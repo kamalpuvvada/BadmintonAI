@@ -74,6 +74,47 @@ class FakeEmptyTracker:
 
 
 class PlayerTrackingTests(unittest.TestCase):
+    @unittest.skipUnless(shutil.which("ffmpeg"), "FFmpeg unavailable")
+    def test_matching_view_edit_resets_tracks_without_rejecting_court_frames(self):
+        from PIL import ImageDraw
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            video = root / "source.mp4"
+            video.write_bytes(b"test source")
+            frames = []
+            for index, x in enumerate((30, 30, 200)):
+                image = Image.new("RGB", (360, 640), "green")
+                ImageDraw.Draw(image).rectangle((x, 100, x + 50, 250), fill="white")
+                path = root / f"source-{index}.jpg"
+                image.save(path)
+                frames.append(path)
+            meta = {"width_px": 360, "height_px": 640, "frame_rate_fps": 1, "duration_seconds": 3}
+            for threshold in (0, .01):
+                tracker = FakeTracker()
+                tracker.reset = Mock()
+                with patch("player_tracking.probe_video", return_value=meta), patch("player_tracking._extract_sampled_video", return_value=frames):
+                    report = track_players(video, root / str(threshold), sample_fps=1,
+                        detector=FakeDetector(), tracker=tracker, court_reference_path=frames[0],
+                        court_cut_threshold=threshold, roi=(.05, .4, .95, .95))
+                rows = [json.loads(line) for line in (report.parent / "player_tracks.jsonl").read_text().splitlines()]
+                summary = json.loads(report.read_text())
+                self.assertTrue(all(row["court_view_status"] == "reference_match" for row in rows))
+                self.assertTrue(all(len(row["persons"]) == 1 for row in rows))
+                self.assertEqual(tracker.reset.call_count, int(bool(threshold)))
+                if threshold:
+                    self.assertTrue(rows[2]["scene_cut"])
+                    self.assertNotEqual(rows[1]["persons"][0]["track_id"], rows[2]["persons"][0]["track_id"])
+                    self.assertEqual(summary["scene_review"]["candidate_cuts"][0]["reason"], "matching_view_jump_cut")
+                else:
+                    self.assertFalse(summary["scene_review"]["candidate_cuts"])
+
+    def test_matching_view_cut_threshold_validation(self):
+        for value in (-1, 2, float("nan"), float("inf")):
+            with self.subTest(value=value), self.assertRaisesRegex(ValueError, "court-cut-threshold"):
+                track_players(Path("unused"), Path("unused"), court_cut_threshold=value)
+        with self.assertRaisesRegex(ValueError, "requires --court-reference"):
+            track_players(Path("unused"), Path("unused"), court_cut_threshold=.01)
+
     def test_crop_edge_fragment_suppression_requires_coverage_and_higher_score(self):
         detections = FakeDetections([[10, 10, 40, 100], [12, 72, 42, 104], [60, 72, 90, 104]],
             [1, 1, 1], [.8, .4, .6])

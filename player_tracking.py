@@ -27,7 +27,7 @@ from badminton_proto import (
 )
 
 
-TRACKING_SCHEMA_VERSION = "0.4.1"
+TRACKING_SCHEMA_VERSION = "0.4.2"
 COLORS = ("#b9ff52", "#42dfdd", "#ffa55b", "#eb88f4", "#fc7575", "#72b7ff")
 
 
@@ -370,6 +370,7 @@ def track_players(
     person_nms_iou: float = 0.5,
     secondary_detect_roi: tuple[float, float, float, float] | None = None,
     secondary_confidence: float = 0.35,
+    court_cut_threshold: float = 0.0,
 ) -> Path:
     if model_name not in ("nano", "small"):
         raise ValueError("Model must be nano or small")
@@ -389,6 +390,10 @@ def track_players(
         raise ValueError("--secondary-confidence must be between 0 and 1")
     if secondary_detect_roi is not None and not person_nms_iou:
         raise ValueError("Secondary-crop inference requires person NMS to remove duplicate boxes")
+    if not np.isfinite(court_cut_threshold) or not 0 <= court_cut_threshold <= 1:
+        raise ValueError("--court-cut-threshold must be finite and in [0, 1] (0 disables)")
+    if court_cut_threshold and court_reference_path is None:
+        raise ValueError("--court-cut-threshold requires --court-reference")
     meta = probe_video(video)
     if not 0 < sample_fps <= meta["frame_rate_fps"]:
         raise ValueError("--sample-fps must be positive and no higher than the source video FPS")
@@ -442,19 +447,26 @@ def track_players(
         # Check full frames, not detector crops. Include both sides of every
         # candidate boundary in the review sheets so resets can be audited.
         cut_scores: dict[int, float] = {}
+        cut_reasons: dict[int, str] = {}
         if scene_cut_threshold or court_reference is not None:
             previous = None
             previous_match = None
             for index, path in enumerate(frames):
                 with Image.open(path) as source:
                     current = scene_thumbnail(source)
-                if previous is not None and scene_cut_threshold:
+                if previous is not None:
                     score = scene_change_score(previous, current)
-                    if score >= scene_cut_threshold:
+                    if scene_cut_threshold and score >= scene_cut_threshold:
                         cut_scores[index] = score
+                        cut_reasons[index] = "candidate_cut"
                         sample_indices.update((index - 1, index))
                 if court_reference is not None:
                     match = scene_change_score(court_reference, current) <= court_view_threshold
+                    if (court_cut_threshold and previous_match and match
+                            and index not in cut_scores and score >= court_cut_threshold):
+                        cut_scores[index] = score
+                        cut_reasons[index] = "matching_view_jump_cut"
+                        sample_indices.update((index - 1, index))
                     if previous_match is not None and match != previous_match:
                         sample_indices.update((index - 1, index))
                     previous_match = match
@@ -484,7 +496,7 @@ def track_players(
                     active_calibration = None
                     scene_events.append({"frame_index": i, "timestamp_seconds": timestamp,
                                          "scene_id": scene_id, "change_score": round(cut_scores[i], 4) if i in cut_scores else None,
-                                         "reason": "candidate_cut" if i in cut_scores else "reference_view_transition"})
+                                         "reason": cut_reasons.get(i, "reference_view_transition")})
                 previous_view_match = view_match
                 rejected_view_frames += int(not view_match)
                 detections, secondary_count = predict_with_secondary_crop(
@@ -565,6 +577,8 @@ def track_players(
         warnings.append("No calibration: coordinates are image pixels, not metres on court.")
     if scene_events:
         warnings.append("Candidate camera cuts detected: tracker and trails reset; court calibration disabled after the first cut. Review every scene before using positions.")
+    if court_cut_threshold:
+        warnings.append("Sensitive matching-view cut checks are enabled: fast motion, lighting or graphics can cause false resets. Validate boundaries at the selected sampling FPS.")
     warnings.append("Scene checks do not classify court views, detect every edit, or validate the initial view. Detector crop and ROI remain unverified after camera changes.")
     if court_reference is not None:
         warnings.append("Reference-view matching is an experimental fixed-view similarity check, not court recognition or calibration validation. Rejected frames retain detector diagnostics but export no player tracks.")
@@ -616,7 +630,8 @@ def track_players(
         "scene_review": {
             "method": "mean absolute RGB change on 64x36 full-frame thumbnails",
             "cut_threshold": scene_cut_threshold,
-            "enabled": bool(scene_cut_threshold),
+            "matching_view_cut_threshold": court_cut_threshold,
+            "enabled": bool(scene_cut_threshold or court_cut_threshold),
             "candidate_cuts": scene_events,
             "scenes_observed": scene_id + 1,
             "status": "requires_manual_review",
@@ -670,6 +685,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--person-nms-iou", type=float, default=0.5, help="Suppress overlapping person duplicates above this IoU; 0 disables")
     parser.add_argument("--secondary-detect-roi", default=None, help="Optional second crop for jump coverage; requires person NMS")
     parser.add_argument("--secondary-confidence", type=float, default=0.35)
+    parser.add_argument("--court-cut-threshold", type=float, default=0.0, help="Optional sensitive cut threshold within reference-matching views; 0 disables, requires --court-reference")
     parser.add_argument("--model", choices=("nano", "small"), default="nano")
     parser.add_argument("--confidence", type=float, default=0.25)
     parser.add_argument("--roi", default=None, help="Optional normalized court rectangle: left,top,right,bottom")
@@ -688,6 +704,7 @@ def main(argv: list[str] | None = None) -> int:
             court_reference_path=args.court_reference, court_view_threshold=args.court_view_threshold,
             person_nms_iou=args.person_nms_iou,
             secondary_detect_roi=parse_roi(args.secondary_detect_roi), secondary_confidence=args.secondary_confidence,
+            court_cut_threshold=args.court_cut_threshold,
             model_name=args.model, confidence=args.confidence,
             roi=parse_roi(args.roi), detect_roi=parse_roi(args.detect_roi),
             track_high_confidence=args.track_high_confidence,
