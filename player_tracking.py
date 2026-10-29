@@ -27,7 +27,7 @@ from badminton_proto import (
 )
 
 
-TRACKING_SCHEMA_VERSION = "0.2.2"
+TRACKING_SCHEMA_VERSION = "0.2.3"
 COLORS = ("#b9ff52", "#42dfdd", "#ffa55b", "#eb88f4", "#fc7575", "#72b7ff")
 
 
@@ -244,9 +244,12 @@ def annotate_detector_frame(
     return output
 
 
-def _extract_sampled_video(video: Path, frame_dir: Path, fps: float, max_seconds: float | None) -> list[Path]:
+def _extract_sampled_video(video: Path, frame_dir: Path, fps: float, max_seconds: float | None, start_seconds: float = 0.0) -> list[Path]:
     frame_dir.mkdir(parents=True, exist_ok=True)
-    command = ["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", str(video)]
+    command = ["ffmpeg", "-hide_banner", "-loglevel", "error", "-y"]
+    if start_seconds:
+        command.extend(["-ss", str(start_seconds)])
+    command.extend(["-i", str(video)])
     if max_seconds is not None:
         command.extend(["-t", str(max_seconds)])
     command.extend(["-vf", f"fps={fps:g}", "-q:v", "3", str(frame_dir / "frame_%06d.jpg")])
@@ -285,6 +288,7 @@ def track_players(
     calibration_path: Path | None = None,
     detector: Any | None = None,
     tracker: Any | None = None,
+    start_seconds: float = 0.0,
 ) -> Path:
     if model_name not in ("nano", "small"):
         raise ValueError("Model must be nano or small")
@@ -297,8 +301,10 @@ def track_players(
     meta = probe_video(video)
     if not 0 < sample_fps <= meta["frame_rate_fps"]:
         raise ValueError("--sample-fps must be positive and no higher than the source video FPS")
-    if max_seconds is not None and max_seconds <= 0:
-        raise ValueError("--max-seconds must be positive")
+    if not np.isfinite(start_seconds) or not 0 <= start_seconds < meta["duration_seconds"]:
+        raise ValueError("--start-seconds must be finite, non-negative and before the video ends")
+    if max_seconds is not None and (not np.isfinite(max_seconds) or max_seconds <= 0):
+        raise ValueError("--max-seconds must be finite and positive")
     if (detector is None) != (tracker is None):
         raise ValueError("Tests must supply both detector and tracker, or neither")
     calibration = read_calibration(calibration_path, camera_id, (meta["width_px"], meta["height_px"]))
@@ -323,7 +329,7 @@ def track_players(
     detector_review_frames: list[dict[str, Any]] = []
     with TemporaryDirectory(prefix="badminton-tracking-") as directory:
         temp = Path(directory)
-        frames = _extract_sampled_video(video, temp / "decoded", sample_fps, max_seconds)
+        frames = _extract_sampled_video(video, temp / "decoded", sample_fps, max_seconds, start_seconds)
         annotated = temp / "annotated"
         annotated.mkdir()
         sample_indices = set(np.linspace(0, len(frames) - 1, min(9, len(frames)), dtype=int).tolist())
@@ -334,7 +340,8 @@ def track_players(
         jsonl = output / "player_tracks.jsonl"
         with jsonl.open("w", encoding="utf-8") as stream:
             for i, frame_path in enumerate(frames):
-                timestamp = round(i / sample_fps, 3)
+                clip_timestamp = round(i / sample_fps, 3)
+                timestamp = round(start_seconds + i / sample_fps, 3)
                 with Image.open(frame_path) as image_file:
                     image = image_file.convert("RGB")
                 detections = predict_with_crop(detector, image, confidence, detect_roi)
@@ -343,7 +350,7 @@ def track_players(
                 class_id_histogram.update(int(class_id) for class_id in detections.class_id)
                 raw_persons = detections[person_detection_mask(detections, person_class_id)]
                 filtered = select_person_detections(detections, image.size, roi, calibration, person_class_id)
-                tracked = tracker.update(filtered, timestamp=timestamp)
+                tracked = tracker.update(filtered, timestamp=clip_timestamp)
                 records = _detections_to_records(tracked, calibration)
                 stage = {
                     "all_class_detections": len(detections),
@@ -412,9 +419,10 @@ def track_players(
         },
         "sampling": {
             "fps": sample_fps,
+            "start_seconds": start_seconds,
             "max_seconds": max_seconds,
             "frames_processed": len(frames),
-            "timestamps": "seconds from evenly sampled output frames; approximate original video time",
+            "timestamps": "source video seconds: start_seconds + frame_index / fps; approximate original video time",
         },
         "region": {
             "normalized_roi": list(roi) if roi else None,
@@ -454,6 +462,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--camera", default="court-01")
     parser.add_argument("--sample-fps", type=float, default=5.0)
     parser.add_argument("--max-seconds", type=float, default=None)
+    parser.add_argument("--start-seconds", type=float, default=0.0, help="Seek into the source video before sampling; exported timestamps remain source-relative")
     parser.add_argument("--model", choices=("nano", "small"), default="nano")
     parser.add_argument("--confidence", type=float, default=0.25)
     parser.add_argument("--roi", default=None, help="Optional normalized court rectangle: left,top,right,bottom")
@@ -467,6 +476,7 @@ def main(argv: list[str] | None = None) -> int:
         summary = track_players(
             video=args.video, output=args.out, camera_id=args.camera,
             sample_fps=args.sample_fps, max_seconds=args.max_seconds,
+            start_seconds=args.start_seconds,
             model_name=args.model, confidence=args.confidence,
             roi=parse_roi(args.roi), detect_roi=parse_roi(args.detect_roi),
             track_high_confidence=args.track_high_confidence,

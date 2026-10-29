@@ -163,6 +163,28 @@ Reproduce the cleaner short baseline into a fresh output directory:
 
 These regions apply only to this clip's opening camera view. Defaults remain unchanged. Review later rallies, camera cuts, and coach-labeled frames before movement analysis or coaching scores. Landscape contact sheets now use compact rows matched to image aspect ratio. Local videos and generated outputs remain excluded from Git.
 
+### Step 2.4 — Review later windows without copying the video
+
+Use `--start-seconds` together with `--max-seconds` (the window's duration). For example, this processes source seconds 60–70:
+
+```powershell
+.\.venv\Scripts\python.exe player_tracking.py --video "Videos\videoplayback.mp4" --out "out\players-007-repeat" --camera court-01 --start-seconds 60 --max-seconds 10 --sample-fps 15 --model nano --confidence 0.30 --detect-roi "0.10,0.20,0.90,1.00" --roi "0.15,0.25,0.85,1.00" --track-high-confidence 0.20 --track-activation 0.30
+```
+
+`--start-seconds` defaults to zero, must be finite and non-negative, and must precede the end of the video. A window reaching the end stops there. `sampling.start_seconds` records the offset. JSONL `frame_index` starts at zero for each run; `timestamp_seconds` and contact-sheet labels refer to the **source video**, approximately `start_seconds + frame_index / fps`. The preview starts at time zero for the selected window. Schema version is now 0.2.3. The tracker uses elapsed window time internally and begins afresh for each run: an ID in one output directory does not identify the same athlete in another run.
+
+Review each window's camera view before interpreting its court filter or foot positions. Broadcast close-ups and replays do not share the original court geometry. The program currently requires manual review for these changes; it does not automatically validate camera continuity.
+
+Real-model checks on the same landscape source and settings above (150 frames per window):
+
+| Run / source window | Raw people | Court kept / tracker boxes | Boxes with IDs | Unique IDs | Review finding |
+| --- | --- | --- | --- | --- | --- |
+| players-007 / 60–70 s | 376 | 299 | 297 | 2 | Both players visible in the nine review frames, consistent near/far IDs; one frame has only one box |
+| players-008 / 300–310 s | 376 | 255 | 246 | 7 | Multiple broadcast close-ups interrupt court tracking; IDs fragment |
+| players-009 / 720–730 s | 416 | 286 | 277 | 6 | Starts with a cropped close-up, then returns to court; far-player IDs fragment and extra boxes occur |
+
+Both detector-only and tracked sheets were inspected for each window. These are diagnostic counts and sampled visual checks, not exhaustive ground-truth accuracy measurements. The later failures mean whole-match movement analysis remains blocked on camera-view handling and further tracking validation. Do not join trajectories across these camera changes. Coaching metrics remain unavailable. Sixteen tests pass, including a two-color video check that verifies seeking extracts the requested content and an end-to-end check of source-relative timestamps.
+
 `--roi` is an **optional normalized rectangle** `(left, top, right, bottom)` in the range 0–1. It keeps detections whose approximate *foot position* is inside the rectangle, helping exclude spectators/officials. The example coordinates suit the sample broadcast's first few seconds, **not all camera setups**. Omit `--roi` initially for a new fixed-camera video, then inspect its generated review sheet and add an appropriate region.
 
 Generated files:

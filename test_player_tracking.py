@@ -4,12 +4,13 @@ import shutil
 import subprocess
 import tempfile
 import unittest
+from unittest.mock import patch
 
 import numpy as np
 from PIL import Image
 
 from player_tracking import (
-    _detections_to_records, parse_roi, person_detection_mask, predict_with_crop, read_calibration,
+    _detections_to_records, _extract_sampled_video, parse_roi, person_detection_mask, predict_with_crop, read_calibration,
     select_person_detections, track_players,
 )
 
@@ -60,6 +61,15 @@ class FakeEmptyTracker:
 
 
 class PlayerTrackingTests(unittest.TestCase):
+    def test_segment_rejects_invalid_time_bounds_before_inference(self):
+        with patch("player_tracking.probe_video", return_value={"frame_rate_fps": 30, "duration_seconds": 10}):
+            for start in (-1, 10, 11, float("nan"), float("inf")):
+                with self.subTest(start=start), self.assertRaisesRegex(ValueError, "start-seconds"):
+                    track_players(Path("unused.mp4"), Path("unused-output"), start_seconds=start)
+            for duration in (0, -1, float("nan"), float("inf")):
+                with self.subTest(duration=duration), self.assertRaisesRegex(ValueError, "max-seconds"):
+                    track_players(Path("unused.mp4"), Path("unused-output"), max_seconds=duration)
+
     def test_roi_validation(self):
         self.assertEqual(parse_roi("0.1,0.2,0.9,1.0"), (0.1, 0.2, 0.9, 1.0))
         for bad in ("0,0,1", "0,0,2,1", "0.9,0,0.1,1", "cat,0,1,1"):
@@ -115,6 +125,25 @@ class PlayerTrackingTests(unittest.TestCase):
                 read_calibration(target, "court-01", (360, 640))
 
     @unittest.skipUnless(shutil.which("ffmpeg") and shutil.which("ffprobe"), "FFmpeg tools unavailable")
+    def test_segment_seek_extracts_requested_content(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            video = root / "two-colors.mp4"
+            subprocess.run([
+                "ffmpeg", "-hide_banner", "-loglevel", "error", "-y",
+                "-f", "lavfi", "-i", "color=c=red:s=64x64:r=10:d=1",
+                "-f", "lavfi", "-i", "color=c=blue:s=64x64:r=10:d=1",
+                "-filter_complex", "[0:v][1:v]concat=n=2:v=1:a=0",
+                "-c:v", "libx264", "-pix_fmt", "yuv420p", str(video),
+            ], check=True)
+            frames = _extract_sampled_video(video, root / "frames", 5, 0.4, start_seconds=1.2)
+            self.assertEqual(len(frames), 2)
+            for path in frames:
+                with Image.open(path) as image:
+                    red, green, blue = image.getpixel((32, 32))
+                    self.assertGreater(blue, red + green)
+
+    @unittest.skipUnless(shutil.which("ffmpeg") and shutil.which("ffprobe"), "FFmpeg tools unavailable")
     def test_end_to_end_with_mock_model(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -126,11 +155,12 @@ class PlayerTrackingTests(unittest.TestCase):
             ], check=True)
             out = root / "out"
             report = track_players(
-                video, out, sample_fps=2, max_seconds=0.8,
+                video, out, sample_fps=2, max_seconds=0.6, start_seconds=0.4,
                 roi=(0.05, 0.4, 0.95, 0.95),
                 detector=FakeDetector(), tracker=FakeTracker(),
             )
             data = json.loads(report.read_text())
+            self.assertEqual(data["sampling"]["start_seconds"], 0.4)
             self.assertGreaterEqual(data["sampling"]["frames_processed"], 1)
             self.assertEqual(data["diagnostics"]["unique_track_ids_observed"], 1)
             totals = data["diagnostics"]["stage_totals"]
@@ -145,6 +175,9 @@ class PlayerTrackingTests(unittest.TestCase):
             rows = (out / "player_tracks.jsonl").read_text().splitlines()
             self.assertEqual(len(rows), data["sampling"]["frames_processed"])
             self.assertEqual(json.loads(rows[0])["persons"][0]["track_id"], 7)
+            for i, row in enumerate(rows):
+                self.assertAlmostEqual(json.loads(row)["timestamp_seconds"], 0.4 + i / 2)
+            self.assertEqual(data["artifacts"]["review_frames"][0]["timestamp_seconds"], 0.4)
 
     @unittest.skipUnless(shutil.which("ffmpeg") and shutil.which("ffprobe"), "FFmpeg tools unavailable")
     def test_report_explains_when_tracker_hides_valid_detections(self):
