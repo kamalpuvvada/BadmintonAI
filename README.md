@@ -205,6 +205,23 @@ Verified on 29 October 2026 with the same source and 15 FPS / confidence 0.30 se
 
 Both expanded sheets were inspected in the two edit windows. Before/after frames show broadcast edits at the flagged boundaries. This verifies these sampled examples, not scene-detection recall for the whole video. Close-up truncation, low-confidence extras, and within-scene ID fragmentation remain. Resets can reduce the number of boxes with IDs because each new scene must establish tracks again. Eighteen tests pass, including a three-scene synthetic video that checks unique IDs, cleared trails, homography invalidation on both cuts, and the disabled-reset comparison. No real court calibration was available for the broadcast; calibration invalidation was tested synthetically.
 
+### Step 2.6 — Exclude mismatched views and suppress duplicate boxes
+
+For a fixed camera, supply a **visually reviewed, full-resolution wide-court reference** with `--court-reference`. The program compares full-frame 64×36 RGB thumbnails against this image. Frames exceeding `--court-view-threshold` (default 0.08 mean absolute channel difference) retain raw detector diagnostics but supply **zero boxes to ByteTrack and export no player tracks**. Entering or leaving a matching view resets tracking, even when candidate-cut detection is disabled. The initial frame is checked too, so a run beginning in a close-up is excluded immediately. The reference hash and rejection count are recorded for audit.
+
+This is an opt-in similarity gate for an established camera view, not a general court classifier. Similar-looking incorrect views may pass, while lighting, camera movement, and different broadcast layouts can reject valid court footage. Review before using it on another camera or match. A match does not restore calibration after a boundary or prove court geometry is valid.
+
+Person boxes also pass score-ordered non-maximum suppression (`--person-nms-iou`, default 0.5; 0 disables). Lower-score boxes overlapping a higher-score box above that IoU are removed before tracking. Overlapping real people can be suppressed too, so evaluate doubles and occlusions separately. This does not force a two-player count or fabricate missing boxes. Detector confidence remains independently configurable; the opening segment's missed 0.288-confidence box is recovered at confidence 0.25 without the low-confidence extras seen at 0.15.
+
+Create the reference from the reviewed wide-court frame in this source, then run a new comparison:
+
+```powershell
+ffmpeg -hide_banner -loglevel error -y -ss 3 -i "Videos\videoplayback.mp4" -frames:v 1 "out\court-reference.jpg"
+.\.venv\Scripts\python.exe player_tracking.py --video "Videos\videoplayback.mp4" --out "out\view-review-repeat" --start-seconds 300 --max-seconds 10 --sample-fps 15 --confidence 0.25 --detect-roi "0.10,0.20,0.90,1.00" --roi "0.15,0.25,0.85,1.00" --track-high-confidence 0.20 --track-activation 0.30 --court-reference "out\court-reference.jpg"
+```
+
+Schema 0.4.0 adds `court_view_review` in the summary (reference filename/hash, threshold and rejected-frame count). JSONL `court_view_status` is `reference_match` or `reference_mismatch` when enabled; without a reference the prior statuses remain. `court_view_difference` records the normalized difference or null when disabled. `court_geometry_status` independently states whether the supplied homography is available but unverified, absent, or invalidated. `scene_cut` now marks any tracking boundary, including reference-view transitions; each summary boundary records its reason. New stage counts `deduplicated_person_detections` and `view_accepted_person_detections` distinguish duplicate removal from view rejection. Detector sheets show all raw people in grey and **final tracker input** in orange, labeled TRACK INPUT; rejected close-ups therefore show only grey boxes. The preview's scene/status badge now has a dark background for readability.
+
 `--roi` is an **optional normalized rectangle** `(left, top, right, bottom)` in the range 0–1. It keeps detections whose approximate *foot position* is inside the rectangle, helping exclude spectators/officials. The example coordinates suit the sample broadcast's first few seconds, **not all camera setups**. Omit `--roi` initially for a new fixed-camera video, then inspect its generated review sheet and add an appropriate region.
 
 Generated files:

@@ -11,7 +11,7 @@ from PIL import Image
 
 from player_tracking import (
     _detections_to_records, _extract_sampled_video, parse_roi, person_detection_mask, predict_with_crop, read_calibration,
-    select_person_detections, track_players,
+    select_person_detections, suppress_duplicate_people, track_players,
 )
 
 
@@ -64,6 +64,67 @@ class FakeEmptyTracker:
 
 
 class PlayerTrackingTests(unittest.TestCase):
+    def test_person_nms_removes_duplicates_preserving_other_people_and_labels(self):
+        detections = FakeDetections(
+            [[10, 10, 50, 100], [11, 11, 51, 101], [40, 10, 80, 100]],
+            [1, 1, 1], [.9, .7, .8], class_names=["person"] * 3)
+        kept = suppress_duplicate_people(detections, .5)
+        self.assertEqual(len(kept), 2)
+        self.assertEqual(kept.confidence.tolist(), [.9, .8])
+        self.assertEqual(kept.data["class_name"].tolist(), ["person", "person"])
+        self.assertEqual(len(suppress_duplicate_people(detections, 0)), 3)
+        self.assertEqual(len(suppress_duplicate_people(FakeDetections([], [], []), .5)), 0)
+
+    @unittest.skipUnless(shutil.which("ffmpeg"), "FFmpeg unavailable")
+    def test_reference_gate_rejects_closeup_even_when_cut_detection_disabled(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            video = root / "source.mp4"
+            video.write_bytes(b"test source")
+            frames = []
+            for index, color in enumerate(("red", "blue", "red")):
+                path = root / f"source-{index}.jpg"
+                Image.new("RGB", (360, 640), color).save(path)
+                frames.append(path)
+            tracker = FakeTracker()
+            tracker.reset = Mock()
+            meta = {"width_px": 360, "height_px": 640, "frame_rate_fps": 1, "duration_seconds": 3}
+            with patch("player_tracking.probe_video", return_value=meta), patch("player_tracking._extract_sampled_video", return_value=frames):
+                report = track_players(video, root / "output", sample_fps=1, detector=FakeDetector(),
+                    tracker=tracker, scene_cut_threshold=0, court_reference_path=frames[0],
+                    roi=(.05, .4, .95, .95))
+            rows = [json.loads(line) for line in (report.parent / "player_tracks.jsonl").read_text().splitlines()]
+            self.assertEqual(rows[1]["persons"], [])
+            self.assertEqual(rows[1]["court_view_status"], "reference_mismatch")
+            self.assertEqual(rows[1]["stage_counts"]["raw_person_detections"], 2)
+            self.assertEqual(rows[1]["stage_counts"]["view_accepted_person_detections"], 0)
+            self.assertEqual(rows[2]["court_view_status"], "reference_match")
+            self.assertNotEqual(rows[0]["persons"][0]["track_id"], rows[2]["persons"][0]["track_id"])
+            self.assertEqual(tracker.reset.call_count, 2)
+            summary = json.loads(report.read_text())
+            self.assertEqual(summary["court_view_review"]["rejected_frames"], 1)
+            with patch("player_tracking.probe_video", return_value=meta), patch("player_tracking._extract_sampled_video", return_value=[frames[1], frames[0], frames[1]]):
+                report = track_players(video, root / "starts-in-closeup", sample_fps=1,
+                    detector=FakeDetector(), tracker=FakeTracker(), scene_cut_threshold=0,
+                    court_reference_path=frames[0], roi=(.05, .4, .95, .95))
+            rows = [json.loads(line) for line in (report.parent / "player_tracks.jsonl").read_text().splitlines()]
+            self.assertEqual(rows[0]["persons"], [])
+            self.assertEqual(rows[0]["court_view_status"], "reference_mismatch")
+            self.assertTrue(rows[1]["persons"])
+            self.assertEqual(rows[2]["persons"], [])
+
+    def test_reference_dimensions_and_filter_threshold_validation(self):
+        for name in ("person_nms_iou", "court_view_threshold"):
+            for value in (-1, 2, float("nan"), float("inf")):
+                with self.subTest(name=name, value=value), self.assertRaises(ValueError):
+                    track_players(Path("unused"), Path("unused"), **{name: value})
+        with tempfile.TemporaryDirectory() as directory:
+            reference = Path(directory) / "reference.jpg"
+            Image.new("RGB", (64, 64)).save(reference)
+            meta = {"width_px": 360, "height_px": 640, "frame_rate_fps": 30, "duration_seconds": 10}
+            with patch("player_tracking.probe_video", return_value=meta), self.assertRaisesRegex(ValueError, "reference dimensions"):
+                track_players(Path("unused"), Path(directory) / "out", court_reference_path=reference)
+
     def test_scene_threshold_validation(self):
         for threshold in (-0.1, 1.1, float("nan"), float("inf")):
             with self.subTest(threshold=threshold), self.assertRaisesRegex(ValueError, "scene-cut-threshold"):
@@ -110,6 +171,7 @@ class PlayerTrackingTests(unittest.TestCase):
                     self.assertIn("foot_court_xy_m", before["persons"][0])
                     self.assertNotIn("foot_court_xy_m", after["persons"][0])
                     self.assertEqual(after["court_view_status"], "invalidated_after_cut")
+                    self.assertEqual(after["court_geometry_status"], "invalidated_after_boundary")
                     self.assertEqual(trail_sizes[5], 0)
                     self.assertEqual(summary["scene_review"]["candidate_cuts"][0]["timestamp_seconds"], 1)
                     self.assertEqual(summary["scene_review"]["scenes_observed"], 3)
