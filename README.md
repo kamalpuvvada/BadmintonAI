@@ -1,6 +1,6 @@
-# Badminton Academy AI — Technical Prototype, Step 1
+# Badminton Academy AI — Technical Prototype
 
-This is the first runnable slice of an **offline-first, fixed-camera badminton coaching platform**. It deliberately does **not** invent shuttle speeds, player positions, shot types, or coaching metrics before we build and validate computer-vision models.
+This is a growing **offline-first, fixed-camera badminton coaching platform**. Step 1 establishes repeatable video ingestion and court calibration. Step 2 adds a separately installed person detection and ID-tracking preview. We deliberately do **not** invent shuttle speeds, shot types, or coaching metrics before validation.
 
 ## Why start here?
 
@@ -82,12 +82,47 @@ This exports `calibration.json` and `court_calibration_preview.jpg`. The matrix 
 python -m unittest discover -v
 ```
 
+## Step 2 — Detect and track badminton players (experimental)
+
+Uses [RF-DETR Nano](https://github.com/roboflow/rf-detr) (pretrained COCO person detection) and [ByteTrack](https://github.com/roboflow/trackers) (ID association). Core RF-DETR Nano/Small weights and the tracker package are Apache-2.0 licensed, suitable for investigation in a commercial product. Other model variants may have different terms; audit all dependencies before deployment.
+
+Step 2 has *additional, considerably larger* AI dependencies. On Windows, create an isolated Python environment:
+
+```powershell
+py -3.11 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements-vision.txt
+```
+
+RF-DETR downloads pretrained model weights on the first run. Processing on CPU may be slow. An NVIDIA GPU can help, but we have **not** benchmarked your machine.
+
+Run a small smoke test on a 10-second section (about 30 sampled frames):
+
+```powershell
+.\.venv\Scripts\python.exe player_tracking.py --video "C:\Users\kamal\Downloads\videoplayback.mp4" --out "out\players-001" --camera court-01 --sample-fps 3 --max-seconds 10 --roi "0.03,0.45,0.97,0.95"
+```
+
+`--roi` is an **optional normalized rectangle** `(left, top, right, bottom)` in the range 0–1. It keeps detections whose approximate *foot position* is inside the rectangle, helping exclude spectators/officials. The example coordinates suit the sample broadcast's first few seconds, **not all camera setups**. Omit `--roi` initially for a new fixed-camera video, then inspect its generated review sheet and add an appropriate region.
+
+Generated files:
+
+- `out/players-001/tracked_preview.mp4`: annotated video, played at the original time scale but sampled to 3 FPS in this example
+- `out/players-001/player_tracks.jsonl`: one row per sampled frame, with boxes, approximate foot pixels, confidence, and track IDs
+- `out/players-001/tracking_summary.json`: model versions, diagnostic counts, warnings, and file names
+- `out/players-001/review_contact_sheet.jpg`: nine-frame annotated QA sheet (when enough frames are available)
+- `out/players-001/review_frames/`: individual annotated review images
+
+**Crucial limitations:** ID 1, ID 2, etc. mean *temporary track IDs*, not known athletes or sides of court. A camera cut or occlusion can trigger ID switches. Until a coach validates output, do not interpret the count of unique IDs as the number of players. The system does not yet count rallies or shots, or produce coaching recommendations.
+
+If you calibrated a full-court camera in Step 1B, optionally append `--calibration "out\court-01\calibration.json"`. It will filter foot positions to the mapped court and add approximate court coordinates in metres. The calibration must use a frame from the exact same camera and video resolution.
+
+For better player tracking, use original, fixed-camera footage with the full court visible; low-resolution broadcast edits are useful for testing the program but not for accuracy claims.
+
 ## Next milestones
 
 | Step | Deliverable | Validation |
 | --- | --- | --- |
 | 1 (this package) | Reliable video ingestion and court calibration | Metadata matches source; geometric corner re-projection; manual visual QA |
-| 2 | Player detection, identity tracking, foot positions | Coach-labeled frames; identity switches; court-position error |
+| 2 (this package) | Experimental person detection, ID tracking, foot-position candidates | Coach-labeled frames; identity switches; detection precision and recall |
 | 3 | Shuttle trajectory and shot-event timing | Annotated shuttle locations and contact timestamps |
 | 4 | Shot types, rally segmentation, and court heatmaps | Shot-level precision/recall and class-wise confusion matrix |
 | 5 | Academy dashboard and verified coaching reports | Coach review, correction flow, consistency across sessions |

@@ -1,0 +1,5 @@
+-r requirements.txt
+# Local pretrained person detector (Apache 2.0 core models)
+rfdetr==1.11.2
+# ByteTrack identity association (Apache 2.0)
+trackers==2.6.1
