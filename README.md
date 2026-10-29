@@ -264,6 +264,31 @@ Decoded-source image auditing found mean changes of 0.01165 and 0.00939 at the t
 
 Real inference in **players-050**, using the Step 2.7 settings plus `--start-seconds 480 --court-cut-threshold 0.009`, verified both boundaries, two boxes in every one of 150 frames, 294 boxes with confirmed IDs, and three scenes. Exported IDs are `{0,1}`, `{2,3}`, and `{4,5}` in the respective scenes, with no cross-scene reuse. Both expanded contact sheets were inspected. The six unique IDs are intentional scene-local tracks for two visible players, not six athletes. There are two unconfirmed boxes when each scene starts. A comparison at threshold 0.010 (players-049) caught only the first edit, illustrating the sensitivity of this experimental setting. Twenty-six tests pass. Continuous movement must still be restricted to reviewed uninterrupted segments, and coaching metrics remain unavailable.
 
+### Step 2.9 — Record scene review before movement analysis
+
+Create a local review packet from existing tracking output; this does not rerun inference or change boxes and IDs:
+
+```powershell
+.\.venv\Scripts\python.exe tracking_review.py prepare --run "out\players-050" --expected-players 2
+```
+
+Open `out/players-050/tracking_review.html`. It includes the sampled tracked images, a playable preview, links to individual scenes, original-video timestamps, temporary track IDs, review flags and verification status. The HTML and JSON stay beside their source artifacts and work offline. The scene links use preview-relative time; visible timestamps remain source-relative. Choose the expected player count explicitly (1–4), or omit it to leave count checks unspecified. Unique track IDs are never automatically treated as athlete counts.
+
+All scenes begin **pending**. After actually reviewing a complete scene, record who checked its boxes, ID continuity, camera view and boundaries. For example (replace the reviewer name and notes):
+
+```powershell
+.\.venv\Scripts\python.exe tracking_review.py decide --run "out\players-050" --scene 0 --decision accepted --reviewer "Reviewer name" --boxes-verified --ids-verified --view-verified --boundaries-verified --notes "Reviewed the complete scene"
+.\.venv\Scripts\python.exe tracking_review.py verify --run "out\players-050"
+```
+
+Use `--decision rejected` to reject a scene, or `--decision pending` to revoke its current acceptance. Rejected decisions require a reviewer; verification flags are required only for acceptance. Each decision is retained in that scene's history. Re-preparing an unchanged packet preserves decisions and history; it does not approve anything. Choose the expected player count when first preparing the packet; an existing packet with a different count is rejected rather than silently reconfigured.
+
+`tracking_review.json` schema 0.1.0 binds decisions to SHA-256 hashes of **both** `tracking_summary.json` and `player_tracks.jsonl`. Changed source files invalidate the review; stale packets are preserved and cannot be approved or verified. Scene facts are recomputed from source, not trusted from editable derived fields. Excluded views, missing confirmed tracks, reused/duplicate IDs and expected-count/ID-count inconsistencies block acceptance. A count check cannot detect every ID swap: the reviewer must still inspect continuity.
+
+`verify` returns freshly computed `approved_intervals` only for accepted scenes. These contain inclusive local frame indices, source timestamps and temporary track IDs. `approval_scope` is explicitly `tracking_in_image_pixels`: this review does not validate court calibration or floor contact. Unconfirmed frames are omitted, gaps split intervals, and intervals never cross a scene boundary or a change in track-ID set. Pending and rejected scenes contribute no intervals. Future movement consumers must call verification and key tracks by the source binding, scene and track ID; they must not blindly trust stored interval fields or join equal numeric IDs across runs. This local review log is **not an authenticated signature or authorization system**; server-side access control remains future RACKETEK integration work.
+
+This step produces no movement measurements or coaching scores, even after all scenes are accepted. Five local packets were prepared for players-044, 045, 046, 047 and 050: all 14 scenes remain pending, with zero approved intervals. The report for players-050 was checked in a browser: all 13 review images and the 10-second preview loaded successfully. Thirty-six tests pass, including approval checks, stale-source rejection, decision preservation/revocation, excluded/fragmented scene blocking, escaped report text and interval separation at unconfirmed frames and scene boundaries.
+
 `--roi` is an **optional normalized rectangle** `(left, top, right, bottom)` in the range 0–1. It keeps detections whose approximate *foot position* is inside the rectangle, helping exclude spectators/officials. The example coordinates suit the sample broadcast's first few seconds, **not all camera setups**. Omit `--roi` initially for a new fixed-camera video, then inspect its generated review sheet and add an appropriate region.
 
 Generated files:
