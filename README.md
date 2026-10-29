@@ -238,6 +238,20 @@ When a person box touches an internal inference-crop edge within two pixels, dup
 
 The example's secondary confidence 0.50 is specific to this reviewed clip. Experiments showed that simply lowering confidence admitted weak partial-body boxes, a taller crop alone changed which frames were missed, and changing only the rectangular court filter did not recover the two jump misses. Keeping the original pass plus a higher-confidence taller pass recovered those detections; crop-edge suppression is necessary to prevent both the fragment and the full person appearing together. These experiments do not establish production settings for other cameras.
 
+Final comparison on 29 October 2026 uses the **same Step 2.7 settings** in every window, RF-DETR Nano 1.11.2 and trackers 2.6.1:
+
+| Run / source window | Sampled frames | Excluded view frames | Accepted frames with two boxes | Boxes with IDs | Unique IDs |
+| --- | --- | --- | --- | --- | --- |
+| players-044 / 300–310 s | 150 | 47 | 103/103 | 200 | 6 (two per court scene) |
+| players-045 / 720–730 s | 150 | 17 | 133/133 | 262 | 4 (two per court scene) |
+| players-046 / 0–10 s | 150 | 0 | 150/150 | 298 | 2 |
+| players-047 / 60–70 s | 150 | 0 | 150/150 | 298 | 2 |
+| players-048 / 480–490 s (additional comparison window) | 150 | 0 | 150/150 | 295 | 5 (fragmentation remains) |
+
+All 686 accepted frames contain two boxes; all 64 excluded frames export no tracks and skip secondary inference. Both contact sheets were visually reviewed for all five windows. The known two jump misses and duplicate-box examples are resolved under this configuration. Stage totals match sums of JSONL counts, exported ID sets do not overlap between scenes, and coaching metrics remain unavailable. Twenty-four tests pass, including native Supervision metadata compatibility, crop coordinate restoration, edge-fragment suppression, reference-view rejection (including an initial close-up), scene resets and calibration invalidation.
+
+**Remaining limitation:** the 480–490 second dive sequence retains both detections but changes IDs within the same court view. Do not derive continuous movement paths or scores from it. Two boxes per frame plus sampled visual checks are not ground-truth precision/recall, bounding-box localization accuracy, or proof of identity continuity. Full-match, doubles, occlusion and different-camera validation are still required. The second inference pass remains optional and is slower; the default path is a single crop.
+
 `--roi` is an **optional normalized rectangle** `(left, top, right, bottom)` in the range 0–1. It keeps detections whose approximate *foot position* is inside the rectangle, helping exclude spectators/officials. The example coordinates suit the sample broadcast's first few seconds, **not all camera setups**. Omit `--roi` initially for a new fixed-camera video, then inspect its generated review sheet and add an appropriate region.
 
 Generated files:
