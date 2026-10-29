@@ -103,8 +103,16 @@ def extract_review_frames(video: Path, output: Path, duration: float, count: int
 
 
 def build_contact_sheet(output: Path, frames: list[dict[str, Any]]) -> str:
-    width, height = 360, 680
-    sheet = Image.new("RGB", (width * 3, height * 3), "#131b24")
+    width = 360
+    # Match the review images rather than reserving portrait-sized cells for
+    # every camera. Keep the existing maximum thumbnail height for portraits.
+    thumbnail_height = 1
+    for item in frames:
+        with Image.open(output / item["image"]) as source:
+            thumbnail_height = max(thumbnail_height, min(640, round(source.height * min(1, width / source.width))))
+    height = thumbnail_height + 40
+    rows = max(1, (len(frames) + 2) // 3)
+    sheet = Image.new("RGB", (width * 3, height * rows), "#131b24")
     draw = ImageDraw.Draw(sheet)
     for index, item in enumerate(frames):
         image_path = output / item["image"]

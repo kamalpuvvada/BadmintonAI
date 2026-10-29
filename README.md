@@ -140,7 +140,28 @@ After pulling the latest code, run the **same comparison** with a fresh output d
 .\.venv\Scripts\python.exe player_tracking.py --video "C:\Users\kamal\Downloads\videoplayback.mp4" --out "out\players-003" --camera court-01 --sample-fps 3 --max-seconds 10 --model nano --confidence 0.15 --detect-roi "0.00,0.38,1.00,0.98" --roi "0.03,0.45,0.97,0.95" --track-high-confidence 0.20 --track-activation 0.30
 ```
 
-Check `tracking_summary.json` for `diagnostics.class_id_histogram`, `raw_person_detections`, `court_filtered_person_detections` and `boxes_with_track_id`. Inspect the two contact sheets. This code correction is verified with mock-model tests, **not yet with RF-DETR inference on the user's PC**. Low-resolution broadcasts and camera cuts still cause genuine detection misses and ID switches even with the correct label mapping.
+Check `tracking_summary.json` for `diagnostics.class_id_histogram`, `raw_person_detections`, `court_filtered_person_detections` and `boxes_with_track_id`. Inspect the two contact sheets. Real inference verification on a different landscape clip is recorded below. Low-resolution broadcasts and camera cuts still cause genuine detection misses and ID switches even with the correct label mapping.
+
+### Step 2.3 — Landscape clip verification (29 October 2026)
+
+The local `Videos/videoplayback.mp4` is a **different source** from players-001/002: 640×360, 30 FPS, 790.848 seconds; SHA-256 `f317baacdd4ccce45febd9f416ba44b6c90071ebf3380c22f877b03376101130`. All runs below use only its first 10 seconds, RF-DETR Nano 1.11.2 and trackers 2.6.1. These counts cannot be used as an accuracy comparison against the old portrait clip.
+
+| Run | FPS | Confidence | All objects | Raw people | Court kept | Tracker boxes | Boxes with IDs | Unique IDs |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| players-003 (old portrait regions) | 3 | 0.15 | 432 | 96 | 78 | 78 | 64 | 8 |
+| players-004 (landscape regions) | 3 | 0.15 | 516 | 196 | 63 | 63 | 52 | 8 |
+| players-005 (landscape regions) | 15 | 0.15 | 2429 | 946 | 307 | 307 | 298 | 2 |
+| players-006 (landscape regions) | 15 | 0.30 | 667 | 501 | 299 | 299 | 297 | 2 |
+
+Visual inspection of both sheets showed that the old crop truncates the far player and retains a side official. The landscape crop fixes those issues in the reviewed frames. At 3 FPS the player IDs fragment; at 15 FPS IDs 0 (near) and 1 (far) persist through this short segment. With confidence 0.15, four frames contain extra unconfirmed boxes. Raising confidence to 0.30 removes these extras, at the cost of one missed person box at 5.867 seconds. There are two boxes in 149/150 frames; the first frame has unconfirmed IDs, and subsequent boxes retain IDs 0/1. Their near/far foot-position ordering remains consistent across every frame with both IDs. These are diagnostic observations, **not measured precision/recall or validation of the full match**.
+
+Reproduce the cleaner short baseline into a fresh output directory:
+
+```powershell
+.\.venv\Scripts\python.exe player_tracking.py --video "Videos\videoplayback.mp4" --out "out\players-006-repeat" --camera court-01 --sample-fps 15 --max-seconds 10 --model nano --confidence 0.30 --detect-roi "0.10,0.20,0.90,1.00" --roi "0.15,0.25,0.85,1.00" --track-high-confidence 0.20 --track-activation 0.30
+```
+
+These regions apply only to this clip's opening camera view. Defaults remain unchanged. Review later rallies, camera cuts, and coach-labeled frames before movement analysis or coaching scores. Landscape contact sheets now use compact rows matched to image aspect ratio. Local videos and generated outputs remain excluded from Git.
 
 `--roi` is an **optional normalized rectangle** `(left, top, right, bottom)` in the range 0–1. It keeps detections whose approximate *foot position* is inside the rectangle, helping exclude spectators/officials. The example coordinates suit the sample broadcast's first few seconds, **not all camera setups**. Omit `--roi` initially for a new fixed-camera video, then inspect its generated review sheet and add an appropriate region.
 

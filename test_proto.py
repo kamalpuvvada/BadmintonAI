@@ -9,11 +9,27 @@ import numpy as np
 from PIL import Image
 
 from badminton_proto import (
-    capture_warnings, project_points, solve_homography, calibrate,
+    build_contact_sheet, capture_warnings, project_points, solve_homography, calibrate,
 )
 
 
 class PrototypeTests(unittest.TestCase):
+    def test_contact_sheet_adapts_to_landscape_and_portrait_frames(self):
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory)
+            for size in ((640, 360), (360, 640)):
+                with self.subTest(size=size):
+                    Image.new("RGB", size, "red").save(output / "frame.jpg")
+                    frames = [{"image": "frame.jpg", "timestamp_seconds": i} for i in range(9)]
+                    result = build_contact_sheet(output, frames)
+                    with Image.open(output / result) as sheet:
+                        cell_height = round(size[1] * min(1, 360 / size[0])) + 40
+                        self.assertEqual(sheet.size, (1080, cell_height * 3))
+                        # Every row must include its thumbnail, not a blank cell.
+                        for row in range(3):
+                            red, green, blue = sheet.getpixel((180, row * cell_height + 60))
+                            self.assertGreater(red, green + blue)
+
     def test_homography_maps_court_corners(self):
         pixels = np.asarray([[125, 90], [505, 105], [610, 910], [60, 880]], dtype=float)
         court = np.asarray([[0, 0], [6.1, 0], [6.1, 13.4], [0, 13.4]], dtype=float)
