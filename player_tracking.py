@@ -27,8 +27,18 @@ from badminton_proto import (
 )
 
 
-TRACKING_SCHEMA_VERSION = "0.2.3"
+TRACKING_SCHEMA_VERSION = "0.3.0"
 COLORS = ("#b9ff52", "#42dfdd", "#ffa55b", "#eb88f4", "#fc7575", "#72b7ff")
+
+
+def scene_thumbnail(image: Image.Image) -> np.ndarray:
+    """Small full-frame RGB image for inexpensive edit-boundary checks."""
+    return np.asarray(image.convert("RGB").resize((64, 36), Image.Resampling.BILINEAR), dtype=float) / 255
+
+
+def scene_change_score(previous: np.ndarray, current: np.ndarray) -> float:
+    """Mean absolute RGB change, normalized to 0..1; not a view classifier."""
+    return float(np.abs(current - previous).mean())
 
 
 def parse_roi(value: str | None) -> tuple[float, float, float, float] | None:
@@ -289,6 +299,7 @@ def track_players(
     detector: Any | None = None,
     tracker: Any | None = None,
     start_seconds: float = 0.0,
+    scene_cut_threshold: float = 0.15,
 ) -> Path:
     if model_name not in ("nano", "small"):
         raise ValueError("Model must be nano or small")
@@ -298,6 +309,8 @@ def track_players(
         raise ValueError("Tracker thresholds must satisfy 0 < high-confidence <= activation < 1")
     if not 0 <= person_class_id <= 1000:
         raise ValueError("--person-class-id must be between 0 and 1000")
+    if not np.isfinite(scene_cut_threshold) or not 0 <= scene_cut_threshold <= 1:
+        raise ValueError("--scene-cut-threshold must be finite and between 0 and 1 (0 disables)")
     meta = probe_video(video)
     if not 0 < sample_fps <= meta["frame_rate_fps"]:
         raise ValueError("--sample-fps must be positive and no higher than the source video FPS")
@@ -327,12 +340,30 @@ def track_players(
     class_id_histogram: Counter[int] = Counter()
     review_frames: list[dict[str, Any]] = []
     detector_review_frames: list[dict[str, Any]] = []
+    scene_id = 0
+    scene_events: list[dict[str, Any]] = []
+    scene_track_ids: dict[int, int] = {}
+    active_calibration = calibration
     with TemporaryDirectory(prefix="badminton-tracking-") as directory:
         temp = Path(directory)
         frames = _extract_sampled_video(video, temp / "decoded", sample_fps, max_seconds, start_seconds)
         annotated = temp / "annotated"
         annotated.mkdir()
         sample_indices = set(np.linspace(0, len(frames) - 1, min(9, len(frames)), dtype=int).tolist())
+        # Check full frames, not detector crops. Include both sides of every
+        # candidate boundary in the review sheets so resets can be audited.
+        cut_scores: dict[int, float] = {}
+        if scene_cut_threshold:
+            previous = None
+            for index, path in enumerate(frames):
+                with Image.open(path) as source:
+                    current = scene_thumbnail(source)
+                if previous is not None:
+                    score = scene_change_score(previous, current)
+                    if score >= scene_cut_threshold:
+                        cut_scores[index] = score
+                        sample_indices.update((index - 1, index))
+                previous = current
         review_dir = output / "review_frames"
         review_dir.mkdir(exist_ok=True)
         detector_review_dir = output / "detector_review"
@@ -344,14 +375,30 @@ def track_players(
                 timestamp = round(start_seconds + i / sample_fps, 3)
                 with Image.open(frame_path) as image_file:
                     image = image_file.convert("RGB")
+                if i in cut_scores:
+                    tracker.reset()
+                    trails.clear()
+                    scene_track_ids.clear()
+                    scene_id += 1
+                    # A different view cannot reuse the original floor mapping,
+                    # even if a later shot appears to return to the same court.
+                    active_calibration = None
+                    scene_events.append({"frame_index": i, "timestamp_seconds": timestamp,
+                                         "scene_id": scene_id, "change_score": round(cut_scores[i], 4)})
                 detections = predict_with_crop(detector, image, confidence, detect_roi)
                 if detections.class_id is None:
                     raise ValueError("Detector returned no class IDs; person labels are required")
                 class_id_histogram.update(int(class_id) for class_id in detections.class_id)
                 raw_persons = detections[person_detection_mask(detections, person_class_id)]
-                filtered = select_person_detections(detections, image.size, roi, calibration, person_class_id)
+                filtered = select_person_detections(detections, image.size, roi, active_calibration, person_class_id)
                 tracked = tracker.update(filtered, timestamp=clip_timestamp)
-                records = _detections_to_records(tracked, calibration)
+                records = _detections_to_records(tracked, active_calibration)
+                for person in records:
+                    local_id = person["track_id"]
+                    if scene_id and local_id is not None:
+                        if local_id not in scene_track_ids:
+                            scene_track_ids[local_id] = max(ids_seen | set(scene_track_ids.values()), default=-1) + 1
+                        person["track_id"] = scene_track_ids[local_id]
                 stage = {
                     "all_class_detections": len(detections),
                     "raw_person_detections": len(raw_persons),
@@ -363,9 +410,12 @@ def track_players(
                     stage_totals[key] += count
                 ids_seen.update(p["track_id"] for p in records if p["track_id"] is not None)
                 total_detections += len(records)
-                row = {"frame_index": i, "timestamp_seconds": timestamp, "persons": records, "stage_counts": stage}
+                row = {"frame_index": i, "timestamp_seconds": timestamp, "persons": records, "stage_counts": stage,
+                       "scene_id": scene_id, "scene_cut": i in cut_scores,
+                       "court_view_status": "requires_review" if scene_id == 0 else "invalidated_after_cut"}
                 stream.write(json.dumps(row, separators=(",", ":")) + "\n")
                 preview = annotate_frame(image, records, trails)
+                ImageDraw.Draw(preview).text((5, 5), f"Scene {scene_id} - view unverified", fill="yellow", font=_font(14))
                 preview.save(annotated / f"frame_{i+1:06d}.jpg", quality=90)
                 if i in sample_indices:
                     target = review_dir / f"frame_{len(review_frames)+1:02d}.jpg"
@@ -389,6 +439,9 @@ def track_players(
     ]
     if calibration is None:
         warnings.append("No calibration: coordinates are image pixels, not metres on court.")
+    if scene_events:
+        warnings.append("Candidate camera cuts detected: tracker and trails reset; court calibration disabled after the first cut. Review every scene before using positions.")
+    warnings.append("Scene checks do not classify court views, detect every edit, or validate the initial view. Detector crop and ROI remain unverified after camera changes.")
     if roi is None and calibration is None:
         warnings.append("No court region: spectators and officials can be detected as people.")
     if stage_totals["raw_person_detections"] == 0:
@@ -429,6 +482,15 @@ def track_players(
             "normalized_detector_crop": list(detect_roi) if detect_roi else None,
             "calibration_provided": calibration is not None,
         },
+        "scene_review": {
+            "method": "mean absolute RGB change on 64x36 full-frame thumbnails",
+            "cut_threshold": scene_cut_threshold,
+            "enabled": bool(scene_cut_threshold),
+            "candidate_cuts": scene_events,
+            "scenes_observed": scene_id + 1,
+            "status": "requires_manual_review",
+            "track_ids": "unique within this run across scene resets; not athlete identities",
+        },
         "diagnostics": {
             "unique_track_ids_observed": len(ids_seen),
             "person_boxes_reported": total_detections,
@@ -463,6 +525,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--sample-fps", type=float, default=5.0)
     parser.add_argument("--max-seconds", type=float, default=None)
     parser.add_argument("--start-seconds", type=float, default=0.0, help="Seek into the source video before sampling; exported timestamps remain source-relative")
+    parser.add_argument("--scene-cut-threshold", type=float, default=0.15, help="Full-frame change threshold 0..1; 0 disables candidate-cut resets")
     parser.add_argument("--model", choices=("nano", "small"), default="nano")
     parser.add_argument("--confidence", type=float, default=0.25)
     parser.add_argument("--roi", default=None, help="Optional normalized court rectangle: left,top,right,bottom")
@@ -477,6 +540,7 @@ def main(argv: list[str] | None = None) -> int:
             video=args.video, output=args.out, camera_id=args.camera,
             sample_fps=args.sample_fps, max_seconds=args.max_seconds,
             start_seconds=args.start_seconds,
+            scene_cut_threshold=args.scene_cut_threshold,
             model_name=args.model, confidence=args.confidence,
             roi=parse_roi(args.roi), detect_roi=parse_roi(args.detect_roi),
             track_high_confidence=args.track_high_confidence,

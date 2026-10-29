@@ -4,7 +4,7 @@ import shutil
 import subprocess
 import tempfile
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 import numpy as np
 from PIL import Image
@@ -47,6 +47,9 @@ class FakeDetector:
 
 
 class FakeTracker:
+    def reset(self):
+        pass
+
     def update(self, detections, timestamp):
         assert timestamp >= 0
         return FakeDetections(
@@ -61,6 +64,64 @@ class FakeEmptyTracker:
 
 
 class PlayerTrackingTests(unittest.TestCase):
+    def test_scene_threshold_validation(self):
+        for threshold in (-0.1, 1.1, float("nan"), float("inf")):
+            with self.subTest(threshold=threshold), self.assertRaisesRegex(ValueError, "scene-cut-threshold"):
+                track_players(Path("unused.mp4"), Path("unused-output"), scene_cut_threshold=threshold)
+
+    @unittest.skipUnless(shutil.which("ffmpeg") and shutil.which("ffprobe"), "FFmpeg tools unavailable")
+    def test_cut_resets_identity_trails_and_invalidates_calibration(self):
+        from player_tracking import annotate_frame
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            video = root / "cut.mp4"
+            subprocess.run([
+                "ffmpeg", "-hide_banner", "-loglevel", "error", "-y",
+                "-f", "lavfi", "-i", "color=c=red:s=360x640:r=5:d=1",
+                "-f", "lavfi", "-i", "color=c=blue:s=360x640:r=5:d=1",
+                "-f", "lavfi", "-i", "color=c=red:s=360x640:r=5:d=1",
+                "-filter_complex", "[0:v][1:v][2:v]concat=n=3:v=1:a=0",
+                "-c:v", "libx264", "-pix_fmt", "yuv420p", str(video),
+            ], check=True)
+            calibration = root / "calibration.json"
+            calibration.write_text(json.dumps({"camera_id": "court-01",
+                "image_size": {"width_px": 360, "height_px": 640},
+                "pixel_to_court_homography": np.diag([.01, .01, 1]).tolist()}))
+            for threshold in (.15, 0):
+                tracker = FakeTracker()
+                tracker.reset = Mock()
+                trail_sizes = []
+                def observe(image, records, trails):
+                    trail_sizes.append(sum(len(t) for t in trails.values()))
+                    return annotate_frame(image, records, trails)
+                out = root / str(threshold)
+                with patch("player_tracking.annotate_frame", side_effect=observe):
+                    report = track_players(video, out, sample_fps=5,
+                        roi=(.05, .4, .95, .95), calibration_path=calibration,
+                        detector=FakeDetector(), tracker=tracker, scene_cut_threshold=threshold)
+                summary = json.loads(report.read_text())
+                rows = [json.loads(line) for line in (out / "player_tracks.jsonl").read_text().splitlines()]
+                before, after = rows[4], rows[5]
+                if threshold:
+                    self.assertEqual(tracker.reset.call_count, 2)
+                    self.assertEqual(after["scene_id"], 1)
+                    self.assertTrue(after["scene_cut"])
+                    self.assertNotEqual(before["persons"][0]["track_id"], after["persons"][0]["track_id"])
+                    self.assertIn("foot_court_xy_m", before["persons"][0])
+                    self.assertNotIn("foot_court_xy_m", after["persons"][0])
+                    self.assertEqual(after["court_view_status"], "invalidated_after_cut")
+                    self.assertEqual(trail_sizes[5], 0)
+                    self.assertEqual(summary["scene_review"]["candidate_cuts"][0]["timestamp_seconds"], 1)
+                    self.assertEqual(summary["scene_review"]["scenes_observed"], 3)
+                    self.assertEqual(len({rows[i]["persons"][0]["track_id"] for i in (0, 5, 10)}), 3)
+                    self.assertNotIn("foot_court_xy_m", rows[10]["persons"][0])
+                else:
+                    tracker.reset.assert_not_called()
+                    self.assertEqual(after["scene_id"], 0)
+                    self.assertIn("foot_court_xy_m", after["persons"][0])
+                    self.assertGreater(trail_sizes[5], 0)
+                    self.assertFalse(summary["scene_review"]["candidate_cuts"])
+
     def test_segment_rejects_invalid_time_bounds_before_inference(self):
         with patch("player_tracking.probe_video", return_value={"frame_rate_fps": 30, "duration_seconds": 10}):
             for start in (-1, 10, 11, float("nan"), float("inf")):

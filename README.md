@@ -173,7 +173,7 @@ Use `--start-seconds` together with `--max-seconds` (the window's duration). For
 
 `--start-seconds` defaults to zero, must be finite and non-negative, and must precede the end of the video. A window reaching the end stops there. `sampling.start_seconds` records the offset. JSONL `frame_index` starts at zero for each run; `timestamp_seconds` and contact-sheet labels refer to the **source video**, approximately `start_seconds + frame_index / fps`. The preview starts at time zero for the selected window. Schema version is now 0.2.3. The tracker uses elapsed window time internally and begins afresh for each run: an ID in one output directory does not identify the same athlete in another run.
 
-Review each window's camera view before interpreting its court filter or foot positions. Broadcast close-ups and replays do not share the original court geometry. The program currently requires manual review for these changes; it does not automatically validate camera continuity.
+Review each window's camera view before interpreting its court filter or foot positions. Broadcast close-ups and replays do not share the original court geometry. Candidate-cut handling is described below; it still requires manual review and does not validate camera continuity.
 
 Real-model checks on the same landscape source and settings above (150 frames per window):
 
@@ -184,6 +184,26 @@ Real-model checks on the same landscape source and settings above (150 frames pe
 | players-009 / 720–730 s | 416 | 286 | 277 | 6 | Starts with a cropped close-up, then returns to court; far-player IDs fragment and extra boxes occur |
 
 Both detector-only and tracked sheets were inspected for each window. These are diagnostic counts and sampled visual checks, not exhaustive ground-truth accuracy measurements. The later failures mean whole-match movement analysis remains blocked on camera-view handling and further tracking validation. Do not join trajectories across these camera changes. Coaching metrics remain unavailable. Sixteen tests pass, including a two-color video check that verifies seeking extracts the requested content and an end-to-end check of source-relative timestamps.
+
+### Step 2.5 — Break tracking at candidate camera cuts
+
+The tracker now compares consecutive full-frame 64×36 RGB thumbnails. A mean absolute channel change of at least `--scene-cut-threshold` (default `0.15`, on a 0–1 scale) starts a new scene. This is an experimental edit-boundary heuristic, not a court-view classifier. Fast motion, lighting changes or graphics can trigger false cuts; gradual edits and similar views can be missed, especially at low sampling rates. Use `--scene-cut-threshold 0` to disable resets for comparison.
+
+At each candidate cut the program resets ByteTrack, clears drawing trails, and assigns new exported track IDs so IDs are not reused across scenes within the same run. IDs still do not persist across separate runs. A camera cut **invalidates the supplied homography for the rest of that run**: subsequent boxes omit `foot_court_xy_m`, including when the broadcast returns to a similar view. Start a separately reviewed run with the correct calibration to resume court coordinates. Detector crop and rectangular ROI remain configured as before and can be inappropriate for the new view; their boxes are candidates requiring review.
+
+Schema 0.3.0 adds JSONL `scene_id` (starts at zero), `scene_cut` (true on the first sampled frame after a candidate cut), and `court_view_status` (`requires_review` initially, `invalidated_after_cut` thereafter). Summary `scene_review` records the method, threshold, candidate boundary timestamps, scores and manual-review status. Neither status certifies a usable court view. The initial view may already be a close-up. Both contact sheets include the sampled frames immediately before and after candidate cuts, in addition to the usual nine frames, and the tracked preview labels the scene. Coaching metrics remain unavailable.
+
+Recheck the broadcast edits using the Step 2.4 command with `--start-seconds 300`, a fresh output directory and optionally explicit `--scene-cut-threshold 0.15`. Continue using 15 FPS for this short experiment; do not infer that a higher scene count or more unique IDs means more athletes.
+
+Verified on 29 October 2026 with the same source and 15 FPS / confidence 0.30 settings:
+
+| Run / source window | Candidate cut timestamps (source seconds) | Result |
+| --- | --- | --- |
+| players-010 / 60–70 s | None | Control keeps one scene and IDs 0/1; same 299 boxes and 297 boxes with IDs as players-007 |
+| players-011 / 300–310 s | 301.267, 302.733, 306.333, 308.000 | Five scenes; all exported ID sets disjoint across scenes; 255 boxes, 245 with IDs |
+| players-012 / 720–730 s | 720.400, 725.200, 725.933 | Four scenes; all exported ID sets disjoint across scenes; 286 boxes, 276 with IDs |
+
+Both expanded sheets were inspected in the two edit windows. Before/after frames show broadcast edits at the flagged boundaries. This verifies these sampled examples, not scene-detection recall for the whole video. Close-up truncation, low-confidence extras, and within-scene ID fragmentation remain. Resets can reduce the number of boxes with IDs because each new scene must establish tracks again. Eighteen tests pass, including a three-scene synthetic video that checks unique IDs, cleared trails, homography invalidation on both cuts, and the disabled-reset comparison. No real court calibration was available for the broadcast; calibration invalidation was tested synthetically.
 
 `--roi` is an **optional normalized rectangle** `(left, top, right, bottom)` in the range 0–1. It keeps detections whose approximate *foot position* is inside the rectangle, helping exclude spectators/officials. The example coordinates suit the sample broadcast's first few seconds, **not all camera setups**. Omit `--roi` initially for a new fixed-camera video, then inspect its generated review sheet and add an appropriate region.
 
