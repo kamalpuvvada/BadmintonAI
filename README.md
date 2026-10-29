@@ -14,7 +14,7 @@ This prototype can:
 4. Create a structured `session.json` that the future .NET API can consume.
 5. Fit a 2D court calibration from four *visible* doubles-court outer corners and export a preview and homography.
 
-It does **not yet** detect players or shuttles, infer shots, or produce performance scores. Those are subsequent verified milestones.
+Step 1 does **not** detect players or shuttles. Step 2 introduces experimental person boxes and track IDs, but they must pass a manual accuracy review before any performance scores are derived.
 
 ## Prerequisites
 
@@ -101,6 +101,35 @@ Run a small smoke test on a 10-second section (about 30 sampled frames):
 .\.venv\Scripts\python.exe player_tracking.py --video "C:\Users\kamal\Downloads\videoplayback.mp4" --out "out\players-001" --camera court-01 --sample-fps 3 --max-seconds 10 --roi "0.03,0.45,0.97,0.95"
 ```
 
+### Step 2.1 — Diagnose zero player boxes in the example broadcast
+
+Our initial run on the **360×640 portrait broadcast** successfully processed 30 frames, but reported **0 player boxes and 0 track IDs**. That alone does not tell us whether RF-DETR missed the players, the court filter removed them, or ByteTrack discarded the remaining boxes. The updated prototype records **counts for each stage**, and makes a separate detector-only contact sheet.
+
+Run a new comparison into a **new output directory** (so the first result remains available):
+
+```powershell
+.\.venv\Scripts\python.exe player_tracking.py --video "C:\Users\kamal\Downloads\videoplayback.mp4" --out "out\players-002" --camera court-01 --sample-fps 3 --max-seconds 10 --model nano --confidence 0.15 --detect-roi "0.00,0.38,1.00,0.98" --roi "0.03,0.45,0.97,0.95" --track-high-confidence 0.20 --track-activation 0.30
+```
+
+Parameters in this **diagnostic experiment** are intentionally more permissive. They may increase false-positive boxes and ID switches; they are **not validated production settings**.
+
+- `--detect-roi` crops the image **before** running RF-DETR, making players larger relative to model input. The coordinates of returned boxes are restored to the original image before all later stages.
+- `--roi` separately filters **after** detection based on the feet of players, and is the same court filter as before.
+- `--confidence` sets the RF-DETR minimum score. `--track-high-confidence` and `--track-activation` control ByteTrack's association and track-start thresholds. Defaults are still 0.25, 0.60, and 0.70 respectively.
+
+Check `out\players-002\tracking_summary.json` → `diagnostics.stage_totals`:
+
+| Counter | Interpretation if zero |
+| --- | --- |
+| `raw_person_detections` | RF-DETR didn't recognize people; inspect crop and model performance |
+| `court_filtered_person_detections` | Person detections were outside the allowed `--roi`/court calibration |
+| `tracker_output_boxes` | ByteTrack rejected the candidate detections |
+| `boxes_with_track_id` | Boxes exist, but ByteTrack hasn't assigned usable IDs |
+
+Open `out\players-002\detector_review\review_contact_sheet.jpg`. Grey boxes are **all person detections**, orange boxes are those remaining **after court filtering**. Yellow rectangle is the filter ROI; cyan rectangle is the detector crop. This view helps spot a detector/ROI problem even if no tracked boxes are displayed in the main preview.
+
+Send back `tracking_summary.json` and **both** contact sheets (or zip the entire `players-002` directory). Do not assess player movement speed, shot quality, or footwork until the boxes and IDs are confirmed visually.
+
 `--roi` is an **optional normalized rectangle** `(left, top, right, bottom)` in the range 0–1. It keeps detections whose approximate *foot position* is inside the rectangle, helping exclude spectators/officials. The example coordinates suit the sample broadcast's first few seconds, **not all camera setups**. Omit `--roi` initially for a new fixed-camera video, then inspect its generated review sheet and add an appropriate region.
 
 Generated files:
@@ -110,6 +139,8 @@ Generated files:
 - `out/players-001/tracking_summary.json`: model versions, diagnostic counts, warnings, and file names
 - `out/players-001/review_contact_sheet.jpg`: nine-frame annotated QA sheet (when enough frames are available)
 - `out/players-001/review_frames/`: individual annotated review images
+- `out/players-001/detector_review/review_contact_sheet.jpg`: **pre-tracker** diagnostic sheet for inspecting raw versus court-filtered person boxes
+- `out/players-001/detector_review/frame_*.jpg`: the separate diagnostic review frames
 
 **Crucial limitations:** ID 1, ID 2, etc. mean *temporary track IDs*, not known athletes or sides of court. A camera cut or occlusion can trigger ID switches. Until a coach validates output, do not interpret the count of unique IDs as the number of players. The system does not yet count rallies or shots, or produce coaching recommendations.
 

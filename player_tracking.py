@@ -27,7 +27,7 @@ from badminton_proto import (
 )
 
 
-TRACKING_SCHEMA_VERSION = "0.2.0"
+TRACKING_SCHEMA_VERSION = "0.2.1"
 COLORS = ("#b9ff52", "#42dfdd", "#ffa55b", "#eb88f4", "#fc7575", "#72b7ff")
 
 
@@ -97,7 +97,37 @@ def select_person_detections(
     return persons[keep]
 
 
-def make_detector_and_tracker(model_name: str, sample_fps: float) -> tuple[Any, Any]:
+def predict_with_crop(
+    detector: Any,
+    image: Image.Image,
+    confidence: float,
+    detect_roi: tuple[float, float, float, float] | None,
+) -> Any:
+    """Optionally enlarge a court crop for inference; return boxes in original pixels."""
+    if detect_roi is None:
+        return detector.predict(image, threshold=confidence)
+    width, height = image.size
+    x1, y1, x2, y2 = detect_roi
+    bounds = (
+        int(x1 * width), int(y1 * height),
+        max(1, int(np.ceil(x2 * width))), max(1, int(np.ceil(y2 * height))),
+    )
+    crop = image.crop(bounds)
+    detections = detector.predict(crop, threshold=confidence)
+    # RF-DETR's crop-relative bounding boxes must be mapped to the full frame
+    # before court filtering, video annotation and metric calculations.
+    detections.xyxy = np.asarray(detections.xyxy, dtype=float) + np.array(
+        [bounds[0], bounds[1], bounds[0], bounds[1]], dtype=float,
+    )
+    return detections
+
+
+def make_detector_and_tracker(
+    model_name: str,
+    sample_fps: float,
+    track_high_confidence: float,
+    track_activation: float,
+) -> tuple[Any, Any]:
     try:
         from rfdetr import RFDETRNano, RFDETRSmall
         from trackers import ByteTrackTracker
@@ -107,7 +137,11 @@ def make_detector_and_tracker(model_name: str, sample_fps: float) -> tuple[Any, 
         ) from exc
     model_type = {"nano": RFDETRNano, "small": RFDETRSmall}[model_name]
     # RF-DETR downloads its pretrained COCO checkpoint on the first run.
-    return model_type(), ByteTrackTracker(frame_rate=sample_fps)
+    return model_type(), ByteTrackTracker(
+        frame_rate=sample_fps,
+        high_conf_det_threshold=track_high_confidence,
+        track_activation_threshold=track_activation,
+    )
 
 
 def _package_version(name: str) -> str | None:
@@ -166,6 +200,33 @@ def annotate_frame(image: Image.Image, records: list[dict[str, Any]], trails: di
     return output
 
 
+def annotate_detector_frame(
+    image: Image.Image,
+    raw_persons: Any,
+    filtered_persons: Any,
+    roi: tuple[float, float, float, float] | None,
+    detect_roi: tuple[float, float, float, float] | None,
+) -> Image.Image:
+    """Diagnostic view before ByteTrack. Grey = raw person, orange = court kept."""
+    output = image.copy()
+    draw = ImageDraw.Draw(output)
+    for group, color, width in ((raw_persons, "#a0b1bb", 1), (filtered_persons, "#ffa33a", 3)):
+        for box in group.xyxy:
+            draw.rectangle(tuple(float(n) for n in box), outline=color, width=width)
+    for region, color in ((roi, "#ffe062"), (detect_roi, "#42dfdd")):
+        if region is None:
+            continue
+        left, top, right, bottom = region
+        draw.rectangle(
+            (left * image.width, top * image.height, right * image.width, bottom * image.height),
+            outline=color, width=2,
+        )
+    caption = f"DETECTOR: {len(raw_persons)} PERSON / {len(filtered_persons)} IN COURT"
+    draw.rectangle((0, image.height - 26, image.width, image.height), fill="#15232a")
+    draw.text((5, image.height - 22), caption, fill="#ffa33a", font=_font(12))
+    return output
+
+
 def _extract_sampled_video(video: Path, frame_dir: Path, fps: float, max_seconds: float | None) -> list[Path]:
     frame_dir.mkdir(parents=True, exist_ok=True)
     command = ["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", str(video)]
@@ -200,6 +261,9 @@ def track_players(
     model_name: str = "nano",
     confidence: float = 0.25,
     roi: tuple[float, float, float, float] | None = None,
+    detect_roi: tuple[float, float, float, float] | None = None,
+    track_high_confidence: float = 0.6,
+    track_activation: float = 0.7,
     calibration_path: Path | None = None,
     detector: Any | None = None,
     tracker: Any | None = None,
@@ -208,6 +272,8 @@ def track_players(
         raise ValueError("Model must be nano or small")
     if not 0 < confidence < 1:
         raise ValueError("Confidence must be between 0 and 1")
+    if not (0 < track_high_confidence <= track_activation < 1):
+        raise ValueError("Tracker thresholds must satisfy 0 < high-confidence <= activation < 1")
     meta = probe_video(video)
     if not 0 < sample_fps <= meta["frame_rate_fps"]:
         raise ValueError("--sample-fps must be positive and no higher than the source video FPS")
@@ -218,12 +284,22 @@ def track_players(
     calibration = read_calibration(calibration_path, camera_id, (meta["width_px"], meta["height_px"]))
     output.mkdir(parents=True, exist_ok=True)
     if detector is None:
-        detector, tracker = make_detector_and_tracker(model_name, sample_fps)
+        detector, tracker = make_detector_and_tracker(
+            model_name, sample_fps, track_high_confidence, track_activation,
+        )
     assert tracker is not None
     trails: dict[int, deque] = defaultdict(lambda: deque(maxlen=20))
     ids_seen: set[int] = set()
     total_detections = 0
+    stage_totals = {
+        "all_class_detections": 0,
+        "raw_person_detections": 0,
+        "court_filtered_person_detections": 0,
+        "tracker_output_boxes": 0,
+        "boxes_with_track_id": 0,
+    }
     review_frames: list[dict[str, Any]] = []
+    detector_review_frames: list[dict[str, Any]] = []
     with TemporaryDirectory(prefix="badminton-tracking-") as directory:
         temp = Path(directory)
         frames = _extract_sampled_video(video, temp / "decoded", sample_fps, max_seconds)
@@ -232,19 +308,33 @@ def track_players(
         sample_indices = set(np.linspace(0, len(frames) - 1, min(9, len(frames)), dtype=int).tolist())
         review_dir = output / "review_frames"
         review_dir.mkdir(exist_ok=True)
+        detector_review_dir = output / "detector_review"
+        detector_review_dir.mkdir(exist_ok=True)
         jsonl = output / "player_tracks.jsonl"
         with jsonl.open("w", encoding="utf-8") as stream:
             for i, frame_path in enumerate(frames):
                 timestamp = round(i / sample_fps, 3)
                 with Image.open(frame_path) as image_file:
                     image = image_file.convert("RGB")
-                detections = detector.predict(image, threshold=confidence)
+                detections = predict_with_crop(detector, image, confidence, detect_roi)
+                if detections.class_id is None:
+                    raise ValueError("Detector returned no class IDs; COCO person labels are required")
+                raw_persons = detections[np.asarray(detections.class_id) == 0]
                 filtered = select_person_detections(detections, image.size, roi, calibration)
                 tracked = tracker.update(filtered, timestamp=timestamp)
                 records = _detections_to_records(tracked, calibration)
+                stage = {
+                    "all_class_detections": len(detections),
+                    "raw_person_detections": len(raw_persons),
+                    "court_filtered_person_detections": len(filtered),
+                    "tracker_output_boxes": len(tracked),
+                    "boxes_with_track_id": sum(p["track_id"] is not None for p in records),
+                }
+                for key, count in stage.items():
+                    stage_totals[key] += count
                 ids_seen.update(p["track_id"] for p in records if p["track_id"] is not None)
                 total_detections += len(records)
-                row = {"frame_index": i, "timestamp_seconds": timestamp, "persons": records}
+                row = {"frame_index": i, "timestamp_seconds": timestamp, "persons": records, "stage_counts": stage}
                 stream.write(json.dumps(row, separators=(",", ":")) + "\n")
                 preview = annotate_frame(image, records, trails)
                 preview.save(annotated / f"frame_{i+1:06d}.jpg", quality=90)
@@ -252,9 +342,17 @@ def track_players(
                     target = review_dir / f"frame_{len(review_frames)+1:02d}.jpg"
                     shutil.copyfile(annotated / f"frame_{i+1:06d}.jpg", target)
                     review_frames.append({"timestamp_seconds": timestamp, "image": str(target.relative_to(output))})
+                    detector_frame = annotate_detector_frame(image, raw_persons, filtered, roi, detect_roi)
+                    detector_file = detector_review_dir / f"frame_{len(detector_review_frames)+1:02d}.jpg"
+                    detector_frame.save(detector_file, quality=92)
+                    detector_review_frames.append({
+                        "timestamp_seconds": timestamp,
+                        "image": detector_file.name,
+                    })
         preview_path = output / "tracked_preview.mp4"
         _encode_preview(annotated, preview_path, sample_fps)
     contact = build_contact_sheet(output, review_frames)
+    detector_contact = build_contact_sheet(detector_review_dir, detector_review_frames)
     warnings = [
         "Track IDs may change after occlusions or camera cuts; they are not verified athlete identities.",
         "Bounding-box foot positions are approximate and must be validated by a coach.",
@@ -264,6 +362,14 @@ def track_players(
         warnings.append("No calibration: coordinates are image pixels, not metres on court.")
     if roi is None and calibration is None:
         warnings.append("No court region: spectators and officials can be detected as people.")
+    if stage_totals["raw_person_detections"] == 0:
+        warnings.append("No person boxes from detector: inspect detector_review; try --detect-roi and a lower --confidence.")
+    elif stage_totals["court_filtered_person_detections"] == 0:
+        warnings.append("All person boxes were rejected by the court region: review --roi or calibration.")
+    elif stage_totals["tracker_output_boxes"] == 0:
+        warnings.append("Tracker discarded all court person boxes: try lower --track-high-confidence and --track-activation.")
+    elif not ids_seen:
+        warnings.append("People were detected but no stable IDs assigned: tune tracking thresholds and sampling FPS.")
     summary = {
         "schema_version": TRACKING_SCHEMA_VERSION,
         "step_1_tool_version": VERSION,
@@ -277,6 +383,8 @@ def track_players(
             "tracker": "ByteTrack",
             "tracker_package_version": _package_version("trackers"),
             "confidence_threshold": confidence,
+            "track_high_confidence_threshold": track_high_confidence,
+            "track_activation_threshold": track_activation,
         },
         "sampling": {
             "fps": sample_fps,
@@ -284,10 +392,15 @@ def track_players(
             "frames_processed": len(frames),
             "timestamps": "seconds from evenly sampled output frames; approximate original video time",
         },
-        "region": {"normalized_roi": list(roi) if roi else None, "calibration_provided": calibration is not None},
+        "region": {
+            "normalized_roi": list(roi) if roi else None,
+            "normalized_detector_crop": list(detect_roi) if detect_roi else None,
+            "calibration_provided": calibration is not None,
+        },
         "diagnostics": {
             "unique_track_ids_observed": len(ids_seen),
             "person_boxes_reported": total_detections,
+            "stage_totals": stage_totals,
             "note": "These are diagnostic counts, not validated athlete counts.",
         },
         "artifacts": {
@@ -295,6 +408,11 @@ def track_players(
             "annotated_video": preview_path.name,
             "contact_sheet": contact,
             "review_frames": review_frames,
+            "detector_contact_sheet": str(Path("detector_review") / detector_contact),
+            "detector_review_frames": [
+                {"timestamp_seconds": item["timestamp_seconds"], "image": str(Path("detector_review") / item["image"])}
+                for item in detector_review_frames
+            ],
         },
         "warnings": warnings,
         "coaching_metrics": {"status": "not_available"},
@@ -314,6 +432,9 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--model", choices=("nano", "small"), default="nano")
     parser.add_argument("--confidence", type=float, default=0.25)
     parser.add_argument("--roi", default=None, help="Optional normalized court rectangle: left,top,right,bottom")
+    parser.add_argument("--detect-roi", default=None, help="Optional normalized crop for model inference; boxes are restored to full-frame pixels")
+    parser.add_argument("--track-high-confidence", type=float, default=0.6)
+    parser.add_argument("--track-activation", type=float, default=0.7)
     parser.add_argument("--calibration", type=Path, default=None)
     args = parser.parse_args(argv)
     try:
@@ -321,7 +442,10 @@ def main(argv: list[str] | None = None) -> int:
             video=args.video, output=args.out, camera_id=args.camera,
             sample_fps=args.sample_fps, max_seconds=args.max_seconds,
             model_name=args.model, confidence=args.confidence,
-            roi=parse_roi(args.roi), calibration_path=args.calibration,
+            roi=parse_roi(args.roi), detect_roi=parse_roi(args.detect_roi),
+            track_high_confidence=args.track_high_confidence,
+            track_activation=args.track_activation,
+            calibration_path=args.calibration,
         )
     except (ValueError, OSError, RuntimeError, KeyError, TypeError, json.JSONDecodeError) as exc:
         print(f"Error: {exc}", file=sys.stderr)
@@ -329,6 +453,10 @@ def main(argv: list[str] | None = None) -> int:
     print(f"Created {summary.resolve()}")
     print(f"Preview: {(summary.parent / 'tracked_preview.mp4').resolve()}")
     print(f"Review sheet: {(summary.parent / 'review_contact_sheet.jpg').resolve()}")
+    data = json.loads(summary.read_text(encoding="utf-8"))
+    stages = data["diagnostics"]["stage_totals"]
+    print("Detections: " + ", ".join(f"{key}={value}" for key, value in stages.items()))
+    print(f"Detector-only sheet: {(summary.parent / 'detector_review' / 'review_contact_sheet.jpg').resolve()}")
     return 0
 
 

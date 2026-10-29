@@ -6,9 +6,10 @@ import tempfile
 import unittest
 
 import numpy as np
+from PIL import Image
 
 from player_tracking import (
-    _detections_to_records, parse_roi, read_calibration,
+    _detections_to_records, parse_roi, predict_with_crop, read_calibration,
     select_person_detections, track_players,
 )
 
@@ -51,6 +52,11 @@ class FakeTracker:
         )
 
 
+class FakeEmptyTracker:
+    def update(self, detections, timestamp):
+        return FakeDetections([], [], [], tracker_id=[])
+
+
 class PlayerTrackingTests(unittest.TestCase):
     def test_roi_validation(self):
         self.assertEqual(parse_roi("0.1,0.2,0.9,1.0"), (0.1, 0.2, 0.9, 1.0))
@@ -71,6 +77,20 @@ class PlayerTrackingTests(unittest.TestCase):
         self.assertEqual(result[0]["track_id"], 5)
         self.assertEqual(result[0]["foot_px"], [140.0, 530.0])
         self.assertNotIn("foot_court_xy_m", result[0])
+
+    def test_detector_crop_restores_full_frame_coordinates(self):
+        class CropDetector:
+            def predict(self, image, threshold):
+                self_seen_size.append(image.size)
+                return FakeDetections([[20, 30, 60, 180]], [0], [0.8])
+
+        self_seen_size = []
+        detections = predict_with_crop(
+            CropDetector(), Image.new("RGB", (360, 640)), 0.2,
+            (0.1, 0.4, 0.9, 0.9),
+        )
+        self.assertEqual(self_seen_size, [(288, 320)])
+        self.assertEqual(detections.xyxy.tolist(), [[56.0, 286.0, 96.0, 436.0]])
 
     def test_calibration_rejects_wrong_video_dimensions(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -101,11 +121,39 @@ class PlayerTrackingTests(unittest.TestCase):
             data = json.loads(report.read_text())
             self.assertGreaterEqual(data["sampling"]["frames_processed"], 1)
             self.assertEqual(data["diagnostics"]["unique_track_ids_observed"], 1)
+            totals = data["diagnostics"]["stage_totals"]
+            self.assertEqual(totals["raw_person_detections"], 2 * data["sampling"]["frames_processed"])
+            self.assertEqual(totals["court_filtered_person_detections"], data["sampling"]["frames_processed"])
+            self.assertEqual(totals["boxes_with_track_id"], data["sampling"]["frames_processed"])
             self.assertTrue((out / "tracked_preview.mp4").is_file())
             self.assertTrue((out / "review_contact_sheet.jpg").is_file())
+            self.assertTrue((out / "detector_review" / "review_contact_sheet.jpg").is_file())
             rows = (out / "player_tracks.jsonl").read_text().splitlines()
             self.assertEqual(len(rows), data["sampling"]["frames_processed"])
             self.assertEqual(json.loads(rows[0])["persons"][0]["track_id"], 7)
+
+    @unittest.skipUnless(shutil.which("ffmpeg") and shutil.which("ffprobe"), "FFmpeg tools unavailable")
+    def test_report_explains_when_tracker_hides_valid_detections(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            video = root / "synthetic.mp4"
+            subprocess.run([
+                "ffmpeg", "-hide_banner", "-loglevel", "error", "-y",
+                "-f", "lavfi", "-i", "color=c=green:s=360x640:r=5:d=1",
+                "-c:v", "libx264", "-pix_fmt", "yuv420p", str(video),
+            ], check=True)
+            out = root / "out"
+            result = track_players(
+                video, out, sample_fps=2, max_seconds=0.8,
+                roi=(0.05, 0.4, 0.95, 0.95),
+                detector=FakeDetector(), tracker=FakeEmptyTracker(),
+            )
+            summary = json.loads(result.read_text())
+            totals = summary["diagnostics"]["stage_totals"]
+            self.assertGreater(totals["court_filtered_person_detections"], 0)
+            self.assertEqual(totals["tracker_output_boxes"], 0)
+            self.assertTrue(any("Tracker discarded" in warning for warning in summary["warnings"]))
+            self.assertTrue((out / "detector_review" / "review_contact_sheet.jpg").is_file())
 
 
 if __name__ == "__main__":
