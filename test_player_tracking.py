@@ -11,7 +11,7 @@ from PIL import Image
 
 from player_tracking import (
     _detections_to_records, _extract_sampled_video, parse_roi, person_detection_mask, predict_with_crop, read_calibration,
-    select_person_detections, suppress_duplicate_people, track_players,
+    predict_with_secondary_crop, select_person_detections, suppress_duplicate_people, track_players,
 )
 
 
@@ -28,12 +28,22 @@ class FakeDetections:
     def __len__(self):
         return len(self.xyxy)
 
+    @classmethod
+    def merge(cls, groups):
+        result = cls(np.concatenate([g.xyxy for g in groups]),
+                   np.concatenate([g.class_id for g in groups]),
+                   np.concatenate([g.confidence for g in groups]))
+        result.data = {key: np.concatenate([g.data[key] for g in groups]) for key in groups[0].data}
+        return result
+
     def __getitem__(self, mask):
-        return FakeDetections(
+        result = FakeDetections(
             self.xyxy[mask], self.class_id[mask], self.confidence[mask],
             None if self.tracker_id is None else self.tracker_id[mask],
             None if "class_name" not in self.data else self.data["class_name"][mask],
         )
+        result.data = {key: value[mask] for key, value in self.data.items()}
+        return result
 
 
 class FakeDetector:
@@ -64,6 +74,56 @@ class FakeEmptyTracker:
 
 
 class PlayerTrackingTests(unittest.TestCase):
+    def test_crop_edge_fragment_suppression_requires_coverage_and_higher_score(self):
+        detections = FakeDetections([[10, 10, 40, 100], [12, 72, 42, 104], [60, 72, 90, 104]],
+            [1, 1, 1], [.8, .4, .6])
+        detections.data["crop_edge_clipped"] = np.array([False, True, True])
+        kept = suppress_duplicate_people(detections, .4)
+        self.assertEqual(kept.xyxy.tolist(), [[10, 10, 40, 100], [60, 72, 90, 104]])
+        detections.confidence[1] = .85
+        kept = suppress_duplicate_people(detections, .4)
+        self.assertEqual(kept.xyxy.tolist(), [[10, 10, 40, 100], [60, 72, 90, 104]])
+        # Without crop-edge evidence, retain the lower-overlap box for review.
+        detections.data["crop_edge_clipped"][:] = False
+        self.assertEqual(len(suppress_duplicate_people(detections, .4)), 3)
+
+    def test_secondary_crop_with_real_supervision_source_metadata(self):
+        try:
+            import supervision as sv
+        except ImportError:
+            self.skipTest("Optional supervision package is unavailable")
+        class Detector:
+            def predict(self, image, threshold):
+                result = sv.Detections(xyxy=np.array([[10., 10., 30., 50.]]),
+                    class_id=np.array([1]), confidence=np.array([.9]))
+                result.metadata["source_image"] = np.asarray(image)
+                result.data["source_shape"] = np.array([[image.height, image.width]])
+                result.data["class_name"] = np.array(["person"])
+                return result
+        image = Image.new("RGB", (100, 80), "green")
+        merged, count = predict_with_secondary_crop(Detector(), image, .25,
+            (0, .25, 1, 1), (0, 0, 1, 1), .35)
+        self.assertEqual(len(merged), 2)
+        self.assertEqual(count, 1)
+        self.assertEqual(merged.metadata["source_image"].shape, (80, 100, 3))
+        self.assertEqual(merged.data["source_shape"].tolist(), [[80, 100], [80, 100]])
+        self.assertEqual(merged.data["class_name"].tolist(), ["person", "person"])
+
+    def test_secondary_crop_restores_coordinates_and_merges_labels_before_nms(self):
+        calls = []
+        class Detector:
+            def predict(self, image, threshold):
+                calls.append((image.size, threshold))
+                box = [10, 10, 30, 50] if threshold == .25 else [10, 30, 30, 70]
+                return FakeDetections([box], [1], [.9 if threshold == .25 else .8], class_names=["person"])
+        merged, count = predict_with_secondary_crop(Detector(), Image.new("RGB", (100, 100)),
+            .25, (0, .2, 1, 1), (0, 0, 1, 1), .35)
+        self.assertEqual(calls, [((100, 80), .25), ((100, 100), .35)])
+        self.assertEqual(count, 1)
+        self.assertEqual(merged.xyxy.tolist(), [[10, 30, 30, 70], [10, 30, 30, 70]])
+        self.assertEqual(merged.data["class_name"].tolist(), ["person", "person"])
+        self.assertEqual(len(suppress_duplicate_people(merged, .4)), 1)
+
     def test_person_nms_removes_duplicates_preserving_other_people_and_labels(self):
         detections = FakeDetections(
             [[10, 10, 50, 100], [11, 11, 51, 101], [40, 10, 80, 100]],
@@ -118,6 +178,11 @@ class PlayerTrackingTests(unittest.TestCase):
             for value in (-1, 2, float("nan"), float("inf")):
                 with self.subTest(name=name, value=value), self.assertRaises(ValueError):
                     track_players(Path("unused"), Path("unused"), **{name: value})
+        for value in (0, 1, float("nan"), float("inf")):
+            with self.subTest(secondary_confidence=value), self.assertRaisesRegex(ValueError, "secondary-confidence"):
+                track_players(Path("unused"), Path("unused"), secondary_confidence=value)
+        with self.assertRaisesRegex(ValueError, "requires person NMS"):
+            track_players(Path("unused"), Path("unused"), person_nms_iou=0, secondary_detect_roi=(0, 0, 1, 1))
         with tempfile.TemporaryDirectory() as directory:
             reference = Path(directory) / "reference.jpg"
             Image.new("RGB", (64, 64)).save(reference)

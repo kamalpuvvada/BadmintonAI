@@ -27,7 +27,7 @@ from badminton_proto import (
 )
 
 
-TRACKING_SCHEMA_VERSION = "0.4.0"
+TRACKING_SCHEMA_VERSION = "0.4.1"
 COLORS = ("#b9ff52", "#42dfdd", "#ffa55b", "#eb88f4", "#fc7575", "#72b7ff")
 
 
@@ -48,20 +48,32 @@ def suppress_duplicate_people(detections: Any, iou_threshold: float) -> Any:
     boxes = np.asarray(detections.xyxy, dtype=float)
     areas = np.maximum(0, boxes[:, 2] - boxes[:, 0]) * np.maximum(0, boxes[:, 3] - boxes[:, 1])
     scores = detections.confidence if detections.confidence is not None else np.ones(len(boxes))
+    edge_clipped = np.asarray(getattr(detections, "data", {}).get("crop_edge_clipped", np.zeros(len(boxes))), dtype=bool)
     order = np.argsort(-np.asarray(scores), kind="stable")
     kept = []
     while len(order):
         index = order[0]
-        kept.append(index)
         remaining = order[1:]
         intersection_size = np.maximum(
             0, np.minimum(boxes[index, 2:], boxes[remaining, 2:])
             - np.maximum(boxes[index, :2], boxes[remaining, :2]),
         )
         intersection = intersection_size[:, 0] * intersection_size[:, 1]
+        # Crop truncation can score slightly higher than the complete person.
+        # Prefer a covering non-edge box with comparable confidence in that case.
+        if edge_clipped[index] and areas[index] > 0:
+            fuller = (~edge_clipped[remaining] & (areas[remaining] > areas[index])
+                      & (intersection / areas[index] >= .65)
+                      & (np.asarray(scores)[remaining] >= scores[index] - .10))
+            if np.any(fuller):
+                order = remaining
+                continue
+        kept.append(index)
         union = areas[index] + areas[remaining] - intersection
         iou = np.divide(intersection, union, out=np.zeros_like(intersection), where=union > 0)
-        order = remaining[iou <= iou_threshold]
+        coverage = np.divide(intersection, areas[remaining], out=np.zeros_like(intersection), where=areas[remaining] > 0)
+        edge_fragment = edge_clipped[remaining] & (areas[index] > areas[remaining]) & (coverage >= .65)
+        order = remaining[(iou <= iou_threshold) & ~edge_fragment]
     return detections[np.asarray(sorted(kept), dtype=int)]
 
 
@@ -156,7 +168,9 @@ def predict_with_crop(
 ) -> Any:
     """Optionally enlarge a court crop for inference; return boxes in original pixels."""
     if detect_roi is None:
-        return detector.predict(image, threshold=confidence)
+        detections = detector.predict(image, threshold=confidence)
+        detections.data["crop_edge_clipped"] = np.zeros(len(detections), dtype=bool)
+        return detections
     width, height = image.size
     x1, y1, x2, y2 = detect_roi
     bounds = (
@@ -165,11 +179,26 @@ def predict_with_crop(
     )
     crop = image.crop(bounds)
     detections = detector.predict(crop, threshold=confidence)
+    crop_boxes = np.asarray(detections.xyxy, dtype=float)
+    # A box touching an inference-crop edge may be just a body fragment.
+    # Full-frame edges are excluded because a second crop cannot restore them.
+    detections.data["crop_edge_clipped"] = (
+        ((crop_boxes[:, 0] <= 2) & (bounds[0] > 0))
+        | ((crop_boxes[:, 1] <= 2) & (bounds[1] > 0))
+        | ((crop_boxes[:, 2] >= crop.width - 2) & (bounds[2] < width))
+        | ((crop_boxes[:, 3] >= crop.height - 2) & (bounds[3] < height))
+    )
     # RF-DETR's crop-relative bounding boxes must be mapped to the full frame
     # before court filtering, video annotation and metric calculations.
     detections.xyxy = np.asarray(detections.xyxy, dtype=float) + np.array(
         [bounds[0], bounds[1], bounds[0], bounds[1]], dtype=float,
     )
+    # RF-DETR 1.11 carries crop-specific image metadata too. Once coordinates
+    # are restored, those fields must describe the original frame for merging.
+    if "source_image" in getattr(detections, "metadata", {}):
+        detections.metadata["source_image"] = np.asarray(image)
+    if "source_shape" in getattr(detections, "data", {}):
+        detections.data["source_shape"] = np.tile(np.array([height, width]), (len(detections), 1))
     return detections
 
 
@@ -193,6 +222,18 @@ def make_detector_and_tracker(
         high_conf_det_threshold=track_high_confidence,
         track_activation_threshold=track_activation,
     )
+
+
+def predict_with_secondary_crop(detector: Any, image: Image.Image, confidence: float,
+                                detect_roi: Any, secondary_roi: Any,
+                                secondary_confidence: float) -> tuple[Any, int]:
+    primary = predict_with_crop(detector, image, confidence, detect_roi)
+    if secondary_roi is None:
+        return primary, 0
+    secondary = predict_with_crop(detector, image, secondary_confidence, secondary_roi)
+    # supervision preserves class names and other per-box metadata. Keep both
+    # passes in raw diagnostics, then suppress person duplicates before tracking.
+    return type(primary).merge([primary, secondary]), len(secondary)
 
 
 def _package_version(name: str) -> str | None:
@@ -327,6 +368,8 @@ def track_players(
     court_reference_path: Path | None = None,
     court_view_threshold: float = 0.08,
     person_nms_iou: float = 0.5,
+    secondary_detect_roi: tuple[float, float, float, float] | None = None,
+    secondary_confidence: float = 0.35,
 ) -> Path:
     if model_name not in ("nano", "small"):
         raise ValueError("Model must be nano or small")
@@ -342,6 +385,10 @@ def track_players(
         raise ValueError("--court-view-threshold must be finite and in (0, 1]")
     if not np.isfinite(person_nms_iou) or not 0 <= person_nms_iou <= 1:
         raise ValueError("--person-nms-iou must be finite and in [0, 1] (0 disables)")
+    if not 0 < secondary_confidence < 1:
+        raise ValueError("--secondary-confidence must be between 0 and 1")
+    if secondary_detect_roi is not None and not person_nms_iou:
+        raise ValueError("Secondary-crop inference requires person NMS to remove duplicate boxes")
     meta = probe_video(video)
     if not 0 < sample_fps <= meta["frame_rate_fps"]:
         raise ValueError("--sample-fps must be positive and no higher than the source video FPS")
@@ -369,6 +416,7 @@ def track_players(
     total_detections = 0
     stage_totals = {
         "all_class_detections": 0,
+        "secondary_all_class_detections": 0,
         "raw_person_detections": 0,
         "court_filtered_person_detections": 0,
         "deduplicated_person_detections": 0,
@@ -439,7 +487,10 @@ def track_players(
                                          "reason": "candidate_cut" if i in cut_scores else "reference_view_transition"})
                 previous_view_match = view_match
                 rejected_view_frames += int(not view_match)
-                detections = predict_with_crop(detector, image, confidence, detect_roi)
+                detections, secondary_count = predict_with_secondary_crop(
+                    detector, image, confidence, detect_roi,
+                    secondary_detect_roi if view_match else None, secondary_confidence,
+                )
                 if detections.class_id is None:
                     raise ValueError("Detector returned no class IDs; person labels are required")
                 class_id_histogram.update(int(class_id) for class_id in detections.class_id)
@@ -457,6 +508,7 @@ def track_players(
                         person["track_id"] = scene_track_ids[local_id]
                 stage = {
                     "all_class_detections": len(detections),
+                    "secondary_all_class_detections": secondary_count,
                     "raw_person_detections": len(raw_persons),
                     "court_filtered_person_detections": len(filtered),
                     "deduplicated_person_detections": len(deduplicated),
@@ -546,6 +598,7 @@ def track_players(
             "person_class_id_fallback": person_class_id,
             "person_label_selection": "class_name == person if supplied, otherwise COCO class_id fallback",
             "person_nms_iou": person_nms_iou,
+            "secondary_confidence_threshold": secondary_confidence,
         },
         "sampling": {
             "fps": sample_fps,
@@ -557,6 +610,7 @@ def track_players(
         "region": {
             "normalized_roi": list(roi) if roi else None,
             "normalized_detector_crop": list(detect_roi) if detect_roi else None,
+            "normalized_secondary_detector_crop": list(secondary_detect_roi) if secondary_detect_roi else None,
             "calibration_provided": calibration is not None,
         },
         "scene_review": {
@@ -614,6 +668,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--court-reference", type=Path, default=None, help="Reviewed full-resolution wide-court reference; reject tracking on mismatched views")
     parser.add_argument("--court-view-threshold", type=float, default=0.08, help="Maximum reference RGB difference, in (0, 1]")
     parser.add_argument("--person-nms-iou", type=float, default=0.5, help="Suppress overlapping person duplicates above this IoU; 0 disables")
+    parser.add_argument("--secondary-detect-roi", default=None, help="Optional second crop for jump coverage; requires person NMS")
+    parser.add_argument("--secondary-confidence", type=float, default=0.35)
     parser.add_argument("--model", choices=("nano", "small"), default="nano")
     parser.add_argument("--confidence", type=float, default=0.25)
     parser.add_argument("--roi", default=None, help="Optional normalized court rectangle: left,top,right,bottom")
@@ -631,6 +687,7 @@ def main(argv: list[str] | None = None) -> int:
             scene_cut_threshold=args.scene_cut_threshold,
             court_reference_path=args.court_reference, court_view_threshold=args.court_view_threshold,
             person_nms_iou=args.person_nms_iou,
+            secondary_detect_roi=parse_roi(args.secondary_detect_roi), secondary_confidence=args.secondary_confidence,
             model_name=args.model, confidence=args.confidence,
             roi=parse_roi(args.roi), detect_roi=parse_roi(args.detect_roi),
             track_high_confidence=args.track_high_confidence,
