@@ -130,6 +130,18 @@ Open `out\players-002\detector_review\review_contact_sheet.jpg`. Grey boxes are 
 
 Send back `tracking_summary.json` and **both** contact sheets (or zip the entire `players-002` directory). Do not assess player movement speed, shot quality, or footwork until the boxes and IDs are confirmed visually.
 
+### Step 2.2 — Fix pretrained COCO person label mapping
+
+The `players-002` diagnostic run reported **329 total object detections but zero person detections** in 30 frames. Our previous code assumed `class_id=0` meant person. That is incorrect for pretrained RF-DETR checkpoints using **sparse COCO category IDs**, where `class_id=1` means person. Fine-tuned models may instead use zero-based class IDs, so the fix preferentially uses the model's `detections.data["class_name"]` field, falling back to `class_id=1` only when class names are absent. The numeric fallback can be overridden with `--person-class-id` for a different model.
+
+After pulling the latest code, run the **same comparison** with a fresh output directory:
+
+```powershell
+.\.venv\Scripts\python.exe player_tracking.py --video "C:\Users\kamal\Downloads\videoplayback.mp4" --out "out\players-003" --camera court-01 --sample-fps 3 --max-seconds 10 --model nano --confidence 0.15 --detect-roi "0.00,0.38,1.00,0.98" --roi "0.03,0.45,0.97,0.95" --track-high-confidence 0.20 --track-activation 0.30
+```
+
+Check `tracking_summary.json` for `diagnostics.class_id_histogram`, `raw_person_detections`, `court_filtered_person_detections` and `boxes_with_track_id`. Inspect the two contact sheets. This code correction is verified with mock-model tests, **not yet with RF-DETR inference on the user's PC**. Low-resolution broadcasts and camera cuts still cause genuine detection misses and ID switches even with the correct label mapping.
+
 `--roi` is an **optional normalized rectangle** `(left, top, right, bottom)` in the range 0–1. It keeps detections whose approximate *foot position* is inside the rectangle, helping exclude spectators/officials. The example coordinates suit the sample broadcast's first few seconds, **not all camera setups**. Omit `--roi` initially for a new fixed-camera video, then inspect its generated review sheet and add an appropriate region.
 
 Generated files:

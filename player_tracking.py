@@ -8,7 +8,7 @@ Does not identify named athletes, recognize strokes, or measure shuttle speed.
 from __future__ import annotations
 
 import argparse
-from collections import defaultdict, deque
+from collections import Counter, defaultdict, deque
 from datetime import datetime, timezone
 from importlib import metadata
 import json
@@ -27,7 +27,7 @@ from badminton_proto import (
 )
 
 
-TRACKING_SCHEMA_VERSION = "0.2.1"
+TRACKING_SCHEMA_VERSION = "0.2.2"
 COLORS = ("#b9ff52", "#42dfdd", "#ffa55b", "#eb88f4", "#fc7575", "#72b7ff")
 
 
@@ -70,16 +70,33 @@ def foot_points(boxes: np.ndarray) -> np.ndarray:
     return np.column_stack(((boxes[:, 0] + boxes[:, 2]) / 2, boxes[:, 3]))
 
 
+def person_detection_mask(detections: Any, fallback_class_id: int = 1) -> np.ndarray:
+    """Select 'person' by model-supplied name, falling back to COCO category ID 1.
+
+    Pretrained RF-DETR COCO checkpoints can emit sparse COCO IDs (1 = person),
+    while some fine-tuned checkpoints use zero-based IDs. Prefer class names when
+    available so we do not silently confuse the two conventions.
+    """
+    if detections.class_id is None:
+        raise ValueError("Detector returned no class IDs; person labels are required")
+    labels = getattr(detections, "data", None)
+    names = labels.get("class_name") if isinstance(labels, dict) else None
+    if names is not None:
+        if len(names) != len(detections):
+            raise ValueError("Detector class_name count does not match detection count")
+        return np.array([str(name).strip().casefold() == "person" for name in names], dtype=bool)
+    return np.asarray(detections.class_id, dtype=int) == fallback_class_id
+
+
 def select_person_detections(
     detections: Any,
     image_size: tuple[int, int],
     roi: tuple[float, float, float, float] | None,
     homography: np.ndarray | None,
+    person_class_id: int = 1,
 ) -> Any:
-    """Keep COCO person class 0, optionally restricted to the court footprint."""
-    if detections.class_id is None:
-        raise ValueError("Detector returned no class IDs; COCO person labels are required")
-    persons = detections[np.asarray(detections.class_id) == 0]
+    """Keep model-labeled people, optionally restricted to the court footprint."""
+    persons = detections[person_detection_mask(detections, person_class_id)]
     if len(persons) == 0:
         return persons
     feet = foot_points(persons.xyxy)
@@ -264,6 +281,7 @@ def track_players(
     detect_roi: tuple[float, float, float, float] | None = None,
     track_high_confidence: float = 0.6,
     track_activation: float = 0.7,
+    person_class_id: int = 1,
     calibration_path: Path | None = None,
     detector: Any | None = None,
     tracker: Any | None = None,
@@ -274,6 +292,8 @@ def track_players(
         raise ValueError("Confidence must be between 0 and 1")
     if not (0 < track_high_confidence <= track_activation < 1):
         raise ValueError("Tracker thresholds must satisfy 0 < high-confidence <= activation < 1")
+    if not 0 <= person_class_id <= 1000:
+        raise ValueError("--person-class-id must be between 0 and 1000")
     meta = probe_video(video)
     if not 0 < sample_fps <= meta["frame_rate_fps"]:
         raise ValueError("--sample-fps must be positive and no higher than the source video FPS")
@@ -298,6 +318,7 @@ def track_players(
         "tracker_output_boxes": 0,
         "boxes_with_track_id": 0,
     }
+    class_id_histogram: Counter[int] = Counter()
     review_frames: list[dict[str, Any]] = []
     detector_review_frames: list[dict[str, Any]] = []
     with TemporaryDirectory(prefix="badminton-tracking-") as directory:
@@ -318,9 +339,10 @@ def track_players(
                     image = image_file.convert("RGB")
                 detections = predict_with_crop(detector, image, confidence, detect_roi)
                 if detections.class_id is None:
-                    raise ValueError("Detector returned no class IDs; COCO person labels are required")
-                raw_persons = detections[np.asarray(detections.class_id) == 0]
-                filtered = select_person_detections(detections, image.size, roi, calibration)
+                    raise ValueError("Detector returned no class IDs; person labels are required")
+                class_id_histogram.update(int(class_id) for class_id in detections.class_id)
+                raw_persons = detections[person_detection_mask(detections, person_class_id)]
+                filtered = select_person_detections(detections, image.size, roi, calibration, person_class_id)
                 tracked = tracker.update(filtered, timestamp=timestamp)
                 records = _detections_to_records(tracked, calibration)
                 stage = {
@@ -363,7 +385,7 @@ def track_players(
     if roi is None and calibration is None:
         warnings.append("No court region: spectators and officials can be detected as people.")
     if stage_totals["raw_person_detections"] == 0:
-        warnings.append("No person boxes from detector: inspect detector_review; try --detect-roi and a lower --confidence.")
+        warnings.append("No person boxes after label selection: inspect diagnostics.class_id_histogram and detector_review.")
     elif stage_totals["court_filtered_person_detections"] == 0:
         warnings.append("All person boxes were rejected by the court region: review --roi or calibration.")
     elif stage_totals["tracker_output_boxes"] == 0:
@@ -385,6 +407,8 @@ def track_players(
             "confidence_threshold": confidence,
             "track_high_confidence_threshold": track_high_confidence,
             "track_activation_threshold": track_activation,
+            "person_class_id_fallback": person_class_id,
+            "person_label_selection": "class_name == person if supplied, otherwise COCO class_id fallback",
         },
         "sampling": {
             "fps": sample_fps,
@@ -401,6 +425,7 @@ def track_players(
             "unique_track_ids_observed": len(ids_seen),
             "person_boxes_reported": total_detections,
             "stage_totals": stage_totals,
+            "class_id_histogram": {str(class_id): count for class_id, count in sorted(class_id_histogram.items())},
             "note": "These are diagnostic counts, not validated athlete counts.",
         },
         "artifacts": {
@@ -435,6 +460,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--detect-roi", default=None, help="Optional normalized crop for model inference; boxes are restored to full-frame pixels")
     parser.add_argument("--track-high-confidence", type=float, default=0.6)
     parser.add_argument("--track-activation", type=float, default=0.7)
+    parser.add_argument("--person-class-id", type=int, default=1, help="Fallback if model omits class_name; pretrained COCO person ID is 1")
     parser.add_argument("--calibration", type=Path, default=None)
     args = parser.parse_args(argv)
     try:
@@ -445,6 +471,7 @@ def main(argv: list[str] | None = None) -> int:
             roi=parse_roi(args.roi), detect_roi=parse_roi(args.detect_roi),
             track_high_confidence=args.track_high_confidence,
             track_activation=args.track_activation,
+            person_class_id=args.person_class_id,
             calibration_path=args.calibration,
         )
     except (ValueError, OSError, RuntimeError, KeyError, TypeError, json.JSONDecodeError) as exc:

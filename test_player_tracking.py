@@ -9,7 +9,7 @@ import numpy as np
 from PIL import Image
 
 from player_tracking import (
-    _detections_to_records, parse_roi, predict_with_crop, read_calibration,
+    _detections_to_records, parse_roi, person_detection_mask, predict_with_crop, read_calibration,
     select_person_detections, track_players,
 )
 
@@ -17,11 +17,12 @@ from player_tracking import (
 class FakeDetections:
     """Minimal stand-in for supervision.Detections, for offline unit tests."""
 
-    def __init__(self, xyxy, class_id, confidence, tracker_id=None):
+    def __init__(self, xyxy, class_id, confidence, tracker_id=None, class_names=None):
         self.xyxy = np.asarray(xyxy, dtype=float).reshape(-1, 4)
         self.class_id = np.asarray(class_id, dtype=int)
         self.confidence = np.asarray(confidence, dtype=float)
         self.tracker_id = None if tracker_id is None else np.asarray(tracker_id, dtype=int)
+        self.data = {} if class_names is None else {"class_name": np.asarray(class_names)}
 
     def __len__(self):
         return len(self.xyxy)
@@ -30,6 +31,7 @@ class FakeDetections:
         return FakeDetections(
             self.xyxy[mask], self.class_id[mask], self.confidence[mask],
             None if self.tracker_id is None else self.tracker_id[mask],
+            None if "class_name" not in self.data else self.data["class_name"][mask],
         )
 
 
@@ -38,7 +40,7 @@ class FakeDetector:
         assert threshold == 0.25
         return FakeDetections(
             xyxy=[[100, 270, 180, 530], [30, 20, 70, 90], [210, 250, 260, 430]],
-            class_id=[0, 0, 1],
+            class_id=[1, 1, 2],
             confidence=[0.91, 0.72, 0.88],
         )
 
@@ -68,8 +70,18 @@ class PlayerTrackingTests(unittest.TestCase):
         detections = FakeDetector().predict(None, 0.25)
         kept = select_person_detections(detections, (360, 640), (0.05, 0.40, 0.95, 0.95), None)
         self.assertEqual(len(kept), 1)
-        self.assertEqual(kept.class_id.tolist(), [0])
+        self.assertEqual(kept.class_id.tolist(), [1])
         self.assertEqual(kept.xyxy.tolist(), [[100, 270, 180, 530]])
+
+    def test_class_name_takes_priority_over_numeric_class_id(self):
+        detections = FakeDetections(
+            [[10, 10, 20, 30], [50, 50, 80, 100]],
+            class_id=[0, 1], confidence=[0.9, 0.8],
+            class_names=["Person", "bicycle"],
+        )
+        self.assertEqual(person_detection_mask(detections, fallback_class_id=1).tolist(), [True, False])
+        selected = select_person_detections(detections, (360, 640), None, None)
+        self.assertEqual(selected.class_id.tolist(), [0])
 
     def test_records_include_id_and_footpoint(self):
         people = FakeDetections([[100, 250, 180, 530]], [0], [0.77], [5])
@@ -125,6 +137,8 @@ class PlayerTrackingTests(unittest.TestCase):
             self.assertEqual(totals["raw_person_detections"], 2 * data["sampling"]["frames_processed"])
             self.assertEqual(totals["court_filtered_person_detections"], data["sampling"]["frames_processed"])
             self.assertEqual(totals["boxes_with_track_id"], data["sampling"]["frames_processed"])
+            self.assertEqual(data["diagnostics"]["class_id_histogram"]["1"], 2 * data["sampling"]["frames_processed"])
+            self.assertEqual(data["model"]["person_class_id_fallback"], 1)
             self.assertTrue((out / "tracked_preview.mp4").is_file())
             self.assertTrue((out / "review_contact_sheet.jpg").is_file())
             self.assertTrue((out / "detector_review" / "review_contact_sheet.jpg").is_file())
