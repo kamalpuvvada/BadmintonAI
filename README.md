@@ -289,6 +289,25 @@ Use `--decision rejected` to reject a scene, or `--decision pending` to revoke i
 
 This step produces no movement measurements or coaching scores, even after all scenes are accepted. Five local packets were prepared for players-044, 045, 046, 047 and 050: all 14 scenes remain pending, with zero approved intervals. The report for players-050 was checked in a browser: all 13 review images and the 10-second preview loaded successfully. Thirty-six tests pass, including approval checks, stale-source rejection, decision preservation/revocation, excluded/fragmented scene blocking, escaped report text and interval separation at unconfirmed frames and scene boundaries.
 
+### Step 2.10 — Export reviewed image positions
+
+Export a small, offline JSON contract for future backend consumption:
+
+```powershell
+.\.venv\Scripts\python.exe tracking_export.py export --run "out\players-050"
+.\.venv\Scripts\python.exe tracking_export.py verify --run "out\players-050"
+```
+
+`reviewed_tracks.json` schema 0.1.0 includes the source hashes, a hash of the validated review snapshot, image dimensions, sampling rate, approved intervals and per-track segments. Each sample retains its local frame index, original-video timestamp, bounding box, approximate box-bottom pixels and detector confidence. Coordinates use the original image's top-left origin. Positions are copied without interpolation or conversion to metres. Out-of-image accepted samples and invalid confidence values fail export instead of being silently clamped.
+
+Only explicitly accepted scenes contribute data. Unconfirmed frames are omitted; gaps and scene boundaries split segments. Identify a track using **both source hashes, scene ID and track ID**; `interval_index` distinguishes separated segments. Equal IDs in another run do not imply the same athlete. Export reads and validates one source/review snapshot, recomputing eligibility instead of trusting saved interval fields. `verify` rebuilds the current export and rejects changed data, changed review decisions (including revocation), or modifications to the exported JSON. A saved file cannot revoke itself: consumers must verify against the current run before use, and a future backend must enforce its own access control and invalidation.
+
+Pending or rejected-only runs export `status: no_approved_intervals` with empty segments. This is a successful gated result, not missing inference. Even accepted exports keep `movement_metrics` and `coaching_metrics` unavailable: image-space review does not establish ground contact, calibration, distance, speed or coaching quality.
+
+On 30 October 2026, export and verification were exercised on players-044, 045, 046, 047 and 050. All 14 scenes remain pending and all five exports contain zero segments. Forty-two tests pass, covering source/review changes, modified exports, scene and gap separation, exact pixel/time preservation, invalid samples and the original tracking/review checks. Accepted-export behavior is tested with synthetic fixtures only; no real review decision was fabricated.
+
+Local cleanup removed 41 superseded `players-*` experiment folders (98,012,352 bytes), preserving their summaries and summary hashes in `out/tracking_cleanup_2026-10-30.json`. The five final runs above, `out/session-001`, `out/dive-transition-review`, the reference image and JSON audits remain. Earlier run names in this README are historical experiment records; their artifacts may have been deleted. Generated data and the cleanup inventory stay local and are not committed.
+
 `--roi` is an **optional normalized rectangle** `(left, top, right, bottom)` in the range 0–1. It keeps detections whose approximate *foot position* is inside the rectangle, helping exclude spectators/officials. The example coordinates suit the sample broadcast's first few seconds, **not all camera setups**. Omit `--roi` initially for a new fixed-camera video, then inspect its generated review sheet and add an appropriate region.
 
 Generated files:

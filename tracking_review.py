@@ -248,14 +248,20 @@ def decide(run: Path, scene_id: int, decision: str, reviewer: str, notes: str,
     return _save(run, review, summary, rows)
 
 
-def verify(run: Path) -> dict:
-    review, _, rows = _load(run)
+def verified_snapshot(run: Path) -> tuple[dict, dict, list[dict], dict]:
+    """Read and validate one source/review snapshot for downstream consumers."""
+    review, summary, rows = _load(run)
     decisions = Counter(scene["review"]["decision"] for scene in review["scenes"])
-    return {"source_binding": review["source_binding"], "approval_scope": "tracking_in_image_pixels",
+    verification = {"source_binding": review["source_binding"], "approval_scope": "tracking_in_image_pixels",
             "decisions": dict(decisions),
             "all_scenes_decided": not decisions["pending"],
             "approved_intervals": _approved_intervals(review, rows),
             "coaching_metrics": {"status": "not_available"}}
+    return verification, summary, rows, review
+
+
+def verify(run: Path) -> dict:
+    return verified_snapshot(run)[0]
 
 
 def main() -> int:
