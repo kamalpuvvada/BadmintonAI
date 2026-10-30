@@ -136,6 +136,31 @@ class TrackingReviewTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "boundaries"):
             prepare(self.run, 2)
 
+    def test_automated_review_is_explicit_and_retained_in_history_and_html(self):
+        path = prepare(self.run, 2)
+        decide(self.run, 0, "accepted", "Codex", "Synthetic audit", dict.fromkeys(CHECKS, True), "automated")
+        result = verify(self.run)
+        self.assertEqual(result["review_provenance"], {"accepted_by_reviewer_kind": {"automated": 1}})
+        prepare(self.run)
+        review = json.loads(path.read_text())
+        self.assertEqual(review["scenes"][0]["review_history"][0]["reviewer_kind"], "automated")
+        self.assertIn("Review type: automated", (self.run / "tracking_review.html").read_text())
+        self.assertEqual(result["coaching_metrics"]["status"], "not_available")
+
+    def test_legacy_review_has_unspecified_provenance_and_unknown_kind_is_rejected(self):
+        path = prepare(self.run, 2)
+        self.accept()
+        review = json.loads(path.read_text())
+        del review["scenes"][0]["review"]["reviewer_kind"]
+        path.write_text(json.dumps(review))
+        self.assertEqual(verify(self.run)["review_provenance"], {"accepted_by_reviewer_kind": {"unspecified": 1}})
+        with self.assertRaisesRegex(ValueError, "reviewer kind"):
+            decide(self.run, 1, "rejected", "Codex", "", {}, "invented")
+        review["scenes"][0]["review"]["reviewer_kind"] = "invented"
+        path.write_text(json.dumps(review))
+        with self.assertRaisesRegex(ValueError, "reviewer kind"):
+            verify(self.run)
+
     def test_html_escapes_notes_and_rejects_artifact_path_escape(self):
         prepare(self.run, 2)
         decide(self.run, 0, "rejected", "<reviewer>", "<script>alert(1)</script>", {})

@@ -277,7 +277,7 @@ Open `out/players-050/tracking_review.html`. It includes the sampled tracked ima
 All scenes begin **pending**. After actually reviewing a complete scene, record who checked its boxes, ID continuity, camera view and boundaries. For example (replace the reviewer name and notes):
 
 ```powershell
-.\.venv\Scripts\python.exe tracking_review.py decide --run "out\players-050" --scene 0 --decision accepted --reviewer "Reviewer name" --boxes-verified --ids-verified --view-verified --boundaries-verified --notes "Reviewed the complete scene"
+.\.venv\Scripts\python.exe tracking_review.py decide --run "out\players-050" --scene 0 --decision accepted --reviewer "Reviewer name" --reviewer-kind human --boxes-verified --ids-verified --view-verified --boundaries-verified --notes "Reviewed the complete scene"
 .\.venv\Scripts\python.exe tracking_review.py verify --run "out\players-050"
 ```
 
@@ -304,9 +304,29 @@ Only explicitly accepted scenes contribute data. Unconfirmed frames are omitted;
 
 Pending or rejected-only runs export `status: no_approved_intervals` with empty segments. This is a successful gated result, not missing inference. Even accepted exports keep `movement_metrics` and `coaching_metrics` unavailable: image-space review does not establish ground contact, calibration, distance, speed or coaching quality.
 
-On 30 October 2026, export and verification were exercised on players-044, 045, 046, 047 and 050. All 14 scenes remain pending and all five exports contain zero segments. Forty-two tests pass, covering source/review changes, modified exports, scene and gap separation, exact pixel/time preservation, invalid samples and the original tracking/review checks. Accepted-export behavior is tested with synthetic fixtures only; no real review decision was fabricated.
+Initial export verification on 30 October 2026 exercised players-044, 045, 046, 047 and 050 while all 14 scenes were pending, correctly producing zero segments. At that checkpoint, 42 tests passed and accepted-export behavior had only been exercised with synthetic fixtures. The subsequent automated visual review below records actual image-space decisions and exercises the accepted exports on real tracking output.
 
 Local cleanup removed 41 superseded `players-*` experiment folders (98,012,352 bytes), preserving their summaries and summary hashes in `out/tracking_cleanup_2026-10-30.json`. The five final runs above, `out/session-001`, `out/dive-transition-review`, the reference image and JSON audits remain. Earlier run names in this README are historical experiment records; their artifacts may have been deleted. Generated data and the cleanup inventory stay local and are not committed.
+
+### Step 2.11 — Completed automated visual review
+
+At the user's request to proceed autonomously, Codex inspected **every one of the 750 sampled frames** in the five final windows on 30 October 2026. Source frames were decoded again with the original sampling settings and overlaid with the saved JSON boxes; 30 dense sheets cover all frames. Source SHA-256 is `f317baacdd4ccce45febd9f416ba44b6c90071ebf3380c22f877b03376101130`. Inspection found no gross missing-player, duplicate-player or within-scene ID-swap error in these windows, including jumps and dives. Box placement remains approximate; this is not a ground-truth IoU or precision/recall benchmark, a full-match evaluation, or a review of unsampled source frames.
+
+The four close-up scenes were explicitly rejected for downstream analysis. All ten court scenes were explicitly accepted for sampled image-space tracking after inspecting their frames, IDs, views and boundaries. The same-camera cuts at 483.933 and 488.000 seconds are visible discontinuities and correctly reset IDs. No inference output or track ID was changed to obtain these decisions.
+
+| Run | Accepted scenes | Excluded scenes | Exported segments | Position samples |
+| --- | --- | --- | --- | --- |
+| players-046 | 0 | None | 2 | 298 |
+| players-047 | 0 | None | 2 | 298 |
+| players-044 | 0, 2, 4 | 1, 3 | 6 | 200 |
+| players-050 | 0, 1, 2 | None | 6 | 294 |
+| players-045 | 1, 3 | 0, 2 | 4 | 262 |
+
+All 14 scenes now have decisions: **10 accepted, 4 rejected, 0 pending**. Accepted exports contain 20 separate track segments and 1,352 position samples, excluding the 64 close-up frames and the first unconfirmed frame in each accepted scene. Each accepted interval stays within one scene. All five exports were regenerated and verified against the current sources and decisions. Local evidence is in `out/full-frame-audit/audit.json`, the 30 sheets, and `out/full-frame-audit/completed_review.json`; each decision records the evidence audit hash. `out/scene-review/index.html` provides scene clips and review notes.
+
+Review decisions and history now retain optional `reviewer_kind`: `automated`, `human`, or `unspecified`. The CLI option is `--reviewer-kind`; its default and legacy records are `unspecified`, never an inferred human review. Reports display the type; verification and exports expose `review_provenance.accepted_by_reviewer_kind`. Codex recorded the initial decisions with kind **automated**. Kamal subsequently explicitly confirmed all four checks for **A (players-046 scene 0)** and **B (players-047 scene 0)** in chat. Those two decisions now record **Kamal / human**, preserving the earlier automated decisions in history. Final accepted-scene provenance is **2 human, 8 automated**; the four excluded scenes retain automated decisions. Counts and automated checks alone never accept scenes; these decisions followed explicit visual inspection. As with other local review fields, the kind is a recorded claim, not authenticated proof.
+
+Forty-five tests pass, including preservation of automated provenance in history, HTML and exports, legacy handling, unknown-kind rejection, and invalidation when review provenance changes. A compact result with source/output hashes and scene decisions is versioned in `validation/tracking_review_2026-10-30.json`; the video and frame evidence remain local. Human confirmation covers A and B only; coach validation is not recorded. Movement measurements, court-calibrated metrics and coaching scores remain unavailable.
 
 `--roi` is an **optional normalized rectangle** `(left, top, right, bottom)` in the range 0–1. It keeps detections whose approximate *foot position* is inside the rectangle, helping exclude spectators/officials. The example coordinates suit the sample broadcast's first few seconds, **not all camera setups**. Omit `--roi` initially for a new fixed-camera video, then inspect its generated review sheet and add an appropriate region.
 

@@ -103,6 +103,17 @@ class TrackingExportTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "outside"):
             export(self.run)
 
+    def test_export_retains_automated_provenance_and_detects_changed_provenance(self):
+        from tracking_review import CHECKS
+        decide(self.run, 0, "accepted", "Codex", "Synthetic", dict.fromkeys(CHECKS, True), "automated")
+        export(self.run)
+        result = build_export(self.run)
+        self.assertEqual(result["review_provenance"], {"accepted_by_reviewer_kind": {"automated": 1}})
+        self.assertEqual(result["coaching_metrics"]["status"], "not_available")
+        decide(self.run, 0, "accepted", "Human test reviewer", "Synthetic", dict.fromkeys(CHECKS, True), "human")
+        with self.assertRaisesRegex(ValueError, "stale"):
+            verify_export(self.run)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -14,6 +14,7 @@ import os
 
 
 CHECKS = ("boxes", "ids", "view", "boundaries")
+REVIEWER_KINDS = ("unspecified", "human", "automated")
 REVIEW_FILE = "tracking_review.json"
 
 
@@ -93,7 +94,7 @@ def _scene_facts(rows: list[dict], expected: int | None) -> list[dict]:
                       "frames": len(frames), "track_ids": ids,
                       "person_count_histogram": dict(Counter(str(len(row["persons"])) for row in frames)),
                       "blockers": blocked, "flags": flags,
-                      "review": {"decision": "pending", "reviewer": "", "notes": "",
+                      "review": {"decision": "pending", "reviewer": "", "reviewer_kind": "unspecified", "notes": "",
                                  "checks": {key: False for key in CHECKS}, "reviewed_utc": None},
                       "review_history": []})
     return facts
@@ -134,6 +135,10 @@ def _load(run: Path, expected: int | None = None, create: bool = False) -> tuple
             raise ValueError("Malformed review decision or history")
         if decision["decision"] not in ("pending", "accepted", "rejected"):
             raise ValueError("Unknown scene review decision")
+        # Legacy decisions never imply that a human inspected the evidence.
+        decision.setdefault("reviewer_kind", "unspecified")
+        if decision["reviewer_kind"] not in REVIEWER_KINDS:
+            raise ValueError("Unknown reviewer kind")
         if decision["decision"] != "pending" and not decision["reviewer"].strip():
             raise ValueError("Reviewed scenes require a reviewer")
         if decision["decision"] == "accepted":
@@ -200,7 +205,7 @@ def _save(run: Path, review: dict, summary: dict, rows: list[dict]) -> Path:
         cards.append(f'''<section><h2>Scene {scene['scene_id']} · {scene['start_seconds']:.3f}–{scene['end_seconds']:.3f} s</h2>
 <p class="status">{escape(decision['decision'].capitalize())}</p><p>{scene['frames']} sampled frames · Temporary IDs: {id_text}</p>
 <p><a href="{video}#t={clip_start:.3f},{clip_end:.3f}">Watch this scene</a></p>
-<p>Reviewer: {escape(decision['reviewer'] or 'Not recorded')}</p><p>{escape(decision['notes'])}</p>
+<p>Reviewer: {escape(decision['reviewer'] or 'Not recorded')} · Review type: {escape(decision['reviewer_kind'])}</p><p>{escape(decision['notes'])}</p>
 <p>{checks_text}</p>
 <ul>{notes}</ul><div class="frames">{pictures or '<p>No saved review frame in this scene. Check the video.</p>'}</div></section>''')
     status = "Review required" if any(scene["review"]["decision"] == "pending" for scene in review["scenes"]) else "Review completed"
@@ -231,17 +236,20 @@ def prepare(run: Path, expected_players: int | None = None) -> Path:
 
 
 def decide(run: Path, scene_id: int, decision: str, reviewer: str, notes: str,
-           checks: dict[str, bool]) -> Path:
+           checks: dict[str, bool], reviewer_kind: str = "unspecified") -> Path:
     review, summary, rows = _load(run)
     matches = [scene for scene in review["scenes"] if scene["scene_id"] == scene_id]
     if not matches or decision not in ("accepted", "rejected", "pending"):
         raise ValueError("Unknown scene or decision")
+    if reviewer_kind not in REVIEWER_KINDS:
+        raise ValueError("Unknown reviewer kind")
     scene = matches[0]
     if decision != "pending" and not reviewer.strip():
         raise ValueError("A reviewer is required")
     if decision == "accepted" and (scene["blockers"] or not all(checks.get(key) is True for key in CHECKS)):
         raise ValueError("Acceptance requires no blockers and all four verification checks")
     scene["review"] = {"decision": decision, "reviewer": reviewer.strip(), "notes": notes,
+                       "reviewer_kind": reviewer_kind,
                        "checks": {key: checks.get(key) is True for key in CHECKS},
                        "reviewed_utc": datetime.now(timezone.utc).isoformat()}
     scene["review_history"].append(dict(scene["review"]))
@@ -255,6 +263,9 @@ def verified_snapshot(run: Path) -> tuple[dict, dict, list[dict], dict]:
     verification = {"source_binding": review["source_binding"], "approval_scope": "tracking_in_image_pixels",
             "decisions": dict(decisions),
             "all_scenes_decided": not decisions["pending"],
+            "review_provenance": {"accepted_by_reviewer_kind": dict(Counter(
+                scene["review"]["reviewer_kind"] for scene in review["scenes"]
+                if scene["review"]["decision"] == "accepted"))},
             "approved_intervals": _approved_intervals(review, rows),
             "coaching_metrics": {"status": "not_available"}}
     return verification, summary, rows, review
@@ -276,6 +287,7 @@ def main() -> int:
             command.add_argument("--scene", type=int, required=True)
             command.add_argument("--decision", choices=("accepted", "rejected", "pending"), required=True)
             command.add_argument("--reviewer", default="")
+            command.add_argument("--reviewer-kind", choices=REVIEWER_KINDS, default="unspecified")
             command.add_argument("--notes", default="")
             for check in CHECKS:
                 command.add_argument(f"--{check}-verified", action="store_true")
@@ -285,7 +297,7 @@ def main() -> int:
             print(prepare(args.run, args.expected_players))
         elif args.command == "decide":
             print(decide(args.run, args.scene, args.decision, args.reviewer, args.notes,
-                         {key: getattr(args, f"{key}_verified") for key in CHECKS}))
+                         {key: getattr(args, f"{key}_verified") for key in CHECKS}, args.reviewer_kind))
         else:
             print(json.dumps(verify(args.run), indent=2))
     except (ValueError, OSError, KeyError, TypeError, AttributeError, IndexError) as exc:

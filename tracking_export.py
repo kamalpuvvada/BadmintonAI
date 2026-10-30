@@ -52,6 +52,7 @@ def build_export(run: Path) -> dict:
             "position_meaning": "bounding_box_bottom_candidate_not_verified_floor_contact",
             "identity_scope": "source_binding_and_scene_id_and_track_id",
             "review_decisions": verification["decisions"],
+            "review_provenance": verification["review_provenance"],
             "approved_intervals": verification["approved_intervals"], "segments": segments,
             "movement_metrics": {"status": "not_available"},
             "coaching_metrics": {"status": "not_available"}}
@@ -73,6 +74,7 @@ def verify_export(run: Path) -> dict:
         raise ValueError("Export is stale or modified; regenerate it from the current review")
     return {"status": "valid", "data_status": current["status"],
             "segments": len(current["segments"]), "source_binding": current["source_binding"],
+            "review_provenance": current["review_provenance"],
             "coaching_metrics": current["coaching_metrics"]}
 
 

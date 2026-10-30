@@ -1,0 +1,272 @@
+{
+  "reviewer": "Codex",
+  "reviewer_kind": "automated",
+  "human_review_performed": true,
+  "source_sha256": "f317baacdd4ccce45febd9f416ba44b6c90071ebf3380c22f877b03376101130",
+  "evidence_audit_sha256": "0bccef303226217b53b95ae7e447dac2a34a79019a48819f52e6e1ccd369ac6c",
+  "frames_inspected": 750,
+  "accepted_scenes": 10,
+  "excluded_scenes": 4,
+  "exported_segments": 20,
+  "exported_samples": 1352,
+  "movement_metrics": {
+    "status": "not_available"
+  },
+  "coaching_metrics": {
+    "status": "not_available"
+  },
+  "review_date": "2026-10-30",
+  "method": "Every 15 FPS sampled source frame inspected in 30 source-overlay contact sheets, plus per-frame counts, near/far ID ordering and adjacent-motion diagnostics. No new detector inference. No ground-truth IoU or production accuracy claim.",
+  "runs": [
+    {
+      "run": "players-046",
+      "source_binding": {
+        "summary_sha256": "210f98b8dac8722628247b5bf69b472daaa2b798253594170d8e979a9bdb5c3a",
+        "tracks_sha256": "789b72713b69021457a41a930328ab42d259491a0d71d610e55d2e61473f163f"
+      },
+      "start_seconds": 0,
+      "fps": 15,
+      "frames_inspected": 150,
+      "export_sha256": "f6cde93dfa67985d2e2983669d8b81484a4260f6dbe67d8a56cbe4566006f4e2",
+      "exported_segments": 2,
+      "exported_samples": 298,
+      "scenes": [
+        {
+          "scene_id": 0,
+          "start_frame": 0,
+          "end_frame": 149,
+          "track_ids": [
+            0,
+            1
+          ],
+          "decision": "accepted",
+          "reviewer_kind": "human",
+          "reviewer": "Kamal"
+        }
+      ]
+    },
+    {
+      "run": "players-047",
+      "source_binding": {
+        "summary_sha256": "ecd057665cdc16c10f6f2dfca236b0e32abeab9ac6662bdde2c9436dd77133c7",
+        "tracks_sha256": "14320ccea359e9cf4bf142737a6dc4ae3f0ab3b7bda8de1fa18dde111274b1c9"
+      },
+      "start_seconds": 60,
+      "fps": 15,
+      "frames_inspected": 150,
+      "export_sha256": "965d90e2a1a24afb109044aaa8c79c25564c2f5f9bc05d7e759c2145cd576e4b",
+      "exported_segments": 2,
+      "exported_samples": 298,
+      "scenes": [
+        {
+          "scene_id": 0,
+          "start_frame": 0,
+          "end_frame": 149,
+          "track_ids": [
+            0,
+            1
+          ],
+          "decision": "accepted",
+          "reviewer_kind": "human",
+          "reviewer": "Kamal"
+        }
+      ]
+    },
+    {
+      "run": "players-044",
+      "source_binding": {
+        "summary_sha256": "bbd2ae6413ab7e8eff2df67ba0d75a5fe4ee756da32450433835553e55fc0a6f",
+        "tracks_sha256": "86b9847d5acbc9c1c0f96b7203ed6b0b86f5154e02794441cab639a87bae34a2"
+      },
+      "start_seconds": 300,
+      "fps": 15,
+      "frames_inspected": 150,
+      "export_sha256": "133882a57dc7b0eaa615d2063427574583ffd052531443dde74cc07332585a04",
+      "exported_segments": 6,
+      "exported_samples": 200,
+      "scenes": [
+        {
+          "scene_id": 0,
+          "start_frame": 0,
+          "end_frame": 18,
+          "track_ids": [
+            0,
+            1
+          ],
+          "decision": "accepted",
+          "reviewer_kind": "automated",
+          "reviewer": "Codex"
+        },
+        {
+          "scene_id": 1,
+          "start_frame": 19,
+          "end_frame": 40,
+          "track_ids": [],
+          "decision": "rejected",
+          "reviewer_kind": "automated",
+          "reviewer": "Codex"
+        },
+        {
+          "scene_id": 2,
+          "start_frame": 41,
+          "end_frame": 94,
+          "track_ids": [
+            2,
+            3
+          ],
+          "decision": "accepted",
+          "reviewer_kind": "automated",
+          "reviewer": "Codex"
+        },
+        {
+          "scene_id": 3,
+          "start_frame": 95,
+          "end_frame": 119,
+          "track_ids": [],
+          "decision": "rejected",
+          "reviewer_kind": "automated",
+          "reviewer": "Codex"
+        },
+        {
+          "scene_id": 4,
+          "start_frame": 120,
+          "end_frame": 149,
+          "track_ids": [
+            4,
+            5
+          ],
+          "decision": "accepted",
+          "reviewer_kind": "automated",
+          "reviewer": "Codex"
+        }
+      ]
+    },
+    {
+      "run": "players-050",
+      "source_binding": {
+        "summary_sha256": "14e0c87fa6db0579b8210eec19110b74720b706aef7bae019e885159fe3390e3",
+        "tracks_sha256": "a43bcfb0ee8c5aa8dc27add5e428e0ff8974394dcc3dbc00e28cb53bc2d8063a"
+      },
+      "start_seconds": 480.0,
+      "fps": 15.0,
+      "frames_inspected": 150,
+      "export_sha256": "78d1177fb91a9dde96f26959db18be831da33533578537ca6cf2f5320c4f8eca",
+      "exported_segments": 6,
+      "exported_samples": 294,
+      "scenes": [
+        {
+          "scene_id": 0,
+          "start_frame": 0,
+          "end_frame": 58,
+          "track_ids": [
+            0,
+            1
+          ],
+          "decision": "accepted",
+          "reviewer_kind": "automated",
+          "reviewer": "Codex"
+        },
+        {
+          "scene_id": 1,
+          "start_frame": 59,
+          "end_frame": 119,
+          "track_ids": [
+            2,
+            3
+          ],
+          "decision": "accepted",
+          "reviewer_kind": "automated",
+          "reviewer": "Codex"
+        },
+        {
+          "scene_id": 2,
+          "start_frame": 120,
+          "end_frame": 149,
+          "track_ids": [
+            4,
+            5
+          ],
+          "decision": "accepted",
+          "reviewer_kind": "automated",
+          "reviewer": "Codex"
+        }
+      ]
+    },
+    {
+      "run": "players-045",
+      "source_binding": {
+        "summary_sha256": "6411010760c6779c89adb664e448912d279a7e821ad2f94cec9d3862ddd9af93",
+        "tracks_sha256": "b4794c0690a899e10f75934bbf6e27686c0bb29c73171edcc3591672ca8845fc"
+      },
+      "start_seconds": 720,
+      "fps": 15,
+      "frames_inspected": 150,
+      "export_sha256": "e8565a2ca33f5be3b61ce79540a8577518b1afc964b503301076db2103e69e76",
+      "exported_segments": 4,
+      "exported_samples": 262,
+      "scenes": [
+        {
+          "scene_id": 0,
+          "start_frame": 0,
+          "end_frame": 5,
+          "track_ids": [],
+          "decision": "rejected",
+          "reviewer_kind": "automated",
+          "reviewer": "Codex"
+        },
+        {
+          "scene_id": 1,
+          "start_frame": 6,
+          "end_frame": 77,
+          "track_ids": [
+            0,
+            1
+          ],
+          "decision": "accepted",
+          "reviewer_kind": "automated",
+          "reviewer": "Codex"
+        },
+        {
+          "scene_id": 2,
+          "start_frame": 78,
+          "end_frame": 88,
+          "track_ids": [],
+          "decision": "rejected",
+          "reviewer_kind": "automated",
+          "reviewer": "Codex"
+        },
+        {
+          "scene_id": 3,
+          "start_frame": 89,
+          "end_frame": 149,
+          "track_ids": [
+            2,
+            3
+          ],
+          "decision": "accepted",
+          "reviewer_kind": "automated",
+          "reviewer": "Codex"
+        }
+      ]
+    }
+  ],
+  "human_reviewed_scenes": 2,
+  "human_review_scope": [
+    {
+      "label": "A",
+      "run": "players-046",
+      "scene_id": 0,
+      "reviewer": "Kamal"
+    },
+    {
+      "label": "B",
+      "run": "players-047",
+      "scene_id": 0,
+      "reviewer": "Kamal"
+    }
+  ],
+  "accepted_scene_provenance": {
+    "human": 2,
+    "automated": 8
+  }
+}
