@@ -1,0 +1,7 @@
+{
+  "repository": "https://github.com/qaz812345/TrackNetV3",
+  "commit": "6eda442ada1740573f200f836d93edc9a541ee86",
+  "upstream_model_sha256": "04fd51ff88e58189474677dbf11f81e52b78df00226fb97ea0678b31ef7284e3",
+  "license_sha256": "1eeb31683deba741bce99f5f33bb813293a23b4e6c8302d6f056a587a30cd497",
+  "modification": "Retained only Conv2D blocks and TrackNet; omitted trajectory inpainting code. Added attribution header. Removed trailing whitespace."
+}

@@ -1,0 +1,137 @@
+{
+  "schema_version": "0.1.0",
+  "split": "development_seed",
+  "role": "additional_time_window_control",
+  "source_video_sha256": "f317baacdd4ccce45febd9f416ba44b6c90071ebf3380c22f877b03376101130",
+  "image_size_px": [
+    640,
+    360
+  ],
+  "annotation_scope": "Codex automated visual labels, frozen before observing TrackNet predictions. New 60\u201370 s time window from the same video/match/camera. Not independent held-out data; upstream training-video overlap is unknown. Approximate component centers, not physical cork locations.",
+  "sources": {
+    "control-060": {
+      "fps": 30,
+      "start_seconds": 60,
+      "frames": 300
+    }
+  },
+  "cases": [
+    {
+      "id": "control-visible-210",
+      "source_run": "control-060",
+      "frame_index": 210,
+      "visibility": "visible",
+      "point_px": [
+        415.83,
+        105.83
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Six enlarged source frames show this shuttle moving down-right independently of the racket. Native-pixel bright-component center; adjacent cases are correlated. Labels fixed before TrackNet inference."
+    },
+    {
+      "id": "control-visible-211",
+      "source_run": "control-060",
+      "frame_index": 211,
+      "visibility": "visible",
+      "point_px": [
+        417,
+        108.25
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Six enlarged source frames show this shuttle moving down-right independently of the racket. Native-pixel bright-component center; adjacent cases are correlated. Labels fixed before TrackNet inference."
+    },
+    {
+      "id": "control-visible-212",
+      "source_run": "control-060",
+      "frame_index": 212,
+      "visibility": "visible",
+      "point_px": [
+        417,
+        108.25
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Six enlarged source frames show this shuttle moving down-right independently of the racket. Native-pixel bright-component center; adjacent cases are correlated. Labels fixed before TrackNet inference."
+    },
+    {
+      "id": "control-visible-213",
+      "source_run": "control-060",
+      "frame_index": 213,
+      "visibility": "visible",
+      "point_px": [
+        418.75,
+        111
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Six enlarged source frames show this shuttle moving down-right independently of the racket. Native-pixel bright-component center; adjacent cases are correlated. Labels fixed before TrackNet inference."
+    },
+    {
+      "id": "control-visible-214",
+      "source_run": "control-060",
+      "frame_index": 214,
+      "visibility": "visible",
+      "point_px": [
+        419.5,
+        115
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Six enlarged source frames show this shuttle moving down-right independently of the racket. Native-pixel bright-component center; adjacent cases are correlated. Labels fixed before TrackNet inference."
+    },
+    {
+      "id": "control-visible-215",
+      "source_run": "control-060",
+      "frame_index": 215,
+      "visibility": "visible",
+      "point_px": [
+        420.2,
+        119.4
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Six enlarged source frames show this shuttle moving down-right independently of the racket. Native-pixel bright-component center; adjacent cases are correlated. Labels fixed before TrackNet inference."
+    },
+    {
+      "id": "control-uncertain-0",
+      "source_run": "control-060",
+      "frame_index": 0,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "No confident shuttle location asserted for this sampled source frame. Do not interpret as shuttle absent."
+    },
+    {
+      "id": "control-uncertain-60",
+      "source_run": "control-060",
+      "frame_index": 60,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "No confident shuttle location asserted for this sampled source frame. Do not interpret as shuttle absent."
+    },
+    {
+      "id": "control-uncertain-120",
+      "source_run": "control-060",
+      "frame_index": 120,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "No confident shuttle location asserted for this sampled source frame. Do not interpret as shuttle absent."
+    }
+  ]
+}

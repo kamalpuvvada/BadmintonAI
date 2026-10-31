@@ -1,0 +1,457 @@
+{
+  "date": "2026-10-31",
+  "status": "experimental_learned_shuttle_proposals_not_verified_trajectories",
+  "model": "TrackNetV3 tracking module",
+  "upstream": {
+    "repository": "https://github.com/qaz812345/TrackNetV3",
+    "commit": "6eda442ada1740573f200f836d93edc9a541ee86",
+    "upstream_model_sha256": "04fd51ff88e58189474677dbf11f81e52b78df00226fb97ea0678b31ef7284e3",
+    "license_sha256": "1eeb31683deba741bce99f5f33bb813293a23b4e6c8302d6f056a587a30cd497",
+    "modification": "Retained only Conv2D blocks and TrackNet; omitted trajectory inpainting code. Added attribution header. Removed trailing whitespace."
+  },
+  "architecture_file_sha256": "73fb2d334102e88cf8eff0a80f2c0e4a13d2b552e58e4390f4ecab9eaf8cd0ad",
+  "checkpoint_sha256": "df867641a02712b021f04548ff4b1208ddfdb47f629ab2094ceb978667e83b1a",
+  "checkpoint_archive_sha256": "8de68d34ea2457e368e22947f1309143d60a6a7f9ddccd31cd526d4c4571bcc4",
+  "official_checkpoint_url": "https://drive.google.com/file/d/1CfzE87a0f6LhBp0kniSl1-89zaLCZ8cA/view",
+  "code_and_checkpoint_license": "MIT, as explicitly stated by upstream LICENSE",
+  "inpainting": false,
+  "new_control_labels_frozen_before_model_predictions": true,
+  "new_control_seed_sha256": "0083da28f73a6e954ce7d202acf38a13199c7a1d5e9d6cb429f4f167118b8f05",
+  "development_evaluation": {
+    "schema_version": "0.1.0",
+    "evaluation_scope": "selected_development_seed_only",
+    "benchmark_sha256": "d15defa845e6502f9e31f1e681007527f018ae7fd00a7ea78a15243cada7caae",
+    "prediction_bindings": {
+      "shuttle-005": {
+        "summary_sha256": "6343b9d9bc0f9c48871daf1ae16688927405bba0e1dc7e0b63f545c16d7219d0",
+        "rows_sha256": "285b9f5bab6606ae2c5de79858cc392cb6249683f69f8e5d96c839b5258eeeee"
+      },
+      "shuttle-006": {
+        "summary_sha256": "57f5c2e403201f20cb07df6465a67ead1f82788abc98eb1f2e8bf1605ffd07fd",
+        "rows_sha256": "a346711731a6af7553ba1a0b1795558aeed7a0abbd4dc44c5a52a7853ff00f03"
+      },
+      "shuttle-007": {
+        "summary_sha256": "90b0657c99f1b08f376b5df93a44824d9d9cf3a45f6c598530e4f90039459809",
+        "rows_sha256": "961c709bf479b72464af535d11d261992b5da21db88a819a591f78c74c73d053"
+      },
+      "shuttle-008": {
+        "summary_sha256": "f38cc9fb07b21d7c386c1eed1972212f1148198f26e52ccefed2627011ec7cb3",
+        "rows_sha256": "2e1075ceb178c6dc204af640a5dfbc8a5f3d323482eacbcd2012dcf2b927d260"
+      }
+    },
+    "point_tolerance_px": 4,
+    "visible_points": 12,
+    "candidate_point_hits": 11,
+    "proposal_point_hits": 11,
+    "uncertain_frames_excluded_from_point_scoring": 4,
+    "known_negative_regions": 1,
+    "negative_regions_with_candidates": 0,
+    "negative_regions_with_proposals": 0,
+    "cases": [
+      {
+        "id": "visible-green-132",
+        "visibility": "visible",
+        "candidate_hit": true,
+        "proposal_hit": true,
+        "negative_region_hits": []
+      },
+      {
+        "id": "visible-green-133",
+        "visibility": "visible",
+        "candidate_hit": true,
+        "proposal_hit": true,
+        "negative_region_hits": []
+      },
+      {
+        "id": "visible-green-134",
+        "visibility": "visible",
+        "candidate_hit": true,
+        "proposal_hit": true,
+        "negative_region_hits": []
+      },
+      {
+        "id": "visible-green-135",
+        "visibility": "visible",
+        "candidate_hit": true,
+        "proposal_hit": true,
+        "negative_region_hits": []
+      },
+      {
+        "id": "visible-green-136",
+        "visibility": "visible",
+        "candidate_hit": true,
+        "proposal_hit": true,
+        "negative_region_hits": []
+      },
+      {
+        "id": "visible-green-137",
+        "visibility": "visible",
+        "candidate_hit": true,
+        "proposal_hit": true,
+        "negative_region_hits": []
+      },
+      {
+        "id": "visible-streak-153",
+        "visibility": "visible",
+        "candidate_hit": false,
+        "proposal_hit": false,
+        "negative_region_hits": []
+      },
+      {
+        "id": "visible-streak-154",
+        "visibility": "visible",
+        "candidate_hit": true,
+        "proposal_hit": true,
+        "negative_region_hits": []
+      },
+      {
+        "id": "visible-streak-155",
+        "visibility": "visible",
+        "candidate_hit": true,
+        "proposal_hit": true,
+        "negative_region_hits": []
+      },
+      {
+        "id": "corrected-shuttle-shuttle-005-128",
+        "visibility": "visible",
+        "candidate_hit": true,
+        "proposal_hit": true,
+        "negative_region_hits": []
+      },
+      {
+        "id": "racket-shuttle-006-242",
+        "visibility": "uncertain",
+        "negative_region_hits": [
+          {
+            "identity": "racket_head",
+            "candidate_hit": false,
+            "proposal_hit": false
+          }
+        ]
+      },
+      {
+        "id": "corrected-shuttle-shuttle-007-132",
+        "visibility": "visible",
+        "candidate_hit": true,
+        "proposal_hit": true,
+        "negative_region_hits": []
+      },
+      {
+        "id": "corrected-shuttle-shuttle-008-105",
+        "visibility": "visible",
+        "candidate_hit": true,
+        "proposal_hit": true,
+        "negative_region_hits": []
+      },
+      {
+        "id": "uncertain-150",
+        "visibility": "uncertain",
+        "negative_region_hits": []
+      },
+      {
+        "id": "uncertain-151",
+        "visibility": "uncertain",
+        "negative_region_hits": []
+      },
+      {
+        "id": "uncertain-152",
+        "visibility": "uncertain",
+        "negative_region_hits": []
+      }
+    ],
+    "verified_shuttle_positions": 0,
+    "limitations": [
+      "Selected, correlated development examples; not held-out data or full-video precision/recall.",
+      "Negative regions label only local distractors, not absence of a shuttle elsewhere in the frame.",
+      "Evaluation never promotes proposals to verified trajectories or enables events/scoring."
+    ]
+  },
+  "additional_window_evaluation": {
+    "heuristic": {
+      "schema_version": "0.1.0",
+      "evaluation_scope": "selected_development_seed_only",
+      "benchmark_sha256": "faf0a225e68110856b0a6d46a709d221c5e440b0bec637031792488e3105786e",
+      "prediction_bindings": {
+        "control-060": {
+          "summary_sha256": "78132fd8a38864084b405684afd0954da51a1e002499d4b28cf617ec167258af",
+          "rows_sha256": "1eed2a3621738d0d19392938f9866ddc05ae2cf2bc8e3873c875f647e29b649f"
+        }
+      },
+      "point_tolerance_px": 4,
+      "visible_points": 6,
+      "candidate_point_hits": 2,
+      "proposal_point_hits": 2,
+      "uncertain_frames_excluded_from_point_scoring": 3,
+      "known_negative_regions": 0,
+      "negative_regions_with_candidates": 0,
+      "negative_regions_with_proposals": 0,
+      "cases": [
+        {
+          "id": "control-visible-210",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "control-visible-211",
+          "visibility": "visible",
+          "candidate_hit": false,
+          "proposal_hit": false,
+          "negative_region_hits": []
+        },
+        {
+          "id": "control-visible-212",
+          "visibility": "visible",
+          "candidate_hit": false,
+          "proposal_hit": false,
+          "negative_region_hits": []
+        },
+        {
+          "id": "control-visible-213",
+          "visibility": "visible",
+          "candidate_hit": false,
+          "proposal_hit": false,
+          "negative_region_hits": []
+        },
+        {
+          "id": "control-visible-214",
+          "visibility": "visible",
+          "candidate_hit": false,
+          "proposal_hit": false,
+          "negative_region_hits": []
+        },
+        {
+          "id": "control-visible-215",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "control-uncertain-0",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "control-uncertain-60",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "control-uncertain-120",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        }
+      ],
+      "verified_shuttle_positions": 0,
+      "limitations": [
+        "Selected, correlated development examples; not held-out data or full-video precision/recall.",
+        "Negative regions label only local distractors, not absence of a shuttle elsewhere in the frame.",
+        "Evaluation never promotes proposals to verified trajectories or enables events/scoring."
+      ]
+    },
+    "tracknet": {
+      "schema_version": "0.1.0",
+      "evaluation_scope": "selected_development_seed_only",
+      "benchmark_sha256": "faf0a225e68110856b0a6d46a709d221c5e440b0bec637031792488e3105786e",
+      "prediction_bindings": {
+        "control-060": {
+          "summary_sha256": "ce5bf04775c5b88ce06c075fe14385d2ce269eb2d5cd50a1e46311f086988c08",
+          "rows_sha256": "ab189fd90aed6cffdd5143a359642cd269bd8e4e78efe4b576ac9b53ec32dd17"
+        }
+      },
+      "point_tolerance_px": 4,
+      "visible_points": 6,
+      "candidate_point_hits": 6,
+      "proposal_point_hits": 6,
+      "uncertain_frames_excluded_from_point_scoring": 3,
+      "known_negative_regions": 0,
+      "negative_regions_with_candidates": 0,
+      "negative_regions_with_proposals": 0,
+      "cases": [
+        {
+          "id": "control-visible-210",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "control-visible-211",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "control-visible-212",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "control-visible-213",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "control-visible-214",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "control-visible-215",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "control-uncertain-0",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "control-uncertain-60",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "control-uncertain-120",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        }
+      ],
+      "verified_shuttle_positions": 0,
+      "limitations": [
+        "Selected, correlated development examples; not held-out data or full-video precision/recall.",
+        "Negative regions label only local distractors, not absence of a shuttle elsewhere in the frame.",
+        "Evaluation never promotes proposals to verified trajectories or enables events/scoring."
+      ]
+    }
+  },
+  "runs": [
+    {
+      "run": "tracknet-001",
+      "player_run": "players-046",
+      "sampling": {
+        "fps": 30.0,
+        "start_seconds": 0,
+        "frames": 300
+      },
+      "frame_status_counts": {
+        "excluded_player_review": 3,
+        "no_heatmap_detection": 87,
+        "proposal": 209,
+        "ambiguous_candidates": 1
+      },
+      "proposal_segments": 13,
+      "elapsed_seconds": 33.864,
+      "summary_sha256": "6343b9d9bc0f9c48871daf1ae16688927405bba0e1dc7e0b63f545c16d7219d0",
+      "rows_sha256": "285b9f5bab6606ae2c5de79858cc392cb6249683f69f8e5d96c839b5258eeeee",
+      "preview_decoded_frames": 300
+    },
+    {
+      "run": "tracknet-002",
+      "player_run": "players-045",
+      "sampling": {
+        "fps": 30.0,
+        "start_seconds": 720,
+        "frames": 300
+      },
+      "frame_status_counts": {
+        "excluded_player_review": 40,
+        "proposal": 134,
+        "no_heatmap_detection": 125,
+        "ambiguous_candidates": 1
+      },
+      "proposal_segments": 13,
+      "elapsed_seconds": 30.188,
+      "summary_sha256": "57f5c2e403201f20cb07df6465a67ead1f82788abc98eb1f2e8bf1605ffd07fd",
+      "rows_sha256": "a346711731a6af7553ba1a0b1795558aeed7a0abbd4dc44c5a52a7853ff00f03",
+      "preview_decoded_frames": 300
+    },
+    {
+      "run": "tracknet-003",
+      "player_run": "players-050",
+      "sampling": {
+        "fps": 30.0,
+        "start_seconds": 480.0,
+        "frames": 300
+      },
+      "frame_status_counts": {
+        "excluded_player_review": 9,
+        "proposal": 196,
+        "no_heatmap_detection": 92,
+        "ambiguous_candidates": 3
+      },
+      "proposal_segments": 15,
+      "elapsed_seconds": 35.823,
+      "summary_sha256": "90b0657c99f1b08f376b5df93a44824d9d9cf3a45f6c598530e4f90039459809",
+      "rows_sha256": "961c709bf479b72464af535d11d261992b5da21db88a819a591f78c74c73d053",
+      "preview_decoded_frames": 300
+    },
+    {
+      "run": "tracknet-004",
+      "player_run": "players-044",
+      "sampling": {
+        "fps": 30.0,
+        "start_seconds": 300,
+        "frames": 300
+      },
+      "frame_status_counts": {
+        "excluded_player_review": 103,
+        "proposal": 183,
+        "no_heatmap_detection": 11,
+        "ambiguous_candidates": 3
+      },
+      "proposal_segments": 8,
+      "elapsed_seconds": 29.586,
+      "summary_sha256": "f38cc9fb07b21d7c386c1eed1972212f1148198f26e52ccefed2627011ec7cb3",
+      "rows_sha256": "2e1075ceb178c6dc204af640a5dfbc8a5f3d323482eacbcd2012dcf2b927d260",
+      "preview_decoded_frames": 300
+    },
+    {
+      "run": "tracknet-005",
+      "player_run": "players-047",
+      "sampling": {
+        "fps": 30.0,
+        "start_seconds": 60,
+        "frames": 300
+      },
+      "frame_status_counts": {
+        "excluded_player_review": 3,
+        "no_heatmap_detection": 36,
+        "proposal": 261
+      },
+      "proposal_segments": 8,
+      "elapsed_seconds": 36.758,
+      "summary_sha256": "ce5bf04775c5b88ce06c075fe14385d2ce269eb2d5cd50a1e46311f086988c08",
+      "rows_sha256": "ab189fd90aed6cffdd5143a359642cd269bd8e4e78efe4b576ac9b53ec32dd17",
+      "preview_decoded_frames": 300
+    }
+  ],
+  "verified_shuttle_positions": 0,
+  "shot_events": {
+    "status": "not_available"
+  },
+  "coaching_metrics": {
+    "status": "not_available"
+  },
+  "frames_processed": 1500,
+  "linked_proposal_frames": 983,
+  "proposal_segments": 57,
+  "limitations": [
+    "The original 12-point development seed is small, selected and correlated.",
+    "Six added visible control points come from the same match/camera, not an independent held-out dataset. Upstream training-video overlap is unknown.",
+    "Labels are approximate automated visual observations, not physical cork positions or independently verified ground truth.",
+    "Adapter uses scene-local median samples and block inference with overlapping tail averaging; not the upstream published ensemble/inpainting protocol.",
+    "All five contact sheets were inspected; model misses and ambiguous heatmaps remain. No continuous-trajectory, shot-event or coaching validation."
+  ]
+}

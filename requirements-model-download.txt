@@ -1,0 +1,2 @@
+# Optional one-time author checkpoint download. Inference works offline afterward.
+gdown==6.5.1

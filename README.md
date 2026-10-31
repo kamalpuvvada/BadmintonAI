@@ -408,6 +408,87 @@ The experimental mode recovers both red-background observations but increases am
 
 The versioned evaluation record is `validation/shuttle_benchmark_evaluation_2026-10-31.json`; local source/context images, packet labels and comparisons are retained for inspection. All four trial contact sheets were inspected. Sixty-one tests pass, including native source preparation, exact tolerance boundaries, unknown-frame handling, source/image integrity, contradictory labels, color-mode opt-in and retained masks. No verified trajectories, shot events or coaching scores are enabled. The next milestone is a broader independently reviewed dataset and shuttle-specific model evaluation; this seed now provides reproducible checks for that work.
 
+## Step 3.3 — TrackNetV3 model evaluation
+
+The first learned shuttle baseline uses the **tracking module** from
+[TrackNetV3](https://github.com/qaz812345/TrackNetV3), pinned at upstream commit
+`6eda442ada1740573f200f836d93edc9a541ee86`. The author's
+[MIT license](https://github.com/qaz812345/TrackNetV3/blob/6eda442ada1740573f200f836d93edc9a541ee86/LICENSE)
+explicitly includes pretrained checkpoints. The small vendored architecture, license
+and provenance are in `third_party/tracknetv3`; InpaintNet is omitted. No training
+dataset or video is downloaded. The author-linked tracking checkpoint stays in ignored
+local storage. Initial setup requires internet; inference thereafter is offline.
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r requirements-model-download.txt
+.\.venv\Scripts\python.exe download_tracknet.py --out "out\models"
+.\.venv\Scripts\python.exe shuttle_tracknet.py --video "Videos\videoplayback.mp4" --player-run "out\players-046" --out "out\tracknet-repeat"
+```
+
+The download helper verifies the archive and tracking file against the recorded
+fingerprints, reads only the named tracking member, and preserves a mismatched
+existing checkpoint instead of overwriting it. Checkpoint loading uses PyTorch's
+restricted `weights_only=True` mode without an unrestricted fallback. The evaluated
+checkpoint SHA-256 is `df867641a02712b021f04548ff4b1208ddfdb47f629ab2094ceb978667e83b1a`.
+The optional downloader dependency is not needed for offline inference with an
+already-downloaded checkpoint.
+
+This checkpoint takes eight RGB frames with an RGB median background prepended
+(27 channels at 512×288). The adapter runs on CPU (`--threads`, default 4), processes
+only consecutive frames inside accepted player intervals, estimates a median from
+up to 31 frames in each eligible group, and uses non-overlapping eight-frame blocks
+plus an overlapping tail. Heatmaps for shared tail frames are averaged before
+thresholding at 0.5. The adapter never pads a short group, shares model context across
+a cut/rejected interval, inpaints a trajectory, or interpolates a missing position.
+Groups shorter than the checkpoint sequence are explicitly unprocessed. Source RGB
+channel order and native coordinate scaling are tested. It uses full-frame model
+input rather than the heuristic's player-box masks. Model heatmap activation is
+uncalibrated and does not certify shuttle identity.
+
+Outputs use the existing candidate JSONL/summary and review artifact conventions,
+so `shuttle_benchmark.py evaluate` can compare them directly. Orange circles mark
+thresholded heatmap components and cyan boxes mark conservative linked proposals.
+Every `verified_shuttle_position_px` remains null. Output summaries retain checkpoint,
+source and player-review hashes, model/version details, window settings and timing.
+This modified inference protocol is not the author's published temporal ensemble
+and inpainting evaluation; no upstream accuracy numbers are inherited.
+
+Five real runs, tracknet-001 through 005, processed **1,500 native-rate frames** from
+players-046, 045, 050, 044 and 047 respectively. Each preview decodes to 300 frames.
+Rejected player intervals contain no heatmap observations, and all 57 linked proposal
+segments stay consecutive and scene-local. There are 983 frames with linked proposals;
+this is a diagnostic count, not an accuracy or recall measurement. Local CPU times
+were approximately 30–37 seconds per 10-second window including decoding, annotation
+and preview encoding but excluding model loading; this is an offline baseline.
+All five contact sheets were inspected; missing observations and occasional ambiguous
+heatmaps remain.
+
+An additional nine-case packet from the 60–70 second window was labeled **before
+observing TrackNet predictions**: six visible shuttle points at 67.000–67.167 seconds
+and three uncertain frames. Its versioned seed is
+`validation/shuttle_control_seed_2026-10-31.json`; the prepared local packet is
+`out/shuttle-control-benchmark-001`. The extra labels are automated, approximate and
+correlated, from the same match and camera. They are not an independent held-out
+dataset; overlap between the source video and upstream training footage is unknown.
+
+| Selected labeled observations, four native-pixel tolerance | Default heuristic | TrackNetV3 adapter |
+| --- | --- | --- |
+| Original development points matched by candidates | 10/12 | 11/12 |
+| Original development points matched by linked proposals | 10/12 | 11/12 |
+| Local racket region containing a candidate / linked proposal | 1/1 / 1/1 | 0/1 / 0/1 |
+| Additional-window points matched by candidates | 2/6 | 6/6 |
+| Additional-window points matched by linked proposals | 2/6 | 6/6 |
+
+The model misses the labeled blurred observation at 5.100 seconds. The small comparison
+supports continued model evaluation, not a general accuracy claim or automatic
+trajectory acceptance. The heuristic remains available and no existing default is
+changed. Model results, source/output fingerprints, control-label provenance and
+limitations are recorded in `validation/tracknet_evaluation_2026-10-31.json`.
+Sixty-eight tests pass, covering preprocessing, coordinate restoration, restricted
+checkpoint loading, exact-member archive handling, short-context behavior and scene/gap
+isolation, including native FFmpeg integration. Installed dependencies pass `pip check`.
+Shot events, court-calibrated metrics and coaching scores remain unavailable.
+
 ## Next milestones
 
 | Step | Deliverable | Validation |
