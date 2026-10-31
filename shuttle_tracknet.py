@@ -20,7 +20,8 @@ import torch
 from badminton_proto import _font, probe_video, sha256_file
 from download_tracknet import CHECKPOINT_SHA256
 from player_tracking import _extract_sampled_video, _encode_preview
-from shuttle_candidates import frame_context, ProposalLinker
+from shuttle_candidates import frame_context
+from shuttle_linking import LINKER_MODES, linker_configuration, make_linker
 from tracking_review import verified_snapshot
 from third_party.tracknetv3.tracknet import TrackNet
 
@@ -153,12 +154,13 @@ def infer_groups(paths: list[Path], contexts: list[dict], predictor, stride: int
 
 def run(video: Path, player_run: Path, output: Path, weights: Path,
         expected_sha256: str = CHECKPOINT_SHA256, threads: int = 4, window_stride: int | None = None,
-        heatmap_threshold: float = .5) -> Path:
+        heatmap_threshold: float = .5, linker_mode: str = "motion") -> Path:
     if output.exists():
         raise ValueError("Choose a new output directory")
     if type(threads) is not int or not 1 <= threads <= 32:
         raise ValueError("CPU threads must be within 1..32")
     _validate_heatmap_threshold(heatmap_threshold)
+    linker = make_linker(linker_mode)
     verification, summary, player_rows, review = verified_snapshot(player_run)
     meta, video_hash = probe_video(video), sha256_file(video)
     if (not summary["session_id"].endswith(video_hash[:12])
@@ -174,7 +176,6 @@ def run(video: Path, player_run: Path, output: Path, weights: Path,
     output.mkdir(parents=True)
     timer = time.perf_counter()
     records, counts = [], Counter()
-    linker = ProposalLinker()
     with TemporaryDirectory() as temporary:
         work = Path(temporary)
         paths = _extract_sampled_video(video, work / "source", fps, duration, start)
@@ -230,6 +231,7 @@ def run(video: Path, player_run: Path, output: Path, weights: Path,
             "configuration":{"heatmap_threshold":heatmap_threshold,"input_size_px":list(MODEL_SIZE),"background_samples_max":31,
                              "window_mode":"nonoverlap_plus_overlapping_tail_mean" if window_stride in (None, predictor.sequence_length) else "strided_windows_plus_tail_mean",
                              "window_stride":predictor.sequence_length if window_stride is None else window_stride,
+                             **linker_configuration(linker_mode),
                              "padding":False,"cpu_threads":threads},
             "elapsed_seconds":round(time.perf_counter()-timer,3),"proposal_segments":linker.next_id,"verified_shuttle_positions":0,
             "limitations":["Heatmap activation is uncalibrated; wrong-object and missed detections remain possible.",
@@ -254,9 +256,10 @@ def main():
     parser.add_argument("--threads",type=int,default=4)
     parser.add_argument("--window-stride",type=int,help="Experimental window step, 1..checkpoint sequence length; default is non-overlap")
     parser.add_argument("--heatmap-threshold",type=float,default=.5,help="Experimental activation cutoff strictly between 0 and 1; default 0.5")
+    parser.add_argument("--linker-mode",choices=LINKER_MODES,default="motion",help="Optional confidence-assisted candidate selection; default motion")
     args=parser.parse_args()
     try:
-        print(run(args.video,args.player_run,args.out,args.weights,args.weights_sha256,args.threads,args.window_stride,args.heatmap_threshold))
+        print(run(args.video,args.player_run,args.out,args.weights,args.weights_sha256,args.threads,args.window_stride,args.heatmap_threshold,args.linker_mode))
     except (ValueError,OSError,RuntimeError,KeyError,TypeError,pickle.UnpicklingError) as exc:
         parser.exit(1,f"TrackNet error: {exc}\n")
     return 0

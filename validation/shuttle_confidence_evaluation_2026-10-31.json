@@ -1,0 +1,1873 @@
+{
+  "date": "2026-10-31",
+  "status": "experimental_confidence_motion_linking_development_evaluation",
+  "algorithm": {
+    "dominant_peak_min": 0.65,
+    "dominant_peak_margin": 0.2,
+    "max_step_px": 60,
+    "motion_ambiguity_margin_px": 8,
+    "scope": "Dominant observed peak filter followed by unchanged motion gates. Otherwise retain motion ambiguity. No future frames or synthetic points."
+  },
+  "runs": [
+    {
+      "cutoff": "050",
+      "source": "out/tracknet-001",
+      "output": "out/tracknet-link-confidence050-v2-001",
+      "summary_sha256": "8b5fe4eb06f9cfbba41aaaebdae6ae52e0550c10dd522a0ac56f74a37a2db8ba",
+      "rows_sha256": "2c3e9505116afd6dcc2d0f204fce2cfe49fb2a1ef9746cf66e5e3694b83b5a59",
+      "observations_unchanged": true,
+      "boundaries_preserved": true,
+      "scene_local_contiguous_segments": true,
+      "newly_linked_frames": 0,
+      "changed_previously_linked_positions": 0
+    },
+    {
+      "cutoff": "050",
+      "source": "out/tracknet-002",
+      "output": "out/tracknet-link-confidence050-v2-002",
+      "summary_sha256": "8bc31e2c2d6a35f09e7f7a32df30c266d9de3572bb3a6a8c521435b6cd943115",
+      "rows_sha256": "d0e3d7efc5956efe0e797a194fa7d44115b026ea6214977ea4f7de62be5ef18e",
+      "observations_unchanged": true,
+      "boundaries_preserved": true,
+      "scene_local_contiguous_segments": true,
+      "newly_linked_frames": 0,
+      "changed_previously_linked_positions": 0
+    },
+    {
+      "cutoff": "050",
+      "source": "out/tracknet-003",
+      "output": "out/tracknet-link-confidence050-v2-003",
+      "summary_sha256": "e41ae3ab34faa1b3946c552ddf18574d3ef1ec9eb2dfe56605c6fb82fadd63dd",
+      "rows_sha256": "d8f6eeaf8bb2d0bfca5b04278e8aba50e92e8a799119b880f622fcbb1efcd376",
+      "observations_unchanged": true,
+      "boundaries_preserved": true,
+      "scene_local_contiguous_segments": true,
+      "newly_linked_frames": 0,
+      "changed_previously_linked_positions": 0
+    },
+    {
+      "cutoff": "050",
+      "source": "out/tracknet-004",
+      "output": "out/tracknet-link-confidence050-v2-004",
+      "summary_sha256": "3fd2e51e32789b0dda4dbb7639eac5f00c80a619705b3135edf404fb58e0a7a5",
+      "rows_sha256": "49a7ba6b66ee7cec689b8eb5faa675fb678ebcc6802b47cf8ea48961be14cbb2",
+      "observations_unchanged": true,
+      "boundaries_preserved": true,
+      "scene_local_contiguous_segments": true,
+      "newly_linked_frames": 0,
+      "changed_previously_linked_positions": 0
+    },
+    {
+      "cutoff": "050",
+      "source": "out/tracknet-005",
+      "output": "out/tracknet-link-confidence050-v2-005",
+      "summary_sha256": "9e2272deb00a26ef79b05b306cb655e68dd7cdb74c22981a4a44d8689e43529d",
+      "rows_sha256": "639bfe7595382e34c372620fcac7433bf32172eefd48dcd9368074c86c33fafc",
+      "observations_unchanged": true,
+      "boundaries_preserved": true,
+      "scene_local_contiguous_segments": true,
+      "newly_linked_frames": 0,
+      "changed_previously_linked_positions": 0
+    },
+    {
+      "cutoff": "035",
+      "source": "out/tracknet-threshold035-001",
+      "output": "out/tracknet-link-confidence035-v2-001",
+      "summary_sha256": "0b2a70948045d61a98b3bf943aa6fb8f976835d1ed8fffa9d1401a7033b508d5",
+      "rows_sha256": "9723f264ddb41245b649a1fe46573d58f3db0018fb48d981907a0711e0b094d3",
+      "observations_unchanged": true,
+      "boundaries_preserved": true,
+      "scene_local_contiguous_segments": true,
+      "newly_linked_frames": 1,
+      "changed_previously_linked_positions": 1
+    },
+    {
+      "cutoff": "035",
+      "source": "out/tracknet-threshold035-002",
+      "output": "out/tracknet-link-confidence035-v2-002",
+      "summary_sha256": "9c540140ff3f6ba69c5bfe7fa6fa2d11e919c5f378b3034a17ad8a2672fe7f16",
+      "rows_sha256": "4010620bd67ed7bcc0fdb4644b51a7005fbc2fb176456a995283d068e3ab8cb9",
+      "observations_unchanged": true,
+      "boundaries_preserved": true,
+      "scene_local_contiguous_segments": true,
+      "newly_linked_frames": 4,
+      "changed_previously_linked_positions": 0
+    },
+    {
+      "cutoff": "035",
+      "source": "out/tracknet-threshold035-003",
+      "output": "out/tracknet-link-confidence035-v2-003",
+      "summary_sha256": "0bc19733b3a0aba9d8215031743a40983312191e108d5c9afd7cee1713f85f4d",
+      "rows_sha256": "9027a84e55d2c05692c169d8b526def5f6db4358b06e78c4782bbfbacb0f6336",
+      "observations_unchanged": true,
+      "boundaries_preserved": true,
+      "scene_local_contiguous_segments": true,
+      "newly_linked_frames": 1,
+      "changed_previously_linked_positions": 0
+    },
+    {
+      "cutoff": "035",
+      "source": "out/tracknet-threshold035-004",
+      "output": "out/tracknet-link-confidence035-v2-004",
+      "summary_sha256": "227a65999937b547c4b08beff4e88905ec8adeb1494a48766582a55c46260101",
+      "rows_sha256": "4da833a8d729ced5fb63883e89a34d83eb987caf35442e615413d622e2122c01",
+      "observations_unchanged": true,
+      "boundaries_preserved": true,
+      "scene_local_contiguous_segments": true,
+      "newly_linked_frames": 7,
+      "changed_previously_linked_positions": 0
+    },
+    {
+      "cutoff": "035",
+      "source": "out/tracknet-threshold035-005",
+      "output": "out/tracknet-link-confidence035-v2-005",
+      "summary_sha256": "2580ac59fa8ccbdf6bb57731cc27f972bb1b2a92c108676a56f7c2a34989a92c",
+      "rows_sha256": "2dbfc0fc62e561dce473bb75af219aa50b805f041251e6e48a3b216872383c17",
+      "observations_unchanged": true,
+      "boundaries_preserved": true,
+      "scene_local_contiguous_segments": true,
+      "newly_linked_frames": 2,
+      "changed_previously_linked_positions": 0
+    }
+  ],
+  "evaluations": {
+    "development": {
+      "motion050": {
+        "schema_version": "0.1.0",
+        "evaluation_scope": "selected_development_seed_only",
+        "benchmark_sha256": "d15defa845e6502f9e31f1e681007527f018ae7fd00a7ea78a15243cada7caae",
+        "prediction_bindings": {
+          "shuttle-005": {
+            "summary_sha256": "6343b9d9bc0f9c48871daf1ae16688927405bba0e1dc7e0b63f545c16d7219d0",
+            "rows_sha256": "285b9f5bab6606ae2c5de79858cc392cb6249683f69f8e5d96c839b5258eeeee"
+          },
+          "shuttle-006": {
+            "summary_sha256": "57f5c2e403201f20cb07df6465a67ead1f82788abc98eb1f2e8bf1605ffd07fd",
+            "rows_sha256": "a346711731a6af7553ba1a0b1795558aeed7a0abbd4dc44c5a52a7853ff00f03"
+          },
+          "shuttle-007": {
+            "summary_sha256": "90b0657c99f1b08f376b5df93a44824d9d9cf3a45f6c598530e4f90039459809",
+            "rows_sha256": "961c709bf479b72464af535d11d261992b5da21db88a819a591f78c74c73d053"
+          },
+          "shuttle-008": {
+            "summary_sha256": "f38cc9fb07b21d7c386c1eed1972212f1148198f26e52ccefed2627011ec7cb3",
+            "rows_sha256": "2e1075ceb178c6dc204af640a5dfbc8a5f3d323482eacbcd2012dcf2b927d260"
+          }
+        },
+        "point_tolerance_px": 4,
+        "visible_points": 12,
+        "candidate_point_hits": 11,
+        "proposal_point_hits": 11,
+        "uncertain_frames_excluded_from_point_scoring": 4,
+        "known_negative_regions": 1,
+        "negative_regions_with_candidates": 0,
+        "negative_regions_with_proposals": 0,
+        "verified_shuttle_positions": 0,
+        "limitations": [
+          "Selected, correlated development examples; not held-out data or full-video precision/recall.",
+          "Negative regions label only local distractors, not absence of a shuttle elsewhere in the frame.",
+          "Evaluation never promotes proposals to verified trajectories or enables events/scoring."
+        ],
+        "full_result": "out/shuttle-confidence-evaluation-002/development-motion050.json",
+        "full_result_sha256": "c66a9aeeb436a7a97d5d31424b552687011f7848fb389f29de95f706afdcab0e"
+      },
+      "motion035": {
+        "schema_version": "0.1.0",
+        "evaluation_scope": "selected_development_seed_only",
+        "benchmark_sha256": "d15defa845e6502f9e31f1e681007527f018ae7fd00a7ea78a15243cada7caae",
+        "prediction_bindings": {
+          "shuttle-005": {
+            "summary_sha256": "2fa6a09ef6f580440cf2c1b25cadfa2e69000b5df9dcf8045bf009f5ad38e34d",
+            "rows_sha256": "d830bf34f91fb9c8540d44cbad29a29deb0391d0ec21bdd1e299ef4365919165"
+          },
+          "shuttle-006": {
+            "summary_sha256": "d57cd27df33be8bec733de8807b3338065aae0d5ffcf4361affd4c78ec013c15",
+            "rows_sha256": "58d05433817453380c27c19e2b00bc8dcd90458c8df15db791115845c38bf961"
+          },
+          "shuttle-007": {
+            "summary_sha256": "c653804962839404af7d377c29ff91ddf05f3522aea162d19cf0caf0bb33e8ea",
+            "rows_sha256": "7c49bad3f337be67da22a19070e7d146266cfff86af6015e478d809c358c0963"
+          },
+          "shuttle-008": {
+            "summary_sha256": "57b9d42ca5786986661ceb7bb3b5b5ceb50449884076480b2219a9ad006e20f9",
+            "rows_sha256": "f7d4ff17f33516c861c4a1ca52783079650db4ced9bcfa702852538d6b6ecac6"
+          }
+        },
+        "point_tolerance_px": 4,
+        "visible_points": 12,
+        "candidate_point_hits": 11,
+        "proposal_point_hits": 11,
+        "uncertain_frames_excluded_from_point_scoring": 4,
+        "known_negative_regions": 1,
+        "negative_regions_with_candidates": 0,
+        "negative_regions_with_proposals": 0,
+        "verified_shuttle_positions": 0,
+        "limitations": [
+          "Selected, correlated development examples; not held-out data or full-video precision/recall.",
+          "Negative regions label only local distractors, not absence of a shuttle elsewhere in the frame.",
+          "Evaluation never promotes proposals to verified trajectories or enables events/scoring."
+        ],
+        "full_result": "out/shuttle-confidence-evaluation-002/development-motion035.json",
+        "full_result_sha256": "613530880f6012ab3fb4d01299991a02b7cef48a77d87d6c4f484f777548b3af"
+      },
+      "confidence050": {
+        "schema_version": "0.1.0",
+        "evaluation_scope": "selected_development_seed_only",
+        "benchmark_sha256": "d15defa845e6502f9e31f1e681007527f018ae7fd00a7ea78a15243cada7caae",
+        "prediction_bindings": {
+          "shuttle-005": {
+            "summary_sha256": "8b5fe4eb06f9cfbba41aaaebdae6ae52e0550c10dd522a0ac56f74a37a2db8ba",
+            "rows_sha256": "2c3e9505116afd6dcc2d0f204fce2cfe49fb2a1ef9746cf66e5e3694b83b5a59"
+          },
+          "shuttle-006": {
+            "summary_sha256": "8bc31e2c2d6a35f09e7f7a32df30c266d9de3572bb3a6a8c521435b6cd943115",
+            "rows_sha256": "d0e3d7efc5956efe0e797a194fa7d44115b026ea6214977ea4f7de62be5ef18e"
+          },
+          "shuttle-007": {
+            "summary_sha256": "e41ae3ab34faa1b3946c552ddf18574d3ef1ec9eb2dfe56605c6fb82fadd63dd",
+            "rows_sha256": "d8f6eeaf8bb2d0bfca5b04278e8aba50e92e8a799119b880f622fcbb1efcd376"
+          },
+          "shuttle-008": {
+            "summary_sha256": "3fd2e51e32789b0dda4dbb7639eac5f00c80a619705b3135edf404fb58e0a7a5",
+            "rows_sha256": "49a7ba6b66ee7cec689b8eb5faa675fb678ebcc6802b47cf8ea48961be14cbb2"
+          }
+        },
+        "point_tolerance_px": 4,
+        "visible_points": 12,
+        "candidate_point_hits": 11,
+        "proposal_point_hits": 11,
+        "uncertain_frames_excluded_from_point_scoring": 4,
+        "known_negative_regions": 1,
+        "negative_regions_with_candidates": 0,
+        "negative_regions_with_proposals": 0,
+        "verified_shuttle_positions": 0,
+        "limitations": [
+          "Selected, correlated development examples; not held-out data or full-video precision/recall.",
+          "Negative regions label only local distractors, not absence of a shuttle elsewhere in the frame.",
+          "Evaluation never promotes proposals to verified trajectories or enables events/scoring."
+        ],
+        "full_result": "out/shuttle-confidence-evaluation-002/development-confidence050.json",
+        "full_result_sha256": "0f2a339fa09860d72b4f0b3ceca6d80ab7361265b2644c334d0c7ecf5c7995b9"
+      },
+      "confidence035": {
+        "schema_version": "0.1.0",
+        "evaluation_scope": "selected_development_seed_only",
+        "benchmark_sha256": "d15defa845e6502f9e31f1e681007527f018ae7fd00a7ea78a15243cada7caae",
+        "prediction_bindings": {
+          "shuttle-005": {
+            "summary_sha256": "0b2a70948045d61a98b3bf943aa6fb8f976835d1ed8fffa9d1401a7033b508d5",
+            "rows_sha256": "9723f264ddb41245b649a1fe46573d58f3db0018fb48d981907a0711e0b094d3"
+          },
+          "shuttle-006": {
+            "summary_sha256": "9c540140ff3f6ba69c5bfe7fa6fa2d11e919c5f378b3034a17ad8a2672fe7f16",
+            "rows_sha256": "4010620bd67ed7bcc0fdb4644b51a7005fbc2fb176456a995283d068e3ab8cb9"
+          },
+          "shuttle-007": {
+            "summary_sha256": "0bc19733b3a0aba9d8215031743a40983312191e108d5c9afd7cee1713f85f4d",
+            "rows_sha256": "9027a84e55d2c05692c169d8b526def5f6db4358b06e78c4782bbfbacb0f6336"
+          },
+          "shuttle-008": {
+            "summary_sha256": "227a65999937b547c4b08beff4e88905ec8adeb1494a48766582a55c46260101",
+            "rows_sha256": "4da833a8d729ced5fb63883e89a34d83eb987caf35442e615413d622e2122c01"
+          }
+        },
+        "point_tolerance_px": 4,
+        "visible_points": 12,
+        "candidate_point_hits": 11,
+        "proposal_point_hits": 11,
+        "uncertain_frames_excluded_from_point_scoring": 4,
+        "known_negative_regions": 1,
+        "negative_regions_with_candidates": 0,
+        "negative_regions_with_proposals": 0,
+        "verified_shuttle_positions": 0,
+        "limitations": [
+          "Selected, correlated development examples; not held-out data or full-video precision/recall.",
+          "Negative regions label only local distractors, not absence of a shuttle elsewhere in the frame.",
+          "Evaluation never promotes proposals to verified trajectories or enables events/scoring."
+        ],
+        "full_result": "out/shuttle-confidence-evaluation-002/development-confidence035.json",
+        "full_result_sha256": "515592b02061e1cfd5b263be225c8fce8085f6a698b42eaa7b6d522626e6c857"
+      }
+    },
+    "control": {
+      "motion050": {
+        "schema_version": "0.1.0",
+        "evaluation_scope": "selected_development_seed_only",
+        "benchmark_sha256": "faf0a225e68110856b0a6d46a709d221c5e440b0bec637031792488e3105786e",
+        "prediction_bindings": {
+          "control-060": {
+            "summary_sha256": "ce5bf04775c5b88ce06c075fe14385d2ce269eb2d5cd50a1e46311f086988c08",
+            "rows_sha256": "ab189fd90aed6cffdd5143a359642cd269bd8e4e78efe4b576ac9b53ec32dd17"
+          }
+        },
+        "point_tolerance_px": 4,
+        "visible_points": 6,
+        "candidate_point_hits": 6,
+        "proposal_point_hits": 6,
+        "uncertain_frames_excluded_from_point_scoring": 3,
+        "known_negative_regions": 0,
+        "negative_regions_with_candidates": 0,
+        "negative_regions_with_proposals": 0,
+        "verified_shuttle_positions": 0,
+        "limitations": [
+          "Selected, correlated development examples; not held-out data or full-video precision/recall.",
+          "Negative regions label only local distractors, not absence of a shuttle elsewhere in the frame.",
+          "Evaluation never promotes proposals to verified trajectories or enables events/scoring."
+        ],
+        "full_result": "out/shuttle-confidence-evaluation-002/control-motion050.json",
+        "full_result_sha256": "4332a365bac468e1c8c9303425c98c25b881ae5d3de4abb77ba0b58b2cbb7a55"
+      },
+      "motion035": {
+        "schema_version": "0.1.0",
+        "evaluation_scope": "selected_development_seed_only",
+        "benchmark_sha256": "faf0a225e68110856b0a6d46a709d221c5e440b0bec637031792488e3105786e",
+        "prediction_bindings": {
+          "control-060": {
+            "summary_sha256": "00ef9c83d3c4cc73c0f58543d489ce13e52d74c169b3b3cab27a0dde813343a0",
+            "rows_sha256": "7a0781a8735dd55c05c67215a6dc657764ba0a25535368c7e78474045593b44a"
+          }
+        },
+        "point_tolerance_px": 4,
+        "visible_points": 6,
+        "candidate_point_hits": 6,
+        "proposal_point_hits": 6,
+        "uncertain_frames_excluded_from_point_scoring": 3,
+        "known_negative_regions": 0,
+        "negative_regions_with_candidates": 0,
+        "negative_regions_with_proposals": 0,
+        "verified_shuttle_positions": 0,
+        "limitations": [
+          "Selected, correlated development examples; not held-out data or full-video precision/recall.",
+          "Negative regions label only local distractors, not absence of a shuttle elsewhere in the frame.",
+          "Evaluation never promotes proposals to verified trajectories or enables events/scoring."
+        ],
+        "full_result": "out/shuttle-confidence-evaluation-002/control-motion035.json",
+        "full_result_sha256": "a9086932e3afbd024b586e1b359124f40424fa590d0da0ce2c2f8002921c8666"
+      },
+      "confidence050": {
+        "schema_version": "0.1.0",
+        "evaluation_scope": "selected_development_seed_only",
+        "benchmark_sha256": "faf0a225e68110856b0a6d46a709d221c5e440b0bec637031792488e3105786e",
+        "prediction_bindings": {
+          "control-060": {
+            "summary_sha256": "9e2272deb00a26ef79b05b306cb655e68dd7cdb74c22981a4a44d8689e43529d",
+            "rows_sha256": "639bfe7595382e34c372620fcac7433bf32172eefd48dcd9368074c86c33fafc"
+          }
+        },
+        "point_tolerance_px": 4,
+        "visible_points": 6,
+        "candidate_point_hits": 6,
+        "proposal_point_hits": 6,
+        "uncertain_frames_excluded_from_point_scoring": 3,
+        "known_negative_regions": 0,
+        "negative_regions_with_candidates": 0,
+        "negative_regions_with_proposals": 0,
+        "verified_shuttle_positions": 0,
+        "limitations": [
+          "Selected, correlated development examples; not held-out data or full-video precision/recall.",
+          "Negative regions label only local distractors, not absence of a shuttle elsewhere in the frame.",
+          "Evaluation never promotes proposals to verified trajectories or enables events/scoring."
+        ],
+        "full_result": "out/shuttle-confidence-evaluation-002/control-confidence050.json",
+        "full_result_sha256": "ef89513d87f9d6d9984c09ad2081fd38cec95280877314e5e14e7749327667ce"
+      },
+      "confidence035": {
+        "schema_version": "0.1.0",
+        "evaluation_scope": "selected_development_seed_only",
+        "benchmark_sha256": "faf0a225e68110856b0a6d46a709d221c5e440b0bec637031792488e3105786e",
+        "prediction_bindings": {
+          "control-060": {
+            "summary_sha256": "2580ac59fa8ccbdf6bb57731cc27f972bb1b2a92c108676a56f7c2a34989a92c",
+            "rows_sha256": "2dbfc0fc62e561dce473bb75af219aa50b805f041251e6e48a3b216872383c17"
+          }
+        },
+        "point_tolerance_px": 4,
+        "visible_points": 6,
+        "candidate_point_hits": 6,
+        "proposal_point_hits": 6,
+        "uncertain_frames_excluded_from_point_scoring": 3,
+        "known_negative_regions": 0,
+        "negative_regions_with_candidates": 0,
+        "negative_regions_with_proposals": 0,
+        "verified_shuttle_positions": 0,
+        "limitations": [
+          "Selected, correlated development examples; not held-out data or full-video precision/recall.",
+          "Negative regions label only local distractors, not absence of a shuttle elsewhere in the frame.",
+          "Evaluation never promotes proposals to verified trajectories or enables events/scoring."
+        ],
+        "full_result": "out/shuttle-confidence-evaluation-002/control-confidence035.json",
+        "full_result_sha256": "9b12eacabda13ae260923b3260ca9a3f960708393c63be8183158aa609e6ca56"
+      }
+    },
+    "continuous": {
+      "motion050": {
+        "schema_version": "0.1.0",
+        "evaluation_scope": "continuously_annotated_development_intervals_only",
+        "benchmark_sha256": "7ca0f95783c4c5799ec913e63201bdcd652e1968f50cfa28e1f20cc4ec36c4a7",
+        "prediction_bindings": {
+          "opening": {
+            "summary_sha256": "6343b9d9bc0f9c48871daf1ae16688927405bba0e1dc7e0b63f545c16d7219d0",
+            "rows_sha256": "285b9f5bab6606ae2c5de79858cc392cb6249683f69f8e5d96c839b5258eeeee"
+          },
+          "control": {
+            "summary_sha256": "ce5bf04775c5b88ce06c075fe14385d2ce269eb2d5cd50a1e46311f086988c08",
+            "rows_sha256": "ab189fd90aed6cffdd5143a359642cd269bd8e4e78efe4b576ac9b53ec32dd17"
+          }
+        },
+        "point_tolerance_px": 4,
+        "visible_points": 111,
+        "candidate_point_hits": 94,
+        "proposal_point_hits": 94,
+        "uncertain_frames_excluded_from_point_scoring": 69,
+        "known_negative_regions": 0,
+        "negative_regions_with_candidates": 0,
+        "negative_regions_with_proposals": 0,
+        "verified_shuttle_positions": 0,
+        "limitations": [
+          "Selected, correlated development examples; not held-out data or full-video precision/recall.",
+          "Negative regions label only local distractors, not absence of a shuttle elsewhere in the frame.",
+          "Evaluation never promotes proposals to verified trajectories or enables events/scoring.",
+          "Uncertain annotations break continuity statistics and never imply shuttle absence; point matches do not certify object identity or physical trajectories."
+        ],
+        "full_result": "out/shuttle-confidence-evaluation-002/continuous-motion050.json",
+        "full_result_sha256": "9a49a536d3946ed2a836dae8ed8ce430c08d6d55b1501ab14ea863c6b5982ae4",
+        "continuous_sequences": [
+          {
+            "id": "opening-006-009",
+            "source_run": "opening",
+            "start_frame": 180,
+            "end_frame": 269,
+            "annotated_frames": 90,
+            "visible_frames": 43,
+            "uncertain_frames": 47,
+            "candidate_point_hits": 32,
+            "proposal_point_hits": 32,
+            "visible_frames_without_candidates": 0,
+            "visible_frames_without_proposal": 0,
+            "visible_frames_with_displaced_proposal": 11,
+            "uncertain_frames_with_proposals_unscored": 40,
+            "longest_correct_same_segment_run_frames": 8,
+            "longest_consecutive_visible_missing_proposal_frames": 0,
+            "adjacent_point_matches_in_same_segment": 23,
+            "adjacent_point_matches_with_segment_or_scene_change": 0,
+            "adjacent_point_matches_with_annotation_view_change": 0,
+            "mean_error_on_visible_proposed_frames_px": 3.9235,
+            "max_error_on_visible_proposed_frames_px": 42.6279,
+            "annotation_view_counts": {
+              "unspecified": {
+                "annotated_frames": 90,
+                "visible_frames": 43,
+                "uncertain_frames": 47,
+                "proposal_point_hits": 32,
+                "visible_frames_without_proposal": 0,
+                "visible_frames_with_displaced_proposal": 11
+              }
+            },
+            "prediction_status_counts": {
+              "proposal": 83,
+              "no_heatmap_detection": 6,
+              "ambiguous_candidates": 1
+            },
+            "scene_change_frames": [],
+            "annotation_view_change_frames": [],
+            "adjacent_visible_proposed_pairs_same_segment_and_view": 37,
+            "mean_step_vector_error_px": 1.6096,
+            "max_step_vector_error_px": 4.8023
+          },
+          {
+            "id": "control-061-064",
+            "source_run": "control",
+            "start_frame": 30,
+            "end_frame": 119,
+            "annotated_frames": 90,
+            "visible_frames": 68,
+            "uncertain_frames": 22,
+            "candidate_point_hits": 62,
+            "proposal_point_hits": 62,
+            "visible_frames_without_candidates": 0,
+            "visible_frames_without_proposal": 0,
+            "visible_frames_with_displaced_proposal": 6,
+            "uncertain_frames_with_proposals_unscored": 19,
+            "longest_correct_same_segment_run_frames": 24,
+            "longest_consecutive_visible_missing_proposal_frames": 0,
+            "adjacent_point_matches_in_same_segment": 52,
+            "adjacent_point_matches_with_segment_or_scene_change": 0,
+            "adjacent_point_matches_with_annotation_view_change": 0,
+            "mean_error_on_visible_proposed_frames_px": 1.6177,
+            "max_error_on_visible_proposed_frames_px": 5.2351,
+            "annotation_view_counts": {
+              "unspecified": {
+                "annotated_frames": 90,
+                "visible_frames": 68,
+                "uncertain_frames": 22,
+                "proposal_point_hits": 62,
+                "visible_frames_without_proposal": 0,
+                "visible_frames_with_displaced_proposal": 6
+              }
+            },
+            "prediction_status_counts": {
+              "no_heatmap_detection": 3,
+              "proposal": 87
+            },
+            "scene_change_frames": [],
+            "annotation_view_change_frames": [],
+            "adjacent_visible_proposed_pairs_same_segment_and_view": 62,
+            "mean_step_vector_error_px": 1.2487,
+            "max_step_vector_error_px": 6.5966
+          }
+        ]
+      },
+      "motion035": {
+        "schema_version": "0.1.0",
+        "evaluation_scope": "continuously_annotated_development_intervals_only",
+        "benchmark_sha256": "7ca0f95783c4c5799ec913e63201bdcd652e1968f50cfa28e1f20cc4ec36c4a7",
+        "prediction_bindings": {
+          "opening": {
+            "summary_sha256": "2fa6a09ef6f580440cf2c1b25cadfa2e69000b5df9dcf8045bf009f5ad38e34d",
+            "rows_sha256": "d830bf34f91fb9c8540d44cbad29a29deb0391d0ec21bdd1e299ef4365919165"
+          },
+          "control": {
+            "summary_sha256": "00ef9c83d3c4cc73c0f58543d489ce13e52d74c169b3b3cab27a0dde813343a0",
+            "rows_sha256": "7a0781a8735dd55c05c67215a6dc657764ba0a25535368c7e78474045593b44a"
+          }
+        },
+        "point_tolerance_px": 4,
+        "visible_points": 111,
+        "candidate_point_hits": 96,
+        "proposal_point_hits": 95,
+        "uncertain_frames_excluded_from_point_scoring": 69,
+        "known_negative_regions": 0,
+        "negative_regions_with_candidates": 0,
+        "negative_regions_with_proposals": 0,
+        "verified_shuttle_positions": 0,
+        "limitations": [
+          "Selected, correlated development examples; not held-out data or full-video precision/recall.",
+          "Negative regions label only local distractors, not absence of a shuttle elsewhere in the frame.",
+          "Evaluation never promotes proposals to verified trajectories or enables events/scoring.",
+          "Uncertain annotations break continuity statistics and never imply shuttle absence; point matches do not certify object identity or physical trajectories."
+        ],
+        "full_result": "out/shuttle-confidence-evaluation-002/continuous-motion035.json",
+        "full_result_sha256": "ddb9a7e0a2ac14891ec717e7b8bf5f11f9df4df1aae0bb54a72d619933d0fbc9",
+        "continuous_sequences": [
+          {
+            "id": "opening-006-009",
+            "source_run": "opening",
+            "start_frame": 180,
+            "end_frame": 269,
+            "annotated_frames": 90,
+            "visible_frames": 43,
+            "uncertain_frames": 47,
+            "candidate_point_hits": 32,
+            "proposal_point_hits": 31,
+            "visible_frames_without_candidates": 0,
+            "visible_frames_without_proposal": 1,
+            "visible_frames_with_displaced_proposal": 11,
+            "uncertain_frames_with_proposals_unscored": 42,
+            "longest_correct_same_segment_run_frames": 16,
+            "longest_consecutive_visible_missing_proposal_frames": 1,
+            "adjacent_point_matches_in_same_segment": 23,
+            "adjacent_point_matches_with_segment_or_scene_change": 0,
+            "adjacent_point_matches_with_annotation_view_change": 0,
+            "mean_error_on_visible_proposed_frames_px": 3.9232,
+            "max_error_on_visible_proposed_frames_px": 42.0002,
+            "annotation_view_counts": {
+              "unspecified": {
+                "annotated_frames": 90,
+                "visible_frames": 43,
+                "uncertain_frames": 47,
+                "proposal_point_hits": 31,
+                "visible_frames_without_proposal": 1,
+                "visible_frames_with_displaced_proposal": 11
+              }
+            },
+            "prediction_status_counts": {
+              "proposal": 84,
+              "no_heatmap_detection": 3,
+              "ambiguous_candidates": 3
+            },
+            "scene_change_frames": [],
+            "annotation_view_change_frames": [],
+            "adjacent_visible_proposed_pairs_same_segment_and_view": 35,
+            "mean_step_vector_error_px": 1.4656,
+            "max_step_vector_error_px": 4.3319
+          },
+          {
+            "id": "control-061-064",
+            "source_run": "control",
+            "start_frame": 30,
+            "end_frame": 119,
+            "annotated_frames": 90,
+            "visible_frames": 68,
+            "uncertain_frames": 22,
+            "candidate_point_hits": 64,
+            "proposal_point_hits": 64,
+            "visible_frames_without_candidates": 0,
+            "visible_frames_without_proposal": 0,
+            "visible_frames_with_displaced_proposal": 4,
+            "uncertain_frames_with_proposals_unscored": 20,
+            "longest_correct_same_segment_run_frames": 28,
+            "longest_consecutive_visible_missing_proposal_frames": 0,
+            "adjacent_point_matches_in_same_segment": 56,
+            "adjacent_point_matches_with_segment_or_scene_change": 0,
+            "adjacent_point_matches_with_annotation_view_change": 0,
+            "mean_error_on_visible_proposed_frames_px": 1.5549,
+            "max_error_on_visible_proposed_frames_px": 4.901,
+            "annotation_view_counts": {
+              "unspecified": {
+                "annotated_frames": 90,
+                "visible_frames": 68,
+                "uncertain_frames": 22,
+                "proposal_point_hits": 64,
+                "visible_frames_without_proposal": 0,
+                "visible_frames_with_displaced_proposal": 4
+              }
+            },
+            "prediction_status_counts": {
+              "ambiguous_candidates": 1,
+              "proposal": 88,
+              "no_heatmap_detection": 1
+            },
+            "scene_change_frames": [],
+            "annotation_view_change_frames": [],
+            "adjacent_visible_proposed_pairs_same_segment_and_view": 62,
+            "mean_step_vector_error_px": 1.1694,
+            "max_step_vector_error_px": 6.0467
+          }
+        ]
+      },
+      "confidence050": {
+        "schema_version": "0.1.0",
+        "evaluation_scope": "continuously_annotated_development_intervals_only",
+        "benchmark_sha256": "7ca0f95783c4c5799ec913e63201bdcd652e1968f50cfa28e1f20cc4ec36c4a7",
+        "prediction_bindings": {
+          "opening": {
+            "summary_sha256": "8b5fe4eb06f9cfbba41aaaebdae6ae52e0550c10dd522a0ac56f74a37a2db8ba",
+            "rows_sha256": "2c3e9505116afd6dcc2d0f204fce2cfe49fb2a1ef9746cf66e5e3694b83b5a59"
+          },
+          "control": {
+            "summary_sha256": "9e2272deb00a26ef79b05b306cb655e68dd7cdb74c22981a4a44d8689e43529d",
+            "rows_sha256": "639bfe7595382e34c372620fcac7433bf32172eefd48dcd9368074c86c33fafc"
+          }
+        },
+        "point_tolerance_px": 4,
+        "visible_points": 111,
+        "candidate_point_hits": 94,
+        "proposal_point_hits": 94,
+        "uncertain_frames_excluded_from_point_scoring": 69,
+        "known_negative_regions": 0,
+        "negative_regions_with_candidates": 0,
+        "negative_regions_with_proposals": 0,
+        "verified_shuttle_positions": 0,
+        "limitations": [
+          "Selected, correlated development examples; not held-out data or full-video precision/recall.",
+          "Negative regions label only local distractors, not absence of a shuttle elsewhere in the frame.",
+          "Evaluation never promotes proposals to verified trajectories or enables events/scoring.",
+          "Uncertain annotations break continuity statistics and never imply shuttle absence; point matches do not certify object identity or physical trajectories."
+        ],
+        "full_result": "out/shuttle-confidence-evaluation-002/continuous-confidence050.json",
+        "full_result_sha256": "b3ec71c94f61179712bbabda9f110d23c827869b944e79dcdc11c8aaa7888cd9",
+        "continuous_sequences": [
+          {
+            "id": "opening-006-009",
+            "source_run": "opening",
+            "start_frame": 180,
+            "end_frame": 269,
+            "annotated_frames": 90,
+            "visible_frames": 43,
+            "uncertain_frames": 47,
+            "candidate_point_hits": 32,
+            "proposal_point_hits": 32,
+            "visible_frames_without_candidates": 0,
+            "visible_frames_without_proposal": 0,
+            "visible_frames_with_displaced_proposal": 11,
+            "uncertain_frames_with_proposals_unscored": 40,
+            "longest_correct_same_segment_run_frames": 8,
+            "longest_consecutive_visible_missing_proposal_frames": 0,
+            "adjacent_point_matches_in_same_segment": 23,
+            "adjacent_point_matches_with_segment_or_scene_change": 0,
+            "adjacent_point_matches_with_annotation_view_change": 0,
+            "mean_error_on_visible_proposed_frames_px": 3.9235,
+            "max_error_on_visible_proposed_frames_px": 42.6279,
+            "annotation_view_counts": {
+              "unspecified": {
+                "annotated_frames": 90,
+                "visible_frames": 43,
+                "uncertain_frames": 47,
+                "proposal_point_hits": 32,
+                "visible_frames_without_proposal": 0,
+                "visible_frames_with_displaced_proposal": 11
+              }
+            },
+            "prediction_status_counts": {
+              "proposal": 83,
+              "no_heatmap_detection": 6,
+              "ambiguous_candidates": 1
+            },
+            "scene_change_frames": [],
+            "annotation_view_change_frames": [],
+            "adjacent_visible_proposed_pairs_same_segment_and_view": 37,
+            "mean_step_vector_error_px": 1.6096,
+            "max_step_vector_error_px": 4.8023
+          },
+          {
+            "id": "control-061-064",
+            "source_run": "control",
+            "start_frame": 30,
+            "end_frame": 119,
+            "annotated_frames": 90,
+            "visible_frames": 68,
+            "uncertain_frames": 22,
+            "candidate_point_hits": 62,
+            "proposal_point_hits": 62,
+            "visible_frames_without_candidates": 0,
+            "visible_frames_without_proposal": 0,
+            "visible_frames_with_displaced_proposal": 6,
+            "uncertain_frames_with_proposals_unscored": 19,
+            "longest_correct_same_segment_run_frames": 24,
+            "longest_consecutive_visible_missing_proposal_frames": 0,
+            "adjacent_point_matches_in_same_segment": 52,
+            "adjacent_point_matches_with_segment_or_scene_change": 0,
+            "adjacent_point_matches_with_annotation_view_change": 0,
+            "mean_error_on_visible_proposed_frames_px": 1.6177,
+            "max_error_on_visible_proposed_frames_px": 5.2351,
+            "annotation_view_counts": {
+              "unspecified": {
+                "annotated_frames": 90,
+                "visible_frames": 68,
+                "uncertain_frames": 22,
+                "proposal_point_hits": 62,
+                "visible_frames_without_proposal": 0,
+                "visible_frames_with_displaced_proposal": 6
+              }
+            },
+            "prediction_status_counts": {
+              "no_heatmap_detection": 3,
+              "proposal": 87
+            },
+            "scene_change_frames": [],
+            "annotation_view_change_frames": [],
+            "adjacent_visible_proposed_pairs_same_segment_and_view": 62,
+            "mean_step_vector_error_px": 1.2487,
+            "max_step_vector_error_px": 6.5966
+          }
+        ]
+      },
+      "confidence035": {
+        "schema_version": "0.1.0",
+        "evaluation_scope": "continuously_annotated_development_intervals_only",
+        "benchmark_sha256": "7ca0f95783c4c5799ec913e63201bdcd652e1968f50cfa28e1f20cc4ec36c4a7",
+        "prediction_bindings": {
+          "opening": {
+            "summary_sha256": "0b2a70948045d61a98b3bf943aa6fb8f976835d1ed8fffa9d1401a7033b508d5",
+            "rows_sha256": "9723f264ddb41245b649a1fe46573d58f3db0018fb48d981907a0711e0b094d3"
+          },
+          "control": {
+            "summary_sha256": "2580ac59fa8ccbdf6bb57731cc27f972bb1b2a92c108676a56f7c2a34989a92c",
+            "rows_sha256": "2dbfc0fc62e561dce473bb75af219aa50b805f041251e6e48a3b216872383c17"
+          }
+        },
+        "point_tolerance_px": 4,
+        "visible_points": 111,
+        "candidate_point_hits": 96,
+        "proposal_point_hits": 96,
+        "uncertain_frames_excluded_from_point_scoring": 69,
+        "known_negative_regions": 0,
+        "negative_regions_with_candidates": 0,
+        "negative_regions_with_proposals": 0,
+        "verified_shuttle_positions": 0,
+        "limitations": [
+          "Selected, correlated development examples; not held-out data or full-video precision/recall.",
+          "Negative regions label only local distractors, not absence of a shuttle elsewhere in the frame.",
+          "Evaluation never promotes proposals to verified trajectories or enables events/scoring.",
+          "Uncertain annotations break continuity statistics and never imply shuttle absence; point matches do not certify object identity or physical trajectories."
+        ],
+        "full_result": "out/shuttle-confidence-evaluation-002/continuous-confidence035.json",
+        "full_result_sha256": "b45d54479689a36b0d699ca9085efbd0538455a77867ded47f37db94feb0edd8",
+        "continuous_sequences": [
+          {
+            "id": "opening-006-009",
+            "source_run": "opening",
+            "start_frame": 180,
+            "end_frame": 269,
+            "annotated_frames": 90,
+            "visible_frames": 43,
+            "uncertain_frames": 47,
+            "candidate_point_hits": 32,
+            "proposal_point_hits": 32,
+            "visible_frames_without_candidates": 0,
+            "visible_frames_without_proposal": 0,
+            "visible_frames_with_displaced_proposal": 11,
+            "uncertain_frames_with_proposals_unscored": 42,
+            "longest_correct_same_segment_run_frames": 16,
+            "longest_consecutive_visible_missing_proposal_frames": 0,
+            "adjacent_point_matches_in_same_segment": 25,
+            "adjacent_point_matches_with_segment_or_scene_change": 0,
+            "adjacent_point_matches_with_annotation_view_change": 0,
+            "mean_error_on_visible_proposed_frames_px": 3.8659,
+            "max_error_on_visible_proposed_frames_px": 42.0002,
+            "annotation_view_counts": {
+              "unspecified": {
+                "annotated_frames": 90,
+                "visible_frames": 43,
+                "uncertain_frames": 47,
+                "proposal_point_hits": 32,
+                "visible_frames_without_proposal": 0,
+                "visible_frames_with_displaced_proposal": 11
+              }
+            },
+            "prediction_status_counts": {
+              "proposal": 85,
+              "no_heatmap_detection": 3,
+              "ambiguous_candidates": 2
+            },
+            "scene_change_frames": [],
+            "annotation_view_change_frames": [],
+            "adjacent_visible_proposed_pairs_same_segment_and_view": 37,
+            "mean_step_vector_error_px": 1.4302,
+            "max_step_vector_error_px": 4.3319
+          },
+          {
+            "id": "control-061-064",
+            "source_run": "control",
+            "start_frame": 30,
+            "end_frame": 119,
+            "annotated_frames": 90,
+            "visible_frames": 68,
+            "uncertain_frames": 22,
+            "candidate_point_hits": 64,
+            "proposal_point_hits": 64,
+            "visible_frames_without_candidates": 0,
+            "visible_frames_without_proposal": 0,
+            "visible_frames_with_displaced_proposal": 4,
+            "uncertain_frames_with_proposals_unscored": 20,
+            "longest_correct_same_segment_run_frames": 28,
+            "longest_consecutive_visible_missing_proposal_frames": 0,
+            "adjacent_point_matches_in_same_segment": 56,
+            "adjacent_point_matches_with_segment_or_scene_change": 0,
+            "adjacent_point_matches_with_annotation_view_change": 0,
+            "mean_error_on_visible_proposed_frames_px": 1.5549,
+            "max_error_on_visible_proposed_frames_px": 4.901,
+            "annotation_view_counts": {
+              "unspecified": {
+                "annotated_frames": 90,
+                "visible_frames": 68,
+                "uncertain_frames": 22,
+                "proposal_point_hits": 64,
+                "visible_frames_without_proposal": 0,
+                "visible_frames_with_displaced_proposal": 4
+              }
+            },
+            "prediction_status_counts": {
+              "ambiguous_candidates": 1,
+              "proposal": 88,
+              "no_heatmap_detection": 1
+            },
+            "scene_change_frames": [],
+            "annotation_view_change_frames": [],
+            "adjacent_visible_proposed_pairs_same_segment_and_view": 62,
+            "mean_step_vector_error_px": 1.1694,
+            "max_step_vector_error_px": 6.0467
+          }
+        ]
+      }
+    },
+    "rally": {
+      "motion050": {
+        "schema_version": "0.1.0",
+        "evaluation_scope": "continuously_annotated_development_intervals_only",
+        "benchmark_sha256": "c1ecf005342387584140b36cbca5122258c9f1e22e88c06211299dd29de0e7ea",
+        "prediction_bindings": {
+          "rally-720": {
+            "summary_sha256": "57f5c2e403201f20cb07df6465a67ead1f82788abc98eb1f2e8bf1605ffd07fd",
+            "rows_sha256": "a346711731a6af7553ba1a0b1795558aeed7a0abbd4dc44c5a52a7853ff00f03"
+          }
+        },
+        "point_tolerance_px": 4,
+        "visible_points": 37,
+        "candidate_point_hits": 25,
+        "proposal_point_hits": 25,
+        "uncertain_frames_excluded_from_point_scoring": 119,
+        "known_negative_regions": 0,
+        "negative_regions_with_candidates": 0,
+        "negative_regions_with_proposals": 0,
+        "verified_shuttle_positions": 0,
+        "limitations": [
+          "Selected, correlated development examples; not held-out data or full-video precision/recall.",
+          "Negative regions label only local distractors, not absence of a shuttle elsewhere in the frame.",
+          "Evaluation never promotes proposals to verified trajectories or enables events/scoring.",
+          "Uncertain annotations break continuity statistics and never imply shuttle absence; point matches do not certify object identity or physical trajectories."
+        ],
+        "full_result": "out/shuttle-confidence-evaluation-002/rally-motion050.json",
+        "full_result_sha256": "f3801a5d667da9a8554ed76ec55efdf6fbdbf227e60dc7cc4e67fa37c9825cc6",
+        "continuous_sequences": [
+          {
+            "id": "broadcast-point-720",
+            "source_run": "rally-720",
+            "start_frame": 0,
+            "end_frame": 155,
+            "annotated_frames": 156,
+            "visible_frames": 37,
+            "uncertain_frames": 119,
+            "candidate_point_hits": 25,
+            "proposal_point_hits": 25,
+            "visible_frames_without_candidates": 5,
+            "visible_frames_without_proposal": 5,
+            "visible_frames_with_displaced_proposal": 7,
+            "uncertain_frames_with_proposals_unscored": 30,
+            "longest_correct_same_segment_run_frames": 14,
+            "longest_consecutive_visible_missing_proposal_frames": 2,
+            "adjacent_point_matches_in_same_segment": 21,
+            "adjacent_point_matches_with_segment_or_scene_change": 0,
+            "adjacent_point_matches_with_annotation_view_change": 0,
+            "mean_error_on_visible_proposed_frames_px": 2.2927,
+            "max_error_on_visible_proposed_frames_px": 13.851,
+            "annotation_view_counts": {
+              "closeup": {
+                "annotated_frames": 13,
+                "visible_frames": 2,
+                "uncertain_frames": 11,
+                "proposal_point_hits": 0,
+                "visible_frames_without_proposal": 2,
+                "visible_frames_with_displaced_proposal": 0
+              },
+              "wide_court": {
+                "annotated_frames": 143,
+                "visible_frames": 35,
+                "uncertain_frames": 108,
+                "proposal_point_hits": 25,
+                "visible_frames_without_proposal": 3,
+                "visible_frames_with_displaced_proposal": 7
+              }
+            },
+            "prediction_status_counts": {
+              "excluded_player_review": 15,
+              "proposal": 62,
+              "no_heatmap_detection": 78,
+              "ambiguous_candidates": 1
+            },
+            "scene_change_frames": [
+              12
+            ],
+            "annotation_view_change_frames": [
+              12,
+              155
+            ],
+            "adjacent_visible_proposed_pairs_same_segment_and_view": 28,
+            "mean_step_vector_error_px": 1.1182,
+            "max_step_vector_error_px": 3.125
+          }
+        ]
+      },
+      "motion035": {
+        "schema_version": "0.1.0",
+        "evaluation_scope": "continuously_annotated_development_intervals_only",
+        "benchmark_sha256": "c1ecf005342387584140b36cbca5122258c9f1e22e88c06211299dd29de0e7ea",
+        "prediction_bindings": {
+          "rally-720": {
+            "summary_sha256": "d57cd27df33be8bec733de8807b3338065aae0d5ffcf4361affd4c78ec013c15",
+            "rows_sha256": "58d05433817453380c27c19e2b00bc8dcd90458c8df15db791115845c38bf961"
+          }
+        },
+        "point_tolerance_px": 4,
+        "visible_points": 37,
+        "candidate_point_hits": 30,
+        "proposal_point_hits": 27,
+        "uncertain_frames_excluded_from_point_scoring": 119,
+        "known_negative_regions": 0,
+        "negative_regions_with_candidates": 0,
+        "negative_regions_with_proposals": 0,
+        "verified_shuttle_positions": 0,
+        "limitations": [
+          "Selected, correlated development examples; not held-out data or full-video precision/recall.",
+          "Negative regions label only local distractors, not absence of a shuttle elsewhere in the frame.",
+          "Evaluation never promotes proposals to verified trajectories or enables events/scoring.",
+          "Uncertain annotations break continuity statistics and never imply shuttle absence; point matches do not certify object identity or physical trajectories."
+        ],
+        "full_result": "out/shuttle-confidence-evaluation-002/rally-motion035.json",
+        "full_result_sha256": "782730ea1e61b781850c620464720337a119247ecf1d156086cbe784752872d8",
+        "continuous_sequences": [
+          {
+            "id": "broadcast-point-720",
+            "source_run": "rally-720",
+            "start_frame": 0,
+            "end_frame": 155,
+            "annotated_frames": 156,
+            "visible_frames": 37,
+            "uncertain_frames": 119,
+            "candidate_point_hits": 30,
+            "proposal_point_hits": 27,
+            "visible_frames_without_candidates": 4,
+            "visible_frames_without_proposal": 7,
+            "visible_frames_with_displaced_proposal": 3,
+            "uncertain_frames_with_proposals_unscored": 35,
+            "longest_correct_same_segment_run_frames": 17,
+            "longest_consecutive_visible_missing_proposal_frames": 5,
+            "adjacent_point_matches_in_same_segment": 22,
+            "adjacent_point_matches_with_segment_or_scene_change": 0,
+            "adjacent_point_matches_with_annotation_view_change": 0,
+            "mean_error_on_visible_proposed_frames_px": 2.2793,
+            "max_error_on_visible_proposed_frames_px": 13.851,
+            "annotation_view_counts": {
+              "closeup": {
+                "annotated_frames": 13,
+                "visible_frames": 2,
+                "uncertain_frames": 11,
+                "proposal_point_hits": 0,
+                "visible_frames_without_proposal": 2,
+                "visible_frames_with_displaced_proposal": 0
+              },
+              "wide_court": {
+                "annotated_frames": 143,
+                "visible_frames": 35,
+                "uncertain_frames": 108,
+                "proposal_point_hits": 27,
+                "visible_frames_without_proposal": 5,
+                "visible_frames_with_displaced_proposal": 3
+              }
+            },
+            "prediction_status_counts": {
+              "excluded_player_review": 15,
+              "ambiguous_candidates": 5,
+              "proposal": 65,
+              "no_heatmap_detection": 71
+            },
+            "scene_change_frames": [
+              12
+            ],
+            "annotation_view_change_frames": [
+              12,
+              155
+            ],
+            "adjacent_visible_proposed_pairs_same_segment_and_view": 26,
+            "mean_step_vector_error_px": 0.9757,
+            "max_step_vector_error_px": 2.8201
+          }
+        ]
+      },
+      "confidence050": {
+        "schema_version": "0.1.0",
+        "evaluation_scope": "continuously_annotated_development_intervals_only",
+        "benchmark_sha256": "c1ecf005342387584140b36cbca5122258c9f1e22e88c06211299dd29de0e7ea",
+        "prediction_bindings": {
+          "rally-720": {
+            "summary_sha256": "8bc31e2c2d6a35f09e7f7a32df30c266d9de3572bb3a6a8c521435b6cd943115",
+            "rows_sha256": "d0e3d7efc5956efe0e797a194fa7d44115b026ea6214977ea4f7de62be5ef18e"
+          }
+        },
+        "point_tolerance_px": 4,
+        "visible_points": 37,
+        "candidate_point_hits": 25,
+        "proposal_point_hits": 25,
+        "uncertain_frames_excluded_from_point_scoring": 119,
+        "known_negative_regions": 0,
+        "negative_regions_with_candidates": 0,
+        "negative_regions_with_proposals": 0,
+        "verified_shuttle_positions": 0,
+        "limitations": [
+          "Selected, correlated development examples; not held-out data or full-video precision/recall.",
+          "Negative regions label only local distractors, not absence of a shuttle elsewhere in the frame.",
+          "Evaluation never promotes proposals to verified trajectories or enables events/scoring.",
+          "Uncertain annotations break continuity statistics and never imply shuttle absence; point matches do not certify object identity or physical trajectories."
+        ],
+        "full_result": "out/shuttle-confidence-evaluation-002/rally-confidence050.json",
+        "full_result_sha256": "779aff44f3ade4076b8511a3bcf6c41391ba9186813f37bc2378b11ddbde502e",
+        "continuous_sequences": [
+          {
+            "id": "broadcast-point-720",
+            "source_run": "rally-720",
+            "start_frame": 0,
+            "end_frame": 155,
+            "annotated_frames": 156,
+            "visible_frames": 37,
+            "uncertain_frames": 119,
+            "candidate_point_hits": 25,
+            "proposal_point_hits": 25,
+            "visible_frames_without_candidates": 5,
+            "visible_frames_without_proposal": 5,
+            "visible_frames_with_displaced_proposal": 7,
+            "uncertain_frames_with_proposals_unscored": 30,
+            "longest_correct_same_segment_run_frames": 14,
+            "longest_consecutive_visible_missing_proposal_frames": 2,
+            "adjacent_point_matches_in_same_segment": 21,
+            "adjacent_point_matches_with_segment_or_scene_change": 0,
+            "adjacent_point_matches_with_annotation_view_change": 0,
+            "mean_error_on_visible_proposed_frames_px": 2.2927,
+            "max_error_on_visible_proposed_frames_px": 13.851,
+            "annotation_view_counts": {
+              "closeup": {
+                "annotated_frames": 13,
+                "visible_frames": 2,
+                "uncertain_frames": 11,
+                "proposal_point_hits": 0,
+                "visible_frames_without_proposal": 2,
+                "visible_frames_with_displaced_proposal": 0
+              },
+              "wide_court": {
+                "annotated_frames": 143,
+                "visible_frames": 35,
+                "uncertain_frames": 108,
+                "proposal_point_hits": 25,
+                "visible_frames_without_proposal": 3,
+                "visible_frames_with_displaced_proposal": 7
+              }
+            },
+            "prediction_status_counts": {
+              "excluded_player_review": 15,
+              "proposal": 62,
+              "no_heatmap_detection": 78,
+              "ambiguous_candidates": 1
+            },
+            "scene_change_frames": [
+              12
+            ],
+            "annotation_view_change_frames": [
+              12,
+              155
+            ],
+            "adjacent_visible_proposed_pairs_same_segment_and_view": 28,
+            "mean_step_vector_error_px": 1.1182,
+            "max_step_vector_error_px": 3.125
+          }
+        ]
+      },
+      "confidence035": {
+        "schema_version": "0.1.0",
+        "evaluation_scope": "continuously_annotated_development_intervals_only",
+        "benchmark_sha256": "c1ecf005342387584140b36cbca5122258c9f1e22e88c06211299dd29de0e7ea",
+        "prediction_bindings": {
+          "rally-720": {
+            "summary_sha256": "9c540140ff3f6ba69c5bfe7fa6fa2d11e919c5f378b3034a17ad8a2672fe7f16",
+            "rows_sha256": "4010620bd67ed7bcc0fdb4644b51a7005fbc2fb176456a995283d068e3ab8cb9"
+          }
+        },
+        "point_tolerance_px": 4,
+        "visible_points": 37,
+        "candidate_point_hits": 30,
+        "proposal_point_hits": 30,
+        "uncertain_frames_excluded_from_point_scoring": 119,
+        "known_negative_regions": 0,
+        "negative_regions_with_candidates": 0,
+        "negative_regions_with_proposals": 0,
+        "verified_shuttle_positions": 0,
+        "limitations": [
+          "Selected, correlated development examples; not held-out data or full-video precision/recall.",
+          "Negative regions label only local distractors, not absence of a shuttle elsewhere in the frame.",
+          "Evaluation never promotes proposals to verified trajectories or enables events/scoring.",
+          "Uncertain annotations break continuity statistics and never imply shuttle absence; point matches do not certify object identity or physical trajectories."
+        ],
+        "full_result": "out/shuttle-confidence-evaluation-002/rally-confidence035.json",
+        "full_result_sha256": "b9b21b8c281dfdff7951785887e8c2f243169ab04431c93c213c0db8310661f6",
+        "continuous_sequences": [
+          {
+            "id": "broadcast-point-720",
+            "source_run": "rally-720",
+            "start_frame": 0,
+            "end_frame": 155,
+            "annotated_frames": 156,
+            "visible_frames": 37,
+            "uncertain_frames": 119,
+            "candidate_point_hits": 30,
+            "proposal_point_hits": 30,
+            "visible_frames_without_candidates": 4,
+            "visible_frames_without_proposal": 4,
+            "visible_frames_with_displaced_proposal": 3,
+            "uncertain_frames_with_proposals_unscored": 36,
+            "longest_correct_same_segment_run_frames": 17,
+            "longest_consecutive_visible_missing_proposal_frames": 2,
+            "adjacent_point_matches_in_same_segment": 24,
+            "adjacent_point_matches_with_segment_or_scene_change": 0,
+            "adjacent_point_matches_with_annotation_view_change": 0,
+            "mean_error_on_visible_proposed_frames_px": 2.1876,
+            "max_error_on_visible_proposed_frames_px": 13.851,
+            "annotation_view_counts": {
+              "closeup": {
+                "annotated_frames": 13,
+                "visible_frames": 2,
+                "uncertain_frames": 11,
+                "proposal_point_hits": 0,
+                "visible_frames_without_proposal": 2,
+                "visible_frames_with_displaced_proposal": 0
+              },
+              "wide_court": {
+                "annotated_frames": 143,
+                "visible_frames": 35,
+                "uncertain_frames": 108,
+                "proposal_point_hits": 30,
+                "visible_frames_without_proposal": 2,
+                "visible_frames_with_displaced_proposal": 3
+              }
+            },
+            "prediction_status_counts": {
+              "excluded_player_review": 15,
+              "proposal": 69,
+              "ambiguous_candidates": 1,
+              "no_heatmap_detection": 71
+            },
+            "scene_change_frames": [
+              12
+            ],
+            "annotation_view_change_frames": [
+              12,
+              155
+            ],
+            "adjacent_visible_proposed_pairs_same_segment_and_view": 28,
+            "mean_step_vector_error_px": 0.9651,
+            "max_step_vector_error_px": 2.8201
+          }
+        ]
+      }
+    }
+  },
+  "tolerance_sensitivity": {
+    "development": {},
+    "control": {},
+    "continuous": {
+      "motion050": {
+        "2": {
+          "visible_points": 111,
+          "candidate_point_hits": 62,
+          "proposal_point_hits": 62
+        },
+        "4": {
+          "visible_points": 111,
+          "candidate_point_hits": 94,
+          "proposal_point_hits": 94
+        },
+        "6": {
+          "visible_points": 111,
+          "candidate_point_hits": 109,
+          "proposal_point_hits": 109
+        }
+      },
+      "motion035": {
+        "2": {
+          "visible_points": 111,
+          "candidate_point_hits": 61,
+          "proposal_point_hits": 60
+        },
+        "4": {
+          "visible_points": 111,
+          "candidate_point_hits": 96,
+          "proposal_point_hits": 95
+        },
+        "6": {
+          "visible_points": 111,
+          "candidate_point_hits": 109,
+          "proposal_point_hits": 108
+        }
+      },
+      "confidence050": {
+        "2": {
+          "visible_points": 111,
+          "candidate_point_hits": 62,
+          "proposal_point_hits": 62
+        },
+        "4": {
+          "visible_points": 111,
+          "candidate_point_hits": 94,
+          "proposal_point_hits": 94
+        },
+        "6": {
+          "visible_points": 111,
+          "candidate_point_hits": 109,
+          "proposal_point_hits": 109
+        }
+      },
+      "confidence035": {
+        "2": {
+          "visible_points": 111,
+          "candidate_point_hits": 61,
+          "proposal_point_hits": 61
+        },
+        "4": {
+          "visible_points": 111,
+          "candidate_point_hits": 96,
+          "proposal_point_hits": 96
+        },
+        "6": {
+          "visible_points": 111,
+          "candidate_point_hits": 109,
+          "proposal_point_hits": 109
+        }
+      }
+    },
+    "rally": {
+      "motion050": {
+        "2": {
+          "visible_points": 37,
+          "candidate_point_hits": 21,
+          "proposal_point_hits": 21
+        },
+        "4": {
+          "visible_points": 37,
+          "candidate_point_hits": 25,
+          "proposal_point_hits": 25
+        },
+        "6": {
+          "visible_points": 37,
+          "candidate_point_hits": 31,
+          "proposal_point_hits": 31
+        }
+      },
+      "motion035": {
+        "2": {
+          "visible_points": 37,
+          "candidate_point_hits": 23,
+          "proposal_point_hits": 20
+        },
+        "4": {
+          "visible_points": 37,
+          "candidate_point_hits": 30,
+          "proposal_point_hits": 27
+        },
+        "6": {
+          "visible_points": 37,
+          "candidate_point_hits": 32,
+          "proposal_point_hits": 29
+        }
+      },
+      "confidence050": {
+        "2": {
+          "visible_points": 37,
+          "candidate_point_hits": 21,
+          "proposal_point_hits": 21
+        },
+        "4": {
+          "visible_points": 37,
+          "candidate_point_hits": 25,
+          "proposal_point_hits": 25
+        },
+        "6": {
+          "visible_points": 37,
+          "candidate_point_hits": 31,
+          "proposal_point_hits": 31
+        }
+      },
+      "confidence035": {
+        "2": {
+          "visible_points": 37,
+          "candidate_point_hits": 23,
+          "proposal_point_hits": 23
+        },
+        "4": {
+          "visible_points": 37,
+          "candidate_point_hits": 30,
+          "proposal_point_hits": 30
+        },
+        "6": {
+          "visible_points": 37,
+          "candidate_point_hits": 32,
+          "proposal_point_hits": 32
+        }
+      }
+    }
+  },
+  "changed_labeled_results": {
+    "development": {
+      "050": [],
+      "035": []
+    },
+    "control": {
+      "050": [],
+      "035": []
+    },
+    "continuous": {
+      "050": [],
+      "035": [
+        {
+          "case_id": "opening-233",
+          "before": {
+            "id": "opening-233",
+            "visibility": "visible",
+            "candidate_hit": true,
+            "proposal_hit": false,
+            "negative_region_hits": []
+          },
+          "after": {
+            "id": "opening-233",
+            "visibility": "visible",
+            "candidate_hit": true,
+            "proposal_hit": true,
+            "negative_region_hits": []
+          }
+        }
+      ]
+    },
+    "rally": {
+      "050": [],
+      "035": [
+        {
+          "case_id": "rally-014",
+          "before": {
+            "id": "rally-014",
+            "visibility": "visible",
+            "candidate_hit": true,
+            "proposal_hit": false,
+            "negative_region_hits": []
+          },
+          "after": {
+            "id": "rally-014",
+            "visibility": "visible",
+            "candidate_hit": true,
+            "proposal_hit": true,
+            "negative_region_hits": []
+          }
+        },
+        {
+          "case_id": "rally-015",
+          "before": {
+            "id": "rally-015",
+            "visibility": "visible",
+            "candidate_hit": true,
+            "proposal_hit": false,
+            "negative_region_hits": []
+          },
+          "after": {
+            "id": "rally-015",
+            "visibility": "visible",
+            "candidate_hit": true,
+            "proposal_hit": true,
+            "negative_region_hits": []
+          }
+        },
+        {
+          "case_id": "rally-016",
+          "before": {
+            "id": "rally-016",
+            "visibility": "visible",
+            "candidate_hit": true,
+            "proposal_hit": false,
+            "negative_region_hits": []
+          },
+          "after": {
+            "id": "rally-016",
+            "visibility": "visible",
+            "candidate_hit": true,
+            "proposal_hit": true,
+            "negative_region_hits": []
+          }
+        }
+      ]
+    }
+  },
+  "motion_replay_matches_source_bytes": true,
+  "observation_rows_replayed": 3000,
+  "implementation_sha256": {
+    "shuttle_linking.py": "e4150ef1a7ac88ef27f17d30416cd34c1ffa8424eb060ff0890b6b38f5b39f58",
+    "shuttle_tracknet.py": "856c84862d010dce7100a2f29ba6e52d4ea6c910635572f8cadab992973fc282",
+    "test_shuttle_linking.py": "3608ee4a38d5458821840a87a311889299975d78994f8e936ae04ade50d1022d",
+    "test_shuttle_tracknet.py": "d77ec18f0727771140cfcc26b8712f4b0d0e45b89dc4908f670915e1e053698a"
+  },
+  "verified_shuttle_positions": 0,
+  "coaching_scores": "not_available",
+  "default_changed": false,
+  "limitations": [
+    "Confidence activations are not calibrated probabilities.",
+    "Known development errors motivated this experiment; not independent held-out validation.",
+    "Packets overlap and labels are approximate automated labels from one broadcast.",
+    "Additional unscored links are not established correct detections or reduced identity switches.",
+    "No labels were changed for this experiment."
+  ],
+  "comparison_examples": [
+    {
+      "window": 1,
+      "frame_index": 104,
+      "source_seconds": 3.466667,
+      "raw_source": "change-00-source.png",
+      "raw_source_sha256": "8f54732e2d741569611b7d29adcf5474a41d0cdf49e346125e3e9c884ae68e39",
+      "comparison": "change-00.png",
+      "comparison_sha256": "a75159dee865667c5740750e96dee4ae55edbc208cbdd6b54db6069bf6aa1193",
+      "existing_point_label": null,
+      "label_scope": "uncertain_or_unlabelled_not_scored",
+      "before": {
+        "candidate_index": 1,
+        "proposal_segment_id": 7,
+        "position_px": [
+          200.625,
+          151.875
+        ],
+        "verification_status": "unverified"
+      },
+      "after": {
+        "candidate_index": 0,
+        "proposal_segment_id": 7,
+        "position_px": [
+          200.625,
+          166.25
+        ],
+        "verification_status": "unverified",
+        "selection_method": "dominant_activation_with_motion_gate"
+      }
+    },
+    {
+      "window": 1,
+      "frame_index": 233,
+      "source_seconds": 7.766667,
+      "raw_source": "change-01-source.png",
+      "raw_source_sha256": "96b9d9752517105d60a644a18e32a19d7bc4c89460972ba91968e1e94a5f7ba8",
+      "comparison": "change-01.png",
+      "comparison_sha256": "3f0ccc8b4c3f34771e552e78e197462a2492ce1665e2bd333e43eb130c438bd5",
+      "existing_point_label": [
+        352,
+        40
+      ],
+      "label_scope": "existing_automated_development",
+      "before": null,
+      "after": {
+        "candidate_index": 0,
+        "proposal_segment_id": 12,
+        "position_px": [
+          351.25,
+          38.75
+        ],
+        "verification_status": "unverified",
+        "selection_method": "dominant_activation_with_motion_gate"
+      }
+    },
+    {
+      "window": 2,
+      "frame_index": 14,
+      "source_seconds": 720.466667,
+      "raw_source": "change-02-source.png",
+      "raw_source_sha256": "c212d4c6e0879dbff1e10ac26fa6be2a3ea2229739bb21772f7ed2105b3d2042",
+      "comparison": "change-02.png",
+      "comparison_sha256": "b87005e78746ca8018d3d352c599262a5587d9e8c77a62bf39ec944235dc27b6",
+      "existing_point_label": [
+        296,
+        150
+      ],
+      "label_scope": "existing_automated_development",
+      "before": null,
+      "after": {
+        "candidate_index": 0,
+        "proposal_segment_id": 0,
+        "position_px": [
+          295.625,
+          148.75
+        ],
+        "verification_status": "unverified",
+        "selection_method": "dominant_activation_with_motion_gate"
+      }
+    },
+    {
+      "window": 2,
+      "frame_index": 15,
+      "source_seconds": 720.5,
+      "raw_source": "change-03-source.png",
+      "raw_source_sha256": "6020a9f4d9e07a0787339f286986321f8f0b9a0409b6972bac9378386bc4afac",
+      "comparison": "change-03.png",
+      "comparison_sha256": "8909721e8a0f66b628f4a7b78e1c6b64260e2f62adecbdb5fa8478237c5062e4",
+      "existing_point_label": [
+        296,
+        142
+      ],
+      "label_scope": "existing_automated_development",
+      "before": null,
+      "after": {
+        "candidate_index": 0,
+        "proposal_segment_id": 0,
+        "position_px": [
+          295.625,
+          141.25
+        ],
+        "verification_status": "unverified",
+        "selection_method": "dominant_activation_with_motion_gate"
+      }
+    },
+    {
+      "window": 2,
+      "frame_index": 16,
+      "source_seconds": 720.533333,
+      "raw_source": "change-04-source.png",
+      "raw_source_sha256": "91f7a5a6ecb9e0a36d1045ac1a2c2c0d2c75a9ee6acbb00df675dd3472c5d2c9",
+      "comparison": "change-04.png",
+      "comparison_sha256": "e2508928e199125470062c54f3a2500c710045e6fc12606674b618be0bc508ae",
+      "existing_point_label": [
+        294,
+        136
+      ],
+      "label_scope": "existing_automated_development",
+      "before": null,
+      "after": {
+        "candidate_index": 0,
+        "proposal_segment_id": 0,
+        "position_px": [
+          294.375,
+          134.375
+        ],
+        "verification_status": "unverified",
+        "selection_method": "dominant_activation_with_motion_gate"
+      }
+    },
+    {
+      "window": 2,
+      "frame_index": 133,
+      "source_seconds": 724.433333,
+      "raw_source": "change-05-source.png",
+      "raw_source_sha256": "4995af755229f80b3c093e73ce51e0d6c76cd7ae3810fcd1e221807a47a5c613",
+      "comparison": "change-05.png",
+      "comparison_sha256": "e984af764e76dd64c8bcfbbe404e6513f21668d45b7361762471f18c4f678481",
+      "existing_point_label": null,
+      "label_scope": "uncertain_or_unlabelled_not_scored",
+      "before": null,
+      "after": {
+        "candidate_index": 0,
+        "proposal_segment_id": 5,
+        "position_px": [
+          491.25,
+          328.125
+        ],
+        "verification_status": "unverified",
+        "selection_method": "dominant_activation_with_motion_gate"
+      }
+    },
+    {
+      "window": 3,
+      "frame_index": 162,
+      "source_seconds": 485.4,
+      "raw_source": "change-06-source.png",
+      "raw_source_sha256": "e074701f71f826721f28c88cd5a9c36876df99bd0beccbfa0d72edac50bfc71e",
+      "comparison": "change-06.png",
+      "comparison_sha256": "8c44358ca0e0a525d8e9832160f20924e7c538b0f53caf84b7154cef8ec2e3df",
+      "existing_point_label": null,
+      "label_scope": "uncertain_or_unlabelled_not_scored",
+      "before": null,
+      "after": {
+        "candidate_index": 0,
+        "proposal_segment_id": 7,
+        "position_px": [
+          251.875,
+          133.75
+        ],
+        "verification_status": "unverified",
+        "selection_method": "dominant_activation_with_motion_gate"
+      }
+    },
+    {
+      "window": 4,
+      "frame_index": 155,
+      "source_seconds": 305.166667,
+      "raw_source": "change-07-source.png",
+      "raw_source_sha256": "111565ca9aa28f7831b1f6f7c0143d43a22fb269b43d797a768c56d1572b1904",
+      "comparison": "change-07.png",
+      "comparison_sha256": "6ac281c826cfadd7112218d4f23f3931ccdaf3668d4a3ea2f420c60b8ac4fedc",
+      "existing_point_label": null,
+      "label_scope": "uncertain_or_unlabelled_not_scored",
+      "before": null,
+      "after": {
+        "candidate_index": 0,
+        "proposal_segment_id": 2,
+        "position_px": [
+          377.5,
+          120.625
+        ],
+        "verification_status": "unverified",
+        "selection_method": "dominant_activation_with_motion_gate"
+      }
+    },
+    {
+      "window": 4,
+      "frame_index": 168,
+      "source_seconds": 305.6,
+      "raw_source": "change-08-source.png",
+      "raw_source_sha256": "a1ed52411a250e4b4ab23ed0bd2ca3ad3953f74e0d23b07fa20bbf2f6e77c62e",
+      "comparison": "change-08.png",
+      "comparison_sha256": "7585c5411db5bb945c6c80944c8480e3032c3ed4a59ab8787d957778563655bd",
+      "existing_point_label": null,
+      "label_scope": "uncertain_or_unlabelled_not_scored",
+      "before": null,
+      "after": {
+        "candidate_index": 0,
+        "proposal_segment_id": 3,
+        "position_px": [
+          266.25,
+          223.75
+        ],
+        "verification_status": "unverified",
+        "selection_method": "dominant_activation_with_motion_gate"
+      }
+    },
+    {
+      "window": 4,
+      "frame_index": 169,
+      "source_seconds": 305.633333,
+      "raw_source": "change-09-source.png",
+      "raw_source_sha256": "f2648a3d0da74086914b0c75ca539157d2ed59c1512ea0fc6491d44e9050eb26",
+      "comparison": "change-09.png",
+      "comparison_sha256": "99f6014069d2ea1f443a95785b8b38e9a1f01762f0a8f777e478b2e9a8817a1b",
+      "existing_point_label": null,
+      "label_scope": "uncertain_or_unlabelled_not_scored",
+      "before": null,
+      "after": {
+        "candidate_index": 0,
+        "proposal_segment_id": 3,
+        "position_px": [
+          250.0,
+          230.0
+        ],
+        "verification_status": "unverified",
+        "selection_method": "motion"
+      }
+    },
+    {
+      "window": 4,
+      "frame_index": 170,
+      "source_seconds": 305.666667,
+      "raw_source": "change-10-source.png",
+      "raw_source_sha256": "d883cfb628c81def799bc2f6ee2f09bbc9d1e84ad98cef5ed4737ead7bc8ec88",
+      "comparison": "change-10.png",
+      "comparison_sha256": "200790fadf535db9d9988f17d73f1ce9e42d655c51d5266779d5a36cb65668a4",
+      "existing_point_label": null,
+      "label_scope": "uncertain_or_unlabelled_not_scored",
+      "before": null,
+      "after": {
+        "candidate_index": 0,
+        "proposal_segment_id": 3,
+        "position_px": [
+          250.0,
+          230.0
+        ],
+        "verification_status": "unverified",
+        "selection_method": "motion"
+      }
+    },
+    {
+      "window": 4,
+      "frame_index": 171,
+      "source_seconds": 305.7,
+      "raw_source": "change-11-source.png",
+      "raw_source_sha256": "07ec218abbf813ace73cfcdeb7b3dd5a451e704a45fbce0536bc95050e8aba9b",
+      "comparison": "change-11.png",
+      "comparison_sha256": "eed722d536e68df9d695d1bfc7fa2de4def1933c81b8cfe29f278f7fc1166417",
+      "existing_point_label": null,
+      "label_scope": "uncertain_or_unlabelled_not_scored",
+      "before": null,
+      "after": {
+        "candidate_index": 0,
+        "proposal_segment_id": 3,
+        "position_px": [
+          235.625,
+          235.0
+        ],
+        "verification_status": "unverified",
+        "selection_method": "dominant_activation_with_motion_gate"
+      }
+    },
+    {
+      "window": 4,
+      "frame_index": 172,
+      "source_seconds": 305.733333,
+      "raw_source": "change-12-source.png",
+      "raw_source_sha256": "ec903c825cb61e2d1d57edcbb63fa8983c30c7e480394a61b969a49bd2d6ed21",
+      "comparison": "change-12.png",
+      "comparison_sha256": "cb319ab47700f4682024634fd4e8c71ec3343041b86f1802ba9e44def08aa60a",
+      "existing_point_label": null,
+      "label_scope": "uncertain_or_unlabelled_not_scored",
+      "before": null,
+      "after": {
+        "candidate_index": 0,
+        "proposal_segment_id": 3,
+        "position_px": [
+          222.5,
+          241.25
+        ],
+        "verification_status": "unverified",
+        "selection_method": "dominant_activation_with_motion_gate"
+      }
+    },
+    {
+      "window": 4,
+      "frame_index": 173,
+      "source_seconds": 305.766667,
+      "raw_source": "change-13-source.png",
+      "raw_source_sha256": "b54a49dab8551d32a50ec69f379bfca23210f36bd9f7870a50e216852b553b5a",
+      "comparison": "change-13.png",
+      "comparison_sha256": "7365324f4be21864f862497a3b6decf34f7696b131f976588c9be301a5064f55",
+      "existing_point_label": null,
+      "label_scope": "uncertain_or_unlabelled_not_scored",
+      "before": null,
+      "after": {
+        "candidate_index": 0,
+        "proposal_segment_id": 3,
+        "position_px": [
+          210.0,
+          247.5
+        ],
+        "verification_status": "unverified",
+        "selection_method": "dominant_activation_with_motion_gate"
+      }
+    },
+    {
+      "window": 5,
+      "frame_index": 256,
+      "source_seconds": 68.533333,
+      "raw_source": "change-14-source.png",
+      "raw_source_sha256": "00a3fd89275edceef4430ea591a66ae78c62a2eac60de72d502a887d7d6b1fff",
+      "comparison": "change-14.png",
+      "comparison_sha256": "a3ff11c9667908d9d91e6238df4be42eab6b19e024c4531dae55c97ae40e5634",
+      "existing_point_label": null,
+      "label_scope": "uncertain_or_unlabelled_not_scored",
+      "before": null,
+      "after": {
+        "candidate_index": 0,
+        "proposal_segment_id": 4,
+        "position_px": [
+          430.0,
+          133.75
+        ],
+        "verification_status": "unverified",
+        "selection_method": "dominant_activation_with_motion_gate"
+      }
+    },
+    {
+      "window": 5,
+      "frame_index": 289,
+      "source_seconds": 69.633333,
+      "raw_source": "change-15-source.png",
+      "raw_source_sha256": "7d3e0fe7a661c9e4843d9c76309d8af083cec20fa658d1f83030b37ae8e9f7b8",
+      "comparison": "change-15.png",
+      "comparison_sha256": "5d8ec31e325c93a514ff5441fb189701dc4878394f0db8343e632791f4911af9",
+      "existing_point_label": null,
+      "label_scope": "uncertain_or_unlabelled_not_scored",
+      "before": null,
+      "after": {
+        "candidate_index": 0,
+        "proposal_segment_id": 6,
+        "position_px": [
+          408.75,
+          88.75
+        ],
+        "verification_status": "unverified",
+        "selection_method": "dominant_activation_with_motion_gate"
+      }
+    }
+  ],
+  "review_page": "out/shuttle-confidence-evaluation-002/index.html",
+  "review_page_sha256": "58d71f9cab7426d2fb826881d18b91ea708f4f4d06d03e01dd850e4afbddb825",
+  "tests": {
+    "python": 94,
+    "javascript": 4,
+    "failures": 0
+  },
+  "fresh_inference": {
+    "output": "out/tracknet-confidence-real-001",
+    "frames": 300,
+    "rows_exactly_match_replay": true,
+    "rows_sha256": "4010620bd67ed7bcc0fdb4644b51a7005fbc2fb176456a995283d068e3ab8cb9",
+    "summary_sha256": "92ef04adb8dfbf85cae1e18fd1a6f0ac9f9bbef558ca1d96e585ab7905582817",
+    "decoded_preview_frames": 300,
+    "preview_sha256": "05bd6e5be15cb78f380ba37e1727bdda9262cf232cbf3fd5f07a8327c38a6a48"
+  },
+  "decision": "Retain both confidence/motion selection and 0.35 cutoff as opt-in. Gains are on the same previously seen broadcast, and tighter-tolerance continuous results still regress versus default.",
+  "automated_diagnostic_review": {
+    "changed_comparisons_inspected": 16,
+    "human_reviews_added": 0,
+    "trajectory_approvals_added": 0,
+    "scope": "All changed selections at cutoff 0.35 were inspected in full-frame comparison images. Raw temporal context 102\u2013106 was also inspected for the changed 3.467-second opening selection. No new ground-truth labels or acceptance decisions.",
+    "unlabelled_frames": "Unscored; sampled visual plausibility is not continuous validation.",
+    "temporal_context_sha256": "4a2584b2c37a06acc0de58e0193781de216134dd1eabfdecb080af2111c08704",
+    "temporal_detail_sha256": "7acfb6d6b9de534071aa12e66af958f74c717d2569002ddfb908034d1fd7fcc3"
+  },
+  "report_local_references_verified": 33,
+  "browser_layout_qa": "not_performed"
+}

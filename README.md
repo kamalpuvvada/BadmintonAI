@@ -816,6 +816,70 @@ and the decision to retain the default are recorded in
 `validation/tracknet_threshold_evaluation_2026-10-31.json`. The trial remains
 opt-in. No verified trajectories, shot events or coaching scores are enabled.
 
+### Step 3.10 — Optional confidence and motion selection
+
+`--linker-mode confidence_motion` can resolve multiple observed candidates when
+the strongest peak is at least **0.65** and exceeds the next peak by at least
+**0.20**. It then applies the existing 60-pixel step gate. Otherwise, the
+original motion selection and eight-pixel ambiguity margin remain in effect.
+The linker uses only current observations and prior linked points; it never
+exports a predicted position or bridges missing frames, excluded views or cuts.
+The underlying offline TrackNet windows and backgrounds are unchanged.
+
+```powershell
+.\.venv\Scripts\python.exe shuttle_tracknet.py --video "Videos\videoplayback.mp4" --player-run "out\players-045" --out "out\confidence-trial-new" --heatmap-threshold 0.35 --linker-mode confidence_motion
+```
+
+Existing TrackNet observations can also be relinked without repeating inference:
+
+```powershell
+.\.venv\Scripts\python.exe shuttle_linking.py --source-run "out\tracknet-threshold035-002" --player-run "out\players-045" --out "out\confidence-replay-new" --mode confidence_motion
+```
+
+Replay requires the exact current player-review snapshot and source binding.
+It rejects malformed sampling, coordinates, peaks and proposal references,
+observations in excluded frames, and concurrent source/review changes. It writes
+a new packet bound to the input hashes, retaining every candidate, timestamp,
+scene and diagnostic activation. The packet contains JSON diagnostics; use a
+fresh inference run or the comparison report to see the updated links. Existing
+output folders are rejected. `--mode motion` reproduces the original linking
+rule; the tested rally replay is byte-for-byte identical to its input rows.
+
+| Linked matches within four native pixels | Default 0.5 / motion | 0.35 / motion | 0.35 / confidence + motion |
+| --- | --- | --- | --- |
+| Original development points | 11/12 | 11/12 | 11/12 |
+| Additional control points | 6/6 | 6/6 | 6/6 |
+| Continuous packet | 94/111 | 95/111 | 96/111 |
+| Revised broadcast-point packet | 25/37 | 27/37 | 30/37 |
+
+Confidence selection at cutoff 0.5 changes no selected positions or labeled
+results in these five windows. At cutoff 0.35 it restores the links for rally
+frames 14–16 and opening frame 233. Across all five windows it adds 15 links and
+changes one previously selected position. All 16 changed selections were
+inspected with automated diagnostics; unlabelled frames remain unscored and
+none become approved trajectories. The existing local racket negative remains
+clear. These overlapping packets must not be pooled as independent observations.
+
+The combined mode reaches 23/37 rally matches at two pixels and 32/37 at six,
+versus default 21/37 and 31/37. Continuous results are 61/111 at two pixels and
+109/111 at six, versus default 62/111 and 109/111. That remaining tight-tolerance
+regression, approximate same-camera development labels and unverified new links
+keep both options experimental. **The default remains cutoff 0.5 with motion
+linking.** Pixel distances and peak margins require validation on other footage.
+
+Verification includes 3,000 replayed observation rows, a new 300-frame real
+inference run whose rows exactly match replay, and a preview decoding to all
+300 frames. All 94 Python tests and four JavaScript tests pass, including stale
+review/revocation checks, candidate-index restoration, confidence ties, motion
+limits and gap/cut isolation. No labels were changed for this experiment.
+
+Review `out/shuttle-confidence-evaluation-002/index.html` for all 16 changed
+selections and their unmarked full source images. Results, tolerance sensitivity,
+model-run bindings and implementation hashes are in
+`validation/shuttle_confidence_evaluation_2026-10-31.json`. The fresh preview is
+`out/tracknet-confidence-real-001/index.html`. No verified trajectories, shot
+events or coaching scores are enabled.
+
 ## Next milestones
 
 | Step | Deliverable | Validation |
