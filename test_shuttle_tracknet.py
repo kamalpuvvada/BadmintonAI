@@ -134,6 +134,37 @@ class ShuttleTrackNetTests(unittest.TestCase):
         with self.assertRaises(pickle.UnpicklingError):
             TrackNetPredictor(checkpoint, sha256_file(checkpoint))
 
+    def test_experimental_threshold_rejects_invalid_values_before_reading_inputs(self):
+        for threshold in (0,1,-.1,float("nan"),float("inf"),True,"0.35"):
+            with self.assertRaisesRegex(ValueError,"Heatmap threshold"):
+                infer_groups([],[],FakePredictor(),heatmap_threshold=threshold)
+            with self.assertRaisesRegex(ValueError,"Heatmap threshold"):
+                run(self.root/"missing.mp4",self.root/"missing-run",self.root/"invalid-output",
+                    self.root/"missing.pt",heatmap_threshold=threshold)
+            self.assertFalse((self.root/"invalid-output").exists())
+
+    def test_threshold_uses_averaged_heatmaps_and_peaks_do_not_fill_gaps(self):
+        paths=[]
+        for i in range(6):
+            path=self.root/f"threshold-{i}.png"
+            Image.new("RGB",(16,16),(i*10,0,0)).save(path); paths.append(path)
+        class WeakFirst(FakePredictor):
+            def __call__(self,batch):
+                result=super().__call__(batch)
+                result[:,0,100:103,200:203]=.3
+                return result
+        contexts=[{"eligible":i!=5,"scene_id":0} for i in range(6)]
+        peaks={}
+        result=infer_groups(paths,contexts,WeakFirst(),stride=2,heatmap_threshold=.65,frame_peaks=peaks)
+        self.assertEqual(peaks,{0:.3,1:.9,2:.6,3:.9,4:.9})
+        self.assertFalse(result[0]);self.assertFalse(result[2]);self.assertTrue(result[1])
+        self.assertNotIn(5,result);self.assertNotIn(5,peaks)
+        lower=infer_groups(paths,contexts,WeakFirst(),stride=2,heatmap_threshold=.2)
+        self.assertTrue(lower[0]);self.assertTrue(lower[2])
+        # Explicit default reproduces the unchanged decoder behavior.
+        default=infer_groups(paths,contexts,WeakFirst(),stride=2)
+        self.assertEqual(default,infer_groups(paths,contexts,WeakFirst(),stride=2,heatmap_threshold=.5))
+
     def test_native_pipeline_keeps_view_gates_and_scene_local_proposals(self):
         fixture = review_tests.TrackingReviewTests()
         fixture.setUp()
@@ -163,6 +194,9 @@ class ShuttleTrackNetTests(unittest.TestCase):
         self.assertEqual({r["proposal"]["proposal_segment_id"] for r in rows[:6] if r["proposal"]}, {0})
         self.assertEqual({r["proposal"]["proposal_segment_id"] for r in rows[6:] if r["proposal"]}, {1})
         self.assertEqual(summary["coaching_metrics"]["status"], "not_available")
+        self.assertEqual(summary["configuration"]["heatmap_threshold"],.5)
+        self.assertTrue(all(r["heatmap_peak"] is None for r in rows if r["status"]=="excluded_player_review"))
+        self.assertTrue(all(r["heatmap_peak"]==.9 for r in rows if r["proposal"]))
         self.assertFalse(summary["model"]["inpainting"])
         self.assertTrue((output/"candidate_preview.mp4").exists())
         with self.assertRaisesRegex(ValueError, "new output"):

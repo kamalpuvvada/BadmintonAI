@@ -1,0 +1,2606 @@
+{
+  "date": "2026-10-31",
+  "status": "development_threshold_trial_not_verified_trajectories",
+  "experiment": "Single predeclared activation cutoff 0.35 versus unchanged 0.5; default non-overlap windows and pinned checkpoint.",
+  "motivation": "Confirmed upper-frame miss at native frame 57 in the 720-second broadcast point.",
+  "runs": [
+    {
+      "output": "out/tracknet-threshold035-001",
+      "summary_sha256": "2fa6a09ef6f580440cf2c1b25cadfa2e69000b5df9dcf8045bf009f5ad38e34d",
+      "rows_sha256": "d830bf34f91fb9c8540d44cbad29a29deb0391d0ec21bdd1e299ef4365919165",
+      "configuration": {
+        "heatmap_threshold": 0.35,
+        "input_size_px": [
+          512,
+          288
+        ],
+        "background_samples_max": 31,
+        "window_mode": "nonoverlap_plus_overlapping_tail_mean",
+        "window_stride": 8,
+        "padding": false,
+        "cpu_threads": 4
+      },
+      "sampling": {
+        "fps": 30.0,
+        "start_seconds": 0,
+        "frames": 300
+      },
+      "frame_status_counts": {
+        "excluded_player_review": 3,
+        "proposal": 215,
+        "no_heatmap_detection": 79,
+        "ambiguous_candidates": 3
+      },
+      "proposal_segments": 15,
+      "excluded_intervals_match_baseline": true,
+      "contiguous_scene_local_segments_verified": true
+    },
+    {
+      "output": "out/tracknet-threshold035-002",
+      "summary_sha256": "d57cd27df33be8bec733de8807b3338065aae0d5ffcf4361affd4c78ec013c15",
+      "rows_sha256": "58d05433817453380c27c19e2b00bc8dcd90458c8df15db791115845c38bf961",
+      "configuration": {
+        "heatmap_threshold": 0.35,
+        "input_size_px": [
+          512,
+          288
+        ],
+        "background_samples_max": 31,
+        "window_mode": "nonoverlap_plus_overlapping_tail_mean",
+        "window_stride": 8,
+        "padding": false,
+        "cpu_threads": 4
+      },
+      "sampling": {
+        "fps": 30.0,
+        "start_seconds": 720,
+        "frames": 300
+      },
+      "frame_status_counts": {
+        "excluded_player_review": 40,
+        "ambiguous_candidates": 5,
+        "proposal": 152,
+        "no_heatmap_detection": 103
+      },
+      "proposal_segments": 12,
+      "excluded_intervals_match_baseline": true,
+      "contiguous_scene_local_segments_verified": true
+    },
+    {
+      "output": "out/tracknet-threshold035-003",
+      "summary_sha256": "c653804962839404af7d377c29ff91ddf05f3522aea162d19cf0caf0bb33e8ea",
+      "rows_sha256": "7c49bad3f337be67da22a19070e7d146266cfff86af6015e478d809c358c0963",
+      "configuration": {
+        "heatmap_threshold": 0.35,
+        "input_size_px": [
+          512,
+          288
+        ],
+        "background_samples_max": 31,
+        "window_mode": "nonoverlap_plus_overlapping_tail_mean",
+        "window_stride": 8,
+        "padding": false,
+        "cpu_threads": 4
+      },
+      "sampling": {
+        "fps": 30.0,
+        "start_seconds": 480.0,
+        "frames": 300
+      },
+      "frame_status_counts": {
+        "excluded_player_review": 9,
+        "proposal": 210,
+        "no_heatmap_detection": 71,
+        "ambiguous_candidates": 10
+      },
+      "proposal_segments": 11,
+      "excluded_intervals_match_baseline": true,
+      "contiguous_scene_local_segments_verified": true
+    },
+    {
+      "output": "out/tracknet-threshold035-004",
+      "summary_sha256": "57b9d42ca5786986661ceb7bb3b5b5ceb50449884076480b2219a9ad006e20f9",
+      "rows_sha256": "f7d4ff17f33516c861c4a1ca52783079650db4ced9bcfa702852538d6b6ecac6",
+      "configuration": {
+        "heatmap_threshold": 0.35,
+        "input_size_px": [
+          512,
+          288
+        ],
+        "background_samples_max": 31,
+        "window_mode": "nonoverlap_plus_overlapping_tail_mean",
+        "window_stride": 8,
+        "padding": false,
+        "cpu_threads": 4
+      },
+      "sampling": {
+        "fps": 30.0,
+        "start_seconds": 300,
+        "frames": 300
+      },
+      "frame_status_counts": {
+        "excluded_player_review": 103,
+        "proposal": 179,
+        "no_heatmap_detection": 6,
+        "ambiguous_candidates": 12
+      },
+      "proposal_segments": 6,
+      "excluded_intervals_match_baseline": true,
+      "contiguous_scene_local_segments_verified": true
+    },
+    {
+      "output": "out/tracknet-threshold035-005",
+      "summary_sha256": "00ef9c83d3c4cc73c0f58543d489ce13e52d74c169b3b3cab27a0dde813343a0",
+      "rows_sha256": "7a0781a8735dd55c05c67215a6dc657764ba0a25535368c7e78474045593b44a",
+      "configuration": {
+        "heatmap_threshold": 0.35,
+        "input_size_px": [
+          512,
+          288
+        ],
+        "background_samples_max": 31,
+        "window_mode": "nonoverlap_plus_overlapping_tail_mean",
+        "window_stride": 8,
+        "padding": false,
+        "cpu_threads": 4
+      },
+      "sampling": {
+        "fps": 30.0,
+        "start_seconds": 60,
+        "frames": 300
+      },
+      "frame_status_counts": {
+        "excluded_player_review": 3,
+        "no_heatmap_detection": 33,
+        "proposal": 260,
+        "ambiguous_candidates": 4
+      },
+      "proposal_segments": 8,
+      "excluded_intervals_match_baseline": true,
+      "contiguous_scene_local_segments_verified": true
+    }
+  ],
+  "default_real_rally_repeat_matches_previous_rows": true,
+  "default_repeat_rows_sha256": "040e7ab5ad5b51fc8489f94d0d833938d59a4e4ce95c93b5476dce4903640a4c",
+  "evaluations": {
+    "development": {
+      "default": {
+        "schema_version": "0.1.0",
+        "evaluation_scope": "selected_development_seed_only",
+        "benchmark_sha256": "d15defa845e6502f9e31f1e681007527f018ae7fd00a7ea78a15243cada7caae",
+        "prediction_bindings": {
+          "shuttle-005": {
+            "summary_sha256": "6343b9d9bc0f9c48871daf1ae16688927405bba0e1dc7e0b63f545c16d7219d0",
+            "rows_sha256": "285b9f5bab6606ae2c5de79858cc392cb6249683f69f8e5d96c839b5258eeeee"
+          },
+          "shuttle-006": {
+            "summary_sha256": "57f5c2e403201f20cb07df6465a67ead1f82788abc98eb1f2e8bf1605ffd07fd",
+            "rows_sha256": "a346711731a6af7553ba1a0b1795558aeed7a0abbd4dc44c5a52a7853ff00f03"
+          },
+          "shuttle-007": {
+            "summary_sha256": "90b0657c99f1b08f376b5df93a44824d9d9cf3a45f6c598530e4f90039459809",
+            "rows_sha256": "961c709bf479b72464af535d11d261992b5da21db88a819a591f78c74c73d053"
+          },
+          "shuttle-008": {
+            "summary_sha256": "f38cc9fb07b21d7c386c1eed1972212f1148198f26e52ccefed2627011ec7cb3",
+            "rows_sha256": "2e1075ceb178c6dc204af640a5dfbc8a5f3d323482eacbcd2012dcf2b927d260"
+          }
+        },
+        "point_tolerance_px": 4,
+        "visible_points": 12,
+        "candidate_point_hits": 11,
+        "proposal_point_hits": 11,
+        "uncertain_frames_excluded_from_point_scoring": 4,
+        "known_negative_regions": 1,
+        "negative_regions_with_candidates": 0,
+        "negative_regions_with_proposals": 0,
+        "verified_shuttle_positions": 0,
+        "limitations": [
+          "Selected, correlated development examples; not held-out data or full-video precision/recall.",
+          "Negative regions label only local distractors, not absence of a shuttle elsewhere in the frame.",
+          "Evaluation never promotes proposals to verified trajectories or enables events/scoring."
+        ],
+        "full_result": "out/tracknet-threshold-evaluation-001/development-default.json",
+        "full_result_sha256": "c66a9aeeb436a7a97d5d31424b552687011f7848fb389f29de95f706afdcab0e"
+      },
+      "trial035": {
+        "schema_version": "0.1.0",
+        "evaluation_scope": "selected_development_seed_only",
+        "benchmark_sha256": "d15defa845e6502f9e31f1e681007527f018ae7fd00a7ea78a15243cada7caae",
+        "prediction_bindings": {
+          "shuttle-005": {
+            "summary_sha256": "2fa6a09ef6f580440cf2c1b25cadfa2e69000b5df9dcf8045bf009f5ad38e34d",
+            "rows_sha256": "d830bf34f91fb9c8540d44cbad29a29deb0391d0ec21bdd1e299ef4365919165"
+          },
+          "shuttle-006": {
+            "summary_sha256": "d57cd27df33be8bec733de8807b3338065aae0d5ffcf4361affd4c78ec013c15",
+            "rows_sha256": "58d05433817453380c27c19e2b00bc8dcd90458c8df15db791115845c38bf961"
+          },
+          "shuttle-007": {
+            "summary_sha256": "c653804962839404af7d377c29ff91ddf05f3522aea162d19cf0caf0bb33e8ea",
+            "rows_sha256": "7c49bad3f337be67da22a19070e7d146266cfff86af6015e478d809c358c0963"
+          },
+          "shuttle-008": {
+            "summary_sha256": "57b9d42ca5786986661ceb7bb3b5b5ceb50449884076480b2219a9ad006e20f9",
+            "rows_sha256": "f7d4ff17f33516c861c4a1ca52783079650db4ced9bcfa702852538d6b6ecac6"
+          }
+        },
+        "point_tolerance_px": 4,
+        "visible_points": 12,
+        "candidate_point_hits": 11,
+        "proposal_point_hits": 11,
+        "uncertain_frames_excluded_from_point_scoring": 4,
+        "known_negative_regions": 1,
+        "negative_regions_with_candidates": 0,
+        "negative_regions_with_proposals": 0,
+        "verified_shuttle_positions": 0,
+        "limitations": [
+          "Selected, correlated development examples; not held-out data or full-video precision/recall.",
+          "Negative regions label only local distractors, not absence of a shuttle elsewhere in the frame.",
+          "Evaluation never promotes proposals to verified trajectories or enables events/scoring."
+        ],
+        "full_result": "out/tracknet-threshold-evaluation-001/development-trial035.json",
+        "full_result_sha256": "613530880f6012ab3fb4d01299991a02b7cef48a77d87d6c4f484f777548b3af"
+      }
+    },
+    "control": {
+      "default": {
+        "schema_version": "0.1.0",
+        "evaluation_scope": "selected_development_seed_only",
+        "benchmark_sha256": "faf0a225e68110856b0a6d46a709d221c5e440b0bec637031792488e3105786e",
+        "prediction_bindings": {
+          "control-060": {
+            "summary_sha256": "ce5bf04775c5b88ce06c075fe14385d2ce269eb2d5cd50a1e46311f086988c08",
+            "rows_sha256": "ab189fd90aed6cffdd5143a359642cd269bd8e4e78efe4b576ac9b53ec32dd17"
+          }
+        },
+        "point_tolerance_px": 4,
+        "visible_points": 6,
+        "candidate_point_hits": 6,
+        "proposal_point_hits": 6,
+        "uncertain_frames_excluded_from_point_scoring": 3,
+        "known_negative_regions": 0,
+        "negative_regions_with_candidates": 0,
+        "negative_regions_with_proposals": 0,
+        "verified_shuttle_positions": 0,
+        "limitations": [
+          "Selected, correlated development examples; not held-out data or full-video precision/recall.",
+          "Negative regions label only local distractors, not absence of a shuttle elsewhere in the frame.",
+          "Evaluation never promotes proposals to verified trajectories or enables events/scoring."
+        ],
+        "full_result": "out/tracknet-threshold-evaluation-001/control-default.json",
+        "full_result_sha256": "4332a365bac468e1c8c9303425c98c25b881ae5d3de4abb77ba0b58b2cbb7a55"
+      },
+      "trial035": {
+        "schema_version": "0.1.0",
+        "evaluation_scope": "selected_development_seed_only",
+        "benchmark_sha256": "faf0a225e68110856b0a6d46a709d221c5e440b0bec637031792488e3105786e",
+        "prediction_bindings": {
+          "control-060": {
+            "summary_sha256": "00ef9c83d3c4cc73c0f58543d489ce13e52d74c169b3b3cab27a0dde813343a0",
+            "rows_sha256": "7a0781a8735dd55c05c67215a6dc657764ba0a25535368c7e78474045593b44a"
+          }
+        },
+        "point_tolerance_px": 4,
+        "visible_points": 6,
+        "candidate_point_hits": 6,
+        "proposal_point_hits": 6,
+        "uncertain_frames_excluded_from_point_scoring": 3,
+        "known_negative_regions": 0,
+        "negative_regions_with_candidates": 0,
+        "negative_regions_with_proposals": 0,
+        "verified_shuttle_positions": 0,
+        "limitations": [
+          "Selected, correlated development examples; not held-out data or full-video precision/recall.",
+          "Negative regions label only local distractors, not absence of a shuttle elsewhere in the frame.",
+          "Evaluation never promotes proposals to verified trajectories or enables events/scoring."
+        ],
+        "full_result": "out/tracknet-threshold-evaluation-001/control-trial035.json",
+        "full_result_sha256": "a9086932e3afbd024b586e1b359124f40424fa590d0da0ce2c2f8002921c8666"
+      }
+    },
+    "continuous": {
+      "default": {
+        "schema_version": "0.1.0",
+        "evaluation_scope": "continuously_annotated_development_intervals_only",
+        "benchmark_sha256": "7ca0f95783c4c5799ec913e63201bdcd652e1968f50cfa28e1f20cc4ec36c4a7",
+        "prediction_bindings": {
+          "opening": {
+            "summary_sha256": "6343b9d9bc0f9c48871daf1ae16688927405bba0e1dc7e0b63f545c16d7219d0",
+            "rows_sha256": "285b9f5bab6606ae2c5de79858cc392cb6249683f69f8e5d96c839b5258eeeee"
+          },
+          "control": {
+            "summary_sha256": "ce5bf04775c5b88ce06c075fe14385d2ce269eb2d5cd50a1e46311f086988c08",
+            "rows_sha256": "ab189fd90aed6cffdd5143a359642cd269bd8e4e78efe4b576ac9b53ec32dd17"
+          }
+        },
+        "point_tolerance_px": 4,
+        "visible_points": 111,
+        "candidate_point_hits": 94,
+        "proposal_point_hits": 94,
+        "uncertain_frames_excluded_from_point_scoring": 69,
+        "known_negative_regions": 0,
+        "negative_regions_with_candidates": 0,
+        "negative_regions_with_proposals": 0,
+        "verified_shuttle_positions": 0,
+        "limitations": [
+          "Selected, correlated development examples; not held-out data or full-video precision/recall.",
+          "Negative regions label only local distractors, not absence of a shuttle elsewhere in the frame.",
+          "Evaluation never promotes proposals to verified trajectories or enables events/scoring.",
+          "Uncertain annotations break continuity statistics and never imply shuttle absence; point matches do not certify object identity or physical trajectories."
+        ],
+        "continuous_sequences": [
+          {
+            "id": "opening-006-009",
+            "source_run": "opening",
+            "start_frame": 180,
+            "end_frame": 269,
+            "annotated_frames": 90,
+            "visible_frames": 43,
+            "uncertain_frames": 47,
+            "candidate_point_hits": 32,
+            "proposal_point_hits": 32,
+            "visible_frames_without_candidates": 0,
+            "visible_frames_without_proposal": 0,
+            "visible_frames_with_displaced_proposal": 11,
+            "uncertain_frames_with_proposals_unscored": 40,
+            "longest_correct_same_segment_run_frames": 8,
+            "longest_consecutive_visible_missing_proposal_frames": 0,
+            "adjacent_point_matches_in_same_segment": 23,
+            "adjacent_point_matches_with_segment_or_scene_change": 0,
+            "adjacent_point_matches_with_annotation_view_change": 0,
+            "mean_error_on_visible_proposed_frames_px": 3.9235,
+            "max_error_on_visible_proposed_frames_px": 42.6279,
+            "annotation_view_counts": {
+              "unspecified": {
+                "annotated_frames": 90,
+                "visible_frames": 43,
+                "uncertain_frames": 47,
+                "proposal_point_hits": 32,
+                "visible_frames_without_proposal": 0,
+                "visible_frames_with_displaced_proposal": 11
+              }
+            },
+            "prediction_status_counts": {
+              "proposal": 83,
+              "no_heatmap_detection": 6,
+              "ambiguous_candidates": 1
+            },
+            "scene_change_frames": [],
+            "annotation_view_change_frames": [],
+            "adjacent_visible_proposed_pairs_same_segment_and_view": 37,
+            "mean_step_vector_error_px": 1.6096,
+            "max_step_vector_error_px": 4.8023
+          },
+          {
+            "id": "control-061-064",
+            "source_run": "control",
+            "start_frame": 30,
+            "end_frame": 119,
+            "annotated_frames": 90,
+            "visible_frames": 68,
+            "uncertain_frames": 22,
+            "candidate_point_hits": 62,
+            "proposal_point_hits": 62,
+            "visible_frames_without_candidates": 0,
+            "visible_frames_without_proposal": 0,
+            "visible_frames_with_displaced_proposal": 6,
+            "uncertain_frames_with_proposals_unscored": 19,
+            "longest_correct_same_segment_run_frames": 24,
+            "longest_consecutive_visible_missing_proposal_frames": 0,
+            "adjacent_point_matches_in_same_segment": 52,
+            "adjacent_point_matches_with_segment_or_scene_change": 0,
+            "adjacent_point_matches_with_annotation_view_change": 0,
+            "mean_error_on_visible_proposed_frames_px": 1.6177,
+            "max_error_on_visible_proposed_frames_px": 5.2351,
+            "annotation_view_counts": {
+              "unspecified": {
+                "annotated_frames": 90,
+                "visible_frames": 68,
+                "uncertain_frames": 22,
+                "proposal_point_hits": 62,
+                "visible_frames_without_proposal": 0,
+                "visible_frames_with_displaced_proposal": 6
+              }
+            },
+            "prediction_status_counts": {
+              "no_heatmap_detection": 3,
+              "proposal": 87
+            },
+            "scene_change_frames": [],
+            "annotation_view_change_frames": [],
+            "adjacent_visible_proposed_pairs_same_segment_and_view": 62,
+            "mean_step_vector_error_px": 1.2487,
+            "max_step_vector_error_px": 6.5966
+          }
+        ],
+        "full_result": "out/tracknet-threshold-evaluation-001/continuous-default.json",
+        "full_result_sha256": "9a49a536d3946ed2a836dae8ed8ce430c08d6d55b1501ab14ea863c6b5982ae4"
+      },
+      "trial035": {
+        "schema_version": "0.1.0",
+        "evaluation_scope": "continuously_annotated_development_intervals_only",
+        "benchmark_sha256": "7ca0f95783c4c5799ec913e63201bdcd652e1968f50cfa28e1f20cc4ec36c4a7",
+        "prediction_bindings": {
+          "opening": {
+            "summary_sha256": "2fa6a09ef6f580440cf2c1b25cadfa2e69000b5df9dcf8045bf009f5ad38e34d",
+            "rows_sha256": "d830bf34f91fb9c8540d44cbad29a29deb0391d0ec21bdd1e299ef4365919165"
+          },
+          "control": {
+            "summary_sha256": "00ef9c83d3c4cc73c0f58543d489ce13e52d74c169b3b3cab27a0dde813343a0",
+            "rows_sha256": "7a0781a8735dd55c05c67215a6dc657764ba0a25535368c7e78474045593b44a"
+          }
+        },
+        "point_tolerance_px": 4,
+        "visible_points": 111,
+        "candidate_point_hits": 96,
+        "proposal_point_hits": 95,
+        "uncertain_frames_excluded_from_point_scoring": 69,
+        "known_negative_regions": 0,
+        "negative_regions_with_candidates": 0,
+        "negative_regions_with_proposals": 0,
+        "verified_shuttle_positions": 0,
+        "limitations": [
+          "Selected, correlated development examples; not held-out data or full-video precision/recall.",
+          "Negative regions label only local distractors, not absence of a shuttle elsewhere in the frame.",
+          "Evaluation never promotes proposals to verified trajectories or enables events/scoring.",
+          "Uncertain annotations break continuity statistics and never imply shuttle absence; point matches do not certify object identity or physical trajectories."
+        ],
+        "continuous_sequences": [
+          {
+            "id": "opening-006-009",
+            "source_run": "opening",
+            "start_frame": 180,
+            "end_frame": 269,
+            "annotated_frames": 90,
+            "visible_frames": 43,
+            "uncertain_frames": 47,
+            "candidate_point_hits": 32,
+            "proposal_point_hits": 31,
+            "visible_frames_without_candidates": 0,
+            "visible_frames_without_proposal": 1,
+            "visible_frames_with_displaced_proposal": 11,
+            "uncertain_frames_with_proposals_unscored": 42,
+            "longest_correct_same_segment_run_frames": 16,
+            "longest_consecutive_visible_missing_proposal_frames": 1,
+            "adjacent_point_matches_in_same_segment": 23,
+            "adjacent_point_matches_with_segment_or_scene_change": 0,
+            "adjacent_point_matches_with_annotation_view_change": 0,
+            "mean_error_on_visible_proposed_frames_px": 3.9232,
+            "max_error_on_visible_proposed_frames_px": 42.0002,
+            "annotation_view_counts": {
+              "unspecified": {
+                "annotated_frames": 90,
+                "visible_frames": 43,
+                "uncertain_frames": 47,
+                "proposal_point_hits": 31,
+                "visible_frames_without_proposal": 1,
+                "visible_frames_with_displaced_proposal": 11
+              }
+            },
+            "prediction_status_counts": {
+              "proposal": 84,
+              "no_heatmap_detection": 3,
+              "ambiguous_candidates": 3
+            },
+            "scene_change_frames": [],
+            "annotation_view_change_frames": [],
+            "adjacent_visible_proposed_pairs_same_segment_and_view": 35,
+            "mean_step_vector_error_px": 1.4656,
+            "max_step_vector_error_px": 4.3319
+          },
+          {
+            "id": "control-061-064",
+            "source_run": "control",
+            "start_frame": 30,
+            "end_frame": 119,
+            "annotated_frames": 90,
+            "visible_frames": 68,
+            "uncertain_frames": 22,
+            "candidate_point_hits": 64,
+            "proposal_point_hits": 64,
+            "visible_frames_without_candidates": 0,
+            "visible_frames_without_proposal": 0,
+            "visible_frames_with_displaced_proposal": 4,
+            "uncertain_frames_with_proposals_unscored": 20,
+            "longest_correct_same_segment_run_frames": 28,
+            "longest_consecutive_visible_missing_proposal_frames": 0,
+            "adjacent_point_matches_in_same_segment": 56,
+            "adjacent_point_matches_with_segment_or_scene_change": 0,
+            "adjacent_point_matches_with_annotation_view_change": 0,
+            "mean_error_on_visible_proposed_frames_px": 1.5549,
+            "max_error_on_visible_proposed_frames_px": 4.901,
+            "annotation_view_counts": {
+              "unspecified": {
+                "annotated_frames": 90,
+                "visible_frames": 68,
+                "uncertain_frames": 22,
+                "proposal_point_hits": 64,
+                "visible_frames_without_proposal": 0,
+                "visible_frames_with_displaced_proposal": 4
+              }
+            },
+            "prediction_status_counts": {
+              "ambiguous_candidates": 1,
+              "proposal": 88,
+              "no_heatmap_detection": 1
+            },
+            "scene_change_frames": [],
+            "annotation_view_change_frames": [],
+            "adjacent_visible_proposed_pairs_same_segment_and_view": 62,
+            "mean_step_vector_error_px": 1.1694,
+            "max_step_vector_error_px": 6.0467
+          }
+        ],
+        "full_result": "out/tracknet-threshold-evaluation-001/continuous-trial035.json",
+        "full_result_sha256": "ddb9a7e0a2ac14891ec717e7b8bf5f11f9df4df1aae0bb54a72d619933d0fbc9"
+      }
+    },
+    "rally": {
+      "default": {
+        "schema_version": "0.1.0",
+        "evaluation_scope": "continuously_annotated_development_intervals_only",
+        "benchmark_sha256": "c1ecf005342387584140b36cbca5122258c9f1e22e88c06211299dd29de0e7ea",
+        "prediction_bindings": {
+          "rally-720": {
+            "summary_sha256": "57f5c2e403201f20cb07df6465a67ead1f82788abc98eb1f2e8bf1605ffd07fd",
+            "rows_sha256": "a346711731a6af7553ba1a0b1795558aeed7a0abbd4dc44c5a52a7853ff00f03"
+          }
+        },
+        "point_tolerance_px": 4,
+        "visible_points": 37,
+        "candidate_point_hits": 25,
+        "proposal_point_hits": 25,
+        "uncertain_frames_excluded_from_point_scoring": 119,
+        "known_negative_regions": 0,
+        "negative_regions_with_candidates": 0,
+        "negative_regions_with_proposals": 0,
+        "verified_shuttle_positions": 0,
+        "limitations": [
+          "Selected, correlated development examples; not held-out data or full-video precision/recall.",
+          "Negative regions label only local distractors, not absence of a shuttle elsewhere in the frame.",
+          "Evaluation never promotes proposals to verified trajectories or enables events/scoring.",
+          "Uncertain annotations break continuity statistics and never imply shuttle absence; point matches do not certify object identity or physical trajectories."
+        ],
+        "continuous_sequences": [
+          {
+            "id": "broadcast-point-720",
+            "source_run": "rally-720",
+            "start_frame": 0,
+            "end_frame": 155,
+            "annotated_frames": 156,
+            "visible_frames": 37,
+            "uncertain_frames": 119,
+            "candidate_point_hits": 25,
+            "proposal_point_hits": 25,
+            "visible_frames_without_candidates": 5,
+            "visible_frames_without_proposal": 5,
+            "visible_frames_with_displaced_proposal": 7,
+            "uncertain_frames_with_proposals_unscored": 30,
+            "longest_correct_same_segment_run_frames": 14,
+            "longest_consecutive_visible_missing_proposal_frames": 2,
+            "adjacent_point_matches_in_same_segment": 21,
+            "adjacent_point_matches_with_segment_or_scene_change": 0,
+            "adjacent_point_matches_with_annotation_view_change": 0,
+            "mean_error_on_visible_proposed_frames_px": 2.2927,
+            "max_error_on_visible_proposed_frames_px": 13.851,
+            "annotation_view_counts": {
+              "closeup": {
+                "annotated_frames": 13,
+                "visible_frames": 2,
+                "uncertain_frames": 11,
+                "proposal_point_hits": 0,
+                "visible_frames_without_proposal": 2,
+                "visible_frames_with_displaced_proposal": 0
+              },
+              "wide_court": {
+                "annotated_frames": 143,
+                "visible_frames": 35,
+                "uncertain_frames": 108,
+                "proposal_point_hits": 25,
+                "visible_frames_without_proposal": 3,
+                "visible_frames_with_displaced_proposal": 7
+              }
+            },
+            "prediction_status_counts": {
+              "excluded_player_review": 15,
+              "proposal": 62,
+              "no_heatmap_detection": 78,
+              "ambiguous_candidates": 1
+            },
+            "scene_change_frames": [
+              12
+            ],
+            "annotation_view_change_frames": [
+              12,
+              155
+            ],
+            "adjacent_visible_proposed_pairs_same_segment_and_view": 28,
+            "mean_step_vector_error_px": 1.1182,
+            "max_step_vector_error_px": 3.125
+          }
+        ],
+        "full_result": "out/tracknet-threshold-evaluation-001/rally-default.json",
+        "full_result_sha256": "f3801a5d667da9a8554ed76ec55efdf6fbdbf227e60dc7cc4e67fa37c9825cc6"
+      },
+      "trial035": {
+        "schema_version": "0.1.0",
+        "evaluation_scope": "continuously_annotated_development_intervals_only",
+        "benchmark_sha256": "c1ecf005342387584140b36cbca5122258c9f1e22e88c06211299dd29de0e7ea",
+        "prediction_bindings": {
+          "rally-720": {
+            "summary_sha256": "d57cd27df33be8bec733de8807b3338065aae0d5ffcf4361affd4c78ec013c15",
+            "rows_sha256": "58d05433817453380c27c19e2b00bc8dcd90458c8df15db791115845c38bf961"
+          }
+        },
+        "point_tolerance_px": 4,
+        "visible_points": 37,
+        "candidate_point_hits": 30,
+        "proposal_point_hits": 27,
+        "uncertain_frames_excluded_from_point_scoring": 119,
+        "known_negative_regions": 0,
+        "negative_regions_with_candidates": 0,
+        "negative_regions_with_proposals": 0,
+        "verified_shuttle_positions": 0,
+        "limitations": [
+          "Selected, correlated development examples; not held-out data or full-video precision/recall.",
+          "Negative regions label only local distractors, not absence of a shuttle elsewhere in the frame.",
+          "Evaluation never promotes proposals to verified trajectories or enables events/scoring.",
+          "Uncertain annotations break continuity statistics and never imply shuttle absence; point matches do not certify object identity or physical trajectories."
+        ],
+        "continuous_sequences": [
+          {
+            "id": "broadcast-point-720",
+            "source_run": "rally-720",
+            "start_frame": 0,
+            "end_frame": 155,
+            "annotated_frames": 156,
+            "visible_frames": 37,
+            "uncertain_frames": 119,
+            "candidate_point_hits": 30,
+            "proposal_point_hits": 27,
+            "visible_frames_without_candidates": 4,
+            "visible_frames_without_proposal": 7,
+            "visible_frames_with_displaced_proposal": 3,
+            "uncertain_frames_with_proposals_unscored": 35,
+            "longest_correct_same_segment_run_frames": 17,
+            "longest_consecutive_visible_missing_proposal_frames": 5,
+            "adjacent_point_matches_in_same_segment": 22,
+            "adjacent_point_matches_with_segment_or_scene_change": 0,
+            "adjacent_point_matches_with_annotation_view_change": 0,
+            "mean_error_on_visible_proposed_frames_px": 2.2793,
+            "max_error_on_visible_proposed_frames_px": 13.851,
+            "annotation_view_counts": {
+              "closeup": {
+                "annotated_frames": 13,
+                "visible_frames": 2,
+                "uncertain_frames": 11,
+                "proposal_point_hits": 0,
+                "visible_frames_without_proposal": 2,
+                "visible_frames_with_displaced_proposal": 0
+              },
+              "wide_court": {
+                "annotated_frames": 143,
+                "visible_frames": 35,
+                "uncertain_frames": 108,
+                "proposal_point_hits": 27,
+                "visible_frames_without_proposal": 5,
+                "visible_frames_with_displaced_proposal": 3
+              }
+            },
+            "prediction_status_counts": {
+              "excluded_player_review": 15,
+              "ambiguous_candidates": 5,
+              "proposal": 65,
+              "no_heatmap_detection": 71
+            },
+            "scene_change_frames": [
+              12
+            ],
+            "annotation_view_change_frames": [
+              12,
+              155
+            ],
+            "adjacent_visible_proposed_pairs_same_segment_and_view": 26,
+            "mean_step_vector_error_px": 0.9757,
+            "max_step_vector_error_px": 2.8201
+          }
+        ],
+        "full_result": "out/tracknet-threshold-evaluation-001/rally-trial035.json",
+        "full_result_sha256": "782730ea1e61b781850c620464720337a119247ecf1d156086cbe784752872d8"
+      }
+    }
+  },
+  "target_frame_57": {
+    "frame_index": 57,
+    "timestamp_seconds": 721.9,
+    "scene_id": 1,
+    "status": "proposal",
+    "candidates": [
+      {
+        "center_px": [
+          331.875,
+          17.5
+        ],
+        "bbox_xyxy_px": [
+          330.0,
+          15.0,
+          333.75,
+          20.0
+        ],
+        "heatmap_peak": 0.423221
+      }
+    ],
+    "proposal": {
+      "candidate_index": 0,
+      "proposal_segment_id": 2,
+      "position_px": [
+        331.875,
+        17.5
+      ],
+      "verification_status": "unverified"
+    },
+    "heatmap_peak": 0.423221,
+    "verified_shuttle_position_px": null
+  },
+  "adapter_sha256": "0ed2539c328d1642daddf1becb2cf0473db34c2ef908aee0c8386b93726ed26a",
+  "checkpoint_sha256": "df867641a02712b021f04548ff4b1208ddfdb47f629ab2094ceb978667e83b1a",
+  "verified_shuttle_positions": 0,
+  "coaching_scores": "not_available",
+  "limitations": [
+    "Same-camera approximate automated development labels; packets overlap and must not be pooled as independent observations.",
+    "Unknown/uncertain frames cannot establish false-positive rates or absence.",
+    "Heatmap activation is uncalibrated, not a probability of a correct shuttle.",
+    "Threshold trial was motivated by known development errors; not held-out validation."
+  ],
+  "changed_labeled_results": [
+    {
+      "packet": "development",
+      "changed_point_results": []
+    },
+    {
+      "packet": "control",
+      "changed_point_results": []
+    },
+    {
+      "packet": "continuous",
+      "changed_point_results": [
+        {
+          "case_id": "opening-186",
+          "default": {
+            "id": "opening-186",
+            "visibility": "visible",
+            "candidate_hit": true,
+            "proposal_hit": true,
+            "negative_region_hits": []
+          },
+          "trial035": {
+            "id": "opening-186",
+            "visibility": "visible",
+            "candidate_hit": false,
+            "proposal_hit": false,
+            "negative_region_hits": []
+          }
+        },
+        {
+          "case_id": "opening-187",
+          "default": {
+            "id": "opening-187",
+            "visibility": "visible",
+            "candidate_hit": true,
+            "proposal_hit": true,
+            "negative_region_hits": []
+          },
+          "trial035": {
+            "id": "opening-187",
+            "visibility": "visible",
+            "candidate_hit": false,
+            "proposal_hit": false,
+            "negative_region_hits": []
+          }
+        },
+        {
+          "case_id": "opening-190",
+          "default": {
+            "id": "opening-190",
+            "visibility": "visible",
+            "candidate_hit": false,
+            "proposal_hit": false,
+            "negative_region_hits": []
+          },
+          "trial035": {
+            "id": "opening-190",
+            "visibility": "visible",
+            "candidate_hit": true,
+            "proposal_hit": true,
+            "negative_region_hits": []
+          }
+        },
+        {
+          "case_id": "opening-233",
+          "default": {
+            "id": "opening-233",
+            "visibility": "visible",
+            "candidate_hit": true,
+            "proposal_hit": true,
+            "negative_region_hits": []
+          },
+          "trial035": {
+            "id": "opening-233",
+            "visibility": "visible",
+            "candidate_hit": true,
+            "proposal_hit": false,
+            "negative_region_hits": []
+          }
+        },
+        {
+          "case_id": "opening-253",
+          "default": {
+            "id": "opening-253",
+            "visibility": "visible",
+            "candidate_hit": false,
+            "proposal_hit": false,
+            "negative_region_hits": []
+          },
+          "trial035": {
+            "id": "opening-253",
+            "visibility": "visible",
+            "candidate_hit": true,
+            "proposal_hit": true,
+            "negative_region_hits": []
+          }
+        },
+        {
+          "case_id": "control-033",
+          "default": {
+            "id": "control-033",
+            "visibility": "visible",
+            "candidate_hit": false,
+            "proposal_hit": false,
+            "negative_region_hits": []
+          },
+          "trial035": {
+            "id": "control-033",
+            "visibility": "visible",
+            "candidate_hit": true,
+            "proposal_hit": true,
+            "negative_region_hits": []
+          }
+        },
+        {
+          "case_id": "control-058",
+          "default": {
+            "id": "control-058",
+            "visibility": "visible",
+            "candidate_hit": false,
+            "proposal_hit": false,
+            "negative_region_hits": []
+          },
+          "trial035": {
+            "id": "control-058",
+            "visibility": "visible",
+            "candidate_hit": true,
+            "proposal_hit": true,
+            "negative_region_hits": []
+          }
+        }
+      ]
+    },
+    {
+      "packet": "rally",
+      "changed_point_results": [
+        {
+          "case_id": "rally-014",
+          "default": {
+            "id": "rally-014",
+            "visibility": "visible",
+            "candidate_hit": true,
+            "proposal_hit": true,
+            "negative_region_hits": []
+          },
+          "trial035": {
+            "id": "rally-014",
+            "visibility": "visible",
+            "candidate_hit": true,
+            "proposal_hit": false,
+            "negative_region_hits": []
+          }
+        },
+        {
+          "case_id": "rally-015",
+          "default": {
+            "id": "rally-015",
+            "visibility": "visible",
+            "candidate_hit": true,
+            "proposal_hit": true,
+            "negative_region_hits": []
+          },
+          "trial035": {
+            "id": "rally-015",
+            "visibility": "visible",
+            "candidate_hit": true,
+            "proposal_hit": false,
+            "negative_region_hits": []
+          }
+        },
+        {
+          "case_id": "rally-016",
+          "default": {
+            "id": "rally-016",
+            "visibility": "visible",
+            "candidate_hit": true,
+            "proposal_hit": true,
+            "negative_region_hits": []
+          },
+          "trial035": {
+            "id": "rally-016",
+            "visibility": "visible",
+            "candidate_hit": true,
+            "proposal_hit": false,
+            "negative_region_hits": []
+          }
+        },
+        {
+          "case_id": "rally-057",
+          "default": {
+            "id": "rally-057",
+            "visibility": "visible",
+            "candidate_hit": false,
+            "proposal_hit": false,
+            "negative_region_hits": []
+          },
+          "trial035": {
+            "id": "rally-057",
+            "visibility": "visible",
+            "candidate_hit": true,
+            "proposal_hit": true,
+            "negative_region_hits": []
+          }
+        },
+        {
+          "case_id": "rally-109",
+          "default": {
+            "id": "rally-109",
+            "visibility": "visible",
+            "candidate_hit": false,
+            "proposal_hit": false,
+            "negative_region_hits": []
+          },
+          "trial035": {
+            "id": "rally-109",
+            "visibility": "visible",
+            "candidate_hit": true,
+            "proposal_hit": true,
+            "negative_region_hits": []
+          }
+        },
+        {
+          "case_id": "rally-110",
+          "default": {
+            "id": "rally-110",
+            "visibility": "visible",
+            "candidate_hit": false,
+            "proposal_hit": false,
+            "negative_region_hits": []
+          },
+          "trial035": {
+            "id": "rally-110",
+            "visibility": "visible",
+            "candidate_hit": true,
+            "proposal_hit": true,
+            "negative_region_hits": []
+          }
+        },
+        {
+          "case_id": "rally-113",
+          "default": {
+            "id": "rally-113",
+            "visibility": "visible",
+            "candidate_hit": true,
+            "proposal_hit": true,
+            "negative_region_hits": []
+          },
+          "trial035": {
+            "id": "rally-113",
+            "visibility": "visible",
+            "candidate_hit": false,
+            "proposal_hit": false,
+            "negative_region_hits": []
+          }
+        },
+        {
+          "case_id": "rally-114",
+          "default": {
+            "id": "rally-114",
+            "visibility": "visible",
+            "candidate_hit": false,
+            "proposal_hit": false,
+            "negative_region_hits": []
+          },
+          "trial035": {
+            "id": "rally-114",
+            "visibility": "visible",
+            "candidate_hit": true,
+            "proposal_hit": true,
+            "negative_region_hits": []
+          }
+        },
+        {
+          "case_id": "rally-115",
+          "default": {
+            "id": "rally-115",
+            "visibility": "visible",
+            "candidate_hit": false,
+            "proposal_hit": false,
+            "negative_region_hits": []
+          },
+          "trial035": {
+            "id": "rally-115",
+            "visibility": "visible",
+            "candidate_hit": true,
+            "proposal_hit": true,
+            "negative_region_hits": []
+          }
+        },
+        {
+          "case_id": "rally-116",
+          "default": {
+            "id": "rally-116",
+            "visibility": "visible",
+            "candidate_hit": false,
+            "proposal_hit": false,
+            "negative_region_hits": []
+          },
+          "trial035": {
+            "id": "rally-116",
+            "visibility": "visible",
+            "candidate_hit": true,
+            "proposal_hit": true,
+            "negative_region_hits": []
+          }
+        }
+      ]
+    }
+  ],
+  "comparison_examples": [
+    {
+      "packet": "continuous",
+      "case_id": "opening-186",
+      "frame_index": 186,
+      "source_image_sha256": "20bfd4a38b249cb88fad5bf910392bb0c2494ca6fae8da0395aa1279a9ab7352",
+      "comparison": "case-00.png",
+      "comparison_sha256": "224097cbbd9c6008bcf9d16e32f65882ba60558c839ac03387839b5ff0dd320a",
+      "raw_source": "case-00-source.png",
+      "values": [
+        {
+          "variant": "default",
+          "row": {
+            "frame_index": 186,
+            "timestamp_seconds": 6.2,
+            "scene_id": 0,
+            "status": "proposal",
+            "candidates": [
+              {
+                "center_px": [
+                  425.625,
+                  150.625
+                ],
+                "bbox_xyxy_px": [
+                  422.5,
+                  147.5,
+                  428.75,
+                  153.75
+                ],
+                "heatmap_peak": 0.751464
+              }
+            ],
+            "proposal": {
+              "candidate_index": 0,
+              "proposal_segment_id": 9,
+              "position_px": [
+                425.625,
+                150.625
+              ],
+              "verification_status": "unverified"
+            },
+            "verified_shuttle_position_px": null
+          }
+        },
+        {
+          "variant": "trial035",
+          "row": {
+            "frame_index": 186,
+            "timestamp_seconds": 6.2,
+            "scene_id": 0,
+            "status": "proposal",
+            "candidates": [
+              {
+                "center_px": [
+                  425.625,
+                  151.25
+                ],
+                "bbox_xyxy_px": [
+                  422.5,
+                  147.5,
+                  428.75,
+                  155.0
+                ],
+                "heatmap_peak": 0.751464
+              }
+            ],
+            "proposal": {
+              "candidate_index": 0,
+              "proposal_segment_id": 10,
+              "position_px": [
+                425.625,
+                151.25
+              ],
+              "verification_status": "unverified"
+            },
+            "heatmap_peak": 0.751464,
+            "verified_shuttle_position_px": null
+          }
+        }
+      ]
+    },
+    {
+      "packet": "continuous",
+      "case_id": "opening-187",
+      "frame_index": 187,
+      "source_image_sha256": "1a255038a3ce31f16d9dfcf8d61e9bee62132215d8dc35e91567d25b6d07d41c",
+      "comparison": "case-01.png",
+      "comparison_sha256": "e5c3e75981d609fa020da7545e64340a3364e987a37633c0cdcacddec8338576",
+      "raw_source": "case-01-source.png",
+      "values": [
+        {
+          "variant": "default",
+          "row": {
+            "frame_index": 187,
+            "timestamp_seconds": 6.233333,
+            "scene_id": 0,
+            "status": "proposal",
+            "candidates": [
+              {
+                "center_px": [
+                  426.25,
+                  150.625
+                ],
+                "bbox_xyxy_px": [
+                  423.75,
+                  147.5,
+                  428.75,
+                  153.75
+                ],
+                "heatmap_peak": 0.769193
+              }
+            ],
+            "proposal": {
+              "candidate_index": 0,
+              "proposal_segment_id": 9,
+              "position_px": [
+                426.25,
+                150.625
+              ],
+              "verification_status": "unverified"
+            },
+            "verified_shuttle_position_px": null
+          }
+        },
+        {
+          "variant": "trial035",
+          "row": {
+            "frame_index": 187,
+            "timestamp_seconds": 6.233333,
+            "scene_id": 0,
+            "status": "proposal",
+            "candidates": [
+              {
+                "center_px": [
+                  426.25,
+                  151.25
+                ],
+                "bbox_xyxy_px": [
+                  422.5,
+                  147.5,
+                  430.0,
+                  155.0
+                ],
+                "heatmap_peak": 0.769193
+              }
+            ],
+            "proposal": {
+              "candidate_index": 0,
+              "proposal_segment_id": 10,
+              "position_px": [
+                426.25,
+                151.25
+              ],
+              "verification_status": "unverified"
+            },
+            "heatmap_peak": 0.769193,
+            "verified_shuttle_position_px": null
+          }
+        }
+      ]
+    },
+    {
+      "packet": "continuous",
+      "case_id": "opening-190",
+      "frame_index": 190,
+      "source_image_sha256": "d857448936ef7bf533c667ca78e9886b0e08ac64edab4dc43eee5073ec0f431c",
+      "comparison": "case-02.png",
+      "comparison_sha256": "b45d84a8809f2c0f93082f6bee0e997cb9227c6cceac1a990ea26aab29723ee8",
+      "raw_source": "case-02-source.png",
+      "values": [
+        {
+          "variant": "default",
+          "row": {
+            "frame_index": 190,
+            "timestamp_seconds": 6.333333,
+            "scene_id": 0,
+            "status": "proposal",
+            "candidates": [
+              {
+                "center_px": [
+                  438.75,
+                  205.625
+                ],
+                "bbox_xyxy_px": [
+                  435.0,
+                  202.5,
+                  442.5,
+                  208.75
+                ],
+                "heatmap_peak": 0.746107
+              }
+            ],
+            "proposal": {
+              "candidate_index": 0,
+              "proposal_segment_id": 9,
+              "position_px": [
+                438.75,
+                205.625
+              ],
+              "verification_status": "unverified"
+            },
+            "verified_shuttle_position_px": null
+          }
+        },
+        {
+          "variant": "trial035",
+          "row": {
+            "frame_index": 190,
+            "timestamp_seconds": 6.333333,
+            "scene_id": 0,
+            "status": "proposal",
+            "candidates": [
+              {
+                "center_px": [
+                  438.75,
+                  205.0
+                ],
+                "bbox_xyxy_px": [
+                  435.0,
+                  201.25,
+                  442.5,
+                  208.75
+                ],
+                "heatmap_peak": 0.746107
+              }
+            ],
+            "proposal": {
+              "candidate_index": 0,
+              "proposal_segment_id": 10,
+              "position_px": [
+                438.75,
+                205.0
+              ],
+              "verification_status": "unverified"
+            },
+            "heatmap_peak": 0.746107,
+            "verified_shuttle_position_px": null
+          }
+        }
+      ]
+    },
+    {
+      "packet": "continuous",
+      "case_id": "opening-233",
+      "frame_index": 233,
+      "source_image_sha256": "96b9d9752517105d60a644a18e32a19d7bc4c89460972ba91968e1e94a5f7ba8",
+      "comparison": "case-03.png",
+      "comparison_sha256": "c74e5ccae27f54e7927425e0fca1c2df89b0ba98aaa9f392fe96a073ec72071d",
+      "raw_source": "case-03-source.png",
+      "values": [
+        {
+          "variant": "default",
+          "row": {
+            "frame_index": 233,
+            "timestamp_seconds": 7.766667,
+            "scene_id": 0,
+            "status": "proposal",
+            "candidates": [
+              {
+                "center_px": [
+                  351.875,
+                  38.125
+                ],
+                "bbox_xyxy_px": [
+                  348.75,
+                  35.0,
+                  355.0,
+                  41.25
+                ],
+                "heatmap_peak": 0.84864
+              }
+            ],
+            "proposal": {
+              "candidate_index": 0,
+              "proposal_segment_id": 11,
+              "position_px": [
+                351.875,
+                38.125
+              ],
+              "verification_status": "unverified"
+            },
+            "verified_shuttle_position_px": null
+          }
+        },
+        {
+          "variant": "trial035",
+          "row": {
+            "frame_index": 233,
+            "timestamp_seconds": 7.766667,
+            "scene_id": 0,
+            "status": "ambiguous_candidates",
+            "candidates": [
+              {
+                "center_px": [
+                  351.25,
+                  38.75
+                ],
+                "bbox_xyxy_px": [
+                  347.5,
+                  35.0,
+                  355.0,
+                  42.5
+                ],
+                "heatmap_peak": 0.84864
+              },
+              {
+                "center_px": [
+                  343.75,
+                  31.25
+                ],
+                "bbox_xyxy_px": [
+                  341.25,
+                  28.75,
+                  346.25,
+                  33.75
+                ],
+                "heatmap_peak": 0.397103
+              }
+            ],
+            "proposal": null,
+            "heatmap_peak": 0.84864,
+            "verified_shuttle_position_px": null
+          }
+        }
+      ]
+    },
+    {
+      "packet": "continuous",
+      "case_id": "opening-253",
+      "frame_index": 253,
+      "source_image_sha256": "b08d4bf80f1bcfebd068ff3d2511e97b3d07035174ca6cf3e2f55df773c6ed12",
+      "comparison": "case-04.png",
+      "comparison_sha256": "76354be6fd4b93941c3bc1f910cbfd69f2c0d4fd1c4db69f2822496709b35b4a",
+      "raw_source": "case-04-source.png",
+      "values": [
+        {
+          "variant": "default",
+          "row": {
+            "frame_index": 253,
+            "timestamp_seconds": 8.433333,
+            "scene_id": 0,
+            "status": "proposal",
+            "candidates": [
+              {
+                "center_px": [
+                  250.0,
+                  58.125
+                ],
+                "bbox_xyxy_px": [
+                  247.5,
+                  55.0,
+                  252.5,
+                  61.25
+                ],
+                "heatmap_peak": 0.669775
+              }
+            ],
+            "proposal": {
+              "candidate_index": 0,
+              "proposal_segment_id": 11,
+              "position_px": [
+                250.0,
+                58.125
+              ],
+              "verification_status": "unverified"
+            },
+            "verified_shuttle_position_px": null
+          }
+        },
+        {
+          "variant": "trial035",
+          "row": {
+            "frame_index": 253,
+            "timestamp_seconds": 8.433333,
+            "scene_id": 0,
+            "status": "proposal",
+            "candidates": [
+              {
+                "center_px": [
+                  250.0,
+                  57.5
+                ],
+                "bbox_xyxy_px": [
+                  246.25,
+                  53.75,
+                  253.75,
+                  61.25
+                ],
+                "heatmap_peak": 0.669775
+              }
+            ],
+            "proposal": {
+              "candidate_index": 0,
+              "proposal_segment_id": 13,
+              "position_px": [
+                250.0,
+                57.5
+              ],
+              "verification_status": "unverified"
+            },
+            "heatmap_peak": 0.669775,
+            "verified_shuttle_position_px": null
+          }
+        }
+      ]
+    },
+    {
+      "packet": "continuous",
+      "case_id": "control-033",
+      "frame_index": 33,
+      "source_image_sha256": "5287954f0e414c21068882b5567028f035d0c1b659b28f2f05a0de04718124b6",
+      "comparison": "case-05.png",
+      "comparison_sha256": "ed2ff02adc69b6404e4c6701854733cafaa62bc155572515c1f293665374a523",
+      "raw_source": "case-05-source.png",
+      "values": [
+        {
+          "variant": "default",
+          "row": {
+            "frame_index": 33,
+            "timestamp_seconds": 61.1,
+            "scene_id": 0,
+            "status": "proposal",
+            "candidates": [
+              {
+                "center_px": [
+                  328.125,
+                  90.625
+                ],
+                "bbox_xyxy_px": [
+                  325.0,
+                  87.5,
+                  331.25,
+                  93.75
+                ],
+                "heatmap_peak": 0.756522
+              }
+            ],
+            "proposal": {
+              "candidate_index": 0,
+              "proposal_segment_id": 1,
+              "position_px": [
+                328.125,
+                90.625
+              ],
+              "verification_status": "unverified"
+            },
+            "verified_shuttle_position_px": null
+          }
+        },
+        {
+          "variant": "trial035",
+          "row": {
+            "frame_index": 33,
+            "timestamp_seconds": 61.1,
+            "scene_id": 0,
+            "status": "proposal",
+            "candidates": [
+              {
+                "center_px": [
+                  328.75,
+                  91.25
+                ],
+                "bbox_xyxy_px": [
+                  325.0,
+                  87.5,
+                  332.5,
+                  95.0
+                ],
+                "heatmap_peak": 0.756522
+              }
+            ],
+            "proposal": {
+              "candidate_index": 0,
+              "proposal_segment_id": 1,
+              "position_px": [
+                328.75,
+                91.25
+              ],
+              "verification_status": "unverified"
+            },
+            "heatmap_peak": 0.756522,
+            "verified_shuttle_position_px": null
+          }
+        }
+      ]
+    },
+    {
+      "packet": "continuous",
+      "case_id": "control-058",
+      "frame_index": 58,
+      "source_image_sha256": "2deae53f4c082ac8fa4bbd3b24709fde463bde6fd459c8f240babfd13a959ef5",
+      "comparison": "case-06.png",
+      "comparison_sha256": "64b69ef53ebf17dadbdd1f8e9ce56f030b33af1ec332bf6624ea2878d0a02c17",
+      "raw_source": "case-06-source.png",
+      "values": [
+        {
+          "variant": "default",
+          "row": {
+            "frame_index": 58,
+            "timestamp_seconds": 61.933333,
+            "scene_id": 0,
+            "status": "proposal",
+            "candidates": [
+              {
+                "center_px": [
+                  268.125,
+                  70.625
+                ],
+                "bbox_xyxy_px": [
+                  265.0,
+                  67.5,
+                  271.25,
+                  73.75
+                ],
+                "heatmap_peak": 0.82861
+              }
+            ],
+            "proposal": {
+              "candidate_index": 0,
+              "proposal_segment_id": 1,
+              "position_px": [
+                268.125,
+                70.625
+              ],
+              "verification_status": "unverified"
+            },
+            "verified_shuttle_position_px": null
+          }
+        },
+        {
+          "variant": "trial035",
+          "row": {
+            "frame_index": 58,
+            "timestamp_seconds": 61.933333,
+            "scene_id": 0,
+            "status": "proposal",
+            "candidates": [
+              {
+                "center_px": [
+                  268.125,
+                  70.0
+                ],
+                "bbox_xyxy_px": [
+                  265.0,
+                  66.25,
+                  271.25,
+                  73.75
+                ],
+                "heatmap_peak": 0.82861
+              }
+            ],
+            "proposal": {
+              "candidate_index": 0,
+              "proposal_segment_id": 1,
+              "position_px": [
+                268.125,
+                70.0
+              ],
+              "verification_status": "unverified"
+            },
+            "heatmap_peak": 0.82861,
+            "verified_shuttle_position_px": null
+          }
+        }
+      ]
+    },
+    {
+      "packet": "rally",
+      "case_id": "rally-014",
+      "frame_index": 14,
+      "source_image_sha256": "c212d4c6e0879dbff1e10ac26fa6be2a3ea2229739bb21772f7ed2105b3d2042",
+      "comparison": "case-07.png",
+      "comparison_sha256": "bdfc97c4785184a8800dc972cdfb9f0064575724109375fac555ca80ba6e048a",
+      "raw_source": "case-07-source.png",
+      "values": [
+        {
+          "variant": "default",
+          "row": {
+            "frame_index": 14,
+            "timestamp_seconds": 720.466667,
+            "scene_id": 1,
+            "status": "proposal",
+            "candidates": [
+              {
+                "center_px": [
+                  295.625,
+                  148.75
+                ],
+                "bbox_xyxy_px": [
+                  292.5,
+                  145.0,
+                  298.75,
+                  152.5
+                ],
+                "heatmap_peak": 0.806768
+              }
+            ],
+            "proposal": {
+              "candidate_index": 0,
+              "proposal_segment_id": 0,
+              "position_px": [
+                295.625,
+                148.75
+              ],
+              "verification_status": "unverified"
+            },
+            "verified_shuttle_position_px": null
+          }
+        },
+        {
+          "variant": "trial035",
+          "row": {
+            "frame_index": 14,
+            "timestamp_seconds": 720.466667,
+            "scene_id": 1,
+            "status": "ambiguous_candidates",
+            "candidates": [
+              {
+                "center_px": [
+                  295.625,
+                  148.75
+                ],
+                "bbox_xyxy_px": [
+                  292.5,
+                  145.0,
+                  298.75,
+                  152.5
+                ],
+                "heatmap_peak": 0.806768
+              },
+              {
+                "center_px": [
+                  291.875,
+                  123.125
+                ],
+                "bbox_xyxy_px": [
+                  290.0,
+                  120.0,
+                  293.75,
+                  126.25
+                ],
+                "heatmap_peak": 0.456856
+              }
+            ],
+            "proposal": null,
+            "heatmap_peak": 0.806768,
+            "verified_shuttle_position_px": null
+          }
+        }
+      ]
+    },
+    {
+      "packet": "rally",
+      "case_id": "rally-015",
+      "frame_index": 15,
+      "source_image_sha256": "6020a9f4d9e07a0787339f286986321f8f0b9a0409b6972bac9378386bc4afac",
+      "comparison": "case-08.png",
+      "comparison_sha256": "214374ac0f6d6c649f189cfbe3142609fef8888058c5e6b395a9f91106d3ba47",
+      "raw_source": "case-08-source.png",
+      "values": [
+        {
+          "variant": "default",
+          "row": {
+            "frame_index": 15,
+            "timestamp_seconds": 720.5,
+            "scene_id": 1,
+            "status": "proposal",
+            "candidates": [
+              {
+                "center_px": [
+                  295.625,
+                  140.625
+                ],
+                "bbox_xyxy_px": [
+                  292.5,
+                  137.5,
+                  298.75,
+                  143.75
+                ],
+                "heatmap_peak": 0.803227
+              },
+              {
+                "center_px": [
+                  291.875,
+                  129.375
+                ],
+                "bbox_xyxy_px": [
+                  291.25,
+                  128.75,
+                  292.5,
+                  130.0
+                ],
+                "heatmap_peak": 0.512149
+              },
+              {
+                "center_px": [
+                  294.375,
+                  129.375
+                ],
+                "bbox_xyxy_px": [
+                  293.75,
+                  128.75,
+                  295.0,
+                  130.0
+                ],
+                "heatmap_peak": 0.523137
+              }
+            ],
+            "proposal": {
+              "candidate_index": 0,
+              "proposal_segment_id": 0,
+              "position_px": [
+                295.625,
+                140.625
+              ],
+              "verification_status": "unverified"
+            },
+            "verified_shuttle_position_px": null
+          }
+        },
+        {
+          "variant": "trial035",
+          "row": {
+            "frame_index": 15,
+            "timestamp_seconds": 720.5,
+            "scene_id": 1,
+            "status": "ambiguous_candidates",
+            "candidates": [
+              {
+                "center_px": [
+                  295.625,
+                  141.25
+                ],
+                "bbox_xyxy_px": [
+                  292.5,
+                  137.5,
+                  298.75,
+                  145.0
+                ],
+                "heatmap_peak": 0.803227
+              },
+              {
+                "center_px": [
+                  293.75,
+                  128.75
+                ],
+                "bbox_xyxy_px": [
+                  291.25,
+                  126.25,
+                  296.25,
+                  131.25
+                ],
+                "heatmap_peak": 0.523137
+              }
+            ],
+            "proposal": null,
+            "heatmap_peak": 0.803227,
+            "verified_shuttle_position_px": null
+          }
+        }
+      ]
+    },
+    {
+      "packet": "rally",
+      "case_id": "rally-016",
+      "frame_index": 16,
+      "source_image_sha256": "91f7a5a6ecb9e0a36d1045ac1a2c2c0d2c75a9ee6acbb00df675dd3472c5d2c9",
+      "comparison": "case-09.png",
+      "comparison_sha256": "59b6d103558316ad1f62cf632e8b4f3c24336049bccdc8c7e0578a4b88ceda26",
+      "raw_source": "case-09-source.png",
+      "values": [
+        {
+          "variant": "default",
+          "row": {
+            "frame_index": 16,
+            "timestamp_seconds": 720.533333,
+            "scene_id": 1,
+            "status": "proposal",
+            "candidates": [
+              {
+                "center_px": [
+                  295.0,
+                  134.375
+                ],
+                "bbox_xyxy_px": [
+                  292.5,
+                  131.25,
+                  297.5,
+                  137.5
+                ],
+                "heatmap_peak": 0.69666
+              }
+            ],
+            "proposal": {
+              "candidate_index": 0,
+              "proposal_segment_id": 0,
+              "position_px": [
+                295.0,
+                134.375
+              ],
+              "verification_status": "unverified"
+            },
+            "verified_shuttle_position_px": null
+          }
+        },
+        {
+          "variant": "trial035",
+          "row": {
+            "frame_index": 16,
+            "timestamp_seconds": 720.533333,
+            "scene_id": 1,
+            "status": "ambiguous_candidates",
+            "candidates": [
+              {
+                "center_px": [
+                  294.375,
+                  134.375
+                ],
+                "bbox_xyxy_px": [
+                  291.25,
+                  131.25,
+                  297.5,
+                  137.5
+                ],
+                "heatmap_peak": 0.69666
+              },
+              {
+                "center_px": [
+                  294.375,
+                  126.875
+                ],
+                "bbox_xyxy_px": [
+                  293.75,
+                  126.25,
+                  295.0,
+                  127.5
+                ],
+                "heatmap_peak": 0.363359
+              }
+            ],
+            "proposal": null,
+            "heatmap_peak": 0.69666,
+            "verified_shuttle_position_px": null
+          }
+        }
+      ]
+    },
+    {
+      "packet": "rally",
+      "case_id": "rally-057",
+      "frame_index": 57,
+      "source_image_sha256": "42d290c53e99b884626bdb3a6e5eb864bc446d0eecf43b48f848697cbd4a11c9",
+      "comparison": "case-10.png",
+      "comparison_sha256": "f680653c94bc45dce6f8205291c981286fa505330e4e640f306d6fd7435a8f61",
+      "raw_source": "case-10-source.png",
+      "values": [
+        {
+          "variant": "default",
+          "row": {
+            "frame_index": 57,
+            "timestamp_seconds": 721.9,
+            "scene_id": 1,
+            "status": "no_heatmap_detection",
+            "candidates": [],
+            "proposal": null,
+            "verified_shuttle_position_px": null
+          }
+        },
+        {
+          "variant": "trial035",
+          "row": {
+            "frame_index": 57,
+            "timestamp_seconds": 721.9,
+            "scene_id": 1,
+            "status": "proposal",
+            "candidates": [
+              {
+                "center_px": [
+                  331.875,
+                  17.5
+                ],
+                "bbox_xyxy_px": [
+                  330.0,
+                  15.0,
+                  333.75,
+                  20.0
+                ],
+                "heatmap_peak": 0.423221
+              }
+            ],
+            "proposal": {
+              "candidate_index": 0,
+              "proposal_segment_id": 2,
+              "position_px": [
+                331.875,
+                17.5
+              ],
+              "verification_status": "unverified"
+            },
+            "heatmap_peak": 0.423221,
+            "verified_shuttle_position_px": null
+          }
+        }
+      ]
+    },
+    {
+      "packet": "rally",
+      "case_id": "rally-109",
+      "frame_index": 109,
+      "source_image_sha256": "80ffd33963866e8976fcb34273857d6b5f68d63ef2ed6f8f356ba5489cabef42",
+      "comparison": "case-11.png",
+      "comparison_sha256": "4dcd10fc0b0c7847e0a7b00227e94e6908c4be37742ee73eb07d315370173b1a",
+      "raw_source": "case-11-source.png",
+      "values": [
+        {
+          "variant": "default",
+          "row": {
+            "frame_index": 109,
+            "timestamp_seconds": 723.633333,
+            "scene_id": 1,
+            "status": "proposal",
+            "candidates": [
+              {
+                "center_px": [
+                  413.75,
+                  130.625
+                ],
+                "bbox_xyxy_px": [
+                  411.25,
+                  127.5,
+                  416.25,
+                  133.75
+                ],
+                "heatmap_peak": 0.640524
+              },
+              {
+                "center_px": [
+                  359.375,
+                  60.0
+                ],
+                "bbox_xyxy_px": [
+                  357.5,
+                  58.75,
+                  361.25,
+                  61.25
+                ],
+                "heatmap_peak": 0.523985
+              }
+            ],
+            "proposal": {
+              "candidate_index": 0,
+              "proposal_segment_id": 5,
+              "position_px": [
+                413.75,
+                130.625
+              ],
+              "verification_status": "unverified"
+            },
+            "verified_shuttle_position_px": null
+          }
+        },
+        {
+          "variant": "trial035",
+          "row": {
+            "frame_index": 109,
+            "timestamp_seconds": 723.633333,
+            "scene_id": 1,
+            "status": "proposal",
+            "candidates": [
+              {
+                "center_px": [
+                  413.125,
+                  129.375
+                ],
+                "bbox_xyxy_px": [
+                  408.75,
+                  123.75,
+                  417.5,
+                  135.0
+                ],
+                "heatmap_peak": 0.640524
+              },
+              {
+                "center_px": [
+                  360.0,
+                  60.0
+                ],
+                "bbox_xyxy_px": [
+                  356.25,
+                  57.5,
+                  363.75,
+                  62.5
+                ],
+                "heatmap_peak": 0.523985
+              },
+              {
+                "center_px": [
+                  391.25,
+                  56.875
+                ],
+                "bbox_xyxy_px": [
+                  388.75,
+                  55.0,
+                  393.75,
+                  58.75
+                ],
+                "heatmap_peak": 0.489563
+              }
+            ],
+            "proposal": {
+              "candidate_index": 0,
+              "proposal_segment_id": 5,
+              "position_px": [
+                413.125,
+                129.375
+              ],
+              "verification_status": "unverified"
+            },
+            "heatmap_peak": 0.640524,
+            "verified_shuttle_position_px": null
+          }
+        }
+      ]
+    },
+    {
+      "packet": "rally",
+      "case_id": "rally-110",
+      "frame_index": 110,
+      "source_image_sha256": "2862827ca423ef0bf5390715da5e0ce19acf9ed73b5441e23e7dc436049471a3",
+      "comparison": "case-12.png",
+      "comparison_sha256": "f74ddb2c317e831c5b89c3d1d07afde1a9da411f37fce9d1b38946775d150e38",
+      "raw_source": "case-12-source.png",
+      "values": [
+        {
+          "variant": "default",
+          "row": {
+            "frame_index": 110,
+            "timestamp_seconds": 723.666667,
+            "scene_id": 1,
+            "status": "proposal",
+            "candidates": [
+              {
+                "center_px": [
+                  413.75,
+                  130.0
+                ],
+                "bbox_xyxy_px": [
+                  410.0,
+                  125.0,
+                  417.5,
+                  135.0
+                ],
+                "heatmap_peak": 0.719039
+              }
+            ],
+            "proposal": {
+              "candidate_index": 0,
+              "proposal_segment_id": 5,
+              "position_px": [
+                413.75,
+                130.0
+              ],
+              "verification_status": "unverified"
+            },
+            "verified_shuttle_position_px": null
+          }
+        },
+        {
+          "variant": "trial035",
+          "row": {
+            "frame_index": 110,
+            "timestamp_seconds": 723.666667,
+            "scene_id": 1,
+            "status": "proposal",
+            "candidates": [
+              {
+                "center_px": [
+                  413.125,
+                  129.375
+                ],
+                "bbox_xyxy_px": [
+                  408.75,
+                  123.75,
+                  417.5,
+                  135.0
+                ],
+                "heatmap_peak": 0.719039
+              }
+            ],
+            "proposal": {
+              "candidate_index": 0,
+              "proposal_segment_id": 5,
+              "position_px": [
+                413.125,
+                129.375
+              ],
+              "verification_status": "unverified"
+            },
+            "heatmap_peak": 0.719039,
+            "verified_shuttle_position_px": null
+          }
+        }
+      ]
+    },
+    {
+      "packet": "rally",
+      "case_id": "rally-113",
+      "frame_index": 113,
+      "source_image_sha256": "fbe5acc44a4f8b2c50001d662de1e7806c2a7d8538ae6501b6baad24d8c985a1",
+      "comparison": "case-13.png",
+      "comparison_sha256": "41d6df207f50d543cdd7d0a2191c7163923a27c49af610437f75f6411cd375c2",
+      "raw_source": "case-13-source.png",
+      "values": [
+        {
+          "variant": "default",
+          "row": {
+            "frame_index": 113,
+            "timestamp_seconds": 723.766667,
+            "scene_id": 1,
+            "status": "proposal",
+            "candidates": [
+              {
+                "center_px": [
+                  431.875,
+                  196.875
+                ],
+                "bbox_xyxy_px": [
+                  428.75,
+                  193.75,
+                  435.0,
+                  200.0
+                ],
+                "heatmap_peak": 0.767298
+              }
+            ],
+            "proposal": {
+              "candidate_index": 0,
+              "proposal_segment_id": 5,
+              "position_px": [
+                431.875,
+                196.875
+              ],
+              "verification_status": "unverified"
+            },
+            "verified_shuttle_position_px": null
+          }
+        },
+        {
+          "variant": "trial035",
+          "row": {
+            "frame_index": 113,
+            "timestamp_seconds": 723.766667,
+            "scene_id": 1,
+            "status": "proposal",
+            "candidates": [
+              {
+                "center_px": [
+                  432.5,
+                  197.5
+                ],
+                "bbox_xyxy_px": [
+                  428.75,
+                  193.75,
+                  436.25,
+                  201.25
+                ],
+                "heatmap_peak": 0.767298
+              }
+            ],
+            "proposal": {
+              "candidate_index": 0,
+              "proposal_segment_id": 5,
+              "position_px": [
+                432.5,
+                197.5
+              ],
+              "verification_status": "unverified"
+            },
+            "heatmap_peak": 0.767298,
+            "verified_shuttle_position_px": null
+          }
+        }
+      ]
+    },
+    {
+      "packet": "rally",
+      "case_id": "rally-114",
+      "frame_index": 114,
+      "source_image_sha256": "bf06bbbac74fbcd306b5e8af874abf63a24f3a73a4ba3bc879608e504d717c30",
+      "comparison": "case-14.png",
+      "comparison_sha256": "c86712db6c2f0d4c8a2b89e2dd115c9392285384990eac091001aa7f3d001b5d",
+      "raw_source": "case-14-source.png",
+      "values": [
+        {
+          "variant": "default",
+          "row": {
+            "frame_index": 114,
+            "timestamp_seconds": 723.8,
+            "scene_id": 1,
+            "status": "proposal",
+            "candidates": [
+              {
+                "center_px": [
+                  436.875,
+                  215.625
+                ],
+                "bbox_xyxy_px": [
+                  433.75,
+                  212.5,
+                  440.0,
+                  218.75
+                ],
+                "heatmap_peak": 0.72866
+              }
+            ],
+            "proposal": {
+              "candidate_index": 0,
+              "proposal_segment_id": 5,
+              "position_px": [
+                436.875,
+                215.625
+              ],
+              "verification_status": "unverified"
+            },
+            "verified_shuttle_position_px": null
+          }
+        },
+        {
+          "variant": "trial035",
+          "row": {
+            "frame_index": 114,
+            "timestamp_seconds": 723.8,
+            "scene_id": 1,
+            "status": "proposal",
+            "candidates": [
+              {
+                "center_px": [
+                  436.875,
+                  215.0
+                ],
+                "bbox_xyxy_px": [
+                  433.75,
+                  211.25,
+                  440.0,
+                  218.75
+                ],
+                "heatmap_peak": 0.72866
+              }
+            ],
+            "proposal": {
+              "candidate_index": 0,
+              "proposal_segment_id": 5,
+              "position_px": [
+                436.875,
+                215.0
+              ],
+              "verification_status": "unverified"
+            },
+            "heatmap_peak": 0.72866,
+            "verified_shuttle_position_px": null
+          }
+        }
+      ]
+    },
+    {
+      "packet": "rally",
+      "case_id": "rally-115",
+      "frame_index": 115,
+      "source_image_sha256": "10d6a57318a510b9b820b5bd5b708c630fbb151b6d7567d77c6da122aae4bc9e",
+      "comparison": "case-15.png",
+      "comparison_sha256": "13b509352ec3b2a195cb6fd5d46324fcc72952b94a67de039635f342de438a32",
+      "raw_source": "case-15-source.png",
+      "values": [
+        {
+          "variant": "default",
+          "row": {
+            "frame_index": 115,
+            "timestamp_seconds": 723.833333,
+            "scene_id": 1,
+            "status": "proposal",
+            "candidates": [
+              {
+                "center_px": [
+                  441.875,
+                  233.75
+                ],
+                "bbox_xyxy_px": [
+                  438.75,
+                  230.0,
+                  445.0,
+                  237.5
+                ],
+                "heatmap_peak": 0.717085
+              }
+            ],
+            "proposal": {
+              "candidate_index": 0,
+              "proposal_segment_id": 5,
+              "position_px": [
+                441.875,
+                233.75
+              ],
+              "verification_status": "unverified"
+            },
+            "verified_shuttle_position_px": null
+          }
+        },
+        {
+          "variant": "trial035",
+          "row": {
+            "frame_index": 115,
+            "timestamp_seconds": 723.833333,
+            "scene_id": 1,
+            "status": "proposal",
+            "candidates": [
+              {
+                "center_px": [
+                  441.25,
+                  233.75
+                ],
+                "bbox_xyxy_px": [
+                  437.5,
+                  230.0,
+                  445.0,
+                  237.5
+                ],
+                "heatmap_peak": 0.717085
+              }
+            ],
+            "proposal": {
+              "candidate_index": 0,
+              "proposal_segment_id": 5,
+              "position_px": [
+                441.25,
+                233.75
+              ],
+              "verification_status": "unverified"
+            },
+            "heatmap_peak": 0.717085,
+            "verified_shuttle_position_px": null
+          }
+        }
+      ]
+    },
+    {
+      "packet": "rally",
+      "case_id": "rally-116",
+      "frame_index": 116,
+      "source_image_sha256": "f5aed03202ca5ccceddc14b66e71376f4ef294760b312db7b97803b4bccf40a2",
+      "comparison": "case-16.png",
+      "comparison_sha256": "2c901005509d65fdd27539555d8e80df97a482e67f9957d52b3e2d87a8bda7ec",
+      "raw_source": "case-16-source.png",
+      "values": [
+        {
+          "variant": "default",
+          "row": {
+            "frame_index": 116,
+            "timestamp_seconds": 723.866667,
+            "scene_id": 1,
+            "status": "proposal",
+            "candidates": [
+              {
+                "center_px": [
+                  441.875,
+                  233.75
+                ],
+                "bbox_xyxy_px": [
+                  438.75,
+                  230.0,
+                  445.0,
+                  237.5
+                ],
+                "heatmap_peak": 0.722317
+              }
+            ],
+            "proposal": {
+              "candidate_index": 0,
+              "proposal_segment_id": 5,
+              "position_px": [
+                441.875,
+                233.75
+              ],
+              "verification_status": "unverified"
+            },
+            "verified_shuttle_position_px": null
+          }
+        },
+        {
+          "variant": "trial035",
+          "row": {
+            "frame_index": 116,
+            "timestamp_seconds": 723.866667,
+            "scene_id": 1,
+            "status": "proposal",
+            "candidates": [
+              {
+                "center_px": [
+                  441.25,
+                  233.75
+                ],
+                "bbox_xyxy_px": [
+                  437.5,
+                  230.0,
+                  445.0,
+                  237.5
+                ],
+                "heatmap_peak": 0.722317
+              }
+            ],
+            "proposal": {
+              "candidate_index": 0,
+              "proposal_segment_id": 5,
+              "position_px": [
+                441.25,
+                233.75
+              ],
+              "verification_status": "unverified"
+            },
+            "heatmap_peak": 0.722317,
+            "verified_shuttle_position_px": null
+          }
+        }
+      ]
+    }
+  ],
+  "preview_decoding": [
+    {
+      "preview": "out/tracknet-threshold035-001/candidate_preview.mp4",
+      "decoded_frames": 300,
+      "sha256": "4614dd7e7aa77581ec038a08f52dc5aeb8f1a7de3a5933f3ae489e5cbae2f5de"
+    },
+    {
+      "preview": "out/tracknet-threshold035-002/candidate_preview.mp4",
+      "decoded_frames": 300,
+      "sha256": "d945f9cc13439f10592cf4a0641cfd86724c75da89983888bed77b06168fd7cf"
+    },
+    {
+      "preview": "out/tracknet-threshold035-003/candidate_preview.mp4",
+      "decoded_frames": 300,
+      "sha256": "c3a79663d2774d706193254210de801c5ca55850e5a74786ba626762295870da"
+    },
+    {
+      "preview": "out/tracknet-threshold035-004/candidate_preview.mp4",
+      "decoded_frames": 300,
+      "sha256": "13dc5864b1ef1de2e4a9dde7a2de66e18c9748b27d0172327f3c8abf6585653f"
+    },
+    {
+      "preview": "out/tracknet-threshold035-005/candidate_preview.mp4",
+      "decoded_frames": 300,
+      "sha256": "1a85b28eb7b7c79f5ad78a6e969901815659cfe07829d1b6a676fcbaf1a4b470"
+    }
+  ],
+  "tests": {
+    "python": 85,
+    "javascript": 4,
+    "failures": 0
+  },
+  "review_page": "out/tracknet-threshold-evaluation-001/index.html",
+  "review_page_sha256": "c372c4ef9f1f71006856fbf49eab56f9834ce96633be8e7af5684a9372e4a630",
+  "default_changed": false,
+  "tolerance_sensitivity": {
+    "continuous": {
+      "default": {
+        "2": {
+          "proposal_point_hits": 62,
+          "visible_points": 111
+        },
+        "4": {
+          "proposal_point_hits": 94,
+          "visible_points": 111
+        },
+        "6": {
+          "proposal_point_hits": 109,
+          "visible_points": 111
+        }
+      },
+      "trial035": {
+        "2": {
+          "proposal_point_hits": 60,
+          "visible_points": 111
+        },
+        "4": {
+          "proposal_point_hits": 95,
+          "visible_points": 111
+        },
+        "6": {
+          "proposal_point_hits": 108,
+          "visible_points": 111
+        }
+      }
+    },
+    "rally": {
+      "default": {
+        "2": {
+          "proposal_point_hits": 21,
+          "visible_points": 37
+        },
+        "4": {
+          "proposal_point_hits": 25,
+          "visible_points": 37
+        },
+        "6": {
+          "proposal_point_hits": 31,
+          "visible_points": 37
+        }
+      },
+      "trial035": {
+        "2": {
+          "proposal_point_hits": 20,
+          "visible_points": 37
+        },
+        "4": {
+          "proposal_point_hits": 27,
+          "visible_points": 37
+        },
+        "6": {
+          "proposal_point_hits": 29,
+          "visible_points": 37
+        }
+      }
+    }
+  },
+  "decision": "Keep 0.5 default. Retain 0.35 as an opt-in experiment: known upper-flight recovery and net gains coexist with point shifts and ambiguous-candidate regressions.",
+  "inspected_contact_sheets": [
+    "out/tracknet-threshold035-001/candidate_contact_sheet.jpg",
+    "out/tracknet-threshold035-002/candidate_contact_sheet.jpg",
+    "out/tracknet-threshold035-003/candidate_contact_sheet.jpg",
+    "out/tracknet-threshold035-004/candidate_contact_sheet.jpg",
+    "out/tracknet-threshold035-005/candidate_contact_sheet.jpg"
+  ],
+  "inspected_comparison_examples": [
+    "opening-186",
+    "rally-014",
+    "rally-057",
+    "rally-113"
+  ],
+  "visual_review_kind": "automated_development_diagnostic_only",
+  "default_repeat_decoded_frames": 300,
+  "real_inference_frames": 1800,
+  "browser_layout_qa": "not_performed",
+  "test_file_sha256": "d77ec18f0727771140cfcc26b8712f4b0d0e45b89dc4908f670915e1e053698a"
+}

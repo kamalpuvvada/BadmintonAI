@@ -760,6 +760,62 @@ approximate automated development labels from one previously seen broadcast.
 The inference default is unchanged; verified trajectories, shot events and
 coaching scores remain unavailable. Live browser interaction remains unverified.
 
+### Step 3.9 — Activation cutoff experiment
+
+`shuttle_tracknet.py` accepts an optional `--heatmap-threshold` strictly between
+zero and one. The default remains **0.5**. The cutoff applies after averaging
+all sequence-window heatmaps for a frame; changing it does not change the
+checkpoint, inputs, scene/view gates or linking rules. Each output row also
+records `heatmap_peak`, the largest averaged activation, or `null` when the
+frame was excluded or lacked sufficient sequence context. This activation is
+uncalibrated and is not a probability of a correct shuttle detection.
+
+```powershell
+.\.venv\Scripts\python.exe shuttle_tracknet.py --video "Videos\videoplayback.mp4" --player-run "out\players-045" --out "out\tracknet-cutoff-trial-new" --heatmap-threshold 0.35
+```
+
+The single 0.35 trial was selected to investigate the known upper-flight miss,
+before measuring the trial results. This is development tuning, not held-out
+validation. Tests check invalid cutoffs before any source/model work, averaging
+before the cutoff, native-coordinate decoding, diagnostic peaks and unchanged
+gap/view boundaries. All 85 Python tests and four JavaScript tests pass.
+
+Five real trial runs (`out/tracknet-threshold035-001` through `005`) processed
+1,500 frames. A further 300-frame real run at the unchanged default reproduces
+every previous rally prediction row exactly, apart from the new diagnostic
+field. All six previews decode to 300 frames each. Trial exclusions match the
+baseline, linked segments stay consecutive within a scene, and every verified
+shuttle position remains null. All five trial contact sheets and selected
+changed-result examples were inspected with automated diagnostic review.
+
+| Linked point matches, four native-pixel tolerance | Default 0.5 | Trial 0.35 |
+| --- | --- | --- |
+| Original development points | 11/12 | 11/12 |
+| Additional control points | 6/6 | 6/6 |
+| Continuous development packet | 94/111 | 95/111 |
+| Revised broadcast-point packet | 25/37 | 27/37 |
+
+These packets overlap; their counts must not be added as independent samples.
+The known local racket negative remains clear in both variants. No broad
+false-positive rate is established from the uncertain frames.
+
+The target upper-flight observation at frame 57 has peak activation `0.423221`.
+The trial locates it at `(331.875, 17.5)` pixels, about 3.8 pixels from the
+approximate development label: a match at four pixels, but not two. Other
+results regress: the opening interval drops from 32/43 to 31/43, and extra
+candidates make rally frames 14–16 ambiguous for linking. At two pixels,
+continuous matches fall from 62/111 to 60/111 and rally matches from 21/37 to
+20/37. At six pixels they fall from 109/111 to 108/111 and 31/37 to 29/37.
+These mixed results do **not** justify changing the default.
+
+Review `out/tracknet-threshold-evaluation-001/index.html` for all five trial
+clips and 17 changed labeled-result comparisons with unmarked source images.
+Comparison titles sit outside the full frame so upper-flight points remain
+visible. Exact model/output bindings, tolerance sensitivity, target diagnostics
+and the decision to retain the default are recorded in
+`validation/tracknet_threshold_evaluation_2026-10-31.json`. The trial remains
+opt-in. No verified trajectories, shot events or coaching scores are enabled.
+
 ## Next milestones
 
 | Step | Deliverable | Validation |

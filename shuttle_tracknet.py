@@ -28,6 +28,11 @@ from third_party.tracknetv3.tracknet import TrackNet
 MODEL_SIZE = (512, 288)
 
 
+def _validate_heatmap_threshold(threshold: float):
+    if type(threshold) not in (int, float) or not math.isfinite(threshold) or not 0 < threshold < 1:
+        raise ValueError("Heatmap threshold must be finite and strictly between zero and one")
+
+
 def sequence_windows(indices: list[int], sequence_length: int, stride: int | None = None) -> list[list[int]]:
     if type(sequence_length) is not int or not 1 <= sequence_length <= 16:
         raise ValueError("Sequence length must be an integer in 1..16")
@@ -58,9 +63,9 @@ def prepare_input(images: list[Image.Image], background: np.ndarray, size=MODEL_
 
 
 def decode_heatmap(heatmap: np.ndarray, image_size: tuple[int, int], threshold: float = .5) -> list[dict]:
+    _validate_heatmap_threshold(threshold)
     if (heatmap.ndim != 2 or not all(heatmap.shape) or not np.all(np.isfinite(heatmap))
-            or np.any(heatmap < 0) or np.any(heatmap > 1)
-            or not math.isfinite(threshold) or not 0 < threshold < 1):
+            or np.any(heatmap < 0) or np.any(heatmap > 1)):
         raise ValueError("Invalid heatmap or threshold")
     if any(type(v) is not int or v <= 0 for v in image_size):
         raise ValueError("Invalid source image size")
@@ -102,7 +107,8 @@ def _read_image(path):
         return image.convert("RGB")
 
 
-def infer_groups(paths: list[Path], contexts: list[dict], predictor, stride: int | None = None) -> dict[int, list[dict]]:
+def infer_groups(paths: list[Path], contexts: list[dict], predictor, stride: int | None = None,
+                 heatmap_threshold: float = .5, frame_peaks: dict | None = None) -> dict[int, list[dict]]:
     """Stride-controlled blocks plus a covering tail, averaging observations.
 
     No padding, synthetic positions, cross-boundary context or repair model.
@@ -110,6 +116,7 @@ def infer_groups(paths: list[Path], contexts: list[dict], predictor, stride: int
     """
     if len(paths) != len(contexts):
         raise ValueError("Frame and context counts differ")
+    _validate_heatmap_threshold(heatmap_threshold)
     sequence_windows([], predictor.sequence_length, stride)  # Validate even with no eligible groups.
     groups = []
     for index, context in enumerate(contexts):
@@ -137,16 +144,21 @@ def infer_groups(paths: list[Path], contexts: list[dict], predictor, stride: int
                 means[index - indices[0]] += heatmaps[0, offset]
                 counts[index - indices[0]] += 1
         for offset, index in enumerate(indices):
-            detections[index] = decode_heatmap(means[offset] / counts[offset], image_size)
+            averaged = means[offset] / counts[offset]
+            detections[index] = decode_heatmap(averaged, image_size, heatmap_threshold)
+            if frame_peaks is not None:
+                frame_peaks[index] = round(float(averaged.max()), 6)
     return detections
 
 
 def run(video: Path, player_run: Path, output: Path, weights: Path,
-        expected_sha256: str = CHECKPOINT_SHA256, threads: int = 4, window_stride: int | None = None) -> Path:
+        expected_sha256: str = CHECKPOINT_SHA256, threads: int = 4, window_stride: int | None = None,
+        heatmap_threshold: float = .5) -> Path:
     if output.exists():
         raise ValueError("Choose a new output directory")
     if type(threads) is not int or not 1 <= threads <= 32:
         raise ValueError("CPU threads must be within 1..32")
+    _validate_heatmap_threshold(heatmap_threshold)
     verification, summary, player_rows, review = verified_snapshot(player_run)
     meta, video_hash = probe_video(video), sha256_file(video)
     if (not summary["session_id"].endswith(video_hash[:12])
@@ -167,7 +179,8 @@ def run(video: Path, player_run: Path, output: Path, weights: Path,
         work = Path(temporary)
         paths = _extract_sampled_video(video, work / "source", fps, duration, start)
         contexts = [frame_context(start+i/fps, summary, player_rows, verification["approved_intervals"]) for i in range(len(paths))]
-        detections = infer_groups(paths, contexts, predictor, window_stride)
+        frame_peaks = {}
+        detections = infer_groups(paths, contexts, predictor, window_stride, heatmap_threshold, frame_peaks)
         annotated = work / "annotated"
         annotated.mkdir()
         selected = set(np.linspace(0, len(paths)-1, min(9, len(paths)), dtype=int).tolist())
@@ -188,6 +201,7 @@ def run(video: Path, player_run: Path, output: Path, weights: Path,
             timestamp = start+index/fps
             records.append({"frame_index": index, "timestamp_seconds": round(timestamp, 6), "scene_id": context["scene_id"],
                             "status": status, "candidates": candidates, "proposal": proposal,
+                            "heatmap_peak": frame_peaks.get(index),
                             "verified_shuttle_position_px": None})
             counts[status] += 1
             image = _read_image(path)
@@ -213,7 +227,7 @@ def run(video: Path, player_run: Path, output: Path, weights: Path,
             "player_review_snapshot_sha256":sha256(json.dumps(review,sort_keys=True,separators=(",",":"),allow_nan=False).encode()).hexdigest(),
             "player_review_provenance":verification["review_provenance"],"video":meta,"model":predictor.metadata,
             "sampling":{"fps":fps,"start_seconds":start,"frames":len(records)},"frame_status_counts":dict(counts),
-            "configuration":{"heatmap_threshold":.5,"input_size_px":list(MODEL_SIZE),"background_samples_max":31,
+            "configuration":{"heatmap_threshold":heatmap_threshold,"input_size_px":list(MODEL_SIZE),"background_samples_max":31,
                              "window_mode":"nonoverlap_plus_overlapping_tail_mean" if window_stride in (None, predictor.sequence_length) else "strided_windows_plus_tail_mean",
                              "window_stride":predictor.sequence_length if window_stride is None else window_stride,
                              "padding":False,"cpu_threads":threads},
@@ -239,9 +253,10 @@ def main():
     parser.add_argument("--weights-sha256",default=CHECKPOINT_SHA256)
     parser.add_argument("--threads",type=int,default=4)
     parser.add_argument("--window-stride",type=int,help="Experimental window step, 1..checkpoint sequence length; default is non-overlap")
+    parser.add_argument("--heatmap-threshold",type=float,default=.5,help="Experimental activation cutoff strictly between 0 and 1; default 0.5")
     args=parser.parse_args()
     try:
-        print(run(args.video,args.player_run,args.out,args.weights,args.weights_sha256,args.threads,args.window_stride))
+        print(run(args.video,args.player_run,args.out,args.weights,args.weights_sha256,args.threads,args.window_stride,args.heatmap_threshold))
     except (ValueError,OSError,RuntimeError,KeyError,TypeError,pickle.UnpicklingError) as exc:
         parser.exit(1,f"TrackNet error: {exc}\n")
     return 0
