@@ -1,0 +1,18 @@
+{
+  "schema_version": "0.1.0",
+  "benchmark_sha256": "6193a7c473736a28f859a31b5595cdb64e79a4ec8948534a875c1c26c1dc86bd",
+  "reviewer": "Codex",
+  "reviewer_kind": "automated",
+  "changes": [
+    {
+      "case_id": "rally-057",
+      "visibility": "visible",
+      "point_px": [
+        331.54,
+        21.29
+      ],
+      "view": "wide_court",
+      "notes": "Codex automated development correction: visible rising shuttle streak against the red board in full-source temporal context 53\u201358 and enlarged raw upper-frame crop. Approximate streak center refined locally against raw frame 53 before inspecting evaluated predictions; no interpolation. Frames 55\u201356 retain uncertainty because official-arm overlap confounds the streak center. Not independently human-reviewed."
+    }
+  ]
+}

@@ -9,7 +9,7 @@ from io import BytesIO
 import json
 from pathlib import Path
 
-from PIL import Image
+from PIL import Image, ImageDraw
 
 from shuttle_benchmark import _validate
 
@@ -71,6 +71,53 @@ def prepare_editor(benchmark: Path, output: Path) -> Path:
         "schema_version": "0.1.0", "benchmark_sha256": binding,
         "images": [{"image": c["image"], "sha256": c["image_sha256"]} for c in data["cases"]],
         "status": "annotation_workspace_only", "verified_shuttle_positions": 0}, indent=2) + "\n", encoding="utf-8")
+    return target
+
+
+def prepare_context(benchmark: Path, output: Path, source_run: str,
+                    start_frame: int, frames: int = 6, columns: int = 2, scale: int = 2) -> Path:
+    """Make unmarked full-frame temporal context, including the image margins."""
+    if output.exists():
+        raise ValueError("Choose a new context directory")
+    if (type(start_frame) is not int or start_frame < 0
+            or type(frames) is not int or not 1 <= frames <= 12
+            or type(columns) is not int or not 1 <= columns <= 4
+            or type(scale) is not int or not 1 <= scale <= 3):
+        raise ValueError("Context requires a nonnegative start, 1–12 frames, 1–4 columns and 1–3 scale")
+    data, binding, images = _read_packet(benchmark)
+    if source_run not in data["sources"]:
+        raise ValueError("Unknown source run")
+    indexed = {case["frame_index"]: (case, image) for case, image in zip(data["cases"], images)
+               if case["source_run"] == source_run}
+    requested = range(start_frame, start_frame + frames)
+    if any(i not in indexed for i in requested):
+        raise ValueError("Every requested source frame must exist in the packet; gaps are not filled")
+    width, height = data["image_size_px"]
+    tile_width, tile_height = width * scale, height * scale + 32
+    columns = min(columns, frames)
+    sheet = Image.new("RGB", (columns * tile_width, ((frames + columns - 1) // columns) * tile_height), "#10202b")
+    draw = ImageDraw.Draw(sheet)
+    sampling = data["sources"][source_run]
+    entries = []
+    for position, frame_index in enumerate(requested):
+        case, (raw, _) = indexed[frame_index]
+        x, y = (position % columns) * tile_width, (position // columns) * tile_height
+        with Image.open(BytesIO(raw)) as image:
+            sheet.paste(image.convert("RGB").resize((width * scale, height * scale), Image.Resampling.NEAREST), (x, y + 32))
+        seconds = sampling["start_seconds"] + frame_index / sampling["fps"]
+        draw.text((x + 4, y + 6), f"Frame {frame_index} | {seconds:.3f}s | full source | {scale}x", fill="white")
+        entries.append({"case_id": case["id"], "frame_index": frame_index,
+                        "source_seconds": seconds, "image_sha256": case["image_sha256"],
+                        "image_rectangle_px": [x, y + 32, x + width * scale, y + tile_height]})
+    output.mkdir(parents=True)
+    target = output / "context.png"
+    sheet.save(target)
+    (output / "context.json").write_text(json.dumps({
+        "schema_version": "0.1.0", "benchmark_sha256": binding, "source_run": source_run,
+        "source_video_sha256": data["source_video_sha256"], "image_size_px": [width, height],
+        "columns": columns, "scale": scale, "cases": entries,
+        "sheet_sha256": sha256(target.read_bytes()).hexdigest(),
+        "status": "unmarked_source_context_only", "verified_shuttle_positions": 0}, indent=2) + "\n", encoding="utf-8")
     return target
 
 
@@ -139,9 +186,22 @@ def main():
     apply.add_argument("--benchmark", type=Path, required=True)
     apply.add_argument("--corrections", type=Path, required=True)
     apply.add_argument("--out", type=Path, required=True)
+    context = commands.add_parser("context", help="Unmarked consecutive full source frames")
+    context.add_argument("--benchmark", type=Path, required=True)
+    context.add_argument("--out", type=Path, required=True)
+    context.add_argument("--source-run", required=True)
+    context.add_argument("--start-frame", type=int, required=True)
+    context.add_argument("--frames", type=int, default=6)
+    context.add_argument("--columns", type=int, default=2)
+    context.add_argument("--scale", type=int, default=2)
     args = parser.parse_args()
     try:
-        result = prepare_editor(args.benchmark, args.out) if args.command == "prepare" else apply_corrections(args.benchmark, args.corrections, args.out)
+        if args.command == "prepare":
+            result = prepare_editor(args.benchmark, args.out)
+        elif args.command == "context":
+            result = prepare_context(args.benchmark, args.out, args.source_run, args.start_frame, args.frames, args.columns, args.scale)
+        else:
+            result = apply_corrections(args.benchmark, args.corrections, args.out)
         print(result)
     except (ValueError, OSError, KeyError, TypeError, AttributeError) as exc:
         parser.exit(1, f"Annotation error: {exc}\n")

@@ -716,6 +716,50 @@ labels within four pixels. The updated workspace hashes and evaluation results
 are in `validation/shuttle_annotation_followup_2026-10-31.json`. These are six
 automated review notes, with no new visible labels or human approvals.
 
+### Step 3.8 — Full-frame temporal context and upper-flight review
+
+Generate unmarked full source frames to inspect shuttle flight above and around
+the court. This command preserves every source pixel, including the margins;
+it adds frame numbers and source timestamps outside each image. The companion
+`context.json` binds the sheet to the exact packet and source-image hashes.
+No labels or predictions are drawn, and missing source frames are rejected.
+
+```powershell
+.\.venv\Scripts\python.exe shuttle_annotation.py context --benchmark "out\shuttle-rally-corrected-001\benchmark.json" --source-run "rally-720" --start-frame 53 --frames 6 --columns 2 --scale 2 --out "out\full-context-new"
+```
+
+Each sheet supports 1–12 consecutive frames, 1–4 columns and 1–3× enlargement.
+Existing output directories are rejected. Tests compare the entire image area
+against source pixels, check temporal ordering and timestamps, and reject gaps
+and invalid requests. All 83 Python tests and four JavaScript tests pass.
+
+Full-frame and enlarged upper-frame inspection identifies a visible rising
+streak in frame 57 (721.900 s), above the official against the red board.
+Its approximate center is `(331.54, 21.29)` native pixels. The local brightness
+refinement used raw frame 53 as background inside a visually chosen region,
+before inspecting evaluated predictions. Initial center estimates in frames
+55–56 were discarded because official-arm overlap confounds the streak center;
+those frames remain uncertain. Frame 58 also remains uncertain. No points were
+interpolated, and no human approval is claimed.
+
+The correction is `validation/shuttle_upper_flight_corrections_2026-10-31.json`,
+bound to the preceding corrected packet. The resulting local packet is
+`out/shuttle-rally-corrected-003/benchmark.json`, with editor at
+`out/shuttle-rally-corrected-003/editor/index.html`. It preserves both earlier
+review history and the original source images. Review the unmarked sheet at
+`out/shuttle-full-context-001/context.png`.
+
+Both model variants have no heatmap detection in frame 57. This increases
+visible-label coverage from 36 to 37 frames, with 119 uncertain frames retained;
+both still match **25/37** visible labels within four pixels. At two pixels both
+match 21/37; at six pixels default matches 31/37 and overlap 30/37. This reveals
+a supported miss, not a model improvement. Source bindings, measurement method
+and results are recorded in
+`validation/shuttle_upper_flight_evaluation_2026-10-31.json`. These remain
+approximate automated development labels from one previously seen broadcast.
+The inference default is unchanged; verified trajectories, shot events and
+coaching scores remain unavailable. Live browser interaction remains unverified.
+
 ## Next milestones
 
 | Step | Deliverable | Validation |

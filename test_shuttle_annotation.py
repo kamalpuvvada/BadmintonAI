@@ -4,7 +4,9 @@ from pathlib import Path
 import unittest
 
 from badminton_proto import sha256_file
-from shuttle_annotation import apply_corrections, prepare_editor
+from PIL import Image
+
+from shuttle_annotation import apply_corrections, prepare_context, prepare_editor
 from shuttle_benchmark import evaluate
 import test_shuttle_benchmark as benchmark_tests
 
@@ -24,6 +26,41 @@ class ShuttleAnnotationTests(unittest.TestCase):
     def apply(self, output=None):
         self.correction.write_text(json.dumps(self.patch), encoding="utf-8")
         return apply_corrections(self.fixture.benchmark, self.correction, output or self.root/"corrected")
+
+    def test_context_preserves_every_source_pixel_without_labels_or_crops(self):
+        image = Image.new("RGB", (10, 10))
+        image.putdata([(x*20,y*20,(x+y)*10) for y in range(10) for x in range(10)])
+        image.save(self.fixture.packet/"frame.png")
+        for case in self.fixture.data["cases"]:
+            case["image_sha256"] = sha256_file(self.fixture.packet/"frame.png")
+        # Input order must not determine temporal sheet order.
+        self.fixture.data["cases"].reverse(); self.fixture.save()
+        original = self.fixture.benchmark.read_bytes()
+        target = prepare_context(self.fixture.benchmark, self.root/"context", "source", 0, 3, 2, 3)
+        meta = json.loads((target.parent/"context.json").read_text())
+        self.assertEqual(meta["benchmark_sha256"], sha256_file(self.fixture.benchmark))
+        self.assertEqual(meta["sheet_sha256"], sha256_file(target))
+        self.assertEqual([c["frame_index"] for c in meta["cases"]], [0,1,2])
+        self.assertEqual([c["source_seconds"] for c in meta["cases"]], [0,1/30,2/30])
+        with Image.open(target) as sheet:
+            for case in meta["cases"]:
+                expected = image.resize((30,30),Image.Resampling.NEAREST)
+                self.assertEqual(sheet.crop(case["image_rectangle_px"]).tobytes(),expected.tobytes())
+                self.assertNotIn("point_px",case)
+        self.assertEqual(self.fixture.benchmark.read_bytes(),original)
+        with self.assertRaisesRegex(ValueError,"new context"):
+            prepare_context(self.fixture.benchmark,target.parent,"source",0)
+
+    def test_context_rejects_missing_frames_unknown_sources_and_invalid_sizes(self):
+        for overrides in ({"start_frame":-1},{"start_frame":True},{"frames":0},{"frames":13},
+                          {"columns":0},{"scale":4},{"source_run":"missing"},{"start_frame":1,"frames":3}):
+            kwargs={"source_run":"source","start_frame":0,"frames":3}; kwargs.update(overrides)
+            with self.assertRaises(ValueError):
+                prepare_context(self.fixture.benchmark,self.root/"invalid-context",**kwargs)
+            self.assertFalse((self.root/"invalid-context").exists())
+        self.fixture.data["cases"].pop(1); self.fixture.save()
+        with self.assertRaisesRegex(ValueError,"gaps are not filled"):
+            prepare_context(self.fixture.benchmark,self.root/"gap","source",0,3)
 
     def test_editor_is_offline_source_only_and_escapes_embedded_data(self):
         self.fixture.data["cases"][0]["id"] = '</script><img src=x onerror="bad()">'
