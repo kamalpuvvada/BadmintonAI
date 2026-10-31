@@ -599,6 +599,67 @@ intervals and native video integration. Shot events and coaching scores remain
 unavailable. The next milestone is a broader set of complete rally intervals and
 independent label checks before trajectory acceptance or shot-event timing.
 
+### Step 3.6 — Complete broadcast-point context and motion diagnostics
+
+`validation/shuttle_rally_seed_2026-10-31.json` annotates every frame from
+720.000–725.167 seconds: **156 native-rate frames**, including the service
+close-up, wide-view exchanges, a dive and post-point context. This covers a complete
+broadcast point, with camera changes at source frames 12 and 155; it is not an
+uninterrupted fixed-camera rally. Codex inspected 26 enlarged unmarked temporal
+sheets and local crops, including the full-frame bottom strip after the dive.
+There are **36 visible approximate locations and 120 uncertain frames**. Earlier
+sparse model previews had already been seen. No evaluated prediction or
+interpolation supplied labels; this remains automated development review from
+the same match, without independent human or held-out validation.
+
+Optional per-frame `view` labels (`wide_court`, `closeup`, `unknown`, or
+`unspecified`) now split results by source view. Visible close-up labels stay in
+the overall totals; a view breakdown never silently removes difficult examples.
+The continuous evaluator records prediction status counts and both inherited
+scene changes and annotated view changes. It also measures the error between
+predicted and labeled frame-to-frame displacement vectors, using only adjacent
+visible observations within the same proposal segment, scene and annotated view.
+Uncertainty, missing proposals, segment resets and view changes break this motion
+comparison. Matching-run and missing-run statistics also stop at view changes.
+These are native image-pixel diagnostics, not physical velocity or contact events.
+
+```powershell
+.\.venv\Scripts\python.exe shuttle_benchmark.py prepare --seed "validation\shuttle_rally_seed_2026-10-31.json" --video "Videos\videoplayback.mp4" --out "out\rally-repeat"
+.\.venv\Scripts\python.exe shuttle_benchmark.py evaluate --benchmark "out\rally-repeat\benchmark.json" --prediction "rally-720=out\tracknet-002"
+.\.venv\Scripts\python.exe shuttle_benchmark.py evaluate --benchmark "out\rally-repeat\benchmark.json" --prediction "rally-720=out\tracknet-overlap-002"
+```
+
+| Broadcast-point development check, four-pixel tolerance | Default stride 8 | Optional stride 4 |
+| --- | --- | --- |
+| Linked point matches across all visible labels | 25/36 | 25/36 |
+| Linked matches on labeled wide-court observations | 25/34 | 25/34 |
+| Visible frames without a linked proposal | 4 | 6 |
+| Visible frames with a displaced proposal | 7 | 5 |
+| Longest same-segment matched run | 14 frames | 14 frames |
+| Adjacent visible proposed pairs, same segment and view | 28 | 26 |
+| Mean displacement-vector error on those pairs | 1.1182 px | 1.1396 px |
+
+The default's four missing observations are two intentional service-close-up
+exclusions and two wide-view boundary frames outside the approved player
+interval. Overlap additionally loses a blurred observation at frame 54 and
+abstains on ambiguous components at frame 110. At two-pixel tolerance both modes
+match 21/36 linked points; at six pixels the default matches 31/36 and overlap
+30/36. These small approximate-label comparisons do not establish general accuracy
+or support changing the default. The 120 uncertain frames, including overlaps and
+flight beyond the enlarged court crop, cannot establish full-rally recall,
+absence, false positives or verified continuous trajectories.
+
+Review `out/shuttle-rally-evaluation/index.html` for the full 156-frame comparison
+video, view/boundary examples and every frame's result with its raw source image.
+The video decodes back to 156 frames. Source-label, evaluator, model and prediction
+fingerprints, per-view results, full timelines and tolerance sensitivity are in
+`validation/shuttle_rally_evaluation_2026-10-31.json`. Re-evaluation of the previous
+continuous packet preserves its 94/111 default and 98/111 overlap matches.
+Seventy-six tests pass, including motion comparisons across uncertainty, missing
+observations, cuts and view changes; visible close-up labels remain counted.
+The default is unchanged. No trajectory acceptance, shot-event timing, line
+decisions or coaching scores are enabled.
+
 ## Next milestones
 
 | Step | Deliverable | Validation |

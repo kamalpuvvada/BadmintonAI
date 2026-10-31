@@ -220,6 +220,45 @@ class ShuttleBenchmarkTests(unittest.TestCase):
         self.assertEqual(sequence["longest_consecutive_visible_missing_proposal_frames"], 0)
         self.assertIsNone(sequence["mean_error_on_visible_proposed_frames_px"])
 
+    def test_motion_error_uses_observed_adjacent_points_and_breaks_at_unknown_gap_cut_and_view(self):
+        self.continuous_fixture()
+        # One observed label step is zero but the proposal moves one pixel.
+        self.rows[1]["candidates"][0]["center_px"] = [3, 2]
+        self.rows[1]["proposal"]["position_px"] = [3, 2]
+        self.save()
+        sequence = self.score()["continuous_sequences"][0]
+        self.assertEqual(sequence["adjacent_visible_proposed_pairs_same_segment_and_view"], 1)
+        self.assertEqual(sequence["mean_step_vector_error_px"], 1)
+        self.assertEqual(sequence["max_step_vector_error_px"], 1)
+        self.assertEqual(sequence["scene_change_frames"], [9])
+        self.data["cases"][0]["view"] = "closeup"
+        self.data["cases"][1]["view"] = "wide_court"
+        self.save()
+        sequence = self.score()["continuous_sequences"][0]
+        self.assertEqual(sequence["adjacent_visible_proposed_pairs_same_segment_and_view"], 0)
+        self.assertEqual(sequence["adjacent_point_matches_with_segment_or_scene_change"], 1)
+        self.assertEqual(sequence["adjacent_point_matches_with_annotation_view_change"], 1)
+        self.assertEqual(sequence["annotation_view_change_frames"], [1, 2])
+        self.assertIsNone(sequence["mean_step_vector_error_px"])
+        self.assertEqual(sequence["annotation_view_counts"]["closeup"]["visible_frames"], 1)
+        self.data["cases"][0]["view"] = "invalid"
+        self.save()
+        with self.assertRaisesRegex(ValueError, "annotation view"):
+            self.score()
+
+    def test_view_breakdown_does_not_hide_visible_closeup_or_gate_failures(self):
+        self.continuous_fixture()
+        self.data["cases"][5]["view"] = "closeup"
+        self.rows[5]["status"] = "excluded_player_review"
+        self.save()
+        result = self.score()
+        sequence = result["continuous_sequences"][0]
+        self.assertEqual(result["visible_points"], 9)
+        self.assertEqual(sequence["annotation_view_counts"]["closeup"]["visible_frames_without_proposal"], 1)
+        self.assertEqual(sequence["prediction_status_counts"]["excluded_player_review"], 1)
+        self.assertEqual(sequence["timeline"][5]["result"], "missing_proposal")
+        self.assertEqual(sequence["timeline"][5]["annotation_view"], "closeup")
+
 
 if __name__ == "__main__":
     unittest.main()

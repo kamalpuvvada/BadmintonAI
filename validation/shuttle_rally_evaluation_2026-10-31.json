@@ -1,0 +1,5117 @@
+{
+  "date": "2026-10-31",
+  "status": "broadcast_point_development_review_not_verified_trajectory",
+  "seed_sha256": "4b5062d0e5ea091272f4f8587478fd2f4c2c9d3ec1413de4613baa9ca2cf16b1",
+  "benchmark_sha256": "f53c6833ef87a3c191144eec78e389279257d8dc5777261f9d503967f29272d2",
+  "evaluator_sha256": "fa3c5411438814e4e04934b03fd83861a664c259967339e6d87a4a284af44e2f",
+  "models": {
+    "default": {
+      "name": "TrackNetV3 tracking module",
+      "checkpoint_sha256": "df867641a02712b021f04548ff4b1208ddfdb47f629ab2094ceb978667e83b1a",
+      "sequence_length": 8,
+      "background_mode": "concat",
+      "upstream_commit": "6eda442ada1740573f200f836d93edc9a541ee86",
+      "torch_version": "2.15.0+cpu",
+      "device": "cpu",
+      "inpainting": false
+    },
+    "overlap": {
+      "name": "TrackNetV3 tracking module",
+      "checkpoint_sha256": "df867641a02712b021f04548ff4b1208ddfdb47f629ab2094ceb978667e83b1a",
+      "sequence_length": 8,
+      "background_mode": "concat",
+      "upstream_commit": "6eda442ada1740573f200f836d93edc9a541ee86",
+      "torch_version": "2.15.0+cpu",
+      "device": "cpu",
+      "inpainting": false
+    }
+  },
+  "provenance": {
+    "reviewer": "Codex",
+    "reviewer_kind": "automated",
+    "scope": "All 156 frames inspected in 26 enlarged unmarked temporal sheets; local context crops checked the serve, initial reception, loft and end of the point, including the full-frame bottom strip. All 36 visible labels checked in local crops before evaluating this packet. Earlier sparse model previews had been seen. No evaluated prediction or interpolation supplied labels.",
+    "annotated_frames": 156,
+    "visible_frames": 36,
+    "uncertain_frames": 120,
+    "full_point_context_not_uninterrupted_fixed_camera_footage": true
+  },
+  "evaluations_at_four_pixels": {
+    "default": {
+      "schema_version": "0.1.0",
+      "evaluation_scope": "continuously_annotated_development_intervals_only",
+      "benchmark_sha256": "f53c6833ef87a3c191144eec78e389279257d8dc5777261f9d503967f29272d2",
+      "prediction_bindings": {
+        "rally-720": {
+          "summary_sha256": "57f5c2e403201f20cb07df6465a67ead1f82788abc98eb1f2e8bf1605ffd07fd",
+          "rows_sha256": "a346711731a6af7553ba1a0b1795558aeed7a0abbd4dc44c5a52a7853ff00f03"
+        }
+      },
+      "point_tolerance_px": 4,
+      "visible_points": 36,
+      "candidate_point_hits": 25,
+      "proposal_point_hits": 25,
+      "uncertain_frames_excluded_from_point_scoring": 120,
+      "known_negative_regions": 0,
+      "negative_regions_with_candidates": 0,
+      "negative_regions_with_proposals": 0,
+      "cases": [
+        {
+          "id": "rally-000",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-001",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-002",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-003",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-004",
+          "visibility": "visible",
+          "candidate_hit": false,
+          "proposal_hit": false,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-005",
+          "visibility": "visible",
+          "candidate_hit": false,
+          "proposal_hit": false,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-006",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-007",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-008",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-009",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-010",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-011",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-012",
+          "visibility": "visible",
+          "candidate_hit": false,
+          "proposal_hit": false,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-013",
+          "visibility": "visible",
+          "candidate_hit": false,
+          "proposal_hit": false,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-014",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-015",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-016",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-017",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-018",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-019",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-020",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-021",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-022",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-023",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-024",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-025",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-026",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-027",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-028",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-029",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-030",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-031",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-032",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-033",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-034",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-035",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-036",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-037",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-038",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-039",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-040",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-041",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-042",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-043",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-044",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-045",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-046",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-047",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-048",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-049",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-050",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-051",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-052",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-053",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-054",
+          "visibility": "visible",
+          "candidate_hit": false,
+          "proposal_hit": false,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-055",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-056",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-057",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-058",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-059",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-060",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-061",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-062",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-063",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-064",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-065",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-066",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-067",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-068",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-069",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-070",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-071",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-072",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-073",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-074",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-075",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-076",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-077",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-078",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-079",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-080",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-081",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-082",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-083",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-084",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-085",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-086",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-087",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-088",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-089",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-090",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-091",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-092",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-093",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-094",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-095",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-096",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-097",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-098",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-099",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-100",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-101",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-102",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-103",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-104",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-105",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-106",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-107",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-108",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-109",
+          "visibility": "visible",
+          "candidate_hit": false,
+          "proposal_hit": false,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-110",
+          "visibility": "visible",
+          "candidate_hit": false,
+          "proposal_hit": false,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-111",
+          "visibility": "visible",
+          "candidate_hit": false,
+          "proposal_hit": false,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-112",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-113",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-114",
+          "visibility": "visible",
+          "candidate_hit": false,
+          "proposal_hit": false,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-115",
+          "visibility": "visible",
+          "candidate_hit": false,
+          "proposal_hit": false,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-116",
+          "visibility": "visible",
+          "candidate_hit": false,
+          "proposal_hit": false,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-117",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-118",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-119",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-120",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-121",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-122",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-123",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-124",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-125",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-126",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-127",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-128",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-129",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-130",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-131",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-132",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-133",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-134",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-135",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-136",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-137",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-138",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-139",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-140",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-141",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-142",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-143",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-144",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-145",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-146",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-147",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-148",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-149",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-150",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-151",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-152",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-153",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-154",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-155",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        }
+      ],
+      "verified_shuttle_positions": 0,
+      "limitations": [
+        "Selected, correlated development examples; not held-out data or full-video precision/recall.",
+        "Negative regions label only local distractors, not absence of a shuttle elsewhere in the frame.",
+        "Evaluation never promotes proposals to verified trajectories or enables events/scoring.",
+        "Uncertain annotations break continuity statistics and never imply shuttle absence; point matches do not certify object identity or physical trajectories."
+      ],
+      "continuous_sequences": [
+        {
+          "id": "broadcast-point-720",
+          "source_run": "rally-720",
+          "start_frame": 0,
+          "end_frame": 155,
+          "annotated_frames": 156,
+          "visible_frames": 36,
+          "uncertain_frames": 120,
+          "candidate_point_hits": 25,
+          "proposal_point_hits": 25,
+          "visible_frames_without_candidates": 4,
+          "visible_frames_without_proposal": 4,
+          "visible_frames_with_displaced_proposal": 7,
+          "uncertain_frames_with_proposals_unscored": 30,
+          "longest_correct_same_segment_run_frames": 14,
+          "longest_consecutive_visible_missing_proposal_frames": 2,
+          "adjacent_point_matches_in_same_segment": 21,
+          "adjacent_point_matches_with_segment_or_scene_change": 0,
+          "adjacent_point_matches_with_annotation_view_change": 0,
+          "mean_error_on_visible_proposed_frames_px": 2.2927,
+          "max_error_on_visible_proposed_frames_px": 13.851,
+          "annotation_view_counts": {
+            "closeup": {
+              "annotated_frames": 13,
+              "visible_frames": 2,
+              "uncertain_frames": 11,
+              "proposal_point_hits": 0,
+              "visible_frames_without_proposal": 2,
+              "visible_frames_with_displaced_proposal": 0
+            },
+            "wide_court": {
+              "annotated_frames": 143,
+              "visible_frames": 34,
+              "uncertain_frames": 109,
+              "proposal_point_hits": 25,
+              "visible_frames_without_proposal": 2,
+              "visible_frames_with_displaced_proposal": 7
+            }
+          },
+          "prediction_status_counts": {
+            "excluded_player_review": 15,
+            "proposal": 62,
+            "no_heatmap_detection": 78,
+            "ambiguous_candidates": 1
+          },
+          "scene_change_frames": [
+            12
+          ],
+          "annotation_view_change_frames": [
+            12,
+            155
+          ],
+          "adjacent_visible_proposed_pairs_same_segment_and_view": 28,
+          "mean_step_vector_error_px": 1.1182,
+          "max_step_vector_error_px": 3.125,
+          "timeline": [
+            {
+              "frame_index": 0,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "closeup",
+              "prediction_status": "excluded_player_review",
+              "scene_id": 0,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 1,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "closeup",
+              "prediction_status": "excluded_player_review",
+              "scene_id": 0,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 2,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "closeup",
+              "prediction_status": "excluded_player_review",
+              "scene_id": 0,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 3,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "closeup",
+              "prediction_status": "excluded_player_review",
+              "scene_id": 0,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 4,
+              "visibility": "visible",
+              "proposal_error_px": null,
+              "annotation_view": "closeup",
+              "prediction_status": "excluded_player_review",
+              "scene_id": 0,
+              "proposal_segment_id": null,
+              "result": "missing_proposal"
+            },
+            {
+              "frame_index": 5,
+              "visibility": "visible",
+              "proposal_error_px": null,
+              "annotation_view": "closeup",
+              "prediction_status": "excluded_player_review",
+              "scene_id": 0,
+              "proposal_segment_id": null,
+              "result": "missing_proposal"
+            },
+            {
+              "frame_index": 6,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "closeup",
+              "prediction_status": "excluded_player_review",
+              "scene_id": 0,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 7,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "closeup",
+              "prediction_status": "excluded_player_review",
+              "scene_id": 0,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 8,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "closeup",
+              "prediction_status": "excluded_player_review",
+              "scene_id": 0,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 9,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "closeup",
+              "prediction_status": "excluded_player_review",
+              "scene_id": 0,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 10,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "closeup",
+              "prediction_status": "excluded_player_review",
+              "scene_id": 0,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 11,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "closeup",
+              "prediction_status": "excluded_player_review",
+              "scene_id": 0,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 12,
+              "visibility": "visible",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "excluded_player_review",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "missing_proposal"
+            },
+            {
+              "frame_index": 13,
+              "visibility": "visible",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "excluded_player_review",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "missing_proposal"
+            },
+            {
+              "frame_index": 14,
+              "visibility": "visible",
+              "proposal_error_px": 1.305,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 0,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 15,
+              "visibility": "visible",
+              "proposal_error_px": 1.4252,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 0,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 16,
+              "visibility": "visible",
+              "proposal_error_px": 1.908,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 0,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 17,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 0,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 18,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 0,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 19,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 20,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 1,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 21,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 1,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 22,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 23,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 24,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 25,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 26,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 27,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 28,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 29,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 30,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 31,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 32,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 33,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 34,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 35,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 36,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 37,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 38,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 39,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 40,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 41,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 42,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 43,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 44,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 45,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 46,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 2,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 47,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 2,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 48,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 2,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 49,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "ambiguous_candidates",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 50,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 51,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 52,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 53,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 54,
+              "visibility": "visible",
+              "proposal_error_px": 13.851,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 3,
+              "result": "displaced_proposal"
+            },
+            {
+              "frame_index": 55,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 3,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 56,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 3,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 57,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 58,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 4,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 59,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 60,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 61,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 62,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 63,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 64,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 65,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 66,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 67,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 68,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 69,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 70,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 71,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 72,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 73,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 74,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 75,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 76,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 77,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 78,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 79,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 80,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 81,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 82,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 83,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 84,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 85,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 86,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 87,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 88,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 89,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 90,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 91,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 92,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 93,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 94,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 95,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 96,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 97,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 98,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 99,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 100,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 101,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 102,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 103,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 104,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 105,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 106,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 107,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 108,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 109,
+              "visibility": "visible",
+              "proposal_error_px": 5.3808,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "displaced_proposal"
+            },
+            {
+              "frame_index": 110,
+              "visibility": "visible",
+              "proposal_error_px": 4.8541,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "displaced_proposal"
+            },
+            {
+              "frame_index": 111,
+              "visibility": "visible",
+              "proposal_error_px": 5.099,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "displaced_proposal"
+            },
+            {
+              "frame_index": 112,
+              "visibility": "visible",
+              "proposal_error_px": 3.3096,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 113,
+              "visibility": "visible",
+              "proposal_error_px": 3.4324,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 114,
+              "visibility": "visible",
+              "proposal_error_px": 4.0812,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "displaced_proposal"
+            },
+            {
+              "frame_index": 115,
+              "visibility": "visible",
+              "proposal_error_px": 4.1926,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "displaced_proposal"
+            },
+            {
+              "frame_index": 116,
+              "visibility": "visible",
+              "proposal_error_px": 4.1926,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "displaced_proposal"
+            },
+            {
+              "frame_index": 117,
+              "visibility": "visible",
+              "proposal_error_px": 1.741,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 118,
+              "visibility": "visible",
+              "proposal_error_px": 1.1859,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 119,
+              "visibility": "visible",
+              "proposal_error_px": 1.7545,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 120,
+              "visibility": "visible",
+              "proposal_error_px": 0.5,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 121,
+              "visibility": "visible",
+              "proposal_error_px": 0.8839,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 122,
+              "visibility": "visible",
+              "proposal_error_px": 0.2795,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 123,
+              "visibility": "visible",
+              "proposal_error_px": 1.1524,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 124,
+              "visibility": "visible",
+              "proposal_error_px": 2.0502,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 125,
+              "visibility": "visible",
+              "proposal_error_px": 1.0753,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 126,
+              "visibility": "visible",
+              "proposal_error_px": 1.1319,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 127,
+              "visibility": "visible",
+              "proposal_error_px": 0.7906,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 128,
+              "visibility": "visible",
+              "proposal_error_px": 1.1524,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 129,
+              "visibility": "visible",
+              "proposal_error_px": 2.2361,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 130,
+              "visibility": "visible",
+              "proposal_error_px": 0.6374,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 131,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 132,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 133,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 134,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 135,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 136,
+              "visibility": "visible",
+              "proposal_error_px": 0.8385,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 137,
+              "visibility": "visible",
+              "proposal_error_px": 0.8839,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 138,
+              "visibility": "visible",
+              "proposal_error_px": 0.7071,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 139,
+              "visibility": "visible",
+              "proposal_error_px": 0.3536,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 140,
+              "visibility": "visible",
+              "proposal_error_px": 0.5303,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 141,
+              "visibility": "visible",
+              "proposal_error_px": 0.4507,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 142,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 143,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 144,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 145,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 146,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 147,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 148,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 149,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 150,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 151,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 152,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 153,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 154,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 155,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "closeup",
+              "prediction_status": "excluded_player_review",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            }
+          ]
+        }
+      ]
+    },
+    "overlap": {
+      "schema_version": "0.1.0",
+      "evaluation_scope": "continuously_annotated_development_intervals_only",
+      "benchmark_sha256": "f53c6833ef87a3c191144eec78e389279257d8dc5777261f9d503967f29272d2",
+      "prediction_bindings": {
+        "rally-720": {
+          "summary_sha256": "0f857228d99163e818218d056e366dd3fabb10eb66c55ab37e3700e1b369e20f",
+          "rows_sha256": "3f0adb29a965de3ea627da12b02136b6f2e8410f800142bd47d732f2b358330a"
+        }
+      },
+      "point_tolerance_px": 4,
+      "visible_points": 36,
+      "candidate_point_hits": 26,
+      "proposal_point_hits": 25,
+      "uncertain_frames_excluded_from_point_scoring": 120,
+      "known_negative_regions": 0,
+      "negative_regions_with_candidates": 0,
+      "negative_regions_with_proposals": 0,
+      "cases": [
+        {
+          "id": "rally-000",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-001",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-002",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-003",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-004",
+          "visibility": "visible",
+          "candidate_hit": false,
+          "proposal_hit": false,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-005",
+          "visibility": "visible",
+          "candidate_hit": false,
+          "proposal_hit": false,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-006",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-007",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-008",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-009",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-010",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-011",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-012",
+          "visibility": "visible",
+          "candidate_hit": false,
+          "proposal_hit": false,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-013",
+          "visibility": "visible",
+          "candidate_hit": false,
+          "proposal_hit": false,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-014",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-015",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-016",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-017",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-018",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-019",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-020",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-021",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-022",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-023",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-024",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-025",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-026",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-027",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-028",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-029",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-030",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-031",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-032",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-033",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-034",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-035",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-036",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-037",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-038",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-039",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-040",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-041",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-042",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-043",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-044",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-045",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-046",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-047",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-048",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-049",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-050",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-051",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-052",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-053",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-054",
+          "visibility": "visible",
+          "candidate_hit": false,
+          "proposal_hit": false,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-055",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-056",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-057",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-058",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-059",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-060",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-061",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-062",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-063",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-064",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-065",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-066",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-067",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-068",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-069",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-070",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-071",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-072",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-073",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-074",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-075",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-076",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-077",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-078",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-079",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-080",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-081",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-082",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-083",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-084",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-085",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-086",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-087",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-088",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-089",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-090",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-091",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-092",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-093",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-094",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-095",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-096",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-097",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-098",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-099",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-100",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-101",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-102",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-103",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-104",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-105",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-106",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-107",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-108",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-109",
+          "visibility": "visible",
+          "candidate_hit": false,
+          "proposal_hit": false,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-110",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": false,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-111",
+          "visibility": "visible",
+          "candidate_hit": false,
+          "proposal_hit": false,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-112",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-113",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-114",
+          "visibility": "visible",
+          "candidate_hit": false,
+          "proposal_hit": false,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-115",
+          "visibility": "visible",
+          "candidate_hit": false,
+          "proposal_hit": false,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-116",
+          "visibility": "visible",
+          "candidate_hit": false,
+          "proposal_hit": false,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-117",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-118",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-119",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-120",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-121",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-122",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-123",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-124",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-125",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-126",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-127",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-128",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-129",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-130",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-131",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-132",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-133",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-134",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-135",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-136",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-137",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-138",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-139",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-140",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-141",
+          "visibility": "visible",
+          "candidate_hit": true,
+          "proposal_hit": true,
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-142",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-143",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-144",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-145",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-146",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-147",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-148",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-149",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-150",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-151",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-152",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-153",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-154",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        },
+        {
+          "id": "rally-155",
+          "visibility": "uncertain",
+          "negative_region_hits": []
+        }
+      ],
+      "verified_shuttle_positions": 0,
+      "limitations": [
+        "Selected, correlated development examples; not held-out data or full-video precision/recall.",
+        "Negative regions label only local distractors, not absence of a shuttle elsewhere in the frame.",
+        "Evaluation never promotes proposals to verified trajectories or enables events/scoring.",
+        "Uncertain annotations break continuity statistics and never imply shuttle absence; point matches do not certify object identity or physical trajectories."
+      ],
+      "continuous_sequences": [
+        {
+          "id": "broadcast-point-720",
+          "source_run": "rally-720",
+          "start_frame": 0,
+          "end_frame": 155,
+          "annotated_frames": 156,
+          "visible_frames": 36,
+          "uncertain_frames": 120,
+          "candidate_point_hits": 26,
+          "proposal_point_hits": 25,
+          "visible_frames_without_candidates": 5,
+          "visible_frames_without_proposal": 6,
+          "visible_frames_with_displaced_proposal": 5,
+          "uncertain_frames_with_proposals_unscored": 24,
+          "longest_correct_same_segment_run_frames": 14,
+          "longest_consecutive_visible_missing_proposal_frames": 2,
+          "adjacent_point_matches_in_same_segment": 21,
+          "adjacent_point_matches_with_segment_or_scene_change": 0,
+          "adjacent_point_matches_with_annotation_view_change": 0,
+          "mean_error_on_visible_proposed_frames_px": 1.8223,
+          "max_error_on_visible_proposed_frames_px": 5.9266,
+          "annotation_view_counts": {
+            "closeup": {
+              "annotated_frames": 13,
+              "visible_frames": 2,
+              "uncertain_frames": 11,
+              "proposal_point_hits": 0,
+              "visible_frames_without_proposal": 2,
+              "visible_frames_with_displaced_proposal": 0
+            },
+            "wide_court": {
+              "annotated_frames": 143,
+              "visible_frames": 34,
+              "uncertain_frames": 109,
+              "proposal_point_hits": 25,
+              "visible_frames_without_proposal": 4,
+              "visible_frames_with_displaced_proposal": 5
+            }
+          },
+          "prediction_status_counts": {
+            "excluded_player_review": 15,
+            "proposal": 54,
+            "no_heatmap_detection": 86,
+            "ambiguous_candidates": 1
+          },
+          "scene_change_frames": [
+            12
+          ],
+          "annotation_view_change_frames": [
+            12,
+            155
+          ],
+          "adjacent_visible_proposed_pairs_same_segment_and_view": 26,
+          "mean_step_vector_error_px": 1.1396,
+          "max_step_vector_error_px": 3.125,
+          "timeline": [
+            {
+              "frame_index": 0,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "closeup",
+              "prediction_status": "excluded_player_review",
+              "scene_id": 0,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 1,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "closeup",
+              "prediction_status": "excluded_player_review",
+              "scene_id": 0,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 2,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "closeup",
+              "prediction_status": "excluded_player_review",
+              "scene_id": 0,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 3,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "closeup",
+              "prediction_status": "excluded_player_review",
+              "scene_id": 0,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 4,
+              "visibility": "visible",
+              "proposal_error_px": null,
+              "annotation_view": "closeup",
+              "prediction_status": "excluded_player_review",
+              "scene_id": 0,
+              "proposal_segment_id": null,
+              "result": "missing_proposal"
+            },
+            {
+              "frame_index": 5,
+              "visibility": "visible",
+              "proposal_error_px": null,
+              "annotation_view": "closeup",
+              "prediction_status": "excluded_player_review",
+              "scene_id": 0,
+              "proposal_segment_id": null,
+              "result": "missing_proposal"
+            },
+            {
+              "frame_index": 6,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "closeup",
+              "prediction_status": "excluded_player_review",
+              "scene_id": 0,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 7,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "closeup",
+              "prediction_status": "excluded_player_review",
+              "scene_id": 0,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 8,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "closeup",
+              "prediction_status": "excluded_player_review",
+              "scene_id": 0,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 9,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "closeup",
+              "prediction_status": "excluded_player_review",
+              "scene_id": 0,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 10,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "closeup",
+              "prediction_status": "excluded_player_review",
+              "scene_id": 0,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 11,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "closeup",
+              "prediction_status": "excluded_player_review",
+              "scene_id": 0,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 12,
+              "visibility": "visible",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "excluded_player_review",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "missing_proposal"
+            },
+            {
+              "frame_index": 13,
+              "visibility": "visible",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "excluded_player_review",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "missing_proposal"
+            },
+            {
+              "frame_index": 14,
+              "visibility": "visible",
+              "proposal_error_px": 1.305,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 0,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 15,
+              "visibility": "visible",
+              "proposal_error_px": 1.4252,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 0,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 16,
+              "visibility": "visible",
+              "proposal_error_px": 1.908,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 0,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 17,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 0,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 18,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 19,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 20,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 21,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 22,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 23,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 24,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 25,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 26,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 27,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 28,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 29,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 30,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 31,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 32,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 33,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 34,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 35,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 36,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 37,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 38,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 39,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 40,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 41,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 42,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 43,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 44,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 45,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 46,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 1,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 47,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 1,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 48,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 49,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 50,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 51,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 52,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 53,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 54,
+              "visibility": "visible",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "missing_proposal"
+            },
+            {
+              "frame_index": 55,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 2,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 56,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 2,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 57,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 58,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 3,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 59,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 60,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 61,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 62,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 63,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 64,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 65,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 66,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 67,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 68,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 69,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 70,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 71,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 72,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 73,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 74,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 75,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 76,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 77,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 78,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 79,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 80,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 81,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 82,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 83,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 84,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 85,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 86,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 87,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 88,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 89,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 90,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 91,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 92,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 93,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 94,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 95,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 96,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 97,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 98,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 99,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 100,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 101,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 102,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 103,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 104,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 105,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 106,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 107,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 108,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "no_heatmap_detection",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 109,
+              "visibility": "visible",
+              "proposal_error_px": 5.9266,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 4,
+              "result": "displaced_proposal"
+            },
+            {
+              "frame_index": 110,
+              "visibility": "visible",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "ambiguous_candidates",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "missing_proposal"
+            },
+            {
+              "frame_index": 111,
+              "visibility": "visible",
+              "proposal_error_px": 5.014,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "displaced_proposal"
+            },
+            {
+              "frame_index": 112,
+              "visibility": "visible",
+              "proposal_error_px": 2.6984,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 113,
+              "visibility": "visible",
+              "proposal_error_px": 3.4324,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 114,
+              "visibility": "visible",
+              "proposal_error_px": 4.0812,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "displaced_proposal"
+            },
+            {
+              "frame_index": 115,
+              "visibility": "visible",
+              "proposal_error_px": 4.1926,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "displaced_proposal"
+            },
+            {
+              "frame_index": 116,
+              "visibility": "visible",
+              "proposal_error_px": 4.1926,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "displaced_proposal"
+            },
+            {
+              "frame_index": 117,
+              "visibility": "visible",
+              "proposal_error_px": 1.741,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 118,
+              "visibility": "visible",
+              "proposal_error_px": 1.1859,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 119,
+              "visibility": "visible",
+              "proposal_error_px": 1.7545,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 120,
+              "visibility": "visible",
+              "proposal_error_px": 0.125,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 121,
+              "visibility": "visible",
+              "proposal_error_px": 0.8839,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 122,
+              "visibility": "visible",
+              "proposal_error_px": 0.8839,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 123,
+              "visibility": "visible",
+              "proposal_error_px": 0.625,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 124,
+              "visibility": "visible",
+              "proposal_error_px": 2.0502,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 125,
+              "visibility": "visible",
+              "proposal_error_px": 1.0753,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 126,
+              "visibility": "visible",
+              "proposal_error_px": 1.1319,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 127,
+              "visibility": "visible",
+              "proposal_error_px": 0.7906,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 128,
+              "visibility": "visible",
+              "proposal_error_px": 1.1524,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 129,
+              "visibility": "visible",
+              "proposal_error_px": 2.0349,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 130,
+              "visibility": "visible",
+              "proposal_error_px": 0.6374,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 131,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 132,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 133,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 134,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 135,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 136,
+              "visibility": "visible",
+              "proposal_error_px": 1.3975,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 137,
+              "visibility": "visible",
+              "proposal_error_px": 0.8839,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 138,
+              "visibility": "visible",
+              "proposal_error_px": 0.7071,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 139,
+              "visibility": "visible",
+              "proposal_error_px": 0.4507,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 140,
+              "visibility": "visible",
+              "proposal_error_px": 0.5303,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 141,
+              "visibility": "visible",
+              "proposal_error_px": 0.4507,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "point_match"
+            },
+            {
+              "frame_index": 142,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 143,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 144,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 145,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 146,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 147,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 148,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 149,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 150,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 151,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 152,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 153,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 154,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "wide_court",
+              "prediction_status": "proposal",
+              "scene_id": 1,
+              "proposal_segment_id": 5,
+              "result": "uncertain_unscored"
+            },
+            {
+              "frame_index": 155,
+              "visibility": "uncertain",
+              "proposal_error_px": null,
+              "annotation_view": "closeup",
+              "prediction_status": "excluded_player_review",
+              "scene_id": 1,
+              "proposal_segment_id": null,
+              "result": "uncertain_unscored"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "tolerance_sensitivity": {
+    "default": {
+      "2": {
+        "visible_points": 36,
+        "candidate_point_hits": 21,
+        "proposal_point_hits": 21
+      },
+      "4": {
+        "visible_points": 36,
+        "candidate_point_hits": 25,
+        "proposal_point_hits": 25
+      },
+      "6": {
+        "visible_points": 36,
+        "candidate_point_hits": 31,
+        "proposal_point_hits": 31
+      }
+    },
+    "overlap": {
+      "2": {
+        "visible_points": 36,
+        "candidate_point_hits": 22,
+        "proposal_point_hits": 21
+      },
+      "4": {
+        "visible_points": 36,
+        "candidate_point_hits": 26,
+        "proposal_point_hits": 25
+      },
+      "6": {
+        "visible_points": 36,
+        "candidate_point_hits": 31,
+        "proposal_point_hits": 30
+      }
+    }
+  },
+  "previous_continuous_packet_regression": {
+    "default": {
+      "proposal_point_hits": 94,
+      "visible_points": 111,
+      "benchmark_sha256": "7ca0f95783c4c5799ec913e63201bdcd652e1968f50cfa28e1f20cc4ec36c4a7"
+    },
+    "overlap": {
+      "proposal_point_hits": 98,
+      "visible_points": 111,
+      "benchmark_sha256": "7ca0f95783c4c5799ec913e63201bdcd652e1968f50cfa28e1f20cc4ec36c4a7"
+    }
+  },
+  "review_video": {
+    "file": "comparison.mp4",
+    "frames_decoded": 156,
+    "sha256": "0704920cb5ee982ce0eaeff400a59a7ae93d259ec628a906a140ccecbc404da6"
+  },
+  "tests": {
+    "passed": 76,
+    "command": ".venv/Scripts/python.exe -m unittest discover -v"
+  },
+  "default_changed": false,
+  "verified_shuttle_positions": 0,
+  "shot_events": {
+    "status": "not_available"
+  },
+  "coaching_metrics": {
+    "status": "not_available"
+  },
+  "findings": [
+    "Both modes match 25/36 visible labels at four pixels, or 25/34 labeled wide-court observations.",
+    "Four visible observations have no proposal in the default: two intentional service close-up exclusions plus two wide-view boundary frames outside approved player intervals.",
+    "Overlap adds two missing visible proposals: a weak heatmap at frame 54 and ambiguity at frame 110. It is not promoted.",
+    "Source view switches at frames 12 and 155; inherited sampled scene changes at frame 12 within this interval, with frame 155 already excluded. No context or motion claim bridges the excluded boundary.",
+    "120 uncertain frames cannot establish absence, false-positive counts, full-rally recall or a continuous physical trajectory."
+  ],
+  "limitations": [
+    "Automated approximate labels, one match and camera, correlated broadcast repeats. No independent human review; upstream training overlap unknown.",
+    "Frame-to-frame vector error is an image-space diagnostic on adjacent visible proposals in one segment and view; no interpolation, velocity, contact timing or physical motion claim.",
+    "Some flight is outside the enlarged court crop; uncertain frames were retained explicitly. No automatic trajectory acceptance, shot-event timing or coaching scores."
+  ]
+}

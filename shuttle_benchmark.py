@@ -47,6 +47,8 @@ def _validate(data: dict):
         if (not case["reviewer"].strip() or case["reviewer_kind"] not in ("human", "automated")
                 or case["visibility"] not in ("visible", "uncertain")):
             raise ValueError("Labels require explicit provenance and visibility")
+        if case.get("view", "unspecified") not in ("wide_court", "closeup", "unknown", "unspecified"):
+            raise ValueError("Invalid annotation view")
         if case["visibility"] == "visible":
             _point(case["point_px"], width, height)
         elif case["point_px"] is not None:
@@ -103,46 +105,81 @@ def _continuous_metrics(data: dict, loaded: dict, tolerance: float) -> list[dict
         source = sequence["source_run"]
         timeline = []
         longest_match = longest_missing = match_run = missing_run = 0
-        same_segment_pairs = segment_changes = 0
+        same_segment_pairs = segment_changes = matched_view_changes = 0
         previous_match = None
         counts = {"visible_frames": 0, "uncertain_frames": 0, "candidate_point_hits": 0,
                   "proposal_point_hits": 0, "visible_frames_without_candidates": 0,
                   "visible_frames_without_proposal": 0, "visible_frames_with_displaced_proposal": 0,
                   "uncertain_frames_with_proposals_unscored": 0}
         errors = []
+        by_view, status_counts, scene_changes, view_changes = {}, {}, [], []
+        previous_scene = None
+        previous_view = None
+        previous_motion = None
+        step_errors = []
         for index in range(sequence["start_frame"], sequence["end_frame"] + 1):
             case, row = cases[source, index], loaded[source][index]
             proposal = row["proposal"]
+            view = case.get("view", "unspecified")
+            view_counts = by_view.setdefault(view, {"annotated_frames": 0, "visible_frames": 0,
+                                                   "uncertain_frames": 0, "proposal_point_hits": 0,
+                                                   "visible_frames_without_proposal": 0,
+                                                   "visible_frames_with_displaced_proposal": 0})
+            view_counts["annotated_frames"] += 1
+            status = row.get("status", "unspecified")
+            status_counts[status] = status_counts.get(status, 0) + 1
+            if index > sequence["start_frame"] and row.get("scene_id") != previous_scene:
+                scene_changes.append(index)
+                missing_run = 0
+            previous_scene = row.get("scene_id")
+            if index > sequence["start_frame"] and view != previous_view:
+                view_changes.append(index)
+                missing_run = 0
+            previous_view = view
             item = {"frame_index": index, "visibility": case["visibility"], "proposal_error_px": None,
+                    "annotation_view": view, "prediction_status": status,
                     "scene_id": row.get("scene_id"),
                     "proposal_segment_id": proposal["proposal_segment_id"] if proposal else None}
             if case["visibility"] == "uncertain":
                 counts["uncertain_frames"] += 1
+                view_counts["uncertain_frames"] += 1
                 counts["uncertain_frames_with_proposals_unscored"] += proposal is not None
                 item["result"] = "uncertain_unscored"
                 match_run = missing_run = 0
                 previous_match = None
+                previous_motion = None
             else:
                 counts["visible_frames"] += 1
+                view_counts["visible_frames"] += 1
                 candidate_hit = any(math.dist(c["center_px"], case["point_px"]) <= tolerance for c in row["candidates"])
                 counts["candidate_point_hits"] += candidate_hit
                 counts["visible_frames_without_candidates"] += not row["candidates"]
                 error = math.dist(proposal["position_px"], case["point_px"]) if proposal else None
                 hit = error is not None and error <= tolerance
                 counts["proposal_point_hits"] += hit
+                view_counts["proposal_point_hits"] += hit
+                view_counts["visible_frames_without_proposal"] += proposal is None
+                view_counts["visible_frames_with_displaced_proposal"] += proposal is not None and not hit
                 counts["visible_frames_without_proposal"] += proposal is None
                 counts["visible_frames_with_displaced_proposal"] += proposal is not None and not hit
                 if error is not None:
                     errors.append(error)
                     item["proposal_error_px"] = round(error, 4)
+                motion_key = (row.get("scene_id"), proposal["proposal_segment_id"], view) if proposal else None
+                if proposal and previous_motion is not None and previous_motion[0] == motion_key:
+                    predicted_step = [a-b for a,b in zip(proposal["position_px"], previous_motion[1])]
+                    labeled_step = [a-b for a,b in zip(case["point_px"], previous_motion[2])]
+                    step_errors.append(math.dist(predicted_step, labeled_step))
+                previous_motion = (motion_key, proposal["position_px"], case["point_px"]) if proposal else None
                 item["result"] = "point_match" if hit else ("missing_proposal" if proposal is None else "displaced_proposal")
                 missing_run = missing_run + 1 if proposal is None else 0
                 longest_missing = max(longest_missing, missing_run)
                 if hit:
-                    key = (row["scene_id"], proposal["proposal_segment_id"])
+                    key = (row["scene_id"], proposal["proposal_segment_id"], view)
                     if previous_match is not None:
-                        same_segment_pairs += previous_match == key
-                        segment_changes += previous_match != key
+                        same_segment_pairs += previous_match[:2] == key[:2]
+                        segment_changes += previous_match[:2] != key[:2]
+                        matched_view_changes += previous_match[2] != view
                     match_run = match_run + 1 if previous_match == key else 1
                     previous_match = key
                     longest_match = max(longest_match, match_run)
@@ -155,8 +192,15 @@ def _continuous_metrics(data: dict, loaded: dict, tolerance: float) -> list[dict
                         "longest_consecutive_visible_missing_proposal_frames": longest_missing,
                         "adjacent_point_matches_in_same_segment": same_segment_pairs,
                         "adjacent_point_matches_with_segment_or_scene_change": segment_changes,
+                        "adjacent_point_matches_with_annotation_view_change": matched_view_changes,
                         "mean_error_on_visible_proposed_frames_px": round(sum(errors)/len(errors), 4) if errors else None,
                         "max_error_on_visible_proposed_frames_px": round(max(errors), 4) if errors else None,
+                        "annotation_view_counts": by_view, "prediction_status_counts": status_counts,
+                        "scene_change_frames": scene_changes,
+                        "annotation_view_change_frames": view_changes,
+                        "adjacent_visible_proposed_pairs_same_segment_and_view": len(step_errors),
+                        "mean_step_vector_error_px": round(sum(step_errors)/len(step_errors), 4) if step_errors else None,
+                        "max_step_vector_error_px": round(max(step_errors), 4) if step_errors else None,
                         "timeline": timeline})
     return results
 
