@@ -1,0 +1,2353 @@
+{
+  "schema_version": "0.1.0",
+  "split": "development_seed",
+  "role": "continuous_development",
+  "source_video_sha256": "f317baacdd4ccce45febd9f416ba44b6c90071ebf3380c22f877b03376101130",
+  "image_size_px": [
+    640,
+    360
+  ],
+  "annotation_scope": "Codex automated visual review of every frame in two unmarked native-rate source intervals, using enlarged temporal source sheets. Approximate visible streak/component centers, not cork positions. Unknown/overlapping/out-of-crop observations remain uncertain, never absent. No interpolation or TrackNet predictions used to supply labels. Existing sparse model previews had already been seen; this is not blind or held-out labeling. Same match/camera; upstream training overlap unknown.",
+  "coordinate_method": "Manual approximate native-pixel centers from 2x enlarged raw crops, checked in 4x local crops. Local bright-pixel connected components refine some visually identified centers; no evaluated model output, identity inference or interpolation. Tolerance sensitivity reported separately.",
+  "sources": {
+    "opening": {
+      "fps": 30,
+      "start_seconds": 0,
+      "frames": 300
+    },
+    "control": {
+      "fps": 30,
+      "start_seconds": 60,
+      "frames": 300
+    }
+  },
+  "sequences": [
+    {
+      "id": "opening-006-009",
+      "source_run": "opening",
+      "start_frame": 180,
+      "end_frame": 269
+    },
+    {
+      "id": "control-061-064",
+      "source_run": "control",
+      "start_frame": 30,
+      "end_frame": 119
+    }
+  ],
+  "cases": [
+    {
+      "id": "opening-180",
+      "source_run": "opening",
+      "frame_index": 180,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-181",
+      "source_run": "opening",
+      "frame_index": 181,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-182",
+      "source_run": "opening",
+      "frame_index": 182,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-183",
+      "source_run": "opening",
+      "frame_index": 183,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-184",
+      "source_run": "opening",
+      "frame_index": 184,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-185",
+      "source_run": "opening",
+      "frame_index": 185,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-186",
+      "source_run": "opening",
+      "frame_index": 186,
+      "visibility": "visible",
+      "point_px": [
+        424.78,
+        147.33
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-187",
+      "source_run": "opening",
+      "frame_index": 187,
+      "visibility": "visible",
+      "point_px": [
+        424.78,
+        147.33
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-188",
+      "source_run": "opening",
+      "frame_index": 188,
+      "visibility": "visible",
+      "point_px": [
+        429.62,
+        166
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-189",
+      "source_run": "opening",
+      "frame_index": 189,
+      "visibility": "visible",
+      "point_px": [
+        433.89,
+        183.61
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-190",
+      "source_run": "opening",
+      "frame_index": 190,
+      "visibility": "visible",
+      "point_px": [
+        437.73,
+        201.27
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-191",
+      "source_run": "opening",
+      "frame_index": 191,
+      "visibility": "visible",
+      "point_px": [
+        441.06,
+        217.89
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-192",
+      "source_run": "opening",
+      "frame_index": 192,
+      "visibility": "visible",
+      "point_px": [
+        444.5,
+        233.86
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-193",
+      "source_run": "opening",
+      "frame_index": 193,
+      "visibility": "visible",
+      "point_px": [
+        444.5,
+        233.86
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-194",
+      "source_run": "opening",
+      "frame_index": 194,
+      "visibility": "visible",
+      "point_px": [
+        446.55,
+        248.73
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-195",
+      "source_run": "opening",
+      "frame_index": 195,
+      "visibility": "visible",
+      "point_px": [
+        449.78,
+        264
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-196",
+      "source_run": "opening",
+      "frame_index": 196,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-197",
+      "source_run": "opening",
+      "frame_index": 197,
+      "visibility": "visible",
+      "point_px": [
+        448,
+        220.5
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-198",
+      "source_run": "opening",
+      "frame_index": 198,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-199",
+      "source_run": "opening",
+      "frame_index": 199,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-200",
+      "source_run": "opening",
+      "frame_index": 200,
+      "visibility": "visible",
+      "point_px": [
+        446,
+        181
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-201",
+      "source_run": "opening",
+      "frame_index": 201,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-202",
+      "source_run": "opening",
+      "frame_index": 202,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-203",
+      "source_run": "opening",
+      "frame_index": 203,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-204",
+      "source_run": "opening",
+      "frame_index": 204,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-205",
+      "source_run": "opening",
+      "frame_index": 205,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-206",
+      "source_run": "opening",
+      "frame_index": 206,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-207",
+      "source_run": "opening",
+      "frame_index": 207,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-208",
+      "source_run": "opening",
+      "frame_index": 208,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-209",
+      "source_run": "opening",
+      "frame_index": 209,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-210",
+      "source_run": "opening",
+      "frame_index": 210,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-211",
+      "source_run": "opening",
+      "frame_index": 211,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-212",
+      "source_run": "opening",
+      "frame_index": 212,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-213",
+      "source_run": "opening",
+      "frame_index": 213,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-214",
+      "source_run": "opening",
+      "frame_index": 214,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-215",
+      "source_run": "opening",
+      "frame_index": 215,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-216",
+      "source_run": "opening",
+      "frame_index": 216,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-217",
+      "source_run": "opening",
+      "frame_index": 217,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-218",
+      "source_run": "opening",
+      "frame_index": 218,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-219",
+      "source_run": "opening",
+      "frame_index": 219,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-220",
+      "source_run": "opening",
+      "frame_index": 220,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-221",
+      "source_run": "opening",
+      "frame_index": 221,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-222",
+      "source_run": "opening",
+      "frame_index": 222,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-223",
+      "source_run": "opening",
+      "frame_index": 223,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-224",
+      "source_run": "opening",
+      "frame_index": 224,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-225",
+      "source_run": "opening",
+      "frame_index": 225,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-226",
+      "source_run": "opening",
+      "frame_index": 226,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-227",
+      "source_run": "opening",
+      "frame_index": 227,
+      "visibility": "visible",
+      "point_px": [
+        405,
+        100
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-228",
+      "source_run": "opening",
+      "frame_index": 228,
+      "visibility": "visible",
+      "point_px": [
+        392,
+        82
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-229",
+      "source_run": "opening",
+      "frame_index": 229,
+      "visibility": "visible",
+      "point_px": [
+        392,
+        82
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-230",
+      "source_run": "opening",
+      "frame_index": 230,
+      "visibility": "visible",
+      "point_px": [
+        379,
+        67
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-231",
+      "source_run": "opening",
+      "frame_index": 231,
+      "visibility": "visible",
+      "point_px": [
+        371,
+        58
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-232",
+      "source_run": "opening",
+      "frame_index": 232,
+      "visibility": "visible",
+      "point_px": [
+        361,
+        48
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-233",
+      "source_run": "opening",
+      "frame_index": 233,
+      "visibility": "visible",
+      "point_px": [
+        352,
+        40
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-234",
+      "source_run": "opening",
+      "frame_index": 234,
+      "visibility": "visible",
+      "point_px": [
+        345,
+        33
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-235",
+      "source_run": "opening",
+      "frame_index": 235,
+      "visibility": "visible",
+      "point_px": [
+        345,
+        33
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-236",
+      "source_run": "opening",
+      "frame_index": 236,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-237",
+      "source_run": "opening",
+      "frame_index": 237,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-238",
+      "source_run": "opening",
+      "frame_index": 238,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-239",
+      "source_run": "opening",
+      "frame_index": 239,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-240",
+      "source_run": "opening",
+      "frame_index": 240,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-241",
+      "source_run": "opening",
+      "frame_index": 241,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-242",
+      "source_run": "opening",
+      "frame_index": 242,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-243",
+      "source_run": "opening",
+      "frame_index": 243,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-244",
+      "source_run": "opening",
+      "frame_index": 244,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-245",
+      "source_run": "opening",
+      "frame_index": 245,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-246",
+      "source_run": "opening",
+      "frame_index": 246,
+      "visibility": "visible",
+      "point_px": [
+        280,
+        27
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-247",
+      "source_run": "opening",
+      "frame_index": 247,
+      "visibility": "visible",
+      "point_px": [
+        280,
+        27
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-248",
+      "source_run": "opening",
+      "frame_index": 248,
+      "visibility": "visible",
+      "point_px": [
+        274,
+        30
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-249",
+      "source_run": "opening",
+      "frame_index": 249,
+      "visibility": "visible",
+      "point_px": [
+        269,
+        35
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-250",
+      "source_run": "opening",
+      "frame_index": 250,
+      "visibility": "visible",
+      "point_px": [
+        263,
+        41
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-251",
+      "source_run": "opening",
+      "frame_index": 251,
+      "visibility": "visible",
+      "point_px": [
+        257,
+        48
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-252",
+      "source_run": "opening",
+      "frame_index": 252,
+      "visibility": "visible",
+      "point_px": [
+        253,
+        55
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-253",
+      "source_run": "opening",
+      "frame_index": 253,
+      "visibility": "visible",
+      "point_px": [
+        253,
+        55
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-254",
+      "source_run": "opening",
+      "frame_index": 254,
+      "visibility": "visible",
+      "point_px": [
+        247,
+        64
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-255",
+      "source_run": "opening",
+      "frame_index": 255,
+      "visibility": "visible",
+      "point_px": [
+        243,
+        73
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-256",
+      "source_run": "opening",
+      "frame_index": 256,
+      "visibility": "visible",
+      "point_px": [
+        237,
+        83
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-257",
+      "source_run": "opening",
+      "frame_index": 257,
+      "visibility": "visible",
+      "point_px": [
+        233,
+        92
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-258",
+      "source_run": "opening",
+      "frame_index": 258,
+      "visibility": "visible",
+      "point_px": [
+        229,
+        104
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-259",
+      "source_run": "opening",
+      "frame_index": 259,
+      "visibility": "visible",
+      "point_px": [
+        229,
+        104
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-260",
+      "source_run": "opening",
+      "frame_index": 260,
+      "visibility": "visible",
+      "point_px": [
+        224,
+        115
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-261",
+      "source_run": "opening",
+      "frame_index": 261,
+      "visibility": "visible",
+      "point_px": [
+        219,
+        127
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-262",
+      "source_run": "opening",
+      "frame_index": 262,
+      "visibility": "visible",
+      "point_px": [
+        216,
+        138
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-263",
+      "source_run": "opening",
+      "frame_index": 263,
+      "visibility": "visible",
+      "point_px": [
+        212,
+        152
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-264",
+      "source_run": "opening",
+      "frame_index": 264,
+      "visibility": "visible",
+      "point_px": [
+        209,
+        165
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-265",
+      "source_run": "opening",
+      "frame_index": 265,
+      "visibility": "visible",
+      "point_px": [
+        209,
+        165
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-266",
+      "source_run": "opening",
+      "frame_index": 266,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "opening-267",
+      "source_run": "opening",
+      "frame_index": 267,
+      "visibility": "visible",
+      "point_px": [
+        202,
+        194
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-268",
+      "source_run": "opening",
+      "frame_index": 268,
+      "visibility": "visible",
+      "point_px": [
+        200,
+        209
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "opening-269",
+      "source_run": "opening",
+      "frame_index": 269,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "control-030",
+      "source_run": "control",
+      "frame_index": 30,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "control-031",
+      "source_run": "control",
+      "frame_index": 31,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "control-032",
+      "source_run": "control",
+      "frame_index": 32,
+      "visibility": "visible",
+      "point_px": [
+        335,
+        107
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-033",
+      "source_run": "control",
+      "frame_index": 33,
+      "visibility": "visible",
+      "point_px": [
+        329.67,
+        94.33
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-034",
+      "source_run": "control",
+      "frame_index": 34,
+      "visibility": "visible",
+      "point_px": [
+        324.67,
+        80.33
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-035",
+      "source_run": "control",
+      "frame_index": 35,
+      "visibility": "visible",
+      "point_px": [
+        321.75,
+        69
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-036",
+      "source_run": "control",
+      "frame_index": 36,
+      "visibility": "visible",
+      "point_px": [
+        317.15,
+        58.46
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-037",
+      "source_run": "control",
+      "frame_index": 37,
+      "visibility": "visible",
+      "point_px": [
+        314.06,
+        51.94
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-038",
+      "source_run": "control",
+      "frame_index": 38,
+      "visibility": "visible",
+      "point_px": [
+        314.06,
+        51.94
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-039",
+      "source_run": "control",
+      "frame_index": 39,
+      "visibility": "visible",
+      "point_px": [
+        311.2,
+        44.3
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-040",
+      "source_run": "control",
+      "frame_index": 40,
+      "visibility": "visible",
+      "point_px": [
+        309,
+        38
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-041",
+      "source_run": "control",
+      "frame_index": 41,
+      "visibility": "visible",
+      "point_px": [
+        305.43,
+        33.5
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-042",
+      "source_run": "control",
+      "frame_index": 42,
+      "visibility": "visible",
+      "point_px": [
+        302.69,
+        29.77
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-043",
+      "source_run": "control",
+      "frame_index": 43,
+      "visibility": "visible",
+      "point_px": [
+        300.17,
+        27.42
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-044",
+      "source_run": "control",
+      "frame_index": 44,
+      "visibility": "visible",
+      "point_px": [
+        300.17,
+        27.42
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-045",
+      "source_run": "control",
+      "frame_index": 45,
+      "visibility": "visible",
+      "point_px": [
+        297.67,
+        25.5
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-046",
+      "source_run": "control",
+      "frame_index": 46,
+      "visibility": "visible",
+      "point_px": [
+        294.5,
+        25
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-047",
+      "source_run": "control",
+      "frame_index": 47,
+      "visibility": "visible",
+      "point_px": [
+        292,
+        25.14
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-048",
+      "source_run": "control",
+      "frame_index": 48,
+      "visibility": "visible",
+      "point_px": [
+        289.42,
+        26.25
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-049",
+      "source_run": "control",
+      "frame_index": 49,
+      "visibility": "visible",
+      "point_px": [
+        286.67,
+        28.25
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-050",
+      "source_run": "control",
+      "frame_index": 50,
+      "visibility": "visible",
+      "point_px": [
+        286.67,
+        28.25
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-051",
+      "source_run": "control",
+      "frame_index": 51,
+      "visibility": "visible",
+      "point_px": [
+        283.71,
+        31.5
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-052",
+      "source_run": "control",
+      "frame_index": 52,
+      "visibility": "visible",
+      "point_px": [
+        281.47,
+        34.87
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-053",
+      "source_run": "control",
+      "frame_index": 53,
+      "visibility": "visible",
+      "point_px": [
+        279.13,
+        39.53
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-054",
+      "source_run": "control",
+      "frame_index": 54,
+      "visibility": "visible",
+      "point_px": [
+        276.5,
+        45
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-055",
+      "source_run": "control",
+      "frame_index": 55,
+      "visibility": "visible",
+      "point_px": [
+        273.62,
+        51.44
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-056",
+      "source_run": "control",
+      "frame_index": 56,
+      "visibility": "visible",
+      "point_px": [
+        273.62,
+        51.44
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-057",
+      "source_run": "control",
+      "frame_index": 57,
+      "visibility": "visible",
+      "point_px": [
+        271.25,
+        58.3
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-058",
+      "source_run": "control",
+      "frame_index": 58,
+      "visibility": "visible",
+      "point_px": [
+        268.56,
+        66.56
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-059",
+      "source_run": "control",
+      "frame_index": 59,
+      "visibility": "visible",
+      "point_px": [
+        265.86,
+        75.14
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-060",
+      "source_run": "control",
+      "frame_index": 60,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "control-061",
+      "source_run": "control",
+      "frame_index": 61,
+      "visibility": "visible",
+      "point_px": [
+        261.29,
+        95.08
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-062",
+      "source_run": "control",
+      "frame_index": 62,
+      "visibility": "visible",
+      "point_px": [
+        261.29,
+        95.08
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-063",
+      "source_run": "control",
+      "frame_index": 63,
+      "visibility": "visible",
+      "point_px": [
+        258.85,
+        105.1
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-064",
+      "source_run": "control",
+      "frame_index": 64,
+      "visibility": "visible",
+      "point_px": [
+        258,
+        117
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-065",
+      "source_run": "control",
+      "frame_index": 65,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "control-066",
+      "source_run": "control",
+      "frame_index": 66,
+      "visibility": "visible",
+      "point_px": [
+        252.38,
+        140.62
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-067",
+      "source_run": "control",
+      "frame_index": 67,
+      "visibility": "visible",
+      "point_px": [
+        250.5,
+        153.5
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-068",
+      "source_run": "control",
+      "frame_index": 68,
+      "visibility": "visible",
+      "point_px": [
+        250.5,
+        153.5
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-069",
+      "source_run": "control",
+      "frame_index": 69,
+      "visibility": "visible",
+      "point_px": [
+        246,
+        150
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-070",
+      "source_run": "control",
+      "frame_index": 70,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "control-071",
+      "source_run": "control",
+      "frame_index": 71,
+      "visibility": "visible",
+      "point_px": [
+        240,
+        117
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-072",
+      "source_run": "control",
+      "frame_index": 72,
+      "visibility": "visible",
+      "point_px": [
+        237,
+        113
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-073",
+      "source_run": "control",
+      "frame_index": 73,
+      "visibility": "visible",
+      "point_px": [
+        235,
+        107
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-074",
+      "source_run": "control",
+      "frame_index": 74,
+      "visibility": "visible",
+      "point_px": [
+        235,
+        108
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-075",
+      "source_run": "control",
+      "frame_index": 75,
+      "visibility": "visible",
+      "point_px": [
+        234,
+        105
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-076",
+      "source_run": "control",
+      "frame_index": 76,
+      "visibility": "visible",
+      "point_px": [
+        232,
+        102
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-077",
+      "source_run": "control",
+      "frame_index": 77,
+      "visibility": "visible",
+      "point_px": [
+        232,
+        102
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-078",
+      "source_run": "control",
+      "frame_index": 78,
+      "visibility": "visible",
+      "point_px": [
+        231,
+        100
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-079",
+      "source_run": "control",
+      "frame_index": 79,
+      "visibility": "visible",
+      "point_px": [
+        231,
+        100
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-080",
+      "source_run": "control",
+      "frame_index": 80,
+      "visibility": "visible",
+      "point_px": [
+        231,
+        101
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-081",
+      "source_run": "control",
+      "frame_index": 81,
+      "visibility": "visible",
+      "point_px": [
+        230,
+        102
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-082",
+      "source_run": "control",
+      "frame_index": 82,
+      "visibility": "visible",
+      "point_px": [
+        230,
+        104
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-083",
+      "source_run": "control",
+      "frame_index": 83,
+      "visibility": "visible",
+      "point_px": [
+        230,
+        106
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-084",
+      "source_run": "control",
+      "frame_index": 84,
+      "visibility": "visible",
+      "point_px": [
+        229,
+        109
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-085",
+      "source_run": "control",
+      "frame_index": 85,
+      "visibility": "visible",
+      "point_px": [
+        229,
+        112
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-086",
+      "source_run": "control",
+      "frame_index": 86,
+      "visibility": "visible",
+      "point_px": [
+        229,
+        112
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-087",
+      "source_run": "control",
+      "frame_index": 87,
+      "visibility": "visible",
+      "point_px": [
+        228,
+        114
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-088",
+      "source_run": "control",
+      "frame_index": 88,
+      "visibility": "visible",
+      "point_px": [
+        228,
+        118
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-089",
+      "source_run": "control",
+      "frame_index": 89,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "control-090",
+      "source_run": "control",
+      "frame_index": 90,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "control-091",
+      "source_run": "control",
+      "frame_index": 91,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "control-092",
+      "source_run": "control",
+      "frame_index": 92,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "control-093",
+      "source_run": "control",
+      "frame_index": 93,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "control-094",
+      "source_run": "control",
+      "frame_index": 94,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "control-095",
+      "source_run": "control",
+      "frame_index": 95,
+      "visibility": "visible",
+      "point_px": [
+        220,
+        115
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-096",
+      "source_run": "control",
+      "frame_index": 96,
+      "visibility": "visible",
+      "point_px": [
+        218,
+        114
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-097",
+      "source_run": "control",
+      "frame_index": 97,
+      "visibility": "visible",
+      "point_px": [
+        216,
+        114
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-098",
+      "source_run": "control",
+      "frame_index": 98,
+      "visibility": "visible",
+      "point_px": [
+        216,
+        114
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-099",
+      "source_run": "control",
+      "frame_index": 99,
+      "visibility": "visible",
+      "point_px": [
+        215,
+        113
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-100",
+      "source_run": "control",
+      "frame_index": 100,
+      "visibility": "visible",
+      "point_px": [
+        213,
+        113
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-101",
+      "source_run": "control",
+      "frame_index": 101,
+      "visibility": "visible",
+      "point_px": [
+        212,
+        114
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-102",
+      "source_run": "control",
+      "frame_index": 102,
+      "visibility": "visible",
+      "point_px": [
+        210,
+        116
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-103",
+      "source_run": "control",
+      "frame_index": 103,
+      "visibility": "visible",
+      "point_px": [
+        208,
+        118
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-104",
+      "source_run": "control",
+      "frame_index": 104,
+      "visibility": "visible",
+      "point_px": [
+        208,
+        118
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-105",
+      "source_run": "control",
+      "frame_index": 105,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "control-106",
+      "source_run": "control",
+      "frame_index": 106,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "control-107",
+      "source_run": "control",
+      "frame_index": 107,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "control-108",
+      "source_run": "control",
+      "frame_index": 108,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "control-109",
+      "source_run": "control",
+      "frame_index": 109,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "control-110",
+      "source_run": "control",
+      "frame_index": 110,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "control-111",
+      "source_run": "control",
+      "frame_index": 111,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "control-112",
+      "source_run": "control",
+      "frame_index": 112,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "control-113",
+      "source_run": "control",
+      "frame_index": 113,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "control-114",
+      "source_run": "control",
+      "frame_index": 114,
+      "visibility": "visible",
+      "point_px": [
+        198,
+        172
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-115",
+      "source_run": "control",
+      "frame_index": 115,
+      "visibility": "visible",
+      "point_px": [
+        196,
+        181
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-116",
+      "source_run": "control",
+      "frame_index": 116,
+      "visibility": "visible",
+      "point_px": [
+        195,
+        182
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-117",
+      "source_run": "control",
+      "frame_index": 117,
+      "visibility": "visible",
+      "point_px": [
+        195,
+        190
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Visible moving shuttle component/streak inspected in raw temporal context; approximate image center."
+    },
+    {
+      "id": "control-118",
+      "source_run": "control",
+      "frame_index": 118,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    },
+    {
+      "id": "control-119",
+      "source_run": "control",
+      "frame_index": 119,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Unable to localize confidently in raw temporal context (small blur, overlap, crop boundary or ambiguous background). No absence assertion."
+    }
+  ]
+}

@@ -531,6 +531,74 @@ so their elapsed times are not a controlled speed comparison. The next validatio
 milestone is longer continuously annotated shuttle intervals, including difficult
 motion and distractors, before accepting trajectories or detecting shot events.
 
+### Step 3.5 — Continuously annotated shuttle intervals
+
+The benchmark evaluator now accepts `sequences`: named inclusive frame intervals
+with `source_run`, `start_frame` and `end_frame`. Every frame in each interval must
+have exactly one visible or uncertain annotation. Missing frames, overlapping
+intervals and annotations outside the declared coverage are rejected. Continuous
+evaluation also rejects proposal segment IDs reused across a gap or scene cut.
+Existing sparse packets retain their previous evaluation behavior.
+
+`validation/shuttle_continuous_seed_2026-10-31.json` labels **180 native-rate
+frames**: opening frames 180–269 (6.000–8.967 seconds) and control-window frames
+30–119 (61.000–63.967 seconds). Both intervals cover three seconds of sampled
+video, substantially longer than the earlier six-frame point checks. Codex
+reviewed all frames in 30 enlarged unmarked temporal sheets, then checked visible
+labels in enlarged local crops before evaluating this packet. There are **111
+visible points and 69 uncertain frames**. Approximate component/streak centers
+were placed visually; some were refined with local bright-pixel measurements.
+No evaluated model output or interpolation supplied locations. Earlier sparse
+model previews had already been seen, so this is automated development labeling,
+not blind, independently reviewed or held-out ground truth. Broadcast repeats,
+correlated frames and unknown upstream training-video overlap limit interpretation.
+
+```powershell
+.\.venv\Scripts\python.exe shuttle_benchmark.py prepare --seed "validation\shuttle_continuous_seed_2026-10-31.json" --video "Videos\videoplayback.mp4" --out "out\continuous-repeat"
+.\.venv\Scripts\python.exe shuttle_benchmark.py evaluate --benchmark "out\continuous-repeat\benchmark.json" --prediction "opening=out\tracknet-001" --prediction "control=out\tracknet-005"
+.\.venv\Scripts\python.exe shuttle_benchmark.py evaluate --benchmark "out\continuous-repeat\benchmark.json" --prediction "opening=out\tracknet-overlap-001" --prediction "control=out\tracknet-overlap-005"
+```
+
+Per-sequence results distinguish visible frames without proposals from proposals
+displaced beyond the point tolerance. They report localization error on visible
+proposed frames, longest consecutive matches within one proposal segment, missing
+observation runs, and segment changes between adjacent point matches. Uncertain
+labels break all matching/missing runs and never become absence labels or false
+positives. Matching nearby points does not certify shuttle identity or a physical
+trajectory. A displaced point can reflect annotation uncertainty or localization
+error as well as a wrong object.
+
+| Continuous development check | Default stride 8 | Optional stride 4 |
+| --- | --- | --- |
+| Visible point matches at 4 native pixels | 94/111 | 98/111 |
+| Opening matches / visible labels | 32/43 | 34/43 |
+| Control matches / visible labels | 62/68 | 64/68 |
+| Longest same-segment matching run, opening / control | 8 / 24 frames | 16 / 26 frames |
+| Visible frames with no proposal | 0 | 0 |
+| Visible frames with a proposal beyond 4 pixels | 17 | 13 |
+| Uncertain frames, excluded from localization scoring | 69 | 69 |
+
+Tolerance sensitivity matters for tiny blurred objects and approximate labels:
+both modes match 62/111 at two pixels and 109/111 at six pixels. At 6.567 seconds,
+the default proposal is 42.63 pixels from its label; overlap reduces that error to
+7.41 pixels but still fails the four-pixel check. Both modes also miss the
+approximate label at 7.567 seconds by more than six pixels. These examples were
+inspected with the source and both predictions together. The default remains
+unchanged; no trajectory is accepted on the basis of this comparison.
+
+The local packet is `out/shuttle-continuous-benchmark-001`. Review
+`out/shuttle-continuous-evaluation/index.html` for two complete 90-frame annotated
+clips, error examples, every frame's result and links to unmarked source images.
+Green circles are automated labels, cyan squares default predictions and pink
+squares overlap predictions. Both clips were decoded back to 90 frames.
+`validation/shuttle_continuous_evaluation_2026-10-31.json` records the source-image
+packet, label, evaluator and prediction fingerprints plus full four-pixel timelines
+and tolerance sensitivity. Seventy-four tests pass, including complete annotation
+coverage, missing/displaced/uncertain accounting, gap/cut isolation, all-uncertain
+intervals and native video integration. Shot events and coaching scores remain
+unavailable. The next milestone is a broader set of complete rally intervals and
+independent label checks before trajectory acceptance or shot-event timing.
+
 ## Next milestones
 
 | Step | Deliverable | Validation |

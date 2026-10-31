@@ -60,6 +60,105 @@ def _validate(data: dict):
                 raise ValueError("Negative regions require an observed identity")
             if case["point_px"] is not None and math.dist(region["center_px"], case["point_px"]) <= radius:
                 raise ValueError("Visible point contradicts a local negative label")
+    if "sequences" in data or data.get("role") == "continuous_development":
+        sequences = data.get("sequences")
+        if not isinstance(sequences, list) or not sequences:
+            raise ValueError("Continuous annotation requires sequence intervals")
+        covered, names = set(), set()
+        for sequence in sequences:
+            name = sequence["id"]
+            source = sequence["source_run"]
+            first, last = sequence["start_frame"], sequence["end_frame"]
+            if (not isinstance(name, str) or not name.strip() or name in names
+                    or source not in data["sources"] or type(first) is not int or type(last) is not int
+                    or not 0 <= first <= last < data["sources"][source]["frames"]):
+                raise ValueError("Invalid or duplicate continuous sequence")
+            names.add(name)
+            interval = {(source, i) for i in range(first, last + 1)}
+            if covered & interval:
+                raise ValueError("Continuous sequences must not overlap")
+            covered |= interval
+        if covered != frames:
+            raise ValueError("Continuous sequences require exactly one annotation for every frame, including uncertain frames")
+
+
+def _continuous_metrics(data: dict, loaded: dict, tolerance: float) -> list[dict]:
+    """Measure observed errors and fragmentation; uncertainty always breaks runs."""
+    cases = {(c["source_run"], c["frame_index"]): c for c in data["cases"]}
+    # Segment IDs must refer to actual consecutive observations within one scene.
+    for rows in loaded.values():
+        previous = {}
+        for index, row in enumerate(rows):
+            proposal = row["proposal"]
+            if proposal is None:
+                continue
+            sid, scene = proposal.get("proposal_segment_id"), row.get("scene_id")
+            if type(sid) is not int or sid < 0 or type(scene) is not int or scene < 0:
+                raise ValueError("Continuous evaluation requires valid scene and proposal segment IDs")
+            if sid in previous and previous[sid] != (index - 1, scene):
+                raise ValueError("Proposal segment crosses a gap or scene boundary")
+            previous[sid] = (index, scene)
+    results = []
+    for sequence in data["sequences"]:
+        source = sequence["source_run"]
+        timeline = []
+        longest_match = longest_missing = match_run = missing_run = 0
+        same_segment_pairs = segment_changes = 0
+        previous_match = None
+        counts = {"visible_frames": 0, "uncertain_frames": 0, "candidate_point_hits": 0,
+                  "proposal_point_hits": 0, "visible_frames_without_candidates": 0,
+                  "visible_frames_without_proposal": 0, "visible_frames_with_displaced_proposal": 0,
+                  "uncertain_frames_with_proposals_unscored": 0}
+        errors = []
+        for index in range(sequence["start_frame"], sequence["end_frame"] + 1):
+            case, row = cases[source, index], loaded[source][index]
+            proposal = row["proposal"]
+            item = {"frame_index": index, "visibility": case["visibility"], "proposal_error_px": None,
+                    "scene_id": row.get("scene_id"),
+                    "proposal_segment_id": proposal["proposal_segment_id"] if proposal else None}
+            if case["visibility"] == "uncertain":
+                counts["uncertain_frames"] += 1
+                counts["uncertain_frames_with_proposals_unscored"] += proposal is not None
+                item["result"] = "uncertain_unscored"
+                match_run = missing_run = 0
+                previous_match = None
+            else:
+                counts["visible_frames"] += 1
+                candidate_hit = any(math.dist(c["center_px"], case["point_px"]) <= tolerance for c in row["candidates"])
+                counts["candidate_point_hits"] += candidate_hit
+                counts["visible_frames_without_candidates"] += not row["candidates"]
+                error = math.dist(proposal["position_px"], case["point_px"]) if proposal else None
+                hit = error is not None and error <= tolerance
+                counts["proposal_point_hits"] += hit
+                counts["visible_frames_without_proposal"] += proposal is None
+                counts["visible_frames_with_displaced_proposal"] += proposal is not None and not hit
+                if error is not None:
+                    errors.append(error)
+                    item["proposal_error_px"] = round(error, 4)
+                item["result"] = "point_match" if hit else ("missing_proposal" if proposal is None else "displaced_proposal")
+                missing_run = missing_run + 1 if proposal is None else 0
+                longest_missing = max(longest_missing, missing_run)
+                if hit:
+                    key = (row["scene_id"], proposal["proposal_segment_id"])
+                    if previous_match is not None:
+                        same_segment_pairs += previous_match == key
+                        segment_changes += previous_match != key
+                    match_run = match_run + 1 if previous_match == key else 1
+                    previous_match = key
+                    longest_match = max(longest_match, match_run)
+                else:
+                    match_run = 0
+                    previous_match = None
+            timeline.append(item)
+        results.append({**sequence, "annotated_frames": len(timeline), **counts,
+                        "longest_correct_same_segment_run_frames": longest_match,
+                        "longest_consecutive_visible_missing_proposal_frames": longest_missing,
+                        "adjacent_point_matches_in_same_segment": same_segment_pairs,
+                        "adjacent_point_matches_with_segment_or_scene_change": segment_changes,
+                        "mean_error_on_visible_proposed_frames_px": round(sum(errors)/len(errors), 4) if errors else None,
+                        "max_error_on_visible_proposed_frames_px": round(max(errors), 4) if errors else None,
+                        "timeline": timeline})
+    return results
 
 
 def prepare(seed: Path, video: Path, output: Path) -> Path:
@@ -172,7 +271,7 @@ def evaluate(benchmark: Path, predictions: dict[str, Path], tolerance_px: float 
             negative_candidate_hits += hit; negative_proposal_hits += linked_hit
             detail["negative_region_hits"].append({"identity": region["identity"], "candidate_hit": hit, "proposal_hit": linked_hit})
         details.append(detail)
-    return {"schema_version": "0.1.0", "evaluation_scope": "selected_development_seed_only",
+    result = {"schema_version": "0.1.0", "evaluation_scope": "selected_development_seed_only",
             "benchmark_sha256": sha256_file(benchmark), "prediction_bindings": bindings, "point_tolerance_px": tolerance_px,
             "visible_points": visible, "candidate_point_hits": candidate_hits, "proposal_point_hits": proposal_hits,
             "uncertain_frames_excluded_from_point_scoring": len(data["cases"]) - visible,
@@ -182,6 +281,11 @@ def evaluate(benchmark: Path, predictions: dict[str, Path], tolerance_px: float 
             "limitations": ["Selected, correlated development examples; not held-out data or full-video precision/recall.",
                             "Negative regions label only local distractors, not absence of a shuttle elsewhere in the frame.",
                             "Evaluation never promotes proposals to verified trajectories or enables events/scoring."]}
+    if "sequences" in data:
+        result["evaluation_scope"] = "continuously_annotated_development_intervals_only"
+        result["continuous_sequences"] = _continuous_metrics(data, loaded, tolerance_px)
+        result["limitations"].append("Uncertain annotations break continuity statistics and never imply shuttle absence; point matches do not certify object identity or physical trajectories.")
+    return result
 
 
 def main() -> int:

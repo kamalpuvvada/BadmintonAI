@@ -139,6 +139,87 @@ class ShuttleBenchmarkTests(unittest.TestCase):
             prepare(seed, video, target.parent)
         self.assertEqual(target.read_bytes(), before)
 
+    def continuous_fixture(self):
+        template = self.data["cases"][0]
+        self.sampling["frames"] = 10
+        self.data["role"] = "continuous_development"
+        self.data["sequences"] = [{"id": "interval", "source_run": "source", "start_frame": 0, "end_frame": 9}]
+        self.data["cases"] = [{**deepcopy(template), "id": f"case-{i}", "frame_index": i} for i in range(10)]
+        self.data["cases"][2].update(visibility="uncertain", point_px=None)
+        self.rows = []
+        for i in range(10):
+            point = [8, 8] if i == 7 else [2, 2]
+            missing = i in (5, 6, 8)
+            self.rows.append({"frame_index": i, "timestamp_seconds": round(i/30, 6), "scene_id": int(i == 9),
+                              "candidates": [] if missing else [{"center_px": point}],
+                              "proposal": None if missing else {"candidate_index": 0, "position_px": point,
+                                  "proposal_segment_id": 0 if i < 4 else (1 if i == 4 else i)}})
+        self.save()
+
+    def test_continuous_metrics_separate_missing_displaced_and_unknown_and_split_runs(self):
+        self.continuous_fixture()
+        result = self.score()
+        sequence = result["continuous_sequences"][0]
+        self.assertEqual(sequence["annotated_frames"], 10)
+        self.assertEqual(sequence["visible_frames"], 9)
+        self.assertEqual(sequence["proposal_point_hits"], 5)
+        self.assertEqual(sequence["visible_frames_without_proposal"], 3)
+        self.assertEqual(sequence["visible_frames_with_displaced_proposal"], 1)
+        self.assertEqual(sequence["uncertain_frames_with_proposals_unscored"], 1)
+        self.assertEqual(sequence["longest_correct_same_segment_run_frames"], 2)
+        self.assertEqual(sequence["longest_consecutive_visible_missing_proposal_frames"], 2)
+        self.assertEqual(sequence["adjacent_point_matches_in_same_segment"], 1)
+        self.assertEqual(sequence["adjacent_point_matches_with_segment_or_scene_change"], 1)
+        self.assertAlmostEqual(sequence["mean_error_on_visible_proposed_frames_px"], 1.4142, places=4)
+        self.assertEqual(sequence["timeline"][2]["result"], "uncertain_unscored")
+        self.assertEqual(result["verified_shuttle_positions"], 0)
+
+    def test_continuous_coverage_requires_all_frames_and_no_overlapping_intervals(self):
+        self.continuous_fixture()
+        original = deepcopy(self.data)
+        self.data["cases"].pop(5)
+        self.save()
+        with self.assertRaisesRegex(ValueError, "every frame"):
+            self.score()
+        self.data = deepcopy(original)
+        self.data["sequences"].append({"id":"overlap", "source_run":"source", "start_frame":8, "end_frame":9})
+        self.save()
+        with self.assertRaisesRegex(ValueError, "overlap"):
+            self.score()
+        self.data = deepcopy(original)
+        del self.data["sequences"]
+        self.save()
+        with self.assertRaisesRegex(ValueError, "requires sequence"):
+            self.score()
+
+    def test_continuous_evaluation_rejects_reused_segment_across_gap_or_scene(self):
+        self.continuous_fixture()
+        self.rows[7]["proposal"]["proposal_segment_id"] = 0
+        self.save()
+        with self.assertRaisesRegex(ValueError, "gap or scene"):
+            self.score()
+        self.continuous_fixture()
+        self.rows[1]["scene_id"] = 1
+        self.save()
+        with self.assertRaisesRegex(ValueError, "gap or scene"):
+            self.score()
+        self.continuous_fixture()
+        del self.rows[0]["proposal"]["proposal_segment_id"]
+        self.save()
+        with self.assertRaisesRegex(ValueError, "valid scene"):
+            self.score()
+
+    def test_all_uncertain_sequence_produces_no_location_error_or_continuity_claim(self):
+        self.continuous_fixture()
+        for case in self.data["cases"]:
+            case.update(visibility="uncertain", point_px=None)
+        self.save()
+        sequence = self.score()["continuous_sequences"][0]
+        self.assertEqual(sequence["visible_frames"], 0)
+        self.assertEqual(sequence["longest_correct_same_segment_run_frames"], 0)
+        self.assertEqual(sequence["longest_consecutive_visible_missing_proposal_frames"], 0)
+        self.assertIsNone(sequence["mean_error_on_visible_proposed_frames_px"])
+
 
 if __name__ == "__main__":
     unittest.main()
