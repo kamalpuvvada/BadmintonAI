@@ -880,6 +880,70 @@ model-run bindings and implementation hashes are in
 `out/tracknet-confidence-real-001/index.html`. No verified trajectories, shot
 events or coaching scores are enabled.
 
+### Step 3.11 — Six-second dive context and independent edit annotations
+
+`validation/shuttle_dive_seed_2026-10-31.json` covers **all 180 native frames**
+from 480.000–485.967 seconds, with 80 approximate visible locations and 100
+uncertain frames. All 15 full-frame temporal sheets and enlarged local raw crops
+were inspected with automated review. Labels were frozen before reading this
+packet's per-frame predictions/results; earlier sparse previews and an existing
+sparse label had been seen. This is same-camera development evidence, not blind,
+independent or held-out validation. No model positions or interpolation supplied
+these labels.
+
+The interval includes jumping play, a diving retrieval, floor-level/post-point
+context and a wide-to-wide broadcast edit at frame 117. It contains partial
+context of two points, not one uninterrupted rally. Thirty-three visible labels
+are in retrieval-followthrough/floor-level context; visible does not imply
+airborne flight, a detected landing, a line decision or a shot event.
+
+Cases can now optionally carry `annotation_scene_id`, independently marked from
+raw source footage. If supplied, every case requires a nonnegative integer ID,
+and IDs cannot decrease within a source. Continuity and adjacent-motion error
+measurements stop at these annotated boundaries even when both views are wide
+court and the model assigns the same segment. Existing packets without these
+IDs retain their previous behavior. The new packet marks the edit at frame 117;
+the inherited sampled model scene changes at frame 118. Both boundaries are
+reported separately. No camera-boundary correction is silently applied to
+inference outputs.
+
+```powershell
+.\.venv\Scripts\python.exe shuttle_benchmark.py prepare --seed "validation\shuttle_dive_seed_2026-10-31.json" --video "Videos\videoplayback.mp4" --out "out\dive-repeat-new"
+.\.venv\Scripts\python.exe shuttle_benchmark.py evaluate --benchmark "out\dive-repeat-new\benchmark.json" --prediction "dive-480=out\tracknet-003"
+.\.venv\Scripts\python.exe shuttle_benchmark.py evaluate --benchmark "out\dive-repeat-new\benchmark.json" --prediction "dive-480=out\tracknet-link-confidence035-v2-003"
+```
+
+| Linked point matches / 80 visible labels | Within 2px | Within 4px | Within 6px |
+| --- | --- | --- | --- |
+| Default 0.5 / motion | 47 | 70 | 73 |
+| Overlap at 0.5 | 46 | 66 | 70 |
+| Cutoff 0.35 / motion | 48 | 77 | 79 |
+| Cutoff 0.35 / confidence + motion | 49 | 78 | 80 |
+
+Confidence selection at cutoff 0.5 reproduces the default result. The combined
+mode has observations and links for all 80 visible labels; two positions are
+displaced by 4.56 and 4.18 pixels at frames 57 and 59. Its longest correct
+same-segment run is 20 frames, versus 16 for the default. At four pixels, the
+default/combined matches are 15/19 versus 17/19 in frames 0–70, 27/33 versus
+33/33 in frames 71–116, and 28/28 versus 28/28 after the edit. The overall count
+includes those easier floor-level observations and does not establish full
+flight recall or false-positive accuracy. Existing packet overlaps and repeated
+broadcast frames must not be pooled as independent observations.
+
+The local benchmark is `out/shuttle-dive-benchmark-001`. Review the complete
+180-frame comparison at `out/shuttle-dive-evaluation-001/index.html`, or edit
+labels at `out/shuttle-dive-annotation-001/index.html`. The comparison video
+decodes to exactly 180 frames; titles sit outside the full source image. Exact
+label/image fingerprints, raw measurement details, independently marked edit,
+per-context results and tolerance sensitivity are recorded in
+`validation/shuttle_dive_evaluation_2026-10-31.json`.
+
+All 96 Python tests and four JavaScript tests pass. New tests cover a
+wide-to-wide annotated edit inside one predicted segment, motion/run separation,
+missing-run separation and invalid/incomplete/decreasing scene IDs. Previous
+benchmarks are retained. The default remains unchanged, and verified shuttle
+trajectories, shot events and coaching scores remain unavailable.
+
 ## Next milestones
 
 | Step | Deliverable | Validation |

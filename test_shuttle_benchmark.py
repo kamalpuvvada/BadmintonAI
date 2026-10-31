@@ -174,6 +174,35 @@ class ShuttleBenchmarkTests(unittest.TestCase):
         self.assertEqual(sequence["timeline"][2]["result"], "uncertain_unscored")
         self.assertEqual(result["verified_shuttle_positions"], 0)
 
+    def test_independent_scene_boundary_splits_motion_and_runs_with_same_wide_view(self):
+        self.continuous_fixture()
+        for case in self.data["cases"]:
+            case.update(view="wide_court",annotation_scene_id=int(case["frame_index"]>=1))
+        self.save()
+        sequence=self.score()["continuous_sequences"][0]
+        self.assertEqual(sequence["annotation_scene_change_frames"],[1])
+        self.assertEqual(sequence["annotation_view_change_frames"],[])
+        self.assertEqual(sequence["scene_change_frames"],[9])
+        self.assertEqual(sequence["adjacent_visible_proposed_pairs_same_segment_and_view"],0)
+        self.assertEqual(sequence["longest_correct_same_segment_run_frames"],1)
+        self.assertEqual(sequence["adjacent_point_matches_with_annotation_scene_change"],1)
+        self.assertIsNone(sequence["mean_step_vector_error_px"])
+        self.assertEqual(sequence["timeline"][1]["annotation_scene_id"],1)
+        for case in self.data["cases"]:case["annotation_scene_id"]=int(case["frame_index"]>=6)
+        self.save()
+        self.assertEqual(self.score()["continuous_sequences"][0]["longest_consecutive_visible_missing_proposal_frames"],1)
+
+    def test_annotation_scenes_require_complete_nonnegative_integer_monotonic_ids(self):
+        self.continuous_fixture()
+        for case in self.data["cases"]:case["annotation_scene_id"]=0
+        for invalid in (None,-1,True,1.5):
+            self.data["cases"][0]["annotation_scene_id"]=invalid;self.save()
+            with self.assertRaisesRegex(ValueError,"annotation scene ID"):self.score()
+        self.data["cases"][0]["annotation_scene_id"]=1;self.save()
+        with self.assertRaisesRegex(ValueError,"cannot decrease"):self.score()
+        self.data["cases"][0].pop("annotation_scene_id");self.save()
+        with self.assertRaisesRegex(ValueError,"Every case"):self.score()
+
     def test_continuous_coverage_requires_all_frames_and_no_overlapping_intervals(self):
         self.continuous_fixture()
         original = deepcopy(self.data)

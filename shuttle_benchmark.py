@@ -30,6 +30,18 @@ def _validate(data: dict):
         raise ValueError("Invalid image dimensions")
     if not data["cases"]:
         raise ValueError("Benchmark must contain cases")
+    annotated_scenes = any("annotation_scene_id" in c for c in data["cases"])
+    if annotated_scenes:
+        for case in data["cases"]:
+            value = case.get("annotation_scene_id")
+            if type(value) is not int or value < 0:
+                raise ValueError("Every case requires a nonnegative integer annotation scene ID")
+        previous = {}
+        for case in sorted(data["cases"], key=lambda c:(c["source_run"],c["frame_index"])):
+            source, scene = case["source_run"],case["annotation_scene_id"]
+            if source in previous and scene < previous[source]:
+                raise ValueError("Annotation scene IDs cannot decrease within a source")
+            previous[source] = scene
     identifiers, frames = set(), set()
     for case in data["cases"]:
         key = (case["source_run"], case["frame_index"])
@@ -105,22 +117,24 @@ def _continuous_metrics(data: dict, loaded: dict, tolerance: float) -> list[dict
         source = sequence["source_run"]
         timeline = []
         longest_match = longest_missing = match_run = missing_run = 0
-        same_segment_pairs = segment_changes = matched_view_changes = 0
+        same_segment_pairs = segment_changes = matched_view_changes = matched_annotation_scene_changes = 0
         previous_match = None
         counts = {"visible_frames": 0, "uncertain_frames": 0, "candidate_point_hits": 0,
                   "proposal_point_hits": 0, "visible_frames_without_candidates": 0,
                   "visible_frames_without_proposal": 0, "visible_frames_with_displaced_proposal": 0,
                   "uncertain_frames_with_proposals_unscored": 0}
         errors = []
-        by_view, status_counts, scene_changes, view_changes = {}, {}, [], []
+        by_view, status_counts, scene_changes, view_changes, annotation_scene_changes = {}, {}, [], [], []
         previous_scene = None
         previous_view = None
+        previous_annotation_scene = None
         previous_motion = None
         step_errors = []
         for index in range(sequence["start_frame"], sequence["end_frame"] + 1):
             case, row = cases[source, index], loaded[source][index]
             proposal = row["proposal"]
             view = case.get("view", "unspecified")
+            annotation_scene = case.get("annotation_scene_id")
             view_counts = by_view.setdefault(view, {"annotated_frames": 0, "visible_frames": 0,
                                                    "uncertain_frames": 0, "proposal_point_hits": 0,
                                                    "visible_frames_without_proposal": 0,
@@ -136,8 +150,13 @@ def _continuous_metrics(data: dict, loaded: dict, tolerance: float) -> list[dict
                 view_changes.append(index)
                 missing_run = 0
             previous_view = view
+            if index > sequence["start_frame"] and annotation_scene != previous_annotation_scene:
+                annotation_scene_changes.append(index)
+                missing_run = 0
+            previous_annotation_scene = annotation_scene
             item = {"frame_index": index, "visibility": case["visibility"], "proposal_error_px": None,
                     "annotation_view": view, "prediction_status": status,
+                    "annotation_scene_id": annotation_scene,
                     "scene_id": row.get("scene_id"),
                     "proposal_segment_id": proposal["proposal_segment_id"] if proposal else None}
             if case["visibility"] == "uncertain":
@@ -165,7 +184,7 @@ def _continuous_metrics(data: dict, loaded: dict, tolerance: float) -> list[dict
                 if error is not None:
                     errors.append(error)
                     item["proposal_error_px"] = round(error, 4)
-                motion_key = (row.get("scene_id"), proposal["proposal_segment_id"], view) if proposal else None
+                motion_key = (row.get("scene_id"), proposal["proposal_segment_id"], view, annotation_scene) if proposal else None
                 if proposal and previous_motion is not None and previous_motion[0] == motion_key:
                     predicted_step = [a-b for a,b in zip(proposal["position_px"], previous_motion[1])]
                     labeled_step = [a-b for a,b in zip(case["point_px"], previous_motion[2])]
@@ -175,11 +194,12 @@ def _continuous_metrics(data: dict, loaded: dict, tolerance: float) -> list[dict
                 missing_run = missing_run + 1 if proposal is None else 0
                 longest_missing = max(longest_missing, missing_run)
                 if hit:
-                    key = (row["scene_id"], proposal["proposal_segment_id"], view)
+                    key = (row["scene_id"], proposal["proposal_segment_id"], view, annotation_scene)
                     if previous_match is not None:
                         same_segment_pairs += previous_match[:2] == key[:2]
                         segment_changes += previous_match[:2] != key[:2]
                         matched_view_changes += previous_match[2] != view
+                        matched_annotation_scene_changes += previous_match[3] != annotation_scene
                     match_run = match_run + 1 if previous_match == key else 1
                     previous_match = key
                     longest_match = max(longest_match, match_run)
@@ -193,11 +213,13 @@ def _continuous_metrics(data: dict, loaded: dict, tolerance: float) -> list[dict
                         "adjacent_point_matches_in_same_segment": same_segment_pairs,
                         "adjacent_point_matches_with_segment_or_scene_change": segment_changes,
                         "adjacent_point_matches_with_annotation_view_change": matched_view_changes,
+                        "adjacent_point_matches_with_annotation_scene_change": matched_annotation_scene_changes,
                         "mean_error_on_visible_proposed_frames_px": round(sum(errors)/len(errors), 4) if errors else None,
                         "max_error_on_visible_proposed_frames_px": round(max(errors), 4) if errors else None,
                         "annotation_view_counts": by_view, "prediction_status_counts": status_counts,
                         "scene_change_frames": scene_changes,
                         "annotation_view_change_frames": view_changes,
+                        "annotation_scene_change_frames": annotation_scene_changes,
                         "adjacent_visible_proposed_pairs_same_segment_and_view": len(step_errors),
                         "mean_step_vector_error_px": round(sum(step_errors)/len(step_errors), 4) if step_errors else None,
                         "max_step_vector_error_px": round(max(step_errors), 4) if step_errors else None,

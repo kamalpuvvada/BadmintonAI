@@ -1,0 +1,2617 @@
+{
+  "schema_version": "0.1.0",
+  "split": "development_seed",
+  "role": "continuous_development",
+  "source_video_sha256": "f317baacdd4ccce45febd9f416ba44b6c90071ebf3380c22f877b03376101130",
+  "image_size_px": [
+    640,
+    360
+  ],
+  "annotation_scope": "Codex automated review of all 180 native-rate frames, 480.000\u2013485.967 seconds: jumping exchange, diving retrieval, floor-level/post-point context and another exchange after a wide-to-wide broadcast edit at frame 117. Partial context of two points, not one uninterrupted fixed-camera rally. Labels frozen before reading per-frame predictions or benchmark results for this new packet. Earlier sparse model previews and one existing sparse label had been seen; this is not blind, independent or held-out truth. Same previously seen match/camera; upstream training overlap unknown. Repeated broadcast frames are correlated.",
+  "coordinate_method": "Visually selected raw source components in full-frame temporal sheets and 4x local crops. Center refinement uses positive mean-RGB difference >30 against raw frame 0 (first scene) or 117 (second), current brightness >125, connected-component area <=100, width <=15, height <=24 in manually chosen local regions. Components were individually chosen after raw-crop inspection. Ambiguous line/official/racket overlaps remain uncertain. No evaluated model positions or interpolated coordinates supplied labels.",
+  "labels_frozen_at_utc": "2026-10-31T13:52:30.937749+00:00",
+  "sources": {
+    "dive-480": {
+      "fps": 30,
+      "start_seconds": 480,
+      "frames": 300
+    }
+  },
+  "sequences": [
+    {
+      "id": "edited-dive-context-480",
+      "source_run": "dive-480",
+      "start_frame": 0,
+      "end_frame": 179
+    }
+  ],
+  "annotation_scene_boundaries": [
+    {
+      "source_run": "dive-480",
+      "first_frame": 117,
+      "reason": "Independent full-source inspection: score/player positions jump while view remains wide court."
+    }
+  ],
+  "cases": [
+    {
+      "id": "dive-000",
+      "source_run": "dive-480",
+      "frame_index": 0,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-001",
+      "source_run": "dive-480",
+      "frame_index": 1,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-002",
+      "source_run": "dive-480",
+      "frame_index": 2,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-003",
+      "source_run": "dive-480",
+      "frame_index": 3,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-004",
+      "source_run": "dive-480",
+      "frame_index": 4,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-005",
+      "source_run": "dive-480",
+      "frame_index": 5,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-006",
+      "source_run": "dive-480",
+      "frame_index": 6,
+      "visibility": "visible",
+      "point_px": [
+        427.5,
+        99.49
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-007",
+      "source_run": "dive-480",
+      "frame_index": 7,
+      "visibility": "visible",
+      "point_px": [
+        426.51,
+        111.07
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-008",
+      "source_run": "dive-480",
+      "frame_index": 8,
+      "visibility": "visible",
+      "point_px": [
+        426.51,
+        111.07
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-009",
+      "source_run": "dive-480",
+      "frame_index": 9,
+      "visibility": "visible",
+      "point_px": [
+        425.51,
+        123.01
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-010",
+      "source_run": "dive-480",
+      "frame_index": 10,
+      "visibility": "visible",
+      "point_px": [
+        425.13,
+        135.29
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-011",
+      "source_run": "dive-480",
+      "frame_index": 11,
+      "visibility": "visible",
+      "point_px": [
+        423.79,
+        148.91
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-012",
+      "source_run": "dive-480",
+      "frame_index": 12,
+      "visibility": "visible",
+      "point_px": [
+        423.24,
+        161.9
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-013",
+      "source_run": "dive-480",
+      "frame_index": 13,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-014",
+      "source_run": "dive-480",
+      "frame_index": 14,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-015",
+      "source_run": "dive-480",
+      "frame_index": 15,
+      "visibility": "visible",
+      "point_px": [
+        421.5,
+        190.2
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-016",
+      "source_run": "dive-480",
+      "frame_index": 16,
+      "visibility": "visible",
+      "point_px": [
+        421.08,
+        203.64
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-017",
+      "source_run": "dive-480",
+      "frame_index": 17,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-018",
+      "source_run": "dive-480",
+      "frame_index": 18,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-019",
+      "source_run": "dive-480",
+      "frame_index": 19,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-020",
+      "source_run": "dive-480",
+      "frame_index": 20,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-021",
+      "source_run": "dive-480",
+      "frame_index": 21,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-022",
+      "source_run": "dive-480",
+      "frame_index": 22,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-023",
+      "source_run": "dive-480",
+      "frame_index": 23,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-024",
+      "source_run": "dive-480",
+      "frame_index": 24,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-025",
+      "source_run": "dive-480",
+      "frame_index": 25,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-026",
+      "source_run": "dive-480",
+      "frame_index": 26,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-027",
+      "source_run": "dive-480",
+      "frame_index": 27,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-028",
+      "source_run": "dive-480",
+      "frame_index": 28,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-029",
+      "source_run": "dive-480",
+      "frame_index": 29,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-030",
+      "source_run": "dive-480",
+      "frame_index": 30,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-031",
+      "source_run": "dive-480",
+      "frame_index": 31,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-032",
+      "source_run": "dive-480",
+      "frame_index": 32,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-033",
+      "source_run": "dive-480",
+      "frame_index": 33,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-034",
+      "source_run": "dive-480",
+      "frame_index": 34,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-035",
+      "source_run": "dive-480",
+      "frame_index": 35,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-036",
+      "source_run": "dive-480",
+      "frame_index": 36,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-037",
+      "source_run": "dive-480",
+      "frame_index": 37,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-038",
+      "source_run": "dive-480",
+      "frame_index": 38,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-039",
+      "source_run": "dive-480",
+      "frame_index": 39,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-040",
+      "source_run": "dive-480",
+      "frame_index": 40,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-041",
+      "source_run": "dive-480",
+      "frame_index": 41,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-042",
+      "source_run": "dive-480",
+      "frame_index": 42,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-043",
+      "source_run": "dive-480",
+      "frame_index": 43,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-044",
+      "source_run": "dive-480",
+      "frame_index": 44,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-045",
+      "source_run": "dive-480",
+      "frame_index": 45,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-046",
+      "source_run": "dive-480",
+      "frame_index": 46,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-047",
+      "source_run": "dive-480",
+      "frame_index": 47,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-048",
+      "source_run": "dive-480",
+      "frame_index": 48,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-049",
+      "source_run": "dive-480",
+      "frame_index": 49,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-050",
+      "source_run": "dive-480",
+      "frame_index": 50,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-051",
+      "source_run": "dive-480",
+      "frame_index": 51,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-052",
+      "source_run": "dive-480",
+      "frame_index": 52,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-053",
+      "source_run": "dive-480",
+      "frame_index": 53,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-054",
+      "source_run": "dive-480",
+      "frame_index": 54,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-055",
+      "source_run": "dive-480",
+      "frame_index": 55,
+      "visibility": "visible",
+      "point_px": [
+        443.69,
+        113.96
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-056",
+      "source_run": "dive-480",
+      "frame_index": 56,
+      "visibility": "visible",
+      "point_px": [
+        443.69,
+        113.96
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-057",
+      "source_run": "dive-480",
+      "frame_index": 57,
+      "visibility": "visible",
+      "point_px": [
+        449.5,
+        137.46
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-058",
+      "source_run": "dive-480",
+      "frame_index": 58,
+      "visibility": "visible",
+      "point_px": [
+        454.27,
+        158.73
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-059",
+      "source_run": "dive-480",
+      "frame_index": 59,
+      "visibility": "visible",
+      "point_px": [
+        458.16,
+        177.5
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-060",
+      "source_run": "dive-480",
+      "frame_index": 60,
+      "visibility": "visible",
+      "point_px": [
+        461.85,
+        195.5
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-061",
+      "source_run": "dive-480",
+      "frame_index": 61,
+      "visibility": "visible",
+      "point_px": [
+        465.46,
+        212.89
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-062",
+      "source_run": "dive-480",
+      "frame_index": 62,
+      "visibility": "visible",
+      "point_px": [
+        465.46,
+        212.89
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-063",
+      "source_run": "dive-480",
+      "frame_index": 63,
+      "visibility": "visible",
+      "point_px": [
+        469.05,
+        230.3
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-064",
+      "source_run": "dive-480",
+      "frame_index": 64,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-065",
+      "source_run": "dive-480",
+      "frame_index": 65,
+      "visibility": "visible",
+      "point_px": [
+        474.7,
+        262.11
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-066",
+      "source_run": "dive-480",
+      "frame_index": 66,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-067",
+      "source_run": "dive-480",
+      "frame_index": 67,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-068",
+      "source_run": "dive-480",
+      "frame_index": 68,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-069",
+      "source_run": "dive-480",
+      "frame_index": 69,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-070",
+      "source_run": "dive-480",
+      "frame_index": 70,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-071",
+      "source_run": "dive-480",
+      "frame_index": 71,
+      "visibility": "visible",
+      "point_px": [
+        486.74,
+        304.29
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory. Includes floor-level/post-point source context; visible does not imply airborne or a detected landing event."
+    },
+    {
+      "id": "dive-072",
+      "source_run": "dive-480",
+      "frame_index": 72,
+      "visibility": "visible",
+      "point_px": [
+        489.51,
+        307.0
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory. Includes floor-level/post-point source context; visible does not imply airborne or a detected landing event."
+    },
+    {
+      "id": "dive-073",
+      "source_run": "dive-480",
+      "frame_index": 73,
+      "visibility": "visible",
+      "point_px": [
+        492.66,
+        310.97
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory. Includes floor-level/post-point source context; visible does not imply airborne or a detected landing event."
+    },
+    {
+      "id": "dive-074",
+      "source_run": "dive-480",
+      "frame_index": 74,
+      "visibility": "visible",
+      "point_px": [
+        492.66,
+        310.97
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory. Includes floor-level/post-point source context; visible does not imply airborne or a detected landing event."
+    },
+    {
+      "id": "dive-075",
+      "source_run": "dive-480",
+      "frame_index": 75,
+      "visibility": "visible",
+      "point_px": [
+        495.62,
+        314.57
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory. Includes floor-level/post-point source context; visible does not imply airborne or a detected landing event."
+    },
+    {
+      "id": "dive-076",
+      "source_run": "dive-480",
+      "frame_index": 76,
+      "visibility": "visible",
+      "point_px": [
+        499.14,
+        318.54
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory. Includes floor-level/post-point source context; visible does not imply airborne or a detected landing event."
+    },
+    {
+      "id": "dive-077",
+      "source_run": "dive-480",
+      "frame_index": 77,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-078",
+      "source_run": "dive-480",
+      "frame_index": 78,
+      "visibility": "visible",
+      "point_px": [
+        506.04,
+        329.71
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory. Includes floor-level/post-point source context; visible does not imply airborne or a detected landing event."
+    },
+    {
+      "id": "dive-079",
+      "source_run": "dive-480",
+      "frame_index": 79,
+      "visibility": "visible",
+      "point_px": [
+        509.33,
+        331.0
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory. Includes floor-level/post-point source context; visible does not imply airborne or a detected landing event."
+    },
+    {
+      "id": "dive-080",
+      "source_run": "dive-480",
+      "frame_index": 80,
+      "visibility": "visible",
+      "point_px": [
+        509.33,
+        331.0
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory. Includes floor-level/post-point source context; visible does not imply airborne or a detected landing event."
+    },
+    {
+      "id": "dive-081",
+      "source_run": "dive-480",
+      "frame_index": 81,
+      "visibility": "visible",
+      "point_px": [
+        512.19,
+        332.21
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory. Includes floor-level/post-point source context; visible does not imply airborne or a detected landing event."
+    },
+    {
+      "id": "dive-082",
+      "source_run": "dive-480",
+      "frame_index": 82,
+      "visibility": "visible",
+      "point_px": [
+        513.83,
+        334.12
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory. Includes floor-level/post-point source context; visible does not imply airborne or a detected landing event."
+    },
+    {
+      "id": "dive-083",
+      "source_run": "dive-480",
+      "frame_index": 83,
+      "visibility": "visible",
+      "point_px": [
+        515.65,
+        337.01
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory. Includes floor-level/post-point source context; visible does not imply airborne or a detected landing event."
+    },
+    {
+      "id": "dive-084",
+      "source_run": "dive-480",
+      "frame_index": 84,
+      "visibility": "visible",
+      "point_px": [
+        517.66,
+        340.02
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory. Includes floor-level/post-point source context; visible does not imply airborne or a detected landing event."
+    },
+    {
+      "id": "dive-085",
+      "source_run": "dive-480",
+      "frame_index": 85,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-086",
+      "source_run": "dive-480",
+      "frame_index": 86,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-087",
+      "source_run": "dive-480",
+      "frame_index": 87,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-088",
+      "source_run": "dive-480",
+      "frame_index": 88,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-089",
+      "source_run": "dive-480",
+      "frame_index": 89,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-090",
+      "source_run": "dive-480",
+      "frame_index": 90,
+      "visibility": "visible",
+      "point_px": [
+        529.14,
+        345.29
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory. Includes floor-level/post-point source context; visible does not imply airborne or a detected landing event."
+    },
+    {
+      "id": "dive-091",
+      "source_run": "dive-480",
+      "frame_index": 91,
+      "visibility": "visible",
+      "point_px": [
+        531.08,
+        345.9
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory. Includes floor-level/post-point source context; visible does not imply airborne or a detected landing event."
+    },
+    {
+      "id": "dive-092",
+      "source_run": "dive-480",
+      "frame_index": 92,
+      "visibility": "visible",
+      "point_px": [
+        531.09,
+        345.88
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory. Includes floor-level/post-point source context; visible does not imply airborne or a detected landing event."
+    },
+    {
+      "id": "dive-093",
+      "source_run": "dive-480",
+      "frame_index": 93,
+      "visibility": "visible",
+      "point_px": [
+        533.29,
+        346.65
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory. Includes floor-level/post-point source context; visible does not imply airborne or a detected landing event."
+    },
+    {
+      "id": "dive-094",
+      "source_run": "dive-480",
+      "frame_index": 94,
+      "visibility": "visible",
+      "point_px": [
+        535.19,
+        347.67
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory. Includes floor-level/post-point source context; visible does not imply airborne or a detected landing event."
+    },
+    {
+      "id": "dive-095",
+      "source_run": "dive-480",
+      "frame_index": 95,
+      "visibility": "visible",
+      "point_px": [
+        536.37,
+        349.02
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory. Includes floor-level/post-point source context; visible does not imply airborne or a detected landing event."
+    },
+    {
+      "id": "dive-096",
+      "source_run": "dive-480",
+      "frame_index": 96,
+      "visibility": "visible",
+      "point_px": [
+        536.6,
+        349.84
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory. Includes floor-level/post-point source context; visible does not imply airborne or a detected landing event."
+    },
+    {
+      "id": "dive-097",
+      "source_run": "dive-480",
+      "frame_index": 97,
+      "visibility": "visible",
+      "point_px": [
+        536.33,
+        350.49
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory. Includes floor-level/post-point source context; visible does not imply airborne or a detected landing event."
+    },
+    {
+      "id": "dive-098",
+      "source_run": "dive-480",
+      "frame_index": 98,
+      "visibility": "visible",
+      "point_px": [
+        536.16,
+        350.67
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory. Includes floor-level/post-point source context; visible does not imply airborne or a detected landing event."
+    },
+    {
+      "id": "dive-099",
+      "source_run": "dive-480",
+      "frame_index": 99,
+      "visibility": "visible",
+      "point_px": [
+        535.74,
+        351.13
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory. Includes floor-level/post-point source context; visible does not imply airborne or a detected landing event."
+    },
+    {
+      "id": "dive-100",
+      "source_run": "dive-480",
+      "frame_index": 100,
+      "visibility": "visible",
+      "point_px": [
+        534.78,
+        351.55
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory. Includes floor-level/post-point source context; visible does not imply airborne or a detected landing event."
+    },
+    {
+      "id": "dive-101",
+      "source_run": "dive-480",
+      "frame_index": 101,
+      "visibility": "visible",
+      "point_px": [
+        533.53,
+        351.57
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory. Includes floor-level/post-point source context; visible does not imply airborne or a detected landing event."
+    },
+    {
+      "id": "dive-102",
+      "source_run": "dive-480",
+      "frame_index": 102,
+      "visibility": "visible",
+      "point_px": [
+        532.27,
+        351.56
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory. Includes floor-level/post-point source context; visible does not imply airborne or a detected landing event."
+    },
+    {
+      "id": "dive-103",
+      "source_run": "dive-480",
+      "frame_index": 103,
+      "visibility": "visible",
+      "point_px": [
+        530.9,
+        351.39
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory. Includes floor-level/post-point source context; visible does not imply airborne or a detected landing event."
+    },
+    {
+      "id": "dive-104",
+      "source_run": "dive-480",
+      "frame_index": 104,
+      "visibility": "visible",
+      "point_px": [
+        530.59,
+        351.49
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory. Includes floor-level/post-point source context; visible does not imply airborne or a detected landing event."
+    },
+    {
+      "id": "dive-105",
+      "source_run": "dive-480",
+      "frame_index": 105,
+      "visibility": "visible",
+      "point_px": [
+        529.73,
+        351.37
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory. Includes floor-level/post-point source context; visible does not imply airborne or a detected landing event."
+    },
+    {
+      "id": "dive-106",
+      "source_run": "dive-480",
+      "frame_index": 106,
+      "visibility": "visible",
+      "point_px": [
+        528.78,
+        350.96
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory. Includes floor-level/post-point source context; visible does not imply airborne or a detected landing event."
+    },
+    {
+      "id": "dive-107",
+      "source_run": "dive-480",
+      "frame_index": 107,
+      "visibility": "visible",
+      "point_px": [
+        528.01,
+        350.36
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory. Includes floor-level/post-point source context; visible does not imply airborne or a detected landing event."
+    },
+    {
+      "id": "dive-108",
+      "source_run": "dive-480",
+      "frame_index": 108,
+      "visibility": "visible",
+      "point_px": [
+        527.49,
+        350.22
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory. Includes floor-level/post-point source context; visible does not imply airborne or a detected landing event."
+    },
+    {
+      "id": "dive-109",
+      "source_run": "dive-480",
+      "frame_index": 109,
+      "visibility": "visible",
+      "point_px": [
+        527.02,
+        350.15
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory. Includes floor-level/post-point source context; visible does not imply airborne or a detected landing event."
+    },
+    {
+      "id": "dive-110",
+      "source_run": "dive-480",
+      "frame_index": 110,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-111",
+      "source_run": "dive-480",
+      "frame_index": 111,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-112",
+      "source_run": "dive-480",
+      "frame_index": 112,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-113",
+      "source_run": "dive-480",
+      "frame_index": 113,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-114",
+      "source_run": "dive-480",
+      "frame_index": 114,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-115",
+      "source_run": "dive-480",
+      "frame_index": 115,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-116",
+      "source_run": "dive-480",
+      "frame_index": 116,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 0,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-117",
+      "source_run": "dive-480",
+      "frame_index": 117,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-118",
+      "source_run": "dive-480",
+      "frame_index": 118,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-119",
+      "source_run": "dive-480",
+      "frame_index": 119,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-120",
+      "source_run": "dive-480",
+      "frame_index": 120,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-121",
+      "source_run": "dive-480",
+      "frame_index": 121,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-122",
+      "source_run": "dive-480",
+      "frame_index": 122,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-123",
+      "source_run": "dive-480",
+      "frame_index": 123,
+      "visibility": "visible",
+      "point_px": [
+        353.55,
+        85.82
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-124",
+      "source_run": "dive-480",
+      "frame_index": 124,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-125",
+      "source_run": "dive-480",
+      "frame_index": 125,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-126",
+      "source_run": "dive-480",
+      "frame_index": 126,
+      "visibility": "visible",
+      "point_px": [
+        365.67,
+        65.19
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-127",
+      "source_run": "dive-480",
+      "frame_index": 127,
+      "visibility": "visible",
+      "point_px": [
+        370.65,
+        57.18
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-128",
+      "source_run": "dive-480",
+      "frame_index": 128,
+      "visibility": "visible",
+      "point_px": [
+        375.61,
+        50.75
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-129",
+      "source_run": "dive-480",
+      "frame_index": 129,
+      "visibility": "visible",
+      "point_px": [
+        380.1,
+        45.73
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-130",
+      "source_run": "dive-480",
+      "frame_index": 130,
+      "visibility": "visible",
+      "point_px": [
+        384.65,
+        41.67
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-131",
+      "source_run": "dive-480",
+      "frame_index": 131,
+      "visibility": "visible",
+      "point_px": [
+        384.65,
+        41.67
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-132",
+      "source_run": "dive-480",
+      "frame_index": 132,
+      "visibility": "visible",
+      "point_px": [
+        388.51,
+        38.99
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-133",
+      "source_run": "dive-480",
+      "frame_index": 133,
+      "visibility": "visible",
+      "point_px": [
+        392.54,
+        37.2
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-134",
+      "source_run": "dive-480",
+      "frame_index": 134,
+      "visibility": "visible",
+      "point_px": [
+        396.27,
+        36.22
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-135",
+      "source_run": "dive-480",
+      "frame_index": 135,
+      "visibility": "visible",
+      "point_px": [
+        399.77,
+        35.96
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-136",
+      "source_run": "dive-480",
+      "frame_index": 136,
+      "visibility": "visible",
+      "point_px": [
+        402.89,
+        36.61
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-137",
+      "source_run": "dive-480",
+      "frame_index": 137,
+      "visibility": "visible",
+      "point_px": [
+        402.9,
+        36.61
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-138",
+      "source_run": "dive-480",
+      "frame_index": 138,
+      "visibility": "visible",
+      "point_px": [
+        406.18,
+        38.37
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-139",
+      "source_run": "dive-480",
+      "frame_index": 139,
+      "visibility": "visible",
+      "point_px": [
+        408.94,
+        40.83
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-140",
+      "source_run": "dive-480",
+      "frame_index": 140,
+      "visibility": "visible",
+      "point_px": [
+        411.88,
+        44.29
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-141",
+      "source_run": "dive-480",
+      "frame_index": 141,
+      "visibility": "visible",
+      "point_px": [
+        414.67,
+        48.35
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-142",
+      "source_run": "dive-480",
+      "frame_index": 142,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-143",
+      "source_run": "dive-480",
+      "frame_index": 143,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-144",
+      "source_run": "dive-480",
+      "frame_index": 144,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-145",
+      "source_run": "dive-480",
+      "frame_index": 145,
+      "visibility": "visible",
+      "point_px": [
+        421.66,
+        66.14
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-146",
+      "source_run": "dive-480",
+      "frame_index": 146,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-147",
+      "source_run": "dive-480",
+      "frame_index": 147,
+      "visibility": "visible",
+      "point_px": [
+        425.5,
+        81.56
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-148",
+      "source_run": "dive-480",
+      "frame_index": 148,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-149",
+      "source_run": "dive-480",
+      "frame_index": 149,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-150",
+      "source_run": "dive-480",
+      "frame_index": 150,
+      "visibility": "visible",
+      "point_px": [
+        428.99,
+        99.87
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-151",
+      "source_run": "dive-480",
+      "frame_index": 151,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-152",
+      "source_run": "dive-480",
+      "frame_index": 152,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-153",
+      "source_run": "dive-480",
+      "frame_index": 153,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-154",
+      "source_run": "dive-480",
+      "frame_index": 154,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-155",
+      "source_run": "dive-480",
+      "frame_index": 155,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-156",
+      "source_run": "dive-480",
+      "frame_index": 156,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-157",
+      "source_run": "dive-480",
+      "frame_index": 157,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-158",
+      "source_run": "dive-480",
+      "frame_index": 158,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-159",
+      "source_run": "dive-480",
+      "frame_index": 159,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-160",
+      "source_run": "dive-480",
+      "frame_index": 160,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-161",
+      "source_run": "dive-480",
+      "frame_index": 161,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-162",
+      "source_run": "dive-480",
+      "frame_index": 162,
+      "visibility": "visible",
+      "point_px": [
+        252.49,
+        133.43
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-163",
+      "source_run": "dive-480",
+      "frame_index": 163,
+      "visibility": "visible",
+      "point_px": [
+        245.0,
+        136.34
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-164",
+      "source_run": "dive-480",
+      "frame_index": 164,
+      "visibility": "visible",
+      "point_px": [
+        237.65,
+        139.59
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-165",
+      "source_run": "dive-480",
+      "frame_index": 165,
+      "visibility": "visible",
+      "point_px": [
+        231.74,
+        142.15
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-166",
+      "source_run": "dive-480",
+      "frame_index": 166,
+      "visibility": "visible",
+      "point_px": [
+        227.06,
+        145.9
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-167",
+      "source_run": "dive-480",
+      "frame_index": 167,
+      "visibility": "visible",
+      "point_px": [
+        227.06,
+        145.9
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-168",
+      "source_run": "dive-480",
+      "frame_index": 168,
+      "visibility": "visible",
+      "point_px": [
+        222.17,
+        150.19
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-169",
+      "source_run": "dive-480",
+      "frame_index": 169,
+      "visibility": "visible",
+      "point_px": [
+        218.42,
+        153.1
+      ],
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated source-only visual location, checked in enlarged unmarked raw crops. Approximate visible component/streak center refined from local raw brightness contrast, not a physical cork location or verified trajectory."
+    },
+    {
+      "id": "dive-170",
+      "source_run": "dive-480",
+      "frame_index": 170,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-171",
+      "source_run": "dive-480",
+      "frame_index": 171,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-172",
+      "source_run": "dive-480",
+      "frame_index": 172,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-173",
+      "source_run": "dive-480",
+      "frame_index": 173,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-174",
+      "source_run": "dive-480",
+      "frame_index": 174,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-175",
+      "source_run": "dive-480",
+      "frame_index": 175,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-176",
+      "source_run": "dive-480",
+      "frame_index": 176,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-177",
+      "source_run": "dive-480",
+      "frame_index": 177,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-178",
+      "source_run": "dive-480",
+      "frame_index": 178,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    },
+    {
+      "id": "dive-179",
+      "source_run": "dive-480",
+      "frame_index": 179,
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "annotation_scene_id": 1,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Codex automated full-frame temporal inspection: unable to localize reliably through blur, body/racket/line/board overlap or weak visibility. Uncertain is not absent; no interpolation."
+    }
+  ]
+}
