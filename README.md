@@ -489,6 +489,48 @@ checkpoint loading, exact-member archive handling, short-context behavior and sc
 isolation, including native FFmpeg integration. Installed dependencies pass `pip check`.
 Shot events, court-calibrated metrics and coaching scores remain unavailable.
 
+### Step 3.4 — Overlapping-window experiment
+
+The TrackNet adapter also accepts an optional `--window-stride` from 1 through
+the checkpoint sequence length (eight for the pinned model). For example:
+
+```powershell
+.\.venv\Scripts\python.exe shuttle_tracknet.py --video "Videos\videoplayback.mp4" --player-run "out\players-046" --out "out\tracknet-overlap-repeat" --window-stride 4
+```
+
+This evaluates complete eight-frame windows every four frames, adds a final
+covering window when needed, and averages all observed heatmaps for each frame
+before applying the existing 0.5 threshold. It uses a uniform mean; it does not
+implement the upstream weighted ensemble. Inputs and scene-local backgrounds
+remain isolated by cuts and rejected intervals. Short groups are left unprocessed,
+and missing detections remain missing. Omit the option to retain the existing
+non-overlap behavior. Summaries record both the window mode and effective stride.
+
+The overlap experiment was motivated by the known 5.100-second development miss;
+its results are development tuning, not held-out validation. All proposals remain
+unverified. No shot events or coaching scores are enabled.
+
+Across the four development windows, stride four still matches **11/12** labeled
+points as both candidates and linked proposals; the 5.100-second miss remains.
+The labeled racket region contains no candidate or linked proposal, matching the
+default result. This experiment does not justify changing the default. Seventy
+tests pass, including overlap averaging before thresholding and isolation across
+both gaps and scene boundaries.
+
+Five real overlap runs (`out/tracknet-overlap-001` through `005`) processed
+another **1,500 frames**. The additional-window control remains **6/6** linked
+point matches. All previews decode to 300 frames, every linked segment stays
+consecutive within a scene, and excluded intervals match the default exactly.
+There are 960 linked-proposal frames across 52 segments versus the default's
+983 across 57; neither count establishes accuracy. All five contact sheets were
+inspected with automated review; full trajectories have not been certified.
+The comparison is in `out/tracknet-overlap-evaluation/index.html`, with source,
+model and output fingerprints in
+`validation/tracknet_overlap_evaluation_2026-10-31.json`. Some runs shared CPU time,
+so their elapsed times are not a controlled speed comparison. The next validation
+milestone is longer continuously annotated shuttle intervals, including difficult
+motion and distractors, before accepting trajectories or detecting shot events.
+
 ## Next milestones
 
 | Step | Deliverable | Validation |

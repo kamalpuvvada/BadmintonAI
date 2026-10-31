@@ -28,14 +28,17 @@ from third_party.tracknetv3.tracknet import TrackNet
 MODEL_SIZE = (512, 288)
 
 
-def sequence_windows(indices: list[int], sequence_length: int) -> list[list[int]]:
+def sequence_windows(indices: list[int], sequence_length: int, stride: int | None = None) -> list[list[int]]:
     if type(sequence_length) is not int or not 1 <= sequence_length <= 16:
         raise ValueError("Sequence length must be an integer in 1..16")
+    stride = sequence_length if stride is None else stride
+    if type(stride) is not int or not 1 <= stride <= sequence_length:
+        raise ValueError("Window stride must be an integer in 1..sequence length")
     if any(type(i) is not int or i < 0 for i in indices) or any(b != a + 1 for a, b in zip(indices, indices[1:])):
         raise ValueError("A sequence group must contain consecutive frame indices")
     if len(indices) < sequence_length:
         return []
-    starts = list(range(0, len(indices) - sequence_length + 1, sequence_length))
+    starts = list(range(0, len(indices) - sequence_length + 1, stride))
     if starts[-1] != len(indices) - sequence_length:
         starts.append(len(indices) - sequence_length)
     return [indices[start:start + sequence_length] for start in starts]
@@ -99,14 +102,15 @@ def _read_image(path):
         return image.convert("RGB")
 
 
-def infer_groups(paths: list[Path], contexts: list[dict], predictor) -> dict[int, list[dict]]:
-    """Non-overlap blocks plus an overlapping tail, averaging only observations.
+def infer_groups(paths: list[Path], contexts: list[dict], predictor, stride: int | None = None) -> dict[int, list[dict]]:
+    """Stride-controlled blocks plus a covering tail, averaging observations.
 
     No padding, synthetic positions, cross-boundary context or repair model.
     A too-short accepted group simply supplies no heatmaps.
     """
     if len(paths) != len(contexts):
         raise ValueError("Frame and context counts differ")
+    sequence_windows([], predictor.sequence_length, stride)  # Validate even with no eligible groups.
     groups = []
     for index, context in enumerate(contexts):
         if not context["eligible"]:
@@ -116,7 +120,7 @@ def infer_groups(paths: list[Path], contexts: list[dict], predictor) -> dict[int
         groups[-1].append(index)
     detections = {}
     for indices in groups:
-        windows = sequence_windows(indices, predictor.sequence_length)
+        windows = sequence_windows(indices, predictor.sequence_length, stride)
         if not windows:
             continue
         samples = [indices[j] for j in np.linspace(0, len(indices)-1, min(31, len(indices)), dtype=int)]
@@ -138,7 +142,7 @@ def infer_groups(paths: list[Path], contexts: list[dict], predictor) -> dict[int
 
 
 def run(video: Path, player_run: Path, output: Path, weights: Path,
-        expected_sha256: str = CHECKPOINT_SHA256, threads: int = 4) -> Path:
+        expected_sha256: str = CHECKPOINT_SHA256, threads: int = 4, window_stride: int | None = None) -> Path:
     if output.exists():
         raise ValueError("Choose a new output directory")
     if type(threads) is not int or not 1 <= threads <= 32:
@@ -150,6 +154,7 @@ def run(video: Path, player_run: Path, output: Path, weights: Path,
         raise ValueError("Video does not match the reviewed player run")
     torch.set_num_threads(threads)
     predictor = TrackNetPredictor(weights, expected_sha256)
+    sequence_windows([], predictor.sequence_length, window_stride)
     fps, start = meta["frame_rate_fps"], summary["sampling"].get("start_seconds", 0)
     if not math.isfinite(fps) or not 0 < fps <= 120:
         raise ValueError("Source FPS must be within 0..120")
@@ -162,7 +167,7 @@ def run(video: Path, player_run: Path, output: Path, weights: Path,
         work = Path(temporary)
         paths = _extract_sampled_video(video, work / "source", fps, duration, start)
         contexts = [frame_context(start+i/fps, summary, player_rows, verification["approved_intervals"]) for i in range(len(paths))]
-        detections = infer_groups(paths, contexts, predictor)
+        detections = infer_groups(paths, contexts, predictor, window_stride)
         annotated = work / "annotated"
         annotated.mkdir()
         selected = set(np.linspace(0, len(paths)-1, min(9, len(paths)), dtype=int).tolist())
@@ -209,7 +214,9 @@ def run(video: Path, player_run: Path, output: Path, weights: Path,
             "player_review_provenance":verification["review_provenance"],"video":meta,"model":predictor.metadata,
             "sampling":{"fps":fps,"start_seconds":start,"frames":len(records)},"frame_status_counts":dict(counts),
             "configuration":{"heatmap_threshold":.5,"input_size_px":list(MODEL_SIZE),"background_samples_max":31,
-                             "window_mode":"nonoverlap_plus_overlapping_tail_mean","padding":False,"cpu_threads":threads},
+                             "window_mode":"nonoverlap_plus_overlapping_tail_mean" if window_stride in (None, predictor.sequence_length) else "strided_windows_plus_tail_mean",
+                             "window_stride":predictor.sequence_length if window_stride is None else window_stride,
+                             "padding":False,"cpu_threads":threads},
             "elapsed_seconds":round(time.perf_counter()-timer,3),"proposal_segments":linker.next_id,"verified_shuttle_positions":0,
             "limitations":["Heatmap activation is uncalibrated; wrong-object and missed detections remain possible.",
                            "Scene-local median and sequence inputs use offline look-ahead, never cross gaps or cuts.",
@@ -231,9 +238,10 @@ def main():
     parser.add_argument("--weights",type=Path,default=Path("out/models/TrackNetV3_TrackNet_best.pt"))
     parser.add_argument("--weights-sha256",default=CHECKPOINT_SHA256)
     parser.add_argument("--threads",type=int,default=4)
+    parser.add_argument("--window-stride",type=int,help="Experimental window step, 1..checkpoint sequence length; default is non-overlap")
     args=parser.parse_args()
     try:
-        print(run(args.video,args.player_run,args.out,args.weights,args.weights_sha256,args.threads))
+        print(run(args.video,args.player_run,args.out,args.weights,args.weights_sha256,args.threads,args.window_stride))
     except (ValueError,OSError,RuntimeError,KeyError,TypeError,pickle.UnpicklingError) as exc:
         parser.exit(1,f"TrackNet error: {exc}\n")
     return 0

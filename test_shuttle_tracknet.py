@@ -88,6 +88,41 @@ class ShuttleTrackNetTests(unittest.TestCase):
         # The too-short scene at 5,6 is left empty, never padded.
         self.assertNotIn(5, result)
 
+    def test_overlapping_windows_cover_once_per_start_and_reject_invalid_stride(self):
+        self.assertEqual(sequence_windows(list(range(11)), 8, 4), [list(range(8)), list(range(3, 11))])
+        self.assertEqual(sequence_windows(list(range(17)), 8, 4),
+                         [list(range(8)), list(range(4, 12)), list(range(8, 16)), list(range(9, 17))])
+        for stride in (0, -1, 9, True, 1.5):
+            with self.assertRaisesRegex(ValueError, "Window stride"):
+                sequence_windows([], 8, stride)
+
+    def test_overlap_averages_heatmaps_before_threshold_without_crossing_gap_or_cut(self):
+        paths = []
+        contexts = []
+        for i in range(15):
+            path = self.root/f"overlap-{i}.png"
+            Image.new("RGB", (16, 16), (i*10, 0, 0)).save(path)
+            paths.append(path)
+            contexts.append({"eligible": i != 5, "scene_id": 0 if i < 10 else 1})
+
+        class OffsetPredictor(FakePredictor):
+            def __call__(self, batch):
+                result = super().__call__(batch)
+                # First sequence position is weak; later positions are strong.
+                result[:, 0, 100:103, 200:203] = .3
+                return result
+
+        predictor = OffsetPredictor()
+        result = infer_groups(paths, contexts, predictor, stride=2)
+        self.assertEqual(predictor.calls, [[0,10,20], [20,30,40], [60,70,80],
+                                         [70,80,90], [100,110,120], [120,130,140]])
+        self.assertNotIn(5, result)
+        self.assertFalse(result[0])
+        self.assertTrue(result[2])  # Mean (.9 + .3)/2 = .6, above threshold.
+        self.assertAlmostEqual(result[2][0]["heatmap_peak"], .6, places=6)
+        self.assertFalse(result[6])
+        self.assertFalse(result[10])
+
     def test_checkpoint_hash_and_restricted_loading_fail_without_unsafe_fallback(self):
         checkpoint = self.root/"weights.pt"
         torch.save({"param_dict": {"seq_len": 8, "bg_mode": "subtract", "model_name": "TrackNet"}}, checkpoint)
