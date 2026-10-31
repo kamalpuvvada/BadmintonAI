@@ -1,0 +1,401 @@
+{
+  "date": "2026-10-31",
+  "scope": "selected_correlated_development_seed_not_held_out",
+  "label_revision": 2,
+  "reviewer": "Codex",
+  "reviewer_kind": "automated",
+  "seed_sha256": "9905e3013a6587eec22af558d4ce1fa9bab331383a33cb29043c7a6fc6efa1b4",
+  "label_counts": {
+    "visible_points": 12,
+    "local_racket_negatives": 1,
+    "additional_uncertain_frames": 3
+  },
+  "baseline": {
+    "schema_version": "0.1.0",
+    "evaluation_scope": "selected_development_seed_only",
+    "benchmark_sha256": "d15defa845e6502f9e31f1e681007527f018ae7fd00a7ea78a15243cada7caae",
+    "prediction_bindings": {
+      "shuttle-005": {
+        "summary_sha256": "7d4a80ddbf499cb9077b441a5382ad864d5ccf81273b85c6e0dae50607880b29",
+        "rows_sha256": "810d2e07d1d2956a4a8bd6333984a114323505921cb4703e9b6343df90400a8c"
+      },
+      "shuttle-006": {
+        "summary_sha256": "f1f91d46bf54922be1b4cbc7bfe6bbb92c664dcbf0dffefc4d455966edfcef9e",
+        "rows_sha256": "d59106209e454aee2b02881658a13f3d84f9829582b5bad1aab735ac52d06e53"
+      },
+      "shuttle-007": {
+        "summary_sha256": "3946001596958f92272bc3effd5d2d7f6a6615628cd9db2adea3d3b4ee130fe7",
+        "rows_sha256": "63f42c6a04376eebed559eb6fbfc99a9169885b5f886964aab0f1dacb60bf7bc"
+      },
+      "shuttle-008": {
+        "summary_sha256": "6d87b0c4c2dd9e30a8d0c2c0c2a17d8d1b09b810654ae95855b33f351c1e9515",
+        "rows_sha256": "b45ab28d3fb04fbbd6c8f3960102697ef6e8cccf1ae9d093baf8cca1f72b2df9"
+      }
+    },
+    "point_tolerance_px": 4,
+    "visible_points": 12,
+    "candidate_point_hits": 10,
+    "proposal_point_hits": 10,
+    "uncertain_frames_excluded_from_point_scoring": 4,
+    "known_negative_regions": 1,
+    "negative_regions_with_candidates": 1,
+    "negative_regions_with_proposals": 1,
+    "cases": [
+      {
+        "id": "visible-green-132",
+        "visibility": "visible",
+        "candidate_hit": true,
+        "proposal_hit": true,
+        "negative_region_hits": []
+      },
+      {
+        "id": "visible-green-133",
+        "visibility": "visible",
+        "candidate_hit": true,
+        "proposal_hit": true,
+        "negative_region_hits": []
+      },
+      {
+        "id": "visible-green-134",
+        "visibility": "visible",
+        "candidate_hit": true,
+        "proposal_hit": true,
+        "negative_region_hits": []
+      },
+      {
+        "id": "visible-green-135",
+        "visibility": "visible",
+        "candidate_hit": true,
+        "proposal_hit": true,
+        "negative_region_hits": []
+      },
+      {
+        "id": "visible-green-136",
+        "visibility": "visible",
+        "candidate_hit": true,
+        "proposal_hit": true,
+        "negative_region_hits": []
+      },
+      {
+        "id": "visible-green-137",
+        "visibility": "visible",
+        "candidate_hit": true,
+        "proposal_hit": true,
+        "negative_region_hits": []
+      },
+      {
+        "id": "visible-streak-153",
+        "visibility": "visible",
+        "candidate_hit": true,
+        "proposal_hit": true,
+        "negative_region_hits": []
+      },
+      {
+        "id": "visible-streak-154",
+        "visibility": "visible",
+        "candidate_hit": false,
+        "proposal_hit": false,
+        "negative_region_hits": []
+      },
+      {
+        "id": "visible-streak-155",
+        "visibility": "visible",
+        "candidate_hit": false,
+        "proposal_hit": false,
+        "negative_region_hits": []
+      },
+      {
+        "id": "corrected-shuttle-shuttle-005-128",
+        "visibility": "visible",
+        "candidate_hit": true,
+        "proposal_hit": true,
+        "negative_region_hits": []
+      },
+      {
+        "id": "racket-shuttle-006-242",
+        "visibility": "uncertain",
+        "negative_region_hits": [
+          {
+            "identity": "racket_head",
+            "candidate_hit": true,
+            "proposal_hit": true
+          }
+        ]
+      },
+      {
+        "id": "corrected-shuttle-shuttle-007-132",
+        "visibility": "visible",
+        "candidate_hit": true,
+        "proposal_hit": true,
+        "negative_region_hits": []
+      },
+      {
+        "id": "corrected-shuttle-shuttle-008-105",
+        "visibility": "visible",
+        "candidate_hit": true,
+        "proposal_hit": true,
+        "negative_region_hits": []
+      },
+      {
+        "id": "uncertain-150",
+        "visibility": "uncertain",
+        "negative_region_hits": []
+      },
+      {
+        "id": "uncertain-151",
+        "visibility": "uncertain",
+        "negative_region_hits": []
+      },
+      {
+        "id": "uncertain-152",
+        "visibility": "uncertain",
+        "negative_region_hits": []
+      }
+    ],
+    "verified_shuttle_positions": 0,
+    "limitations": [
+      "Selected, correlated development examples; not held-out data or full-video precision/recall.",
+      "Negative regions label only local distractors, not absence of a shuttle elsewhere in the frame.",
+      "Evaluation never promotes proposals to verified trajectories or enables events/scoring."
+    ]
+  },
+  "tinted_streak_trial": {
+    "schema_version": "0.1.0",
+    "evaluation_scope": "selected_development_seed_only",
+    "benchmark_sha256": "d15defa845e6502f9e31f1e681007527f018ae7fd00a7ea78a15243cada7caae",
+    "prediction_bindings": {
+      "shuttle-005": {
+        "summary_sha256": "a7999c3d0ec95f63ffb6400fd25281042be812ca488a2051d88feb95ed410a22",
+        "rows_sha256": "9b625e0d731789a8def330e55e3b9eb8f959dc5ec9b70be27039f9a6a1c78474"
+      },
+      "shuttle-006": {
+        "summary_sha256": "ff8bf1e955b7e07079bd6c5a6a1dc5e275fb269869a03fd23ffca5a16cfe8631",
+        "rows_sha256": "88274f981b74e60885b276f117d48cbeb04a93b8e8d71b9d82efea71dcf7ba3d"
+      },
+      "shuttle-007": {
+        "summary_sha256": "9bc38471baf905a46971c99fdb06847a9dbcd853d7d6ac435e5928e162bf6cc4",
+        "rows_sha256": "0f6c1cdec28c1ca9c1fca0a35b068f8873b90cd4c10d7182329e25f0f0ee6510"
+      },
+      "shuttle-008": {
+        "summary_sha256": "b09d36af296ac407798adfcca53277f9d7a7f120cfe72e9df3c4c3bfb144cca9",
+        "rows_sha256": "1260a95f09a29710b0505859e6e63b3cf0882e547fae175afa3d67e2bd333caf"
+      }
+    },
+    "point_tolerance_px": 4,
+    "visible_points": 12,
+    "candidate_point_hits": 12,
+    "proposal_point_hits": 9,
+    "uncertain_frames_excluded_from_point_scoring": 4,
+    "known_negative_regions": 1,
+    "negative_regions_with_candidates": 1,
+    "negative_regions_with_proposals": 0,
+    "cases": [
+      {
+        "id": "visible-green-132",
+        "visibility": "visible",
+        "candidate_hit": true,
+        "proposal_hit": false,
+        "negative_region_hits": []
+      },
+      {
+        "id": "visible-green-133",
+        "visibility": "visible",
+        "candidate_hit": true,
+        "proposal_hit": true,
+        "negative_region_hits": []
+      },
+      {
+        "id": "visible-green-134",
+        "visibility": "visible",
+        "candidate_hit": true,
+        "proposal_hit": false,
+        "negative_region_hits": []
+      },
+      {
+        "id": "visible-green-135",
+        "visibility": "visible",
+        "candidate_hit": true,
+        "proposal_hit": true,
+        "negative_region_hits": []
+      },
+      {
+        "id": "visible-green-136",
+        "visibility": "visible",
+        "candidate_hit": true,
+        "proposal_hit": true,
+        "negative_region_hits": []
+      },
+      {
+        "id": "visible-green-137",
+        "visibility": "visible",
+        "candidate_hit": true,
+        "proposal_hit": true,
+        "negative_region_hits": []
+      },
+      {
+        "id": "visible-streak-153",
+        "visibility": "visible",
+        "candidate_hit": true,
+        "proposal_hit": true,
+        "negative_region_hits": []
+      },
+      {
+        "id": "visible-streak-154",
+        "visibility": "visible",
+        "candidate_hit": true,
+        "proposal_hit": true,
+        "negative_region_hits": []
+      },
+      {
+        "id": "visible-streak-155",
+        "visibility": "visible",
+        "candidate_hit": true,
+        "proposal_hit": true,
+        "negative_region_hits": []
+      },
+      {
+        "id": "corrected-shuttle-shuttle-005-128",
+        "visibility": "visible",
+        "candidate_hit": true,
+        "proposal_hit": false,
+        "negative_region_hits": []
+      },
+      {
+        "id": "racket-shuttle-006-242",
+        "visibility": "uncertain",
+        "negative_region_hits": [
+          {
+            "identity": "racket_head",
+            "candidate_hit": true,
+            "proposal_hit": false
+          }
+        ]
+      },
+      {
+        "id": "corrected-shuttle-shuttle-007-132",
+        "visibility": "visible",
+        "candidate_hit": true,
+        "proposal_hit": true,
+        "negative_region_hits": []
+      },
+      {
+        "id": "corrected-shuttle-shuttle-008-105",
+        "visibility": "visible",
+        "candidate_hit": true,
+        "proposal_hit": true,
+        "negative_region_hits": []
+      },
+      {
+        "id": "uncertain-150",
+        "visibility": "uncertain",
+        "negative_region_hits": []
+      },
+      {
+        "id": "uncertain-151",
+        "visibility": "uncertain",
+        "negative_region_hits": []
+      },
+      {
+        "id": "uncertain-152",
+        "visibility": "uncertain",
+        "negative_region_hits": []
+      }
+    ],
+    "verified_shuttle_positions": 0,
+    "limitations": [
+      "Selected, correlated development examples; not held-out data or full-video precision/recall.",
+      "Negative regions label only local distractors, not absence of a shuttle elsewhere in the frame.",
+      "Evaluation never promotes proposals to verified trajectories or enables events/scoring."
+    ]
+  },
+  "temporal_ablation": {
+    "scope": "Selected seed cases, candidate extraction only; no linked-path or full-window evaluation for lag 3",
+    "results": {
+      "white_lag1": {
+        "point_hits": 10,
+        "visible_points": 12,
+        "negative_regions_with_candidates": 1
+      },
+      "white_lag3": {
+        "point_hits": 10,
+        "visible_points": 12,
+        "negative_regions_with_candidates": 1
+      },
+      "tinted_lag1": {
+        "point_hits": 12,
+        "visible_points": 12,
+        "negative_regions_with_candidates": 1
+      },
+      "tinted_lag3": {
+        "point_hits": 12,
+        "visible_points": 12,
+        "negative_regions_with_candidates": 1
+      }
+    }
+  },
+  "trial_runs": [
+    {
+      "run": "shuttle-009",
+      "frame_status_counts": {
+        "excluded_player_review": 3,
+        "no_temporal_context": 2,
+        "no_candidate": 170,
+        "excessive_clutter": 4,
+        "ambiguous_candidates": 37,
+        "proposal": 84
+      },
+      "proposal_segments": 40,
+      "decoded_preview_frames": 300,
+      "summary_sha256": "a7999c3d0ec95f63ffb6400fd25281042be812ca488a2051d88feb95ed410a22",
+      "rows_sha256": "9b625e0d731789a8def330e55e3b9eb8f959dc5ec9b70be27039f9a6a1c78474"
+    },
+    {
+      "run": "shuttle-010",
+      "frame_status_counts": {
+        "excluded_player_review": 40,
+        "no_temporal_context": 4,
+        "no_candidate": 131,
+        "ambiguous_candidates": 57,
+        "proposal": 68
+      },
+      "proposal_segments": 36,
+      "decoded_preview_frames": 300,
+      "summary_sha256": "ff8bf1e955b7e07079bd6c5a6a1dc5e275fb269869a03fd23ffca5a16cfe8631",
+      "rows_sha256": "88274f981b74e60885b276f117d48cbeb04a93b8e8d71b9d82efea71dcf7ba3d"
+    },
+    {
+      "run": "shuttle-011",
+      "frame_status_counts": {
+        "excluded_player_review": 9,
+        "no_temporal_context": 6,
+        "ambiguous_candidates": 54,
+        "proposal": 92,
+        "no_candidate": 139
+      },
+      "proposal_segments": 40,
+      "decoded_preview_frames": 300,
+      "summary_sha256": "9bc38471baf905a46971c99fdb06847a9dbcd853d7d6ac435e5928e162bf6cc4",
+      "rows_sha256": "0f6c1cdec28c1ca9c1fca0a35b068f8873b90cd4c10d7182329e25f0f0ee6510"
+    },
+    {
+      "run": "shuttle-012",
+      "frame_status_counts": {
+        "excluded_player_review": 103,
+        "no_temporal_context": 6,
+        "proposal": 91,
+        "ambiguous_candidates": 28,
+        "no_candidate": 72
+      },
+      "proposal_segments": 36,
+      "decoded_preview_frames": 300,
+      "summary_sha256": "b09d36af296ac407798adfcca53277f9d7a7f120cfe72e9df3c4c3bfb144cca9",
+      "rows_sha256": "1260a95f09a29710b0505859e6e63b3cf0882e547fae175afa3d67e2bd333caf"
+    }
+  ],
+  "default_changed": false,
+  "promoted_to_verified_tracking": false,
+  "coaching_metrics": {
+    "status": "not_available"
+  },
+  "conclusion": "The tinted proposal experiment covers all 12 labeled points but linked hits fall from 10 to 9. The default remains unchanged; no generalized accuracy or verified trajectory claim. Three initial racket-negative claims were corrected to shuttles after temporal inspection."
+}

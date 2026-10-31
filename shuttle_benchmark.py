@@ -1,0 +1,216 @@
+"""Hash-bound development labels and diagnostic evaluation of shuttle proposals."""
+from __future__ import annotations
+
+import argparse
+from hashlib import sha256
+from html import escape
+import json
+import math
+from pathlib import Path
+from tempfile import TemporaryDirectory
+
+from PIL import Image, ImageDraw
+
+from badminton_proto import probe_video, sha256_file
+from player_tracking import _extract_sampled_video
+
+
+def _point(value, width, height):
+    if (not isinstance(value, list) or len(value) != 2
+            or any(type(v) not in (int, float) or not math.isfinite(v) for v in value)
+            or not 0 <= value[0] < width or not 0 <= value[1] < height):
+        raise ValueError("Invalid benchmark point")
+
+
+def _validate(data: dict):
+    if data.get("schema_version") != "0.1.0" or data.get("split") != "development_seed":
+        raise ValueError("Unsupported benchmark schema or split")
+    width, height = data["image_size_px"]
+    if any(type(v) is not int or v <= 0 for v in (width, height)):
+        raise ValueError("Invalid image dimensions")
+    if not data["cases"]:
+        raise ValueError("Benchmark must contain cases")
+    identifiers, frames = set(), set()
+    for case in data["cases"]:
+        key = (case["source_run"], case["frame_index"])
+        if case["id"] in identifiers or key in frames:
+            raise ValueError("Duplicate case or source frame")
+        identifiers.add(case["id"])
+        frames.add(key)
+        sampling = data["sources"][case["source_run"]]
+        if (type(sampling["frames"]) is not int or sampling["frames"] <= 0
+                or not math.isfinite(sampling["fps"]) or sampling["fps"] <= 0
+                or not math.isfinite(sampling["start_seconds"]) or sampling["start_seconds"] < 0
+                or type(case["frame_index"]) is not int
+                or not 0 <= case["frame_index"] < sampling["frames"]):
+            raise ValueError("Invalid benchmark sampling or frame")
+        if (not case["reviewer"].strip() or case["reviewer_kind"] not in ("human", "automated")
+                or case["visibility"] not in ("visible", "uncertain")):
+            raise ValueError("Labels require explicit provenance and visibility")
+        if case["visibility"] == "visible":
+            _point(case["point_px"], width, height)
+        elif case["point_px"] is not None:
+            raise ValueError("Uncertain frames cannot assert a shuttle location")
+        for region in case["not_shuttle_regions"]:
+            _point(region["center_px"], width, height)
+            radius = region["radius_px"]
+            if type(radius) not in (int, float) or not math.isfinite(radius) or radius <= 0:
+                raise ValueError("Invalid negative-region radius")
+            if not region["identity"].strip():
+                raise ValueError("Negative regions require an observed identity")
+            if case["point_px"] is not None and math.dist(region["center_px"], case["point_px"]) <= radius:
+                raise ValueError("Visible point contradicts a local negative label")
+
+
+def prepare(seed: Path, video: Path, output: Path) -> Path:
+    data = json.loads(seed.read_text(encoding="utf-8"))
+    _validate(data)
+    if output.exists():
+        raise ValueError("Choose a new benchmark directory")
+    if sha256_file(video) != data["source_video_sha256"]:
+        raise ValueError("Benchmark source video hash does not match")
+    meta = probe_video(video)
+    if [meta["width_px"], meta["height_px"]] != data["image_size_px"]:
+        raise ValueError("Benchmark source dimensions do not match")
+    if any(abs(s["fps"] - meta["frame_rate_fps"]) > 1e-6 for s in data["sources"].values()):
+        raise ValueError("Benchmark must retain the native source sampling rate")
+    output.mkdir(parents=True)
+    (output / "images").mkdir()
+    cards = []
+    with TemporaryDirectory() as temporary:
+        for number, (name, sampling) in enumerate(data["sources"].items()):
+            paths = _extract_sampled_video(video, Path(temporary) / str(number), sampling["fps"],
+                                           sampling["frames"] / sampling["fps"], sampling["start_seconds"])
+            if len(paths) != sampling["frames"]:
+                raise ValueError("Decoded benchmark frame count differs from seed")
+            for case in (c for c in data["cases"] if c["source_run"] == name):
+                # Case IDs never become filesystem paths.
+                index = data["cases"].index(case)
+                relative = f"images/case_{index:04}.png"
+                image = Image.open(paths[case["frame_index"]]).convert("RGB")
+                image.save(output / relative)
+                case["image"] = relative
+                case["image_sha256"] = sha256_file(output / relative)
+                annotated = image.copy()
+                draw = ImageDraw.Draw(annotated)
+                if case["point_px"] is not None:
+                    x, y = case["point_px"]
+                    draw.ellipse((x-6, y-6, x+6, y+6), outline="#38ff93", width=2)
+                for region in case["not_shuttle_regions"]:
+                    x, y = region["center_px"]; r = region["radius_px"]
+                    draw.rectangle((x-r, y-r, x+r, y+r), outline="#ff8855", width=2)
+                annotated.save(output / f"images/labeled_{index:04}.png")
+                time = sampling["start_seconds"] + case["frame_index"] / sampling["fps"]
+                cards.append(f'<section><h2>{escape(case["id"])} · {time:.3f} s</h2><p>{escape(case["visibility"])} · {escape(case["reviewer"])} / {escape(case["reviewer_kind"])}</p><p>{escape(case["notes"])}</p><img src="images/labeled_{index:04}.png" alt="Labeled source frame"><p><a href="{relative}">Unmarked source image</a></p></section>')
+    data["seed_sha256"] = sha256_file(seed)
+    target = output / "benchmark.json"
+    target.write_text(json.dumps(data, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+    (output / "index.html").write_text('''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Shuttle development benchmark</title><style>body{font:17px/1.6 system-ui;background:#10202b;color:#edf5fa;max-width:1000px;margin:auto;padding:24px}img{width:100%}section{border:1px solid #587480;border-radius:10px;padding:20px;margin:20px 0}a{color:#80e5d0}</style><h1>Shuttle development benchmark</h1><p>Green: observed shuttle point. Orange: a local region known to contain another object. An uncertain frame is not labeled as shuttle-absent. These selected development cases are not an independent accuracy test. Labels are explicitly attributed; source images are hash-bound.</p>'''+''.join(cards), encoding="utf-8")
+    return target
+
+
+def evaluate(benchmark: Path, predictions: dict[str, Path], tolerance_px: float = 4) -> dict:
+    if not math.isfinite(tolerance_px) or tolerance_px <= 0:
+        raise ValueError("Point tolerance must be finite and positive")
+    data = json.loads(benchmark.read_text(encoding="utf-8"))
+    _validate(data)
+    root = benchmark.resolve().parent
+    for case in data["cases"]:
+        path = (root / case["image"]).resolve()
+        if not path.is_relative_to(root) or sha256_file(path) != case["image_sha256"]:
+            raise ValueError("Benchmark image is changed or outside the packet")
+        with Image.open(path) as image:
+            if list(image.size) != data["image_size_px"]:
+                raise ValueError("Benchmark image dimensions changed")
+    needed = {c["source_run"] for c in data["cases"]}
+    if set(predictions) != needed:
+        raise ValueError("Provide exactly one prediction run per benchmark source")
+    loaded, bindings = {}, {}
+    for name, path in predictions.items():
+        summary_path, rows_path = path / "shuttle_summary.json", path / "shuttle_candidates.jsonl"
+        summary_bytes, rows_bytes = summary_path.read_bytes(), rows_path.read_bytes()
+        summary = json.loads(summary_bytes)
+        rows = [json.loads(line) for line in rows_bytes.decode("utf-8").splitlines() if line.strip()]
+        sampling = data["sources"][name]
+        if (summary["source_video_sha256"] != data["source_video_sha256"] or summary["sampling"] != sampling
+                or [summary["video"]["width_px"], summary["video"]["height_px"]] != data["image_size_px"]
+                or len(rows) != sampling["frames"]):
+            raise ValueError("Prediction source or sampling does not match benchmark")
+        for i, row in enumerate(rows):
+            expected = sampling["start_seconds"] + i / sampling["fps"]
+            if type(row["frame_index"]) is not int or row["frame_index"] != i or not math.isfinite(row["timestamp_seconds"]) or abs(row["timestamp_seconds"] - expected) > .00001:
+                raise ValueError("Invalid prediction frame or timestamp")
+            for candidate in row["candidates"]:
+                _point(candidate["center_px"], *data["image_size_px"])
+            proposal = row["proposal"]
+            if proposal is not None:
+                index = proposal["candidate_index"]
+                if (type(index) is not int or not 0 <= index < len(row["candidates"])
+                        or proposal["position_px"] != row["candidates"][index]["center_px"]):
+                    raise ValueError("Proposal does not reference a candidate")
+        loaded[name] = rows
+        bindings[name] = {"summary_sha256": sha256(summary_bytes).hexdigest(), "rows_sha256": sha256(rows_bytes).hexdigest()}
+    visible, candidate_hits, proposal_hits, negatives, negative_candidate_hits, negative_proposal_hits = (0,) * 6
+    details = []
+    distance = lambda a, b: math.hypot(a[0] - b[0], a[1] - b[1])
+    for case in data["cases"]:
+        row = loaded[case["source_run"]][case["frame_index"]]
+        points = [c["center_px"] for c in row["candidates"]]
+        proposal = row["proposal"]["position_px"] if row["proposal"] is not None else None
+        detail = {"id": case["id"], "visibility": case["visibility"]}
+        if case["visibility"] == "visible":
+            visible += 1
+            hit = any(distance(p, case["point_px"]) <= tolerance_px for p in points)
+            linked_hit = proposal is not None and distance(proposal, case["point_px"]) <= tolerance_px
+            candidate_hits += hit; proposal_hits += linked_hit
+            detail.update(candidate_hit=hit, proposal_hit=linked_hit)
+        detail["negative_region_hits"] = []
+        for region in case["not_shuttle_regions"]:
+            negatives += 1
+            hit = any(distance(p, region["center_px"]) <= region["radius_px"] for p in points)
+            linked_hit = proposal is not None and distance(proposal, region["center_px"]) <= region["radius_px"]
+            negative_candidate_hits += hit; negative_proposal_hits += linked_hit
+            detail["negative_region_hits"].append({"identity": region["identity"], "candidate_hit": hit, "proposal_hit": linked_hit})
+        details.append(detail)
+    return {"schema_version": "0.1.0", "evaluation_scope": "selected_development_seed_only",
+            "benchmark_sha256": sha256_file(benchmark), "prediction_bindings": bindings, "point_tolerance_px": tolerance_px,
+            "visible_points": visible, "candidate_point_hits": candidate_hits, "proposal_point_hits": proposal_hits,
+            "uncertain_frames_excluded_from_point_scoring": len(data["cases"]) - visible,
+            "known_negative_regions": negatives, "negative_regions_with_candidates": negative_candidate_hits,
+            "negative_regions_with_proposals": negative_proposal_hits,
+            "cases": details, "verified_shuttle_positions": 0,
+            "limitations": ["Selected, correlated development examples; not held-out data or full-video precision/recall.",
+                            "Negative regions label only local distractors, not absence of a shuttle elsewhere in the frame.",
+                            "Evaluation never promotes proposals to verified trajectories or enables events/scoring."]}
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    commands = parser.add_subparsers(dest="command", required=True)
+    make = commands.add_parser("prepare")
+    make.add_argument("--seed", type=Path, required=True)
+    make.add_argument("--video", type=Path, required=True)
+    make.add_argument("--out", type=Path, required=True)
+    score = commands.add_parser("evaluate")
+    score.add_argument("--benchmark", type=Path, required=True)
+    score.add_argument("--prediction", action="append", required=True, help="Benchmark source name=prediction directory")
+    score.add_argument("--tolerance-px", type=float, default=4)
+    args = parser.parse_args()
+    try:
+        if args.command == "prepare":
+            print(prepare(args.seed, args.video, args.out))
+        else:
+            mappings = {}
+            for item in args.prediction:
+                name, path = item.split("=", 1)
+                if name in mappings:
+                    raise ValueError("Duplicate prediction mapping")
+                mappings[name] = Path(path)
+            print(json.dumps(evaluate(args.benchmark, mappings, args.tolerance_px), indent=2, allow_nan=False))
+    except (ValueError, OSError, RuntimeError, KeyError, TypeError, AttributeError, IndexError) as exc:
+        parser.exit(1, f"Benchmark error: {exc}\n")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

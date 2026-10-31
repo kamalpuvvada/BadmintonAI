@@ -374,11 +374,39 @@ On 31 October 2026, four final runs processed **1,200 frames** after an initial 
 | shuttle-007 | players-050 / 480–490 s | 51 | 27 | 0 |
 | shuttle-008 | players-044 / 300–310 s | 54 | 25 | 0 |
 
-All four previews decode to 300 frames each; status totals match JSONL rows; rejected frames contain no candidates; every proposal segment is consecutive and confined to one scene. The 198 linked-proposal frames and 106 segments are **diagnostic counts, not recall, detected shots, rallies or valid trajectories**. All four final contact sheets were inspected. Native-resolution spot checks at 4.267, 728.067, 484.400 and 303.500 seconds show proposals on **racket heads**. Player masking also deliberately loses near-body shuttle visibility. Blur, low contrast, court-line overlap and slow/static motion cause additional misses. The baseline therefore **fails shuttle identity validation** and is retained as a diagnostic baseline, not promoted to analysis.
+All four previews decode to 300 frames each; status totals match JSONL rows; rejected frames contain no candidates; every proposal segment is consecutive and confined to one scene. The 198 linked-proposal frames and 106 segments are **diagnostic counts, not recall, detected shots, rallies or valid trajectories**. All four final contact sheets were inspected. Initial single-frame spot checks at 4.267, 728.067, 484.400 and 303.500 seconds incorrectly classified all four proposals as racket heads. **Correction from Step 3.2:** enlarged temporal context shows the first, third and fourth are shuttles moving independently of the racket; the 728.067 s example remains a local racket-head negative. The validation record retains the previous classifications with explicit corrections. Player masking also deliberately loses near-body shuttle visibility. Blur, low contrast, court-line overlap and slow/static motion cause additional misses. Racket confusion and fragmentation remain, so the baseline is retained for diagnostics and not promoted to verified trajectories.
 
 Results, hashes and the four failure labels are recorded in `validation/shuttle_candidates_2026-10-31.json`. Local source visibility sheets and a four-example failure sheet are in `out/shuttle-visibility`. Fifty-two tests pass, including real FFmpeg pipeline coverage, source mismatch, output preservation, player eligibility bounds, scene and gap resets, ambiguity, stationary/ghost rejection, masks and background flicker. Installed dependencies pass `pip check`.
 
-The next shuttle milestone is a labeled visibility/location benchmark and evaluation of a shuttle-specific detector against these failure cases. The existing pretrained person model is not treated as a shuttle detector. No shuttle trajectories, contact timing, shot types or coaching scores are verified by this baseline.
+The existing pretrained person model is not treated as a shuttle detector. No shuttle trajectories, contact timing, shot types or coaching scores are verified by this baseline.
+
+## Step 3.2 — Labeled development benchmark and measured color experiment
+
+`validation/shuttle_benchmark_seed_2026-10-31.json` contains 16 selected source frames: **12 visible shuttle locations, one local racket-head region, and three additional uncertain frames**. All labels are attributed to Codex / automated visual review. Six consecutive enlarged court-background frames and three colored-blur frames were inspected directly; three candidate-selected examples were corrected from the earlier misclassifications after inspecting their temporal context. The corrected examples are not independent ground truth. Centers of tiny components or streaks are approximate image locations, not physical cork positions.
+
+Prepare native-resolution source images from the hash-matched video, then evaluate candidate output:
+
+```powershell
+.\.venv\Scripts\python.exe shuttle_benchmark.py prepare --seed "validation\shuttle_benchmark_seed_2026-10-31.json" --video "Videos\videoplayback.mp4" --out "out\benchmark-repeat"
+.\.venv\Scripts\python.exe shuttle_benchmark.py evaluate --benchmark "out\benchmark-repeat\benchmark.json" --prediction "shuttle-005=out\shuttle-005" --prediction "shuttle-006=out\shuttle-006" --prediction "shuttle-007=out\shuttle-007" --prediction "shuttle-008=out\shuttle-008"
+```
+
+The packet's `index.html` shows green point labels, orange local distractor regions and provenance. Its `benchmark.json` binds each unmarked source image to its SHA-256. Evaluation rejects altered/escaping images, mismatched source video or dimensions, changed sampling, malformed rows, duplicate or contradictory labels, invalid coordinates and proposals that do not reference a candidate. Reports bind the benchmark and prediction bytes to hashes. Default point tolerance is four native pixels (`--tolerance-px`). An uncertain frame is excluded from point scoring; a local racket label **does not mean the entire frame is shuttle-absent**. These selected, correlated development examples are not a held-out accuracy benchmark or full-video precision/recall test. They must not be used as evidence of generalization.
+
+An opt-in `--allow-tinted-streaks` mode in `shuttle_candidates.py` relaxes color thresholds only while retaining motion, scene-background contrast, player masks, ROI and cut/gap rules. It recovers color-tinted shuttle blur that the white-component test misses. It can also admit more distractors; the default remains unchanged. To reproduce a trial, add that flag to the Step 3.1 command and choose a new output folder. For evaluation, map the original benchmark source name to the trial output directory, for example `--prediction "shuttle-005=out\shuttle-009"`.
+
+The corrected local packet is `out/shuttle-benchmark-002` (draft 001 is explicitly superseded). Four full-window tinted trials, shuttle-009 through 012, processed another 1,200 frames. At four-pixel tolerance:
+
+| Selected development cases | Default white components | Opt-in tinted streaks |
+| --- | --- | --- |
+| Visible points with a nearby candidate | 10/12 | 12/12 |
+| Visible points with a nearby linked proposal | 10/12 | 9/12 |
+| Local racket regions containing a candidate | 1/1 | 1/1 |
+| Local racket regions selected as a linked proposal | 1/1 | 0/1 |
+
+The experimental mode recovers both red-background observations but increases ambiguity and reduces linked point hits. Failure to select the racket is an abstention, not evidence that it learned racket identity. Across the four full windows, linked-proposal frames increased from 198 to 335 and segments from 106 to 152; these are not accuracy gains. Both modes remain unverified, and the trial is **not promoted as better tracking**. A separate extraction-only ablation on these labeled cases compared temporal lag 1 against lag 3: white hits stayed 10/12 and tinted hits 12/12, with the racket candidate remaining in every condition. Wider temporal comparison was not adopted.
+
+The versioned evaluation record is `validation/shuttle_benchmark_evaluation_2026-10-31.json`; local source/context images, packet labels and comparisons are retained for inspection. All four trial contact sheets were inspected. Sixty-one tests pass, including native source preparation, exact tolerance boundaries, unknown-frame handling, source/image integrity, contradictory labels, color-mode opt-in and retained masks. No verified trajectories, shot events or coaching scores are enabled. The next milestone is a broader independently reviewed dataset and shuttle-specific model evaluation; this seed now provides reproducible checks for that work.
 
 ## Next milestones
 

@@ -122,8 +122,9 @@
         219.83,
         105.83
       ],
-      "observed_candidate_identity": "racket_head",
-      "review_scope": "Selected native-resolution proposal spot check; not an exhaustive precision/recall evaluation"
+      "observed_candidate_identity": "shuttle",
+      "review_scope": "Corrected after six-frame enlarged temporal inspection during benchmark creation. Original single-frame racket-head conclusion was wrong.",
+      "previous_observed_candidate_identity": "racket_head"
     },
     {
       "run": "shuttle-006",
@@ -144,8 +145,9 @@
         388.5,
         38.5
       ],
-      "observed_candidate_identity": "racket_head",
-      "review_scope": "Selected native-resolution proposal spot check; not an exhaustive precision/recall evaluation"
+      "observed_candidate_identity": "shuttle",
+      "review_scope": "Corrected after six-frame enlarged temporal inspection during benchmark creation. Original single-frame racket-head conclusion was wrong.",
+      "previous_observed_candidate_identity": "racket_head"
     },
     {
       "run": "shuttle-008",
@@ -155,12 +157,14 @@
         360.0,
         102.5
       ],
-      "observed_candidate_identity": "racket_head",
-      "review_scope": "Selected native-resolution proposal spot check; not an exhaustive precision/recall evaluation"
+      "observed_candidate_identity": "shuttle",
+      "review_scope": "Corrected after six-frame enlarged temporal inspection during benchmark creation. Original single-frame racket-head conclusion was wrong.",
+      "previous_observed_candidate_identity": "racket_head"
     }
   ],
   "frames_processed": 1200,
   "frames_with_linked_proposals": 198,
   "proposal_segments": 106,
-  "conclusion": "Visual inspection of four final contact sheets and four native-resolution failure examples found racket confusion and fragmentation. Counts describe proposals, not shuttle recall or accuracy. A shuttle-specific labeled benchmark is needed before accepting trajectories."
+  "conclusion": "Initial single-frame inspection incorrectly called three shuttles racket heads. Temporal reinspection corrected shuttle-005 frame 128, shuttle-007 frame 132 and shuttle-008 frame 105 to shuttle. Shuttle-006 frame 242 remains a racket-head negative. Fragmentation and missed observations remain; the original four-negative claim is superseded by the development benchmark.",
+  "annotation_revision": 2
 }

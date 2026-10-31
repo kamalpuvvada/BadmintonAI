@@ -52,6 +52,17 @@ class ShuttleCandidateTests(unittest.TestCase):
         self.assertEqual(len(raw), 2)
         self.assertEqual([c["center_px"] for c in filtered], [[51, 51]])
 
+    def test_tinted_streak_mode_is_opt_in_requires_background_and_respects_masks(self):
+        background = np.full((100, 100, 3), [200, 30, 40], dtype=np.uint8)
+        current = background.copy()
+        current[40:46, 50:53] = [235, 120, 130]
+        self.assertFalse(moving_candidates(background, current, background, (0, 0, 1, 1), [], background))
+        found = moving_candidates(background, current, background, (0, 0, 1, 1), [], background, True)
+        self.assertEqual(len(found), 1)
+        self.assertFalse(moving_candidates(background, current, background, (0, 0, 1, 1), [[48, 38, 55, 48]], background, True))
+        with self.assertRaisesRegex(ValueError, "require a scene background"):
+            moving_candidates(background, current, background, (0, 0, 1, 1), [], allow_tinted_streaks=True)
+
     def test_linker_never_bridges_gaps_or_scene_boundaries(self):
         linker = ProposalLinker()
         first = linker.update(0, 0, [candidate(10)])

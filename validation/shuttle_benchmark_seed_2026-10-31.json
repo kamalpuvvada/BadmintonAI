@@ -1,0 +1,256 @@
+{
+  "schema_version": "0.1.0",
+  "split": "development_seed",
+  "source_video_sha256": "f317baacdd4ccce45febd9f416ba44b6c90071ebf3380c22f877b03376101130",
+  "image_size_px": [
+    640,
+    360
+  ],
+  "annotation_scope": "Automated visual labels on selected native-rate source frames. Positive locations use centers of the visible shuttle/streak, not physical cork position. Not independent ground truth or a held-out benchmark. Three initially alleged racket examples were reclassified as visible shuttle observations after temporal inspection; selected candidate locations are not held-out labels.",
+  "sources": {
+    "shuttle-005": {
+      "fps": 30.0,
+      "start_seconds": 0,
+      "frames": 300
+    },
+    "shuttle-006": {
+      "fps": 30.0,
+      "start_seconds": 720,
+      "frames": 300
+    },
+    "shuttle-007": {
+      "fps": 30.0,
+      "start_seconds": 480.0,
+      "frames": 300
+    },
+    "shuttle-008": {
+      "fps": 30.0,
+      "start_seconds": 300,
+      "frames": 300
+    }
+  },
+  "cases": [
+    {
+      "id": "visible-green-132",
+      "source_run": "shuttle-005",
+      "frame_index": 132,
+      "visibility": "visible",
+      "point_px": [
+        216.5,
+        109.0
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Isolated bright shuttle observed moving down-left over six consecutive enlarged source frames. Green/blue court background; approximate visible-component center. Adjacent frames are correlated, not six independent trials."
+    },
+    {
+      "id": "visible-green-133",
+      "source_run": "shuttle-005",
+      "frame_index": 133,
+      "visibility": "visible",
+      "point_px": [
+        216.5,
+        109.0
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Isolated bright shuttle observed moving down-left over six consecutive enlarged source frames. Green/blue court background; approximate visible-component center. Adjacent frames are correlated, not six independent trials."
+    },
+    {
+      "id": "visible-green-134",
+      "source_run": "shuttle-005",
+      "frame_index": 134,
+      "visibility": "visible",
+      "point_px": [
+        215.4,
+        110.8
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Isolated bright shuttle observed moving down-left over six consecutive enlarged source frames. Green/blue court background; approximate visible-component center. Adjacent frames are correlated, not six independent trials."
+    },
+    {
+      "id": "visible-green-135",
+      "source_run": "shuttle-005",
+      "frame_index": 135,
+      "visibility": "visible",
+      "point_px": [
+        214.5,
+        114.0
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Isolated bright shuttle observed moving down-left over six consecutive enlarged source frames. Green/blue court background; approximate visible-component center. Adjacent frames are correlated, not six independent trials."
+    },
+    {
+      "id": "visible-green-136",
+      "source_run": "shuttle-005",
+      "frame_index": 136,
+      "visibility": "visible",
+      "point_px": [
+        213.5,
+        117.67
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Isolated bright shuttle observed moving down-left over six consecutive enlarged source frames. Green/blue court background; approximate visible-component center. Adjacent frames are correlated, not six independent trials."
+    },
+    {
+      "id": "visible-green-137",
+      "source_run": "shuttle-005",
+      "frame_index": 137,
+      "visibility": "visible",
+      "point_px": [
+        212.71,
+        121.86
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Isolated bright shuttle observed moving down-left over six consecutive enlarged source frames. Green/blue court background; approximate visible-component center. Adjacent frames are correlated, not six independent trials."
+    },
+    {
+      "id": "visible-streak-153",
+      "source_run": "shuttle-005",
+      "frame_index": 153,
+      "visibility": "visible",
+      "point_px": [
+        271.27,
+        65.24
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Coherent moving shuttle streak inspected in three enlarged consecutive source frames. Streak center is approximate; backdrop changes from dark advertising to red. No contact timing or physical cork location asserted."
+    },
+    {
+      "id": "visible-streak-154",
+      "source_run": "shuttle-005",
+      "frame_index": 154,
+      "visibility": "visible",
+      "point_px": [
+        280.79,
+        48.06
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Coherent moving shuttle streak inspected in three enlarged consecutive source frames. Streak center is approximate; backdrop changes from dark advertising to red. No contact timing or physical cork location asserted."
+    },
+    {
+      "id": "visible-streak-155",
+      "source_run": "shuttle-005",
+      "frame_index": 155,
+      "visibility": "visible",
+      "point_px": [
+        289.43,
+        35.17
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Coherent moving shuttle streak inspected in three enlarged consecutive source frames. Streak center is approximate; backdrop changes from dark advertising to red. No contact timing or physical cork location asserted."
+    },
+    {
+      "id": "corrected-shuttle-shuttle-005-128",
+      "source_run": "shuttle-005",
+      "frame_index": 128,
+      "visibility": "visible",
+      "point_px": [
+        219.83,
+        105.83
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Corrected earlier single-frame racket-head misclassification after inspecting six enlarged surrounding source frames: this object moves independently of the racket and follows a shuttle trajectory. Candidate-selected example; location is approximate and not independent ground truth."
+    },
+    {
+      "id": "racket-shuttle-006-242",
+      "source_run": "shuttle-006",
+      "frame_index": 242,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [
+        {
+          "center_px": [
+            351.0,
+            117.0
+          ],
+          "radius_px": 6,
+          "identity": "racket_head"
+        }
+      ],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Known racket-head proposal inspected at native resolution. Negative label applies only within this local radius; shuttle visibility elsewhere in the frame is not asserted."
+    },
+    {
+      "id": "corrected-shuttle-shuttle-007-132",
+      "source_run": "shuttle-007",
+      "frame_index": 132,
+      "visibility": "visible",
+      "point_px": [
+        388.5,
+        38.5
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Corrected earlier single-frame racket-head misclassification after inspecting six enlarged surrounding source frames: this object moves independently of the racket and follows a shuttle trajectory. Candidate-selected example; location is approximate and not independent ground truth."
+    },
+    {
+      "id": "corrected-shuttle-shuttle-008-105",
+      "source_run": "shuttle-008",
+      "frame_index": 105,
+      "visibility": "visible",
+      "point_px": [
+        360.0,
+        102.5
+      ],
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Corrected earlier single-frame racket-head misclassification after inspecting six enlarged surrounding source frames: this object moves independently of the racket and follows a shuttle trajectory. Candidate-selected example; location is approximate and not independent ground truth."
+    },
+    {
+      "id": "uncertain-150",
+      "source_run": "shuttle-005",
+      "frame_index": 150,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Source frame inspected; shuttle location not confidently established near player/contact area. Do not treat as a shuttle-absent negative."
+    },
+    {
+      "id": "uncertain-151",
+      "source_run": "shuttle-005",
+      "frame_index": 151,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Source frame inspected; shuttle location not confidently established near player/contact area. Do not treat as a shuttle-absent negative."
+    },
+    {
+      "id": "uncertain-152",
+      "source_run": "shuttle-005",
+      "frame_index": 152,
+      "visibility": "uncertain",
+      "point_px": null,
+      "not_shuttle_regions": [],
+      "reviewer": "Codex",
+      "reviewer_kind": "automated",
+      "notes": "Source frame inspected; shuttle location not confidently established near player/contact area. Do not treat as a shuttle-absent negative."
+    }
+  ],
+  "label_revision": 2
+}

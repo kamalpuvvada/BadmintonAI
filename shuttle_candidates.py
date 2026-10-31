@@ -21,7 +21,7 @@ from tracking_review import verified_snapshot
 
 def moving_candidates(previous: np.ndarray, current: np.ndarray, following: np.ndarray,
                       roi: tuple[float, float, float, float], player_boxes: list[list[float]],
-                      background: np.ndarray | None = None) -> list[dict]:
+                      background: np.ndarray | None = None, allow_tinted_streaks: bool = False) -> list[dict]:
     """Tiny bright components changing on BOTH sides of the current frame.
 
     Player masks deliberately trade away near-body shuttle recall. Colour,
@@ -42,6 +42,14 @@ def moving_candidates(previous: np.ndarray, current: np.ndarray, following: np.n
         # compression. Require positive contrast against a scene-local median.
         contrast = gray[1].astype(int) - background_gray.astype(int)
         mask &= (contrast >= 20).astype(np.uint8)
+        if allow_tinted_streaks:
+            # Blur over a coloured backdrop can tint the shuttle. Keep the
+            # motion/background tests; colour alone cannot identify it.
+            tinted = ((motion >= 12) & (low >= 80) & (high >= 160)
+                      & (high.astype(int) - low.astype(int) <= 160) & (contrast >= 25))
+            mask |= tinted.astype(np.uint8)
+    elif allow_tinted_streaks:
+        raise ValueError("Tinted-streak proposals require a scene background")
     height, width = mask.shape
     allowed = np.zeros_like(mask)
     left, top, right, bottom = roi
@@ -129,7 +137,8 @@ def frame_context(timestamp: float, summary: dict, rows: list[dict], intervals: 
 
 
 def run(video: Path, player_run: Path, output: Path,
-        roi: tuple[float, float, float, float] = (.10, .08, .90, 1.0)) -> Path:
+        roi: tuple[float, float, float, float] = (.10, .08, .90, 1.0),
+        allow_tinted_streaks: bool = False) -> Path:
     if output.exists():
         raise ValueError("Choose a new output directory; existing evidence is never overwritten")
     verification, summary, player_rows, review = verified_snapshot(player_run)
@@ -175,7 +184,7 @@ def run(video: Path, player_run: Path, output: Path,
             elif not same_context:
                 status = "no_temporal_context"
             else:
-                candidates = moving_candidates(previous, current, following, roi, context["player_boxes"], backgrounds[scene])
+                candidates = moving_candidates(previous, current, following, roi, context["player_boxes"], backgrounds[scene], allow_tinted_streaks)
                 if len(candidates) > 12:
                     status = "excessive_clutter"
                 else:
@@ -220,6 +229,9 @@ def run(video: Path, player_run: Path, output: Path,
               "player_review_snapshot_sha256": review_hash, "player_review_provenance": verification["review_provenance"],
               "video": meta, "opencv_version": cv2.__version__,
               "configuration": {"motion_difference_min": 12, "rgb_channel_min": 120, "rgb_peak_min": 180,
+                                "allow_tinted_streaks": allow_tinted_streaks,
+                                "tinted_rgb_channel_min": 80, "tinted_rgb_peak_min": 160,
+                                "tinted_rgb_chroma_max": 160, "tinted_background_contrast_min": 25,
                                 "rgb_chroma_max": 70, "background_contrast_min": 20,
                                 "component_area_range_px": [1, 50], "component_dimension_max_px": 20,
                                 "player_mask_margin_px": 4, "scene_background_samples_max": 31,
@@ -247,9 +259,10 @@ def main() -> int:
     parser.add_argument("--player-run", type=Path, required=True)
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--roi", default="0.10,0.08,0.90,1.00")
+    parser.add_argument("--allow-tinted-streaks", action="store_true", help="Experimental colour-tinted blur proposals; may admit more distractors")
     args = parser.parse_args()
     try:
-        print(run(args.video, args.player_run, args.out, parse_roi(args.roi)))
+        print(run(args.video, args.player_run, args.out, parse_roi(args.roi), args.allow_tinted_streaks))
     except (ValueError, OSError, RuntimeError, KeyError, TypeError) as exc:
         parser.exit(1, f"Shuttle candidate error: {exc}\n")
     return 0

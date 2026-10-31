@@ -1,0 +1,144 @@
+from copy import deepcopy
+import json
+from pathlib import Path
+import tempfile
+import unittest
+
+from PIL import Image
+
+from badminton_proto import sha256_file
+from player_tracking import _encode_preview
+from shuttle_benchmark import evaluate, prepare
+
+
+class ShuttleBenchmarkTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        self.root = Path(self.temp.name)
+        self.packet = self.root / "packet"
+        self.packet.mkdir()
+        image = self.packet / "frame.png"
+        Image.new("RGB", (10, 10), "green").save(image)
+        self.sampling = {"fps": 30, "start_seconds": 0, "frames": 3}
+        template = {"source_run": "source", "visibility": "uncertain", "point_px": None,
+                    "not_shuttle_regions": [], "reviewer": "Synthetic reviewer", "reviewer_kind": "automated",
+                    "notes": "Synthetic only", "image": "frame.png", "image_sha256": sha256_file(image)}
+        cases = [{**deepcopy(template), "id": f"case-{i}", "frame_index": i} for i in range(3)]
+        cases[0].update(visibility="visible", point_px=[2, 2])
+        cases[2]["not_shuttle_regions"] = [{"center_px": [8, 8], "radius_px": 1, "identity": "racket_head"}]
+        self.data = {"schema_version": "0.1.0", "split": "development_seed", "image_size_px": [10, 10],
+                     "source_video_sha256": "a" * 64, "sources": {"source": self.sampling}, "cases": cases}
+        self.predictions = self.root / "predictions"
+        self.predictions.mkdir()
+        self.summary = {"source_video_sha256": "a" * 64, "sampling": self.sampling,
+                        "video": {"width_px": 10, "height_px": 10}}
+        self.rows = [{"frame_index": i, "timestamp_seconds": round(i / 30, 6), "candidates": [], "proposal": None} for i in range(3)]
+        self.rows[0]["candidates"] = [{"center_px": [2, 2]}, {"center_px": [7, 7]}]
+        self.rows[0]["proposal"] = {"candidate_index": 1, "position_px": [7, 7]}
+        self.rows[2]["candidates"] = [{"center_px": [8, 8]}]
+        self.rows[2]["proposal"] = {"candidate_index": 0, "position_px": [8, 8]}
+        self.save()
+
+    def save(self):
+        self.benchmark = self.packet / "benchmark.json"
+        self.benchmark.write_text(json.dumps(self.data), encoding="utf-8")
+        (self.predictions / "shuttle_summary.json").write_text(json.dumps(self.summary), encoding="utf-8")
+        (self.predictions / "shuttle_candidates.jsonl").write_text("".join(json.dumps(r) + "\n" for r in self.rows), encoding="utf-8")
+
+    def score(self, **kwargs):
+        return evaluate(self.benchmark, {"source": self.predictions}, **kwargs)
+
+    def test_point_hits_and_local_negatives_are_separate_and_never_verified(self):
+        result = self.score()
+        self.assertEqual((result["visible_points"], result["candidate_point_hits"], result["proposal_point_hits"]), (1, 1, 0))
+        self.assertEqual((result["known_negative_regions"], result["negative_regions_with_candidates"], result["negative_regions_with_proposals"]), (1, 1, 1))
+        self.assertEqual(result["verified_shuttle_positions"], 0)
+        self.assertNotIn("precision", result)
+        self.assertEqual(result["uncertain_frames_excluded_from_point_scoring"], 2)
+
+    def test_unknown_frames_do_not_become_absence_labels(self):
+        before = self.score()
+        self.rows[1]["candidates"] = [{"center_px": [1, 1]}]
+        self.rows[1]["proposal"] = {"candidate_index": 0, "position_px": [1, 1]}
+        self.save()
+        after = self.score()
+        for key in ("candidate_point_hits", "proposal_point_hits", "negative_regions_with_proposals"):
+            self.assertEqual(before[key], after[key])
+
+    def test_tolerance_boundary_and_invalid_points(self):
+        self.rows[0]["candidates"] = [{"center_px": [6, 2]}]
+        self.rows[0]["proposal"] = {"candidate_index": 0, "position_px": [6, 2]}
+        self.save()
+        self.assertEqual(self.score(tolerance_px=4)["proposal_point_hits"], 1)
+        self.assertEqual(self.score(tolerance_px=3.99)["proposal_point_hits"], 0)
+        self.rows[0]["candidates"][0]["center_px"] = [float("nan"), 2]
+        self.save()
+        with self.assertRaisesRegex(ValueError, "point"):
+            self.score()
+
+    def test_changed_or_escaping_images_are_rejected(self):
+        Image.new("RGB", (10, 10), "red").save(self.packet / "frame.png")
+        with self.assertRaisesRegex(ValueError, "changed"):
+            self.score()
+        outside = self.root / "outside.png"
+        Image.new("RGB", (10, 10), "red").save(outside)
+        for case in self.data["cases"]:
+            case.update(image="../outside.png", image_sha256=sha256_file(outside))
+        self.save()
+        with self.assertRaisesRegex(ValueError, "outside"):
+            self.score()
+
+    def test_mismatched_source_sampling_and_malformed_rows_are_rejected(self):
+        original = deepcopy(self.summary)
+        for change in ({"source_video_sha256": "b" * 64}, {"sampling": {**self.sampling, "fps": 15}}):
+            self.summary = {**original, **change}
+            self.save()
+            with self.assertRaisesRegex(ValueError, "does not match"):
+                self.score()
+        self.summary = original
+        self.rows[1]["timestamp_seconds"] = 100
+        self.save()
+        with self.assertRaisesRegex(ValueError, "timestamp"):
+            self.score()
+
+    def test_duplicate_labels_and_inconsistent_visibility_are_rejected(self):
+        self.data["cases"].append(deepcopy(self.data["cases"][0]))
+        self.save()
+        with self.assertRaisesRegex(ValueError, "Duplicate"):
+            self.score()
+        self.data["cases"].pop()
+        self.data["cases"][1]["point_px"] = [2, 2]
+        self.save()
+        with self.assertRaisesRegex(ValueError, "Uncertain"):
+            self.score()
+
+    def test_contradictory_positive_and_local_negative_are_rejected(self):
+        self.data["cases"][0]["not_shuttle_regions"] = [{"center_px": [2, 2], "radius_px": 2, "identity": "racket"}]
+        self.save()
+        with self.assertRaisesRegex(ValueError, "contradicts"):
+            self.score()
+
+    def test_prepare_decodes_hash_bound_native_images_and_preserves_existing_packet(self):
+        frames = self.root / "frames"
+        frames.mkdir()
+        for i in range(3):
+            Image.new("RGB", (10, 10), (i * 80, 30, 10)).save(frames / f"frame_{i + 1:06d}.jpg")
+        video = self.root / "source.mp4"
+        _encode_preview(frames, video, 30)
+        self.data["source_video_sha256"] = sha256_file(video)
+        seed = self.root / "seed.json"
+        seed.write_text(json.dumps(self.data))
+        target = prepare(seed, video, self.root / "new-packet")
+        data = json.loads(target.read_text())
+        self.assertEqual(len(data["cases"]), 3)
+        for case in data["cases"]:
+            self.assertEqual(sha256_file(target.parent / case["image"]), case["image_sha256"])
+        before = target.read_bytes()
+        with self.assertRaisesRegex(ValueError, "new benchmark"):
+            prepare(seed, video, target.parent)
+        self.assertEqual(target.read_bytes(), before)
+
+
+if __name__ == "__main__":
+    unittest.main()
