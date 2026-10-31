@@ -3,3 +3,5 @@
 rfdetr==1.11.2
 # ByteTrack identity association (Apache 2.0)
 trackers==2.6.1
+# Moving-component diagnostics for experimental shuttle proposals
+opencv-python==5.0.0.93

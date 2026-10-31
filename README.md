@@ -346,6 +346,40 @@ If you calibrated a full-court camera in Step 1B, optionally append `--calibrati
 
 For better player tracking, use original, fixed-camera footage with the full court visible; low-resolution broadcast edits are useful for testing the program but not for accuracy claims.
 
+## Step 3.1 — Experimental shuttle candidate diagnostics
+
+Run the first shuttle baseline on a **reviewed player run**, using the matching original video:
+
+```powershell
+.\.venv\Scripts\python.exe shuttle_candidates.py --video "Videos\videoplayback.mp4" --player-run "out\players-046" --out "out\shuttle-repeat"
+```
+
+The output directory must be new. The tool revalidates the player review and source identity, uses the original video rate (30 FPS for this source), and processes the same time window as the player run. A higher-rate frame is eligible only inside an accepted player interval's timestamp bounds. This inherits player-view eligibility, **not shuttle approval or review of every higher-rate frame**. Rejected views, unconfirmed starts and time outside accepted bounds produce no candidates. The player source hashes, review-snapshot hash and full video SHA-256 are recorded for audit; outputs are snapshots, not a live authorization system.
+
+The baseline finds tiny bright components that change against both adjacent frames, subtracts a scene-local median background, masks player boxes from neighboring player samples, and applies an optional normalized `--roi` (default `0.10,0.08,0.90,1.00`). These are experimental pixel thresholds, recorded in the summary, for the 640×360 source. It uses no trained shuttle classifier. A conservative linker starts only from a single candidate, requires consecutive frames, and terminates on ambiguity, excessive motion, missing observations, rejected views or a scene change. It never interpolates across gaps. The median uses up to 31 frames from the same scene with offline look-ahead; no temporal image context or background is shared across cuts.
+
+Generated artifacts:
+
+- `shuttle_candidates.jsonl`: every sampled frame, candidates, optional unverified proposal and explicit missing/excluded/ambiguous status. `verified_shuttle_position_px` is always null.
+- `shuttle_summary.json`: source/review hashes, sampling, thresholds, diagnostic counts and limitations. `verified_shuttle_positions` stays zero; shot events and coaching metrics stay unavailable.
+- `candidate_preview.mp4`: native-rate preview; orange circles are candidate components, cyan boxes are linked proposals. They are **not verified shuttle detections**.
+- `candidate_contact_sheet.jpg`, nine native-resolution `review_*.jpg` images, and `index.html`: offline inspection evidence.
+
+On 31 October 2026, four final runs processed **1,200 frames** after an initial comparison exposed white-marking/graphic flicker. Adding the scene background contrast check is covered by a regression test. It reduced some proposal clutter but does not establish an accuracy improvement without ground truth.
+
+| Final run | Player run / source window | Frames with linked proposals | Proposal segments | Verified shuttle positions |
+| --- | --- | --- | --- | --- |
+| shuttle-005 | players-046 / 0–10 s | 60 | 30 | 0 |
+| shuttle-006 | players-045 / 720–730 s | 33 | 24 | 0 |
+| shuttle-007 | players-050 / 480–490 s | 51 | 27 | 0 |
+| shuttle-008 | players-044 / 300–310 s | 54 | 25 | 0 |
+
+All four previews decode to 300 frames each; status totals match JSONL rows; rejected frames contain no candidates; every proposal segment is consecutive and confined to one scene. The 198 linked-proposal frames and 106 segments are **diagnostic counts, not recall, detected shots, rallies or valid trajectories**. All four final contact sheets were inspected. Native-resolution spot checks at 4.267, 728.067, 484.400 and 303.500 seconds show proposals on **racket heads**. Player masking also deliberately loses near-body shuttle visibility. Blur, low contrast, court-line overlap and slow/static motion cause additional misses. The baseline therefore **fails shuttle identity validation** and is retained as a diagnostic baseline, not promoted to analysis.
+
+Results, hashes and the four failure labels are recorded in `validation/shuttle_candidates_2026-10-31.json`. Local source visibility sheets and a four-example failure sheet are in `out/shuttle-visibility`. Fifty-two tests pass, including real FFmpeg pipeline coverage, source mismatch, output preservation, player eligibility bounds, scene and gap resets, ambiguity, stationary/ghost rejection, masks and background flicker. Installed dependencies pass `pip check`.
+
+The next shuttle milestone is a labeled visibility/location benchmark and evaluation of a shuttle-specific detector against these failure cases. The existing pretrained person model is not treated as a shuttle detector. No shuttle trajectories, contact timing, shot types or coaching scores are verified by this baseline.
+
 ## Next milestones
 
 | Step | Deliverable | Validation |

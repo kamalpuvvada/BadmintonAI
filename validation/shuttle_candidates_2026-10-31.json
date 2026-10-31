@@ -1,0 +1,166 @@
+{
+  "date": "2026-10-31",
+  "status": "experimental_baseline_failed_shuttle_identity_validation",
+  "reviewer": "Codex",
+  "reviewer_kind": "automated",
+  "verified_shuttle_positions": 0,
+  "shot_events": {
+    "status": "not_available"
+  },
+  "coaching_metrics": {
+    "status": "not_available"
+  },
+  "runs": [
+    {
+      "run": "shuttle-005",
+      "source_player_run": "players-046",
+      "sampling": {
+        "fps": 30.0,
+        "start_seconds": 0,
+        "frames": 300
+      },
+      "source_video_sha256": "f317baacdd4ccce45febd9f416ba44b6c90071ebf3380c22f877b03376101130",
+      "player_source_binding": {
+        "summary_sha256": "210f98b8dac8722628247b5bf69b472daaa2b798253594170d8e979a9bdb5c3a",
+        "tracks_sha256": "789b72713b69021457a41a930328ab42d259491a0d71d610e55d2e61473f163f"
+      },
+      "frame_status_counts": {
+        "excluded_player_review": 3,
+        "no_temporal_context": 2,
+        "no_candidate": 215,
+        "excessive_clutter": 4,
+        "ambiguous_candidates": 16,
+        "proposal": 60
+      },
+      "proposal_segments": 30,
+      "summary_sha256": "7d4a80ddbf499cb9077b441a5382ad864d5ccf81273b85c6e0dae50607880b29",
+      "candidate_rows_sha256": "810d2e07d1d2956a4a8bd6333984a114323505921cb4703e9b6343df90400a8c",
+      "preview_decoded_frames": 300
+    },
+    {
+      "run": "shuttle-006",
+      "source_player_run": "players-045",
+      "sampling": {
+        "fps": 30.0,
+        "start_seconds": 720,
+        "frames": 300
+      },
+      "source_video_sha256": "f317baacdd4ccce45febd9f416ba44b6c90071ebf3380c22f877b03376101130",
+      "player_source_binding": {
+        "summary_sha256": "6411010760c6779c89adb664e448912d279a7e821ad2f94cec9d3862ddd9af93",
+        "tracks_sha256": "b4794c0690a899e10f75934bbf6e27686c0bb29c73171edcc3591672ca8845fc"
+      },
+      "frame_status_counts": {
+        "excluded_player_review": 40,
+        "no_temporal_context": 4,
+        "no_candidate": 203,
+        "ambiguous_candidates": 20,
+        "proposal": 33
+      },
+      "proposal_segments": 24,
+      "summary_sha256": "f1f91d46bf54922be1b4cbc7bfe6bbb92c664dcbf0dffefc4d455966edfcef9e",
+      "candidate_rows_sha256": "d59106209e454aee2b02881658a13f3d84f9829582b5bad1aab735ac52d06e53",
+      "preview_decoded_frames": 300
+    },
+    {
+      "run": "shuttle-007",
+      "source_player_run": "players-050",
+      "sampling": {
+        "fps": 30.0,
+        "start_seconds": 480.0,
+        "frames": 300
+      },
+      "source_video_sha256": "f317baacdd4ccce45febd9f416ba44b6c90071ebf3380c22f877b03376101130",
+      "player_source_binding": {
+        "summary_sha256": "14e0c87fa6db0579b8210eec19110b74720b706aef7bae019e885159fe3390e3",
+        "tracks_sha256": "a43bcfb0ee8c5aa8dc27add5e428e0ff8974394dcc3dbc00e28cb53bc2d8063a"
+      },
+      "frame_status_counts": {
+        "excluded_player_review": 9,
+        "no_temporal_context": 6,
+        "proposal": 51,
+        "ambiguous_candidates": 26,
+        "no_candidate": 208
+      },
+      "proposal_segments": 27,
+      "summary_sha256": "3946001596958f92272bc3effd5d2d7f6a6615628cd9db2adea3d3b4ee130fe7",
+      "candidate_rows_sha256": "63f42c6a04376eebed559eb6fbfc99a9169885b5f886964aab0f1dacb60bf7bc",
+      "preview_decoded_frames": 300
+    },
+    {
+      "run": "shuttle-008",
+      "source_player_run": "players-044",
+      "sampling": {
+        "fps": 30.0,
+        "start_seconds": 300,
+        "frames": 300
+      },
+      "source_video_sha256": "f317baacdd4ccce45febd9f416ba44b6c90071ebf3380c22f877b03376101130",
+      "player_source_binding": {
+        "summary_sha256": "bbd2ae6413ab7e8eff2df67ba0d75a5fe4ee756da32450433835553e55fc0a6f",
+        "tracks_sha256": "86b9847d5acbc9c1c0f96b7203ed6b0b86f5154e02794441cab639a87bae34a2"
+      },
+      "frame_status_counts": {
+        "excluded_player_review": 103,
+        "no_temporal_context": 6,
+        "no_candidate": 128,
+        "proposal": 54,
+        "ambiguous_candidates": 9
+      },
+      "proposal_segments": 25,
+      "summary_sha256": "6d87b0c4c2dd9e30a8d0c2c0c2a17d8d1b09b810654ae95855b33f351c1e9515",
+      "candidate_rows_sha256": "b45ab28d3fb04fbbd6c8f3960102697ef6e8cccf1ae9d093baf8cca1f72b2df9",
+      "preview_decoded_frames": 300
+    }
+  ],
+  "failure_spot_checks": [
+    {
+      "run": "shuttle-005",
+      "frame_index": 128,
+      "source_seconds": 4.266667,
+      "proposal_position_px": [
+        219.83,
+        105.83
+      ],
+      "observed_candidate_identity": "racket_head",
+      "review_scope": "Selected native-resolution proposal spot check; not an exhaustive precision/recall evaluation"
+    },
+    {
+      "run": "shuttle-006",
+      "frame_index": 242,
+      "source_seconds": 728.066667,
+      "proposal_position_px": [
+        351.0,
+        117.0
+      ],
+      "observed_candidate_identity": "racket_head",
+      "review_scope": "Selected native-resolution proposal spot check; not an exhaustive precision/recall evaluation"
+    },
+    {
+      "run": "shuttle-007",
+      "frame_index": 132,
+      "source_seconds": 484.4,
+      "proposal_position_px": [
+        388.5,
+        38.5
+      ],
+      "observed_candidate_identity": "racket_head",
+      "review_scope": "Selected native-resolution proposal spot check; not an exhaustive precision/recall evaluation"
+    },
+    {
+      "run": "shuttle-008",
+      "frame_index": 105,
+      "source_seconds": 303.5,
+      "proposal_position_px": [
+        360.0,
+        102.5
+      ],
+      "observed_candidate_identity": "racket_head",
+      "review_scope": "Selected native-resolution proposal spot check; not an exhaustive precision/recall evaluation"
+    }
+  ],
+  "frames_processed": 1200,
+  "frames_with_linked_proposals": 198,
+  "proposal_segments": 106,
+  "conclusion": "Visual inspection of four final contact sheets and four native-resolution failure examples found racket confusion and fragmentation. Counts describe proposals, not shuttle recall or accuracy. A shuttle-specific labeled benchmark is needed before accepting trajectories."
+}
