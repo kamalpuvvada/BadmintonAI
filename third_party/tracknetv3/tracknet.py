@@ -73,5 +73,3 @@ class TrackNet(nn.Module):
         x = self.predictor(x)                                           # (N,    3,  288,   512)
         x = self.sigmoid(x)                                             # (N,    3,  288,   512)
         return x
-
-

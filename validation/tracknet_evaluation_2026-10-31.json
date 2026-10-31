@@ -9,7 +9,7 @@
     "license_sha256": "1eeb31683deba741bce99f5f33bb813293a23b4e6c8302d6f056a587a30cd497",
     "modification": "Retained only Conv2D blocks and TrackNet; omitted trajectory inpainting code. Added attribution header. Removed trailing whitespace."
   },
-  "architecture_file_sha256": "73fb2d334102e88cf8eff0a80f2c0e4a13d2b552e58e4390f4ecab9eaf8cd0ad",
+  "architecture_file_sha256": "28f70942b31c8544fa1c91dbc9809d4e5488cb277f74f11dc6f5e343155dad25",
   "checkpoint_sha256": "df867641a02712b021f04548ff4b1208ddfdb47f629ab2094ceb978667e83b1a",
   "checkpoint_archive_sha256": "8de68d34ea2457e368e22947f1309143d60a6a7f9ddccd31cd526d4c4571bcc4",
   "official_checkpoint_url": "https://drive.google.com/file/d/1CfzE87a0f6LhBp0kniSl1-89zaLCZ8cA/view",
@@ -453,5 +453,7 @@
     "Labels are approximate automated visual observations, not physical cork positions or independently verified ground truth.",
     "Adapter uses scene-local median samples and block inference with overlapping tail averaging; not the upstream published ensemble/inpainting protocol.",
     "All five contact sheets were inspected; model misses and ambiguous heatmaps remain. No continuous-trajectory, shot-event or coaching validation."
-  ]
+  ],
+  "inference_architecture_file_sha256": "73fb2d334102e88cf8eff0a80f2c0e4a13d2b552e58e4390f4ecab9eaf8cd0ad",
+  "post_inference_architecture_change": "Trimmed final blank lines only; no functional model change."
 }
