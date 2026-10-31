@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-31",
+  "status": "offline_annotation_workflow_implemented_browser_qa_pending",
+  "workspaces": [
+    {
+      "source_packet": "out/shuttle-rally-benchmark-001/benchmark.json",
+      "benchmark_sha256": "f53c6833ef87a3c191144eec78e389279257d8dc5777261f9d503967f29272d2",
+      "editor": "out/shuttle-annotation-rally-001/index.html",
+      "editor_sha256": "5eb33defaa46321207491a67c68580a268db675741bb74046030f358c38f6d5e",
+      "frames": 156,
+      "image_hashes_verified": 156
+    },
+    {
+      "source_packet": "out/shuttle-continuous-benchmark-001/benchmark.json",
+      "benchmark_sha256": "7ca0f95783c4c5799ec913e63201bdcd652e1968f50cfa28e1f20cc4ec36c4a7",
+      "editor": "out/shuttle-annotation-continuous-001/index.html",
+      "editor_sha256": "ac11fcfc7981773c9e6a2c9750d5880543e8d1969b90436e013d2ecc3eb17683",
+      "frames": 180,
+      "image_hashes_verified": 180
+    }
+  ],
+  "implementation_sha256": {
+    "shuttle_annotation.py": "ab77d8d3fa82d426d916b87ef4cad0a9da3d6ae5cb59b604ea340d36f8f6fbc8",
+    "shuttle_annotation.html": "4b55b2e8e4006f57ca8abf3d31950d7ed7c9b7e5e10a0b458da335a1023120e0",
+    "shuttle_annotation.js": "82cd23422c65a599994c511c72c48436b4081af2aa6730fed12af75eb8ab429e",
+    "test_shuttle_annotation.py": "c19edcb976a45dbf2faf3aeb3a1be5e8eb1f690c2683b2b0d829bd2b69f04616",
+    "test_shuttle_annotation_ui.cjs": "bcd3e7604ab56f4e3db68d5bfb939252bb2179b459971ac29ac18483012fa981"
+  },
+  "verification": {
+    "python_unittest_discover": {
+      "passed": 81,
+      "failed": 0
+    },
+    "node_coordinate_export_tests": {
+      "passed": 2,
+      "failed": 0
+    },
+    "source_images_verified": 336,
+    "live_browser": "not_completed_local_preview_connection_timed_out",
+    "visual_layout_and_browser_interactions": "unverified"
+  },
+  "new_human_reviews": 0,
+  "real_packet_corrections_applied": 0,
+  "verified_shuttle_positions": 0,
+  "coaching_scores": "not_available",
+  "limitations": [
+    "Reviewer identity is self-declared, not authenticated.",
+    "Existing approximate automated development labels are unchanged.",
+    "No new model inference or accuracy improvement is claimed."
+  ]
+}

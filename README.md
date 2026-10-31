@@ -660,6 +660,47 @@ observations, cuts and view changes; visible close-up labels remain counted.
 The default is unchanged. No trajectory acceptance, shot-event timing, line
 decisions or coaching scores are enabled.
 
+### Step 3.7 — Offline shuttle label correction
+
+`shuttle_annotation.py` prepares a source-only editor and imports corrections
+into a **new** benchmark packet. The editor shows the complete source frame,
+adjacent frames, existing labels and view type. Zoom or enter native-pixel
+coordinates to locate a visible shuttle; keep unclear frames uncertain.
+Locations are never copied between frames. No model predictions are displayed.
+
+```powershell
+.\.venv\Scripts\python.exe shuttle_annotation.py prepare --benchmark "out\shuttle-rally-benchmark-001\benchmark.json" --out "out\shuttle-label-review-new"
+```
+
+Open the generated `index.html` locally. Prepared workspaces also exist at
+`out/shuttle-annotation-rally-001/index.html` (156 frames) and
+`out/shuttle-annotation-continuous-001/index.html` (180 frames).
+Previous/Next, Next uncertain and Next unchecked navigate the packet. Confirm
+an unchanged label explicitly; Reset this frame removes its draft correction.
+Browser drafts are bound to the exact original packet. Download corrections
+after entering the reviewer name and explicitly choosing human or automated
+review. This is declared provenance, not authenticated reviewer identity.
+
+Save the downloaded correction file at the path used below, then import it:
+
+```powershell
+.\.venv\Scripts\python.exe shuttle_annotation.py apply --benchmark "out\shuttle-rally-benchmark-001\benchmark.json" --corrections "out\shuttle-corrections.json" --out "out\shuttle-rally-corrected-new"
+.\.venv\Scripts\python.exe shuttle_benchmark.py evaluate --benchmark "out\shuttle-rally-corrected-new\benchmark.json" --prediction "rally-720=out\tracknet-002"
+```
+
+The importer rejects changed source packets/images, duplicate or unknown frames,
+out-of-bounds points, uncertain labels with locations, contradictory local
+negative labels and attempts to change source metadata. It preserves previous
+labels and reviewer details in revision history. Existing output directories
+are never overwritten. Source images and packet hashes bind each revision.
+
+Verification: 81 Python tests and two JavaScript coordinate/export tests pass.
+All 336 copied source images match their original hashes. Live browser testing
+could not complete because the local preview connection timed out; visual
+layout and browser interaction remain unverified. The editor has not created
+any new human reviews or changed the measured model results. Label corrections
+do not approve shuttle trajectories, shot events or coaching scores.
+
 ## Next milestones
 
 | Step | Deliverable | Validation |

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shuttle label editor</title>
+<style>
+body{font:17px/1.5 system-ui;margin:0;background:#10202b;color:#edf5fa}main{max-width:1300px;margin:auto;padding:24px}h1{font-size:28px;margin:0}button,input,select,textarea{font:inherit}button,input,select,textarea{border:1px solid #7293a7;border-radius:5px;padding:8px;background:#172f3e;color:#edf5fa}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,canvas:focus-visible{outline:3px solid #ffca70;outline-offset:2px}button.primary{background:#74e6e5;color:#10202b;font-weight:650}button:disabled{opacity:.5;cursor:default}.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:14px 0}label{display:flex;gap:8px;align-items:center}#viewport{overflow:auto;border:1px solid #7293a7;max-height:65vh}canvas{display:block;cursor:crosshair;max-width:none}textarea{width:min(700px,95%);height:64px}#context{display:flex;gap:14px;flex-wrap:wrap}#context figure{margin:0}#context img{width:240px;max-width:100%}#context figcaption{font-size:14px}#message{min-height:28px;color:#ffca70}small{color:#b5cbd9}.coordinate{width:90px}
+</style>
+<main>
+<h1>Shuttle label editor</h1>
+<p>Click the shuttle when you can locate it. Keep unclear frames uncertain. Green circles show labels; points are never copied between frames.</p>
+<div class="row"><button id="previous">Previous</button><button id="next">Next</button><button id="uncertainNext">Next uncertain</button><button id="uncheckedNext">Next unchecked</button><label>Frame <select id="frameSelect"></select></label></div>
+<p id="frameTitle"></p>
+<div class="row"><label>Zoom <select id="zoom"><option value="1">1×</option><option value="2" selected>2×</option><option value="3">3×</option><option value="4">4×</option></select></label><strong id="labelStatus"></strong><label>View <select id="view"><option value="unspecified">Unspecified</option><option value="wide_court">Wide court</option><option value="closeup">Close-up</option><option value="unknown">Unknown</option></select></label></div>
+<div id="viewport"><canvas id="frame" tabindex="0" role="img" aria-label="Full source frame. Click to mark a visible shuttle location, or enter coordinates below."></canvas></div>
+<div class="row"><label>X <input class="coordinate" id="pointX" type="number" step="0.001" min="0"></label><label>Y <input class="coordinate" id="pointY" type="number" step="0.001" min="0"></label><button id="usePoint">Use coordinates</button><button id="markUncertain">Mark uncertain</button><button id="confirm">Confirm current label</button><button id="reset">Reset this frame</button></div>
+<label for="notes">Review note</label><textarea id="notes"></textarea>
+<p id="message" role="status" aria-live="polite"></p>
+<div id="context" aria-label="Adjacent source frames"></div>
+<h2>Save corrections</h2>
+<p id="progress"></p>
+<div class="row"><label>Reviewer <input id="reviewer" autocomplete="off"></label><label>Review type <select id="reviewerKind"><option value="">Choose type</option><option value="human">Human review</option><option value="automated">Automated review</option></select></label><button class="primary" id="download">Download corrections</button></div>
+<small>Edits are saved in this browser for this exact packet. Download corrections to keep a separate copy, then import them with the project tool. Original packets remain unchanged. Label review does not approve trajectories, shots or coaching scores.</small>
+</main>
+<script id="annotation-data" type="application/json">__ANNOTATION_DATA__</script>
+<script src="editor.js"></script>
+</html>
