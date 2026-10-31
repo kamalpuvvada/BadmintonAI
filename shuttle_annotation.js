@@ -39,6 +39,13 @@ if (typeof document !== "undefined") {
   const changes = new Map();
   const cacheKey = "badminton-shuttle-annotation:" + data.benchmark_sha256;
   let index = 0, current, sourceImage = null, generation = 0;
+  const labelControls = ["usePoint", "markUncertain", "confirm", "view", "notes"];
+  function allowLabels(allowed) { labelControls.forEach(id => { $(id).disabled = !allowed; }); }
+  function frameReady() {
+    if (sourceImage) return true;
+    message("Wait for the source frame to load before reviewing its label.");
+    return false;
+  }
   const labelOf = c => ({case_id: c.id, visibility: c.visibility, point_px: c.point_px, view: c.view || "unspecified", notes: c.notes || ""});
   function message(text) { $("message").textContent = text; }
   function persist() {
@@ -78,8 +85,10 @@ if (typeof document !== "undefined") {
     draw();
   }
   function record() {
+    if (!frameReady()) return false;
     current.view = $("view").value; current.notes = $("notes").value;
     changes.set(current.case_id, structuredClone(current)); persist(); showLabel();
+    return true;
   }
   function load(next) {
     index = next; const c = data.cases[index];
@@ -87,9 +96,9 @@ if (typeof document !== "undefined") {
     $("view").value = current.view; $("notes").value = current.notes; $("frameSelect").value = index;
     const sampling = data.sources[c.source_run];
     $("frameTitle").textContent = `${c.source_run} · source frame ${c.frame_index} · ${(sampling.start_seconds+c.frame_index/sampling.fps).toFixed(3)} seconds`;
-    sourceImage = null; showLabel(); const ticket = ++generation;
-    const image = new Image(); image.onload = () => { if (ticket === generation) { sourceImage = image; draw(); } };
-    image.onerror = () => { if (ticket === generation) message("Source image could not be loaded."); };
+    sourceImage = null; allowLabels(false); showLabel(); const ticket = ++generation;
+    const image = new Image(); image.onload = () => { if (ticket === generation) { sourceImage = image; allowLabels(true); draw(); message(""); } };
+    image.onerror = () => { if (ticket === generation) message("Source image could not be loaded. Label editing is unavailable for this frame."); };
     image.src = c.image;
     $("context").replaceChildren();
     for (const offset of [-1,1]) {
@@ -116,14 +125,15 @@ if (typeof document !== "undefined") {
     catch (error) { message(error.message); }
   });
   $("usePoint").onclick = () => {
+    if (!frameReady()) return;
     const values=[$("pointX").value,$("pointY").value];
     if (values.some(v => !v.trim())) { message("Enter both native-pixel coordinates."); return; }
     const candidate={...current, visibility:"visible", point_px:values.map(Number), view:$("view").value, notes:$("notes").value};
     try { correctionPatch(data,[candidate],"Draft validation","automated"); current=candidate; record(); message("Location saved in the browser draft."); }
     catch (error) { message(error.message); }
   };
-  $("markUncertain").onclick = () => { current.visibility="uncertain"; current.point_px=null; record(); message("Uncertain label saved; no absence claim."); };
-  $("confirm").onclick = () => { record(); message("Current label marked as reviewed in this draft."); };
+  $("markUncertain").onclick = () => { if (!frameReady()) return; current.visibility="uncertain"; current.point_px=null; record(); message("Uncertain label saved; no absence claim."); };
+  $("confirm").onclick = () => { if (record()) message("Current label marked as reviewed in this draft."); };
   $("reset").onclick = () => { changes.delete(current.case_id); load(index); persist(); message("This frame restored to its original packet label."); };
   $("notes").oninput = record; $("view").onchange = record;
   $("reviewer").oninput = persist; $("reviewerKind").onchange = persist;

@@ -673,10 +673,12 @@ Locations are never copied between frames. No model predictions are displayed.
 ```
 
 Open the generated `index.html` locally. Prepared workspaces also exist at
-`out/shuttle-annotation-rally-001/index.html` (156 frames) and
-`out/shuttle-annotation-continuous-001/index.html` (180 frames).
+`out/shuttle-rally-corrected-001/editor/index.html` (156 frames) and
+`out/shuttle-annotation-continuous-002/index.html` (180 frames).
 Previous/Next, Next uncertain and Next unchecked navigate the packet. Confirm
 an unchanged label explicitly; Reset this frame removes its draft correction.
+Label editing and confirmation stay unavailable until the current source image
+loads. A delayed image from a previous frame cannot unlock the current frame.
 Browser drafts are bound to the exact original packet. Download corrections
 after entering the reviewer name and explicitly choosing human or automated
 review. This is declared provenance, not authenticated reviewer identity.
@@ -694,12 +696,25 @@ negative labels and attempts to change source metadata. It preserves previous
 labels and reviewer details in revision history. Existing output directories
 are never overwritten. Source images and packet hashes bind each revision.
 
-Verification: 81 Python tests and two JavaScript coordinate/export tests pass.
+Verification: 81 Python tests and four JavaScript tests pass. Application-level
+JavaScript tests use DOM doubles to cover delayed/failed image loads, navigation,
+draft restoration, native-coordinate edits, reviewer requirements and reset;
+they do not exercise a browser layout engine.
 All 336 copied source images match their original hashes. Live browser testing
 could not complete because the local preview connection timed out; visual
 layout and browser interaction remain unverified. The editor has not created
 any new human reviews or changed the measured model results. Label corrections
 do not approve shuttle trajectories, shot events or coaching scores.
+
+Automated follow-up review inspected full, unmarked source frames 18–23 of the
+broadcast-point packet. All six retain uncertainty: no reliable shuttle center
+could be identified. The versioned correction file is
+`validation/shuttle_rally_uncertainty_review_2026-10-31.json`; importing it produces
+`out/shuttle-rally-corrected-001/benchmark.json` with the original labels preserved
+in history. Both default and overlap predictions still match 25 of 36 visible
+labels within four pixels. The updated workspace hashes and evaluation results
+are in `validation/shuttle_annotation_followup_2026-10-31.json`. These are six
+automated review notes, with no new visible labels or human approvals.
 
 ## Next milestones
 

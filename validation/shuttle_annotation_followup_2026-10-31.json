@@ -1,0 +1,223 @@
+{
+  "date": "2026-10-31",
+  "status": "editor_source_readiness_guard_and_automated_uncertainty_review",
+  "correction_file": "validation/shuttle_rally_uncertainty_review_2026-10-31.json",
+  "correction_sha256": "ea1c5c7eeae4214652c576f698c76869b2de146c510e9e43a7ff3645590b1124",
+  "original_benchmark_sha256": "f53c6833ef87a3c191144eec78e389279257d8dc5777261f9d503967f29272d2",
+  "original_packet_unchanged": true,
+  "automated_rechecked_uncertain_frames": [
+    18,
+    19,
+    20,
+    21,
+    22,
+    23
+  ],
+  "new_visible_labels": 0,
+  "new_human_reviews": 0,
+  "source_review_sheet_sha256": "eb85e219555c852b4d6ae57974a7d55c8b8b7539c019b5293233529c05a683d8",
+  "source_review_sheet": "out/rally-18-23-full.png",
+  "editors": [
+    {
+      "benchmark": "out/shuttle-rally-corrected-001/benchmark.json",
+      "benchmark_sha256": "6193a7c473736a28f859a31b5595cdb64e79a4ec8948534a875c1c26c1dc86bd",
+      "editor": "out/shuttle-rally-corrected-001/editor/index.html",
+      "images_verified": 156,
+      "javascript_sha256": "b5fcd206c38185d670095db55709ee92f67399e0f9665daa66d94b1065783df3"
+    },
+    {
+      "benchmark": "out/shuttle-continuous-benchmark-001/benchmark.json",
+      "benchmark_sha256": "7ca0f95783c4c5799ec913e63201bdcd652e1968f50cfa28e1f20cc4ec36c4a7",
+      "editor": "out/shuttle-annotation-continuous-002/index.html",
+      "images_verified": 180,
+      "javascript_sha256": "b5fcd206c38185d670095db55709ee92f67399e0f9665daa66d94b1065783df3"
+    }
+  ],
+  "evaluation": {
+    "default": {
+      "schema_version": "0.1.0",
+      "evaluation_scope": "continuously_annotated_development_intervals_only",
+      "benchmark_sha256": "6193a7c473736a28f859a31b5595cdb64e79a4ec8948534a875c1c26c1dc86bd",
+      "prediction_bindings": {
+        "rally-720": {
+          "summary_sha256": "57f5c2e403201f20cb07df6465a67ead1f82788abc98eb1f2e8bf1605ffd07fd",
+          "rows_sha256": "a346711731a6af7553ba1a0b1795558aeed7a0abbd4dc44c5a52a7853ff00f03"
+        }
+      },
+      "point_tolerance_px": 4,
+      "visible_points": 36,
+      "candidate_point_hits": 25,
+      "proposal_point_hits": 25,
+      "uncertain_frames_excluded_from_point_scoring": 120,
+      "known_negative_regions": 0,
+      "negative_regions_with_candidates": 0,
+      "negative_regions_with_proposals": 0,
+      "verified_shuttle_positions": 0,
+      "limitations": [
+        "Selected, correlated development examples; not held-out data or full-video precision/recall.",
+        "Negative regions label only local distractors, not absence of a shuttle elsewhere in the frame.",
+        "Evaluation never promotes proposals to verified trajectories or enables events/scoring.",
+        "Uncertain annotations break continuity statistics and never imply shuttle absence; point matches do not certify object identity or physical trajectories."
+      ],
+      "continuous_sequences": [
+        {
+          "id": "broadcast-point-720",
+          "source_run": "rally-720",
+          "start_frame": 0,
+          "end_frame": 155,
+          "annotated_frames": 156,
+          "visible_frames": 36,
+          "uncertain_frames": 120,
+          "candidate_point_hits": 25,
+          "proposal_point_hits": 25,
+          "visible_frames_without_candidates": 4,
+          "visible_frames_without_proposal": 4,
+          "visible_frames_with_displaced_proposal": 7,
+          "uncertain_frames_with_proposals_unscored": 30,
+          "longest_correct_same_segment_run_frames": 14,
+          "longest_consecutive_visible_missing_proposal_frames": 2,
+          "adjacent_point_matches_in_same_segment": 21,
+          "adjacent_point_matches_with_segment_or_scene_change": 0,
+          "adjacent_point_matches_with_annotation_view_change": 0,
+          "mean_error_on_visible_proposed_frames_px": 2.2927,
+          "max_error_on_visible_proposed_frames_px": 13.851,
+          "annotation_view_counts": {
+            "closeup": {
+              "annotated_frames": 13,
+              "visible_frames": 2,
+              "uncertain_frames": 11,
+              "proposal_point_hits": 0,
+              "visible_frames_without_proposal": 2,
+              "visible_frames_with_displaced_proposal": 0
+            },
+            "wide_court": {
+              "annotated_frames": 143,
+              "visible_frames": 34,
+              "uncertain_frames": 109,
+              "proposal_point_hits": 25,
+              "visible_frames_without_proposal": 2,
+              "visible_frames_with_displaced_proposal": 7
+            }
+          },
+          "prediction_status_counts": {
+            "excluded_player_review": 15,
+            "proposal": 62,
+            "no_heatmap_detection": 78,
+            "ambiguous_candidates": 1
+          },
+          "scene_change_frames": [
+            12
+          ],
+          "annotation_view_change_frames": [
+            12,
+            155
+          ],
+          "adjacent_visible_proposed_pairs_same_segment_and_view": 28,
+          "mean_step_vector_error_px": 1.1182,
+          "max_step_vector_error_px": 3.125
+        }
+      ],
+      "full_result_path": "out/shuttle-rally-corrected-001/evaluation-default.json",
+      "full_result_sha256": "90112a3410e340e2c6246f182e8b81ac1e211e72e517ec54c6f6b5348fd120eb"
+    },
+    "overlap": {
+      "schema_version": "0.1.0",
+      "evaluation_scope": "continuously_annotated_development_intervals_only",
+      "benchmark_sha256": "6193a7c473736a28f859a31b5595cdb64e79a4ec8948534a875c1c26c1dc86bd",
+      "prediction_bindings": {
+        "rally-720": {
+          "summary_sha256": "0f857228d99163e818218d056e366dd3fabb10eb66c55ab37e3700e1b369e20f",
+          "rows_sha256": "3f0adb29a965de3ea627da12b02136b6f2e8410f800142bd47d732f2b358330a"
+        }
+      },
+      "point_tolerance_px": 4,
+      "visible_points": 36,
+      "candidate_point_hits": 26,
+      "proposal_point_hits": 25,
+      "uncertain_frames_excluded_from_point_scoring": 120,
+      "known_negative_regions": 0,
+      "negative_regions_with_candidates": 0,
+      "negative_regions_with_proposals": 0,
+      "verified_shuttle_positions": 0,
+      "limitations": [
+        "Selected, correlated development examples; not held-out data or full-video precision/recall.",
+        "Negative regions label only local distractors, not absence of a shuttle elsewhere in the frame.",
+        "Evaluation never promotes proposals to verified trajectories or enables events/scoring.",
+        "Uncertain annotations break continuity statistics and never imply shuttle absence; point matches do not certify object identity or physical trajectories."
+      ],
+      "continuous_sequences": [
+        {
+          "id": "broadcast-point-720",
+          "source_run": "rally-720",
+          "start_frame": 0,
+          "end_frame": 155,
+          "annotated_frames": 156,
+          "visible_frames": 36,
+          "uncertain_frames": 120,
+          "candidate_point_hits": 26,
+          "proposal_point_hits": 25,
+          "visible_frames_without_candidates": 5,
+          "visible_frames_without_proposal": 6,
+          "visible_frames_with_displaced_proposal": 5,
+          "uncertain_frames_with_proposals_unscored": 24,
+          "longest_correct_same_segment_run_frames": 14,
+          "longest_consecutive_visible_missing_proposal_frames": 2,
+          "adjacent_point_matches_in_same_segment": 21,
+          "adjacent_point_matches_with_segment_or_scene_change": 0,
+          "adjacent_point_matches_with_annotation_view_change": 0,
+          "mean_error_on_visible_proposed_frames_px": 1.8223,
+          "max_error_on_visible_proposed_frames_px": 5.9266,
+          "annotation_view_counts": {
+            "closeup": {
+              "annotated_frames": 13,
+              "visible_frames": 2,
+              "uncertain_frames": 11,
+              "proposal_point_hits": 0,
+              "visible_frames_without_proposal": 2,
+              "visible_frames_with_displaced_proposal": 0
+            },
+            "wide_court": {
+              "annotated_frames": 143,
+              "visible_frames": 34,
+              "uncertain_frames": 109,
+              "proposal_point_hits": 25,
+              "visible_frames_without_proposal": 4,
+              "visible_frames_with_displaced_proposal": 5
+            }
+          },
+          "prediction_status_counts": {
+            "excluded_player_review": 15,
+            "proposal": 54,
+            "no_heatmap_detection": 86,
+            "ambiguous_candidates": 1
+          },
+          "scene_change_frames": [
+            12
+          ],
+          "annotation_view_change_frames": [
+            12,
+            155
+          ],
+          "adjacent_visible_proposed_pairs_same_segment_and_view": 26,
+          "mean_step_vector_error_px": 1.1396,
+          "max_step_vector_error_px": 3.125
+        }
+      ],
+      "full_result_path": "out/shuttle-rally-corrected-001/evaluation-overlap.json",
+      "full_result_sha256": "b9aeaa5506a2b0b328d50242b547c7e7f86dee95467d76fccb03cdd068832318"
+    }
+  },
+  "tests": {
+    "python": 81,
+    "javascript": 4,
+    "failures": 0,
+    "javascript_scope": "Node application tests with DOM doubles, not a real browser/layout engine."
+  },
+  "browser_qa": "Unverified: HTTP preview timed out; file URL rejected by browser policy. No alternate browser route used.",
+  "verified_shuttle_positions": 0,
+  "coaching_scores": "not_available",
+  "implementation_sha256": {
+    "shuttle_annotation.js": "b5fcd206c38185d670095db55709ee92f67399e0f9665daa66d94b1065783df3",
+    "test_shuttle_annotation_ui.cjs": "d816387d8965d6211a6ddaa9259356f7c2db4e150ed6133095e9921a26fedd94"
+  }
+}

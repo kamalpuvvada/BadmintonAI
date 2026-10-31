@@ -1,0 +1,50 @@
+{
+  "schema_version": "0.1.0",
+  "benchmark_sha256": "f53c6833ef87a3c191144eec78e389279257d8dc5777261f9d503967f29272d2",
+  "reviewer": "Codex",
+  "reviewer_kind": "automated",
+  "changes": [
+    {
+      "case_id": "rally-018",
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "notes": "Codex automated follow-up: inspected the complete unmarked source frame alongside frames 18\u201323. Unable to identify a reliable shuttle center independently of player/racket overlap and court/background details. Retain uncertainty; no absence claim, no interpolation or model-supplied point."
+    },
+    {
+      "case_id": "rally-019",
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "notes": "Codex automated follow-up: inspected the complete unmarked source frame alongside frames 18\u201323. Unable to identify a reliable shuttle center independently of player/racket overlap and court/background details. Retain uncertainty; no absence claim, no interpolation or model-supplied point."
+    },
+    {
+      "case_id": "rally-020",
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "notes": "Codex automated follow-up: inspected the complete unmarked source frame alongside frames 18\u201323. Unable to identify a reliable shuttle center independently of player/racket overlap and court/background details. Retain uncertainty; no absence claim, no interpolation or model-supplied point."
+    },
+    {
+      "case_id": "rally-021",
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "notes": "Codex automated follow-up: inspected the complete unmarked source frame alongside frames 18\u201323. Unable to identify a reliable shuttle center independently of player/racket overlap and court/background details. Retain uncertainty; no absence claim, no interpolation or model-supplied point."
+    },
+    {
+      "case_id": "rally-022",
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "notes": "Codex automated follow-up: inspected the complete unmarked source frame alongside frames 18\u201323. Unable to identify a reliable shuttle center independently of player/racket overlap and court/background details. Retain uncertainty; no absence claim, no interpolation or model-supplied point."
+    },
+    {
+      "case_id": "rally-023",
+      "visibility": "uncertain",
+      "point_px": null,
+      "view": "wide_court",
+      "notes": "Codex automated follow-up: inspected the complete unmarked source frame alongside frames 18\u201323. Unable to identify a reliable shuttle center independently of player/racket overlap and court/background details. Retain uncertainty; no absence claim, no interpolation or model-supplied point."
+    }
+  ]
+}
