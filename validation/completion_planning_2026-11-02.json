@@ -1,0 +1,82 @@
+{
+  "date": "2026-11-02",
+  "baseline_commit": "a2a147c",
+  "task": "completion planning; no production implementation or inference experiment",
+  "video": {
+    "path": "C:\\Users\\kamal\\Downloads\\SaveInta.com_AQPC6Ly6eh-lIW26J_bgtQCIIk14zYO416N9kXOrQXG7gIH0znTKp0e0PaOJ9apJE_rpv9lps3YrGZTbdnxa4UuaflWamSIlZG1aW5o.mp4",
+    "sha256": "2c08a15287f336a5a9711f7199b15bb03c8347a0bb5e1dfa3c1d79b61b793232",
+    "frames": 665,
+    "fps": 30.0,
+    "width": 720,
+    "height": 1280,
+    "duration_seconds": 22.166666666666668,
+    "frames_decoded": 665,
+    "inspection_scope": "Complete sequential decode; 12 timestamp-spaced full-frame visual samples. No full-motion visual acceptance or ground-truth review."
+  },
+  "source_samples": [
+    {
+      "frame_index": 0,
+      "sha256": "8de0c59d6fcd6eb02139d26a1feb0bae36c5d3f2b9c784194993e8141fb93f1a"
+    },
+    {
+      "frame_index": 60,
+      "sha256": "5308f1f1b248a18ffd2d1df8a060326260ebb17e83234db53f4f789ff3be378a"
+    },
+    {
+      "frame_index": 121,
+      "sha256": "df6ebf3164f8a2ec271381bc22a420131c31206e3e0c5fc5464d2fa206c469f8"
+    },
+    {
+      "frame_index": 181,
+      "sha256": "a55a1bdbf164693f0028c0cd167c632859e36bc35f57dd44495e898729f0e121"
+    },
+    {
+      "frame_index": 241,
+      "sha256": "84464407e910986115f694c2aa5a940d67e9ea33dd3fb268d8f1cbc5e1a79168"
+    },
+    {
+      "frame_index": 302,
+      "sha256": "c15d69243b3a1e21b861c156ed32f86c1e663c0f97f131e1f79eee6bd3c7ff30"
+    },
+    {
+      "frame_index": 362,
+      "sha256": "b18b6268eecd63fdbe79c9b7c75a06c0846725c7330ab90219851f6be79b2d1c"
+    },
+    {
+      "frame_index": 423,
+      "sha256": "91900e7316f5235b61f84505cf18fe417a6ae5b61d9ed4b42a5cf6f0cd202732"
+    },
+    {
+      "frame_index": 483,
+      "sha256": "91f8da7601398b6c7d678e290c2a901dd43f6c36405405f746d44a0cdfe59b55"
+    },
+    {
+      "frame_index": 543,
+      "sha256": "0260eebb51159a9d50372274b54ce76526942737757c81e22b10eae3ee1aec52"
+    },
+    {
+      "frame_index": 604,
+      "sha256": "b58b045d1dd6ead97d7314e93c955898270ffc515e5cc8a6e3e743e0dcd58fb0"
+    },
+    {
+      "frame_index": 664,
+      "sha256": "cade439bc12455cf6c08e2fe5b9be8578e5f289aaae0c0edaccfebcdbea300c9"
+    }
+  ],
+  "sheet_sha256": "fc141308237880f7fe23d784fd24219d0808301e591ba037e05ec9902f8ca9ea",
+  "reference_use": "Read-only architecture/reference inspection of C:/Projects/baddy-oss-main; no code/assets/models copied or executed",
+  "verification": {
+    "sequential_decode_complete": true,
+    "source_hash_rechecked": true,
+    "twelve_full_frame_samples_visually_inspected": true,
+    "full_motion_visual_acceptance": false,
+    "new_model_inference": false,
+    "automated_tests_rerun": false,
+    "readme_plan_link_exists": true
+  },
+  "limitations": [
+    "Processed reference video includes pre-existing generated graphics and is not independent ground truth",
+    "No new human review or coaching/measurement validation",
+    "RACKETEK backend not inspected or integrated"
+  ]
+}

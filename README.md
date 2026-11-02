@@ -1,5 +1,7 @@
 # Badminton Academy AI — Technical Prototype
 
+Current delivery priorities: [completion plan based on the supplied doubles video](docs/COMPLETION_PLAN.md) (2 November 2026).
+
 This is a growing **offline-first, fixed-camera badminton coaching platform**. Step 1 establishes repeatable video ingestion and court calibration. Step 2 adds a separately installed person detection and ID-tracking preview. We deliberately do **not** invent shuttle speeds, shot types, or coaching metrics before validation.
 
 ## Why start here?
