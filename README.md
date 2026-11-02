@@ -62,6 +62,32 @@ The [minimal .NET file adapter](integration/dotnet/README.md) reads versioned
 session results, checks the completed manifest/result binding and preserves
 review status. It is not a deployed RACKETEK integration.
 
+### Correct player identities separately from tracking approval
+
+The identity editor lets a reviewer assign arbitrary P1–P4 slots to temporary
+tracker segments, including splitting an interval at an ID swap. It starts with
+no assignments. It preserves original detections and pending scene decisions;
+identity labels do not approve boxes, movement, calibration or coaching.
+
+```powershell
+.\.venv\Scripts\python.exe player_identity.py prepare --job "out\academy-session-new" --out "out\identity-editor-new"
+# Open out/identity-editor-new/index.html, inspect segments, enter reviewer/type,
+# and download player-identity-corrections.json. Then validate the downloaded file:
+.\.venv\Scripts\python.exe player_identity.py apply --job "out\academy-session-new" --patch "path\to\player-identity-corrections.json" --out "out\identity-result-new"
+.\.venv\Scripts\python.exe player_identity.py verify --job "out\academy-session-new" --out "out\identity-result-new"
+```
+
+The editor copies the exact bound preview locally, supports frame ranges,
+stores drafts against the observation hashes and exports an explicit correction
+patch. The backend rejects stale sources, overlapping assignments of a player
+or tracker within one frame, missing observations and invalid slot/range values.
+Gaps and scene changes split track segments; no identity positions are invented
+between observations. Export includes reviewer type, observation/patch hashes,
+coverage and a separate integrity manifest. Reviewer identity is self-declared,
+not authenticated. Keep the complete identity output and verify it against the
+current job before consumption. This is a separate snapshot, not a rewrite of
+the original tracking files or an automatic addition to the combined preview.
+
 This is a growing **offline-first, fixed-camera badminton coaching platform**. Step 1 establishes repeatable video ingestion and court calibration. Step 2 adds a separately installed person detection and ID-tracking preview. We deliberately do **not** invent shuttle speeds, shot types, or coaching metrics before validation.
 
 ## Why start here?

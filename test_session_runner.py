@@ -15,6 +15,7 @@ from session_runner import (Cancelled, artifact_binding, cached_stage, execute, 
                             job_lock, run_job, validate_configuration, code_binding)
 from session_results import observation_at, render_preview
 from tracking_review import CHECKS, decide
+from badminton_proto import sha256_file
 
 
 class SessionTests(unittest.TestCase):
@@ -48,7 +49,7 @@ class SessionTests(unittest.TestCase):
             (data / 'shuttle_summary.json').write_text('{}')
             (data / 'shuttle_candidates.jsonl').write_text('')
             return
-        summary = {'session_id': 'test-example', 'sampling': {'fps': 5, 'start_seconds': 0, 'frames_processed': 5,
+        summary = {'session_id': f'test-{sha256_file(self.video)[:12]}', 'sampling': {'fps': 5, 'start_seconds': 0, 'frames_processed': 5,
                    'max_seconds': None}, 'scene_review': {'scenes_observed': 1},
                    'video': {'width_px': 100, 'height_px': 80}, 'artifacts': {
                        'annotated_video': 'tracked_preview.mp4', 'review_frames': []},

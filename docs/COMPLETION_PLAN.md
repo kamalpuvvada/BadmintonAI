@@ -150,3 +150,13 @@ fixture ahead of milestone 5; the actual RACKETEK backend remains untouched. Cou
 setup UI, identity corrections, calibrated movement, event/shot analysis and the
 pilot gates remain unfinished. Speed and coaching measurements remain unavailable.
 See `validation/session_workflow_2026-11-02.json` for the completed-run evidence.
+
+The separate identity editor now supports explicit P1–P4 assignments, split ranges,
+collision checks, source-bound correction export and integrity verification.
+It preserves detection/review files and does not grant scene approval. The supplied
+clip's current output has 21 contiguous track segments across 12 temporary IDs;
+its prepared identity editor intentionally has no slot assignments. Automatic
+identity recovery and actual accepted identity labels remain unresolved. The
+identity editor uses the copied native preview and has DOM behavior tests; real
+browser visual acceptance is still pending. See
+`validation/player_identity_workflow_2026-11-02.json` for this follow-up evidence.

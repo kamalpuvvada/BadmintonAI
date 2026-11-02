@@ -1,0 +1,52 @@
+{
+  "date": "2026-11-02",
+  "baseline_commit": "2c38a0a",
+  "scope": "Identity review/correction workflow; no actual athlete identities assigned",
+  "job": "out/academy-session-004",
+  "editor": "out/academy-player-identities-001",
+  "source_binding": {
+    "summary_sha256": "a9ef99cf61620688a090b66207237a3fb592ea90ed8bbef13861840c4d24d351",
+    "tracks_sha256": "f627010dcc37ba5eac7b75793d6080680afd62f809a51e0040b1affeeb19d6c7",
+    "source_video_sha256": "2c08a15287f336a5a9711f7199b15bb03c8347a0bb5e1dfa3c1d79b61b793232",
+    "session_id": "academy-court-01-2c08a15287f3"
+  },
+  "tracklets": 21,
+  "temporary_ids": 12,
+  "confirmed_observations": 1259,
+  "expected_player_slots": 4,
+  "actual_identity_assignments": 0,
+  "artifact_sha256": {
+    "identity_source.json": "9ad0ab44651357b65237d4700d57894318f6fb60087acc5c367dcfa5db38ebe6",
+    "preview.mp4": "b4bbd05bb871ffd39a8a0d4e806dbb8d337df58e3f1ccb072aa36ae066df07fe",
+    "index.html": "1ca1b45a3c7f43e74a8ba7bcf5e6540b415ceeb9f44e3a6e4f6f870d24677bb0"
+  },
+  "implementation_sha256": {
+    "player_identity.py": "70d7acaea95423800ccee0293537f4da1603a0b162c5d2729e2e0e222f790667",
+    "player_identity.html": "ea1f389aad4cac08d971e997029be09463e394521840b29fd98bbab1af0bf9a2"
+  },
+  "verification": {
+    "python_tests_passed": 118,
+    "javascript_behavior_tests_passed": 10,
+    "original_observations_unchanged": true,
+    "preview_copy_hash_matches_finished_job": true,
+    "current_source_hash_rechecked": true,
+    "coverage": [
+      "Synthetic successful correction/export/verify with automated provenance",
+      "Conflicting slot/tracker ranges rejected",
+      "Split ranges preserve gaps without interpolation",
+      "Track gaps and scenes split segments",
+      "Source staleness, duplicate IDs, invalid ranges/types and malformed patch fields rejected",
+      "Concurrent preview copy change rejected without output",
+      "Export alteration detected",
+      "Editor video-readiness guard, explicit slots/reviewer type, overlapping drafts, range splitting, reload and native source seeking"
+    ],
+    "actual_browser_interaction_or_layout_verified": false
+  },
+  "limitations": [
+    "Prepared actual editor contains no identity decisions",
+    "Identity assignment is not scene/box approval or permission for coaching",
+    "UI tests use DOM doubles",
+    "Reviewer identities are self-declared, not authenticated",
+    "Identity exports are separate snapshots and do not yet render athlete labels into the combined preview"
+  ]
+}
