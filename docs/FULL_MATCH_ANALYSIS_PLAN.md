@@ -379,6 +379,17 @@ from the current short demonstration.
 
 ## Sources consulted for this plan
 
+Implementation checkpoint: the [analysis workflow](ANALYSIS_WORKFLOW.md) now has
+an editable source-bound ledger, per-rally winner/error/pressure reports, player
+contributions, unknown-safe custom score engine, explicit forcedness rubric,
+experimental contact cues, a local shot-baseline training/proposal path,
+annotation-comparison metrics and a separate .NET 2.0.0 reader. Runtime tests and
+synthetic contract examples verify software behavior; they do not pass the
+academy accuracy gates. The supplied clip has no accepted event labels and no
+trained academy shot classifier. Actual hitter/class/terminal automation, coach
+agreement, geometry-dependent analysis, live UI acceptance and held-out pilot
+work remain open. No coaching score is enabled.
+
 - [BWF Laws of Badminton, version 5.0 (2), in force 26 April 2025](https://extranet.bwf.sport/docs/document-system/81/1466/1470/Section%204.1%20-%20Laws%20of%20Badminton%20-%2026%20April%202025%20V5.0%20(2)%20.pdf): rally, stroke, court-line, scoring, fault and let concepts. Historical version; select the applicable event profile before implementation.
 - [ShuttleSet: A Human-Annotated Stroke-Level Singles Dataset for Badminton Tactical Analysis](https://arxiv.org/abs/2306.04948): research precedent for expert-annotated shot-level records and tactical analysis; singles scope, not evidence of our doubles performance.
 - [Automated Hit-frame Detection for Badminton Match Analysis](https://arxiv.org/abs/2307.16000): research context for separating contact detection from downstream shot/movement analysis; no performance transfer claim or code adoption.

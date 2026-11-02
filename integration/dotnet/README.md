@@ -28,3 +28,16 @@ must be inspected before implementing that host-specific adapter.
 The directory pins the .NET 8 SDK family and clears package feeds because this
 adapter uses only the installed framework. Run from this directory so its SDK
 selection applies. No external NuGet packages are needed.
+
+Separate 2.0.0 event-analysis snapshots are imported explicitly:
+
+```powershell
+Push-Location integration/dotnet
+dotnet run -- --analysis ../../out/academy-session-004 ../../out/academy-session-004/match-review-002
+Pop-Location
+```
+
+This checks current job/source/preview/player bindings, all analysis artifact
+hashes, schema and reviewer provenance, and imports reviewed annotation counts.
+It does not upgrade 1.0.0 tracking metrics, establish annotation accuracy or
+authenticate the reviewer. Physical/coaching measurements remain unavailable.

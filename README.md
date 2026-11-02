@@ -4,6 +4,8 @@ Current delivery priorities: [completion plan based on the supplied doubles vide
 
 Planned match intelligence: [shot-by-shot analysis, point outcomes, winners and forced/unforced errors](docs/FULL_MATCH_ANALYSIS_PLAN.md).
 
+Implemented analysis workflow: [rally editor, reviewed shot/point reports, experimental suggestions, local model training and comparison](docs/ANALYSIS_WORKFLOW.md). Use **Review rallies and shots** in the Windows launcher. Automated sports-accuracy and coaching release gates remain open.
+
 ## Run a complete offline review job
 
 On Windows, double-click [Start-BadmintonAI.cmd](Start-BadmintonAI.cmd) to open the

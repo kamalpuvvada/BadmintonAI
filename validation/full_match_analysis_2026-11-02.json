@@ -1,0 +1,137 @@
+{
+  "date": "2026-11-02",
+  "baseline_commit": "ef51285",
+  "scope": "Rally/contact/attempt ledger, reviewed shot and point analysis, score engine, experimental proposals, local development classifier, evaluation and .NET contract",
+  "actual_recording": {
+    "job": "out\\academy-session-004",
+    "analysis": "out\\academy-session-004\\match-review-002",
+    "source_binding": {
+      "summary_sha256": "a9ef99cf61620688a090b66207237a3fb592ea90ed8bbef13861840c4d24d351",
+      "tracks_sha256": "f627010dcc37ba5eac7b75793d6080680afd62f809a51e0040b1affeeb19d6c7",
+      "source_video_sha256": "2c08a15287f336a5a9711f7199b15bb03c8347a0bb5e1dfa3c1d79b61b793232",
+      "session_id": "academy-court-01-2c08a15287f3"
+    },
+    "native_frames": 665,
+    "fps": 30.0,
+    "accepted_contacts": 0,
+    "accepted_points": 0,
+    "meaning": "No event annotations accepted; not an assertion of no actual shots or points",
+    "automatic_contacts": "unavailable because the current player/shuttle review eligibility is not ready",
+    "trained_academy_shot_model_supplied": false,
+    "human_review_added": false,
+    "source_and_original_tracking_unchanged": true,
+    "artifacts": {
+      "analysis.json": "b1239dd70625db0f30a18be9e0eb02d077370939a7eafec996a86d7fd76f4068",
+      "report.json": "7066990cb1bd926700af608060ef035ecad48d0202d5c371ef77d0e25e51c7ec",
+      "index.html": "77797ed03559b9acf41e34d2b06e410ccc6491c013969feb3dc02dd9b812974c",
+      "preview.mp4": "b4bbd05bb871ffd39a8a0d4e806dbb8d337df58e3f1ccb072aa36ae066df07fe",
+      "analysis_manifest.json": "c899a33ac5aa0d9f2fecbc70fe3a699af727bddb8b07eebbb015420d4abdb0d8"
+    }
+  },
+  "implemented": [
+    "Editable native-frame rally/contact/attempt timeline with undo/redo and source-bound drafts",
+    "Separate contact, shot, point, terminal and finish review statuses",
+    "Winner/error/preceding-pressure linkage and per-rally explanation table",
+    "Player contributions, explicit denominators, unknown responsibility and clip playlists",
+    "Custom target/margin/cap/best-of score arithmetic; unknown gaps, lets, replays, administrative points and game/match ending checks",
+    "Explicit skill-context rubric for forced/unforced acceptance; no heuristic forcedness assignment",
+    "Five-observation contact cues with gap/scene/segment/review isolation",
+    "Versioned local feature export/combine/softmax training, disjoint sources, abstention and development-only predictions",
+    "One-to-one contact evaluation, unknown-aware class/point metrics, pressure links and agreement/kappa",
+    "Separate .NET 2.0.0 snapshot reader; old 1.0.0 meanings preserved",
+    "Launcher actions for review/apply and optional model/outcome suggestions"
+  ],
+  "verification": {
+    "python_tests_passed": 161,
+    "javascript_behavior_tests_passed": 17,
+    "python_log_sha256": "8c0f669d265ac5cca43e8da92694922c8a25664d50a5e596fdaeb2487af02a8b",
+    "dotnet_build": "passed; 0 warnings, 0 errors",
+    "dotnet_self_checks": "Session contract checks passed.",
+    "dotnet_actual_import": {
+      "SchemaVersion": "2.0.0",
+      "SessionId": "academy-court-01-2c08a15287f3",
+      "Revision": 1,
+      "ReviewerKind": null,
+      "AcceptedContacts": 0,
+      "AcceptedShotClasses": 0,
+      "AnnotatedRallyPointsA": 0,
+      "AnnotatedRallyPointsB": 0,
+      "CoachingStatus": "not_available"
+    },
+    "dotnet_synthetic_import": {
+      "case": "synthetic_contract",
+      "python_packet_verification": "passed",
+      "dotnet_exit_code": 0,
+      "dotnet_import": {
+        "SchemaVersion": "2.0.0",
+        "SessionId": "test-3952312648b5",
+        "Revision": 1,
+        "ReviewerKind": "automated",
+        "AcceptedContacts": 4,
+        "AcceptedShotClasses": 4,
+        "AnnotatedRallyPointsA": 1,
+        "AnnotatedRallyPointsB": 0,
+        "CoachingStatus": "not_available"
+      }
+    },
+    "dotnet_rejections": [
+      {
+        "case": "schema",
+        "exit_code": 1,
+        "reason": "Session import rejected: Unsupported analysis packet/report schema"
+      },
+      {
+        "case": "source",
+        "exit_code": 1,
+        "reason": "Session import rejected: Analysis belongs to a different source/session"
+      },
+      {
+        "case": "provenance",
+        "exit_code": 1,
+        "reason": "Session import rejected: Report reviewer provenance differs"
+      },
+      {
+        "case": "negative",
+        "exit_code": 1,
+        "reason": "Session import rejected: Negative annotation counts"
+      },
+      {
+        "case": "tampered",
+        "exit_code": 1,
+        "reason": "Session import rejected: Analysis artifact changed: preview.mp4"
+      },
+      {
+        "case": "missing_reviewer",
+        "exit_code": 1,
+        "reason": "Session import rejected: Accepted annotations have no reviewer provenance"
+      }
+    ],
+    "synthetic_example": "Invented annotated serve/net/smash/block on generated color video produces A=1, B block terminal error, A smash pressure shot, no direct-winner double credit. This is not sports accuracy evidence.",
+    "model_training_tests": "Synthetic numerical separability/determinism, data splits, duplicate physical contacts, malformed/nonfinite inputs, manifest integrity and abstention; no actual academy model accuracy measured",
+    "actual_source_packet_and_tracking_hashes_checked": true,
+    "documentation_links_resolve": true,
+    "actual_desktop_or_browser_visual_acceptance": false,
+    "ui_tests_use_DOM_doubles": true,
+    "no_new_real_model_inference": true,
+    "coaching_scores_enabled": false
+  },
+  "implementation_sha256": {
+    "match_analysis.py": "391cb3415afdff8c15fb8dec6e54089dff65a56bab2a022fdb84bf2c34923609",
+    "match_analysis.html": "03e5544d50cd833a54eb0116372b041d3e4566ddf990421f0383fab8a35ca39e",
+    "contact_proposals.py": "d2370f9a45719d19d021e3cecdc0c557ad035aa24b7c7aa7e8c06daa77b0d202",
+    "shot_model.py": "5d82a9f985781d899e978a57d6e53a20e631e7eab4e4bc92ebba8118704d512b",
+    "analysis_evaluation.py": "2a0f151a9acdfd1fbb132e766757481339a4bd0a763f4a76d36f0512d7765dab",
+    "academy_app.py": "bd54fe4894643ff521f64a0c3b5eb1d40512ed8974fae0c74d40069b396537ee",
+    "integration/dotnet/AnalysisReader.cs": "8a61e89ea0578e724e71b3ccda6e5ed871ce5b68e2550a47e196f3a89b337160",
+    "integration/dotnet/Program.cs": "00ea690a1e51e6478f144cdda8aa79f1c1360dffc995962b88cc9cae1af04e1c"
+  },
+  "remaining": [
+    "Reviewed multi-session academy contacts/shot labels and independent coach rubric agreement",
+    "Reliable automatic identity/hitter/contact/class and terminal-event accuracy",
+    "Camera/ground-contact-dependent maps, physical movement and flight speed",
+    "Official rules profiles, service sequence and scoreboard OCR validation",
+    "Real browser/desktop acceptance and held-out pilot sessions",
+    "Production RACKETEK hosting/authenticated review integration"
+  ],
+  "release_status": "development_workflow; no automatic accuracy, coaching or full-plan completion claimed"
+}

@@ -150,18 +150,27 @@ class Desktop:
         self.worker = None
         self.log = None
         self.job = None
+        self.analysis_folder = None
         self.log_path = None
         self.pending = None
         self.cancel_requested = False
         self.executor = ThreadPoolExecutor(max_workers=1)
         self.results = LocalResults()
         root.title("BadmintonAI — Offline academy analysis")
-        root.geometry("820x620")
+        root.geometry("900x800")
         root.minsize(650, 560)
         style = ttk.Style(root)
         style.configure("TButton", padding=8)
-        panel = ttk.Frame(root, padding=24)
-        panel.pack(fill="both", expand=True)
+        canvas = tk.Canvas(root, highlightthickness=0)
+        scrollbar = ttk.Scrollbar(root, orient="vertical", command=canvas.yview)
+        scrollbar.pack(side="right", fill="y")
+        canvas.pack(side="left", fill="both", expand=True)
+        canvas.configure(yscrollcommand=scrollbar.set)
+        panel = ttk.Frame(canvas, padding=24)
+        window = canvas.create_window((0, 0), window=panel, anchor="nw")
+        panel.bind('<Configure>', lambda event: canvas.configure(scrollregion=canvas.bbox('all')))
+        canvas.bind('<Configure>', lambda event: canvas.itemconfigure(window, width=event.width))
+        root.bind('<MouseWheel>', lambda event: canvas.yview_scroll(int(-event.delta/120), 'units'))
         ttk.Label(panel, text="Analyze an academy recording", font=("Segoe UI", 21)).pack(anchor="w")
         ttk.Label(panel, text="Local processing · experimental tracking · review before measurements", wraplength=740).pack(anchor="w", pady=(4, 20))
         self.video = tk.StringVar()
@@ -194,6 +203,16 @@ class Desktop:
         row = ttk.Frame(panel); row.pack(fill="x", pady=4)
         self.apply_button = ttk.Button(row, text="Apply identity correction file", state="disabled", command=self.apply_identities)
         self.apply_button.pack(side="left")
+        row = ttk.Frame(panel); row.pack(fill="x", pady=4)
+        self.analysis_button = ttk.Button(row, text="Review rallies and shots", state="disabled", command=self.open_analysis)
+        self.analysis_button.pack(side="left")
+        self.analysis_apply_button = ttk.Button(row, text="Apply shot/outcome corrections", state="disabled", command=self.apply_analysis)
+        self.analysis_apply_button.pack(side="left", padx=8)
+        row = ttk.Frame(panel); row.pack(fill="x", pady=4)
+        self.outcome_button = ttk.Button(row, text="Suggest point outcomes from tags", state="disabled", command=self.suggest_outcomes)
+        self.outcome_button.pack(side="left")
+        self.shot_button = ttk.Button(row, text="Suggest shot types with a local model", state="disabled", command=self.suggest_shots)
+        self.shot_button.pack(side="left", padx=8)
         self.status = tk.StringVar(value="Choose a video to begin. Models must already be installed locally.")
         ttk.Label(panel, textvariable=self.status, wraplength=740, font=("Segoe UI", 11)).pack(anchor="w", pady=14)
         self.progress = ttk.Progressbar(panel, mode="indeterminate")
@@ -238,6 +257,11 @@ class Desktop:
         self.open_button.configure(state="disabled")
         self.identity_button.configure(state="disabled")
         self.apply_button.configure(state="disabled")
+        self.analysis_button.configure(state="disabled")
+        self.analysis_apply_button.configure(state="disabled")
+        self.outcome_button.configure(state="disabled")
+        self.shot_button.configure(state="disabled")
+        self.analysis_folder = None
         self.cancel_requested = False
         self.status.set("Checking the recording and selected settings…")
         self.pending = self.executor.submit(worker_arguments, video, self.job, expected,
@@ -252,6 +276,11 @@ class Desktop:
             self.open_button.configure(state="disabled")
             self.identity_button.configure(state="disabled")
             self.apply_button.configure(state="disabled")
+            self.analysis_button.configure(state="disabled")
+            self.analysis_apply_button.configure(state="disabled")
+            self.outcome_button.configure(state="disabled")
+            self.shot_button.configure(state="disabled")
+            self.analysis_folder = None
             self.busy(True)
             self.status.set("Checking saved job…")
             self.pending = self.executor.submit(resume_arguments, self.job)
@@ -305,6 +334,10 @@ class Desktop:
                     self.open_button.configure(state="normal")
                     self.identity_button.configure(state="normal")
                     self.apply_button.configure(state="normal")
+                    self.analysis_button.configure(state="normal")
+                    self.analysis_apply_button.configure(state="normal")
+                    self.outcome_button.configure(state="normal")
+                    self.shot_button.configure(state="normal")
                     self.show_details(f"Results: {self.job}\n\nOpen results to play the preview and inspect scene decisions. No review has been granted automatically. Close this window after finishing with the results browser.")
                 elif self.cancel_requested or (manifest and manifest.get("status") == "cancelled"):
                     self.status.set("Analysis cancelled. Completed stage files were preserved.")
@@ -358,6 +391,90 @@ class Desktop:
             self.show_details(f"Identity results: {target}\n\nAssigned {result['coverage']['assigned_observations']} observed positions. Reviewer type: {result['reviewer_kind']}. These are separate identity labels, not verified movement measurements.")
         except (ValueError, OSError, KeyError, TypeError) as exc:
             self.status.set(f"Identity corrections were not applied: {exc}")
+
+    def open_analysis(self):
+        from match_analysis import verify
+        from contact_proposals import prepare
+        try:
+            if self.analysis_folder is None:
+                candidates = []
+                for folder in self.job.iterdir():
+                    if folder.is_dir() and (folder.name.startswith('match-analysis-') or folder.name.startswith('match-review-')):
+                        try:
+                            packet = verify(self.job, folder)
+                            candidates.append((packet['revision'], packet['created_utc'], folder))
+                        except (ValueError, OSError, KeyError, TypeError):
+                            continue
+                if candidates:
+                    self.analysis_folder = max(candidates, key=lambda item: (item[0],item[1]))[2]
+                else:
+                    number = 1
+                    while (self.job / f'match-analysis-{number:03d}').exists(): number += 1
+                    self.analysis_folder = self.job / f'match-analysis-{number:03d}'
+                    prepare(self.job, self.analysis_folder)
+            verify(self.job, self.analysis_folder)
+            webbrowser.open(self.results.url(self.job) + self.analysis_folder.name + '/')
+        except (ValueError, OSError, KeyError, TypeError) as exc:
+            self.analysis_folder = None
+            self.status.set(f'Could not prepare rally analysis: {exc}')
+
+    def apply_analysis(self):
+        from tkinter import filedialog
+        from match_analysis import apply, verify
+        if self.analysis_folder is None:
+            self.status.set('Open rally analysis first so the source revision is selected.')
+            return
+        selected = filedialog.askopenfilename(title='Choose downloaded match analysis corrections', filetypes=[('Correction JSON','*.json')])
+        if not selected: return
+        try:
+            number = 1
+            while (self.job / f'match-review-{number:03d}').exists(): number += 1
+            folder = self.job / f'match-review-{number:03d}'
+            apply(self.job, self.analysis_folder, Path(selected), folder)
+            packet = verify(self.job, folder)
+            self.analysis_folder = folder
+            self.status.set(f'Analysis revision {packet["revision"]} validated. Opening its reviewed report.')
+            webbrowser.open(self.results.url(self.job) + folder.name + '/')
+        except (ValueError, OSError, KeyError, TypeError) as exc:
+            self.status.set(f'Analysis corrections were not applied: {exc}')
+
+    def _proposal_folder(self):
+        number = 1
+        while (self.job / f'match-review-{number:03d}').exists(): number += 1
+        return self.job / f'match-review-{number:03d}'
+
+    def suggest_outcomes(self):
+        from match_analysis import propose_outcomes, verify
+        if self.analysis_folder is None:
+            self.status.set('Open rally analysis first. Suggestions use explicit terminal execution annotations.')
+            return
+        try:
+            folder=self._proposal_folder()
+            propose_outcomes(self.job,self.analysis_folder,folder)
+            packet=verify(self.job,folder);self.analysis_folder=folder
+            self.status.set(f'{len(packet["outcome_suggestions"]["suggestions"])} point suggestions. None are confirmed automatically.')
+            webbrowser.open(self.results.url(self.job)+folder.name+'/')
+        except (ValueError,OSError,KeyError,TypeError) as exc:
+            self.status.set(f'Could not suggest outcomes: {exc}')
+
+    def suggest_shots(self):
+        from tkinter import filedialog
+        from shot_model import propose
+        from match_analysis import verify
+        if self.analysis_folder is None:
+            self.status.set('Open rally analysis first. A locally trained development model is required.')
+            return
+        selected=filedialog.askopenfilename(title='Choose a trained model_manifest.json',filetypes=[('Local shot model','model_manifest.json')])
+        if not selected:return
+        try:
+            folder=self._proposal_folder()
+            propose(self.job,self.analysis_folder,Path(selected).parent,folder)
+            packet=verify(self.job,folder);self.analysis_folder=folder
+            info=packet['automatic_shot_model']
+            self.status.set(f'Shot model: {info["status"].replace("_"," ")}. All predictions remain unverified.')
+            webbrowser.open(self.results.url(self.job)+folder.name+'/')
+        except (ValueError,OSError,KeyError,TypeError) as exc:
+            self.status.set(f'Could not propose shot types: {exc}')
 
     def close(self):
         if self.worker or self.pending:
