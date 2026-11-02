@@ -4,6 +4,12 @@ Prepared 2 November 2026 against BadmintonAI commit `a2a147c`.
 
 ## Target and delivery decision
 
+The detailed event/shot/outcome scope is now specified in
+[the full match analysis plan](FULL_MATCH_ANALYSIS_PLAN.md), including point credit,
+terminal errors, forced/unforced review, doubles attribution, score reconciliation
+and tactical patterns. It extends the analytics milestones below; it does not
+claim those capabilities are implemented.
+
 Deliver an offline academy analysis workflow: select a recording, set up its court, run analysis, review uncertain results, and export an annotated video plus a structured report for RACKETEK. The attached doubles clip defines the intended presentation: four player identities, player trails, court map, movement totals, shuttle trail, rally/contact count, and shot labels. Its displayed measurements are examples of the experience, not verified labels or acceptance criteria.
 
 The next development milestone is a complete vertical slice on this exact clip. Stop extending the old broadcast benchmark as the main activity. Reuse its regression tests while building the missing product workflow. A usable preview can finish before every measurement is scientifically validated; every result must state which capabilities are available, experimental, or unsupported.

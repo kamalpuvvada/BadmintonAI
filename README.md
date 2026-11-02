@@ -2,6 +2,8 @@
 
 Current delivery priorities: [completion plan based on the supplied doubles video](docs/COMPLETION_PLAN.md) (2 November 2026).
 
+Planned match intelligence: [shot-by-shot analysis, point outcomes, winners and forced/unforced errors](docs/FULL_MATCH_ANALYSIS_PLAN.md).
+
 ## Run a complete offline review job
 
 On Windows, double-click [Start-BadmintonAI.cmd](Start-BadmintonAI.cmd) to open the
