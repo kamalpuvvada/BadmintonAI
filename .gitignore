@@ -14,3 +14,5 @@ tracking_output/
 *.webm
 *.zip
 .DS_Store
+integration/dotnet/bin/
+integration/dotnet/obj/

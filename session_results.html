@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BadmintonAI session results</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,sans-serif;background:#101e27;color:#edf4f6}*{box-sizing:border-box}body{margin:auto;max-width:1200px;padding:24px}h1{margin-bottom:8px}p{line-height:1.6;color:#bed0da}a{color:#92e9dc}header,.panel{background:#192d39;padding:22px;border-radius:14px;margin-bottom:18px}.badge{background:#ffde9b;color:#302005;padding:6px 12px;border-radius:20px;display:inline-block}.layout{display:grid;grid-template-columns:minmax(280px,1fr) minmax(280px,1fr);gap:20px}video{width:100%;max-height:78vh;background:#000;border-radius:10px}button{padding:10px 14px;border:1px solid #9cb3bf;background:#223c4c;color:#fff;border-radius:8px;cursor:pointer}button:focus-visible,a:focus-visible{outline:3px solid #ffde9b;outline-offset:3px}.controls{display:flex;gap:12px;align-items:center;margin:12px 0;flex-wrap:wrap}input[type=range]{width:100%}pre{white-space:pre-wrap;overflow-wrap:anywhere;color:#cad9e0}li{margin:10px 0;line-height:1.5}table{width:100%;border-collapse:collapse}td,th{text-align:left;border-bottom:1px solid #38525e;padding:10px 3px}img{width:100%}#timeline{font-variant-numeric:tabular-nums}@media(max-width:760px){.layout{grid-template-columns:1fr}body{padding:12px}}
+</style>
+<header><span class="badge" id="status"></span><h1>BadmintonAI session review</h1><p id="source"></p><p>Review tracking first. New cyan boxes use temporary T IDs. Source video labels and measurements, if present, belong to the original recording.</p></header>
+<main class="layout"><section class="panel"><h2>Analysis preview</h2><video id="video" controls preload="metadata" playsinline></video><div class="controls"><button id="back" type="button">Previous frame</button><button id="next" type="button">Next frame</button><output id="timeline" aria-live="polite"></output></div><label for="seek">Go to frame</label><input id="seek" type="range" min="0" value="0"><p id="playback"></p></section>
+<section><div class="panel"><h2>Review and exports</h2><p id="reviewSummary"></p><ul id="links"></ul><p>Review decisions are recorded using the existing review command shown in the scene review page. This page does not grant approval.</p></div><div class="panel"><h2>Available measurements</h2><table><thead><tr><th>Measurement</th><th>Status</th></tr></thead><tbody id="metrics"></tbody></table><p>Unavailable measurements remain empty. A finished processing job does not mean its detections are verified.</p></div></section></main>
+<section class="panel"><h2>Tracking diagnostics</h2><p id="counts"></p><a id="detector" target="_blank" rel="noopener">Open detector-only contact sheet</a><details><summary>Quality and limitations</summary><ul id="limitations"></ul></details><details><summary>Session details</summary><pre id="details"></pre></details></section>
+<script>
+'use strict';
+const session = /*SESSION_DATA*/;
+const $ = id => document.getElementById(id);
+const video = $('video'), seek = $('seek'), fps = session.preview.fps;
+const pathURL = path => path.split('/').map(encodeURIComponent).join('/');
+$('status').textContent = session.status === 'needs_review' ? 'Tracking review needed' : 'Processing finished — check review status';
+$('source').textContent = `${session.source.video.filename} · ${session.preview.frames} frames · ${fps} FPS`;
+video.src = pathURL(session.artifacts.preview);
+seek.max = session.preview.frames - 1;
+function update(){const frame=Math.min(session.preview.frames-1,Math.max(0,Math.round(video.currentTime*fps)));seek.value=frame;$('timeline').textContent=`Frame ${frame} · ${(frame/fps).toFixed(3)} s`;}
+function jump(frame){video.pause();video.currentTime=Math.max(0,Math.min(session.preview.frames-1,frame))/fps;update();}
+$('back').onclick=()=>jump(Math.round(video.currentTime*fps)-1);
+$('next').onclick=()=>jump(Math.round(video.currentTime*fps)+1);
+seek.oninput=()=>jump(Number(seek.value));video.ontimeupdate=update;
+video.onerror=()=>{$('playback').textContent='Preview could not be loaded. Check that the complete job folder is present and open it through a local web server if needed.';};
+$('reviewSummary').textContent=`${session.players.sampled_frames} sampled frames. Scene decisions: ${JSON.stringify(session.players.review.decisions)}. Shuttle: ${session.shuttle.status.replaceAll('_',' ')}.`;
+for(const [label,path] of [['Review player scenes',session.artifacts.player_review],['Download session results','result.json'],['Job manifest','job.json'],['Player observations',session.artifacts.observations],['Shuttle summary',session.artifacts.shuttle_summary]]){if(!path)continue;const li=document.createElement('li'),a=document.createElement('a');a.textContent=label;a.href=pathURL(path);li.append(a);$('links').append(li);}
+for(const [key,metric] of Object.entries(session.metrics)){const tr=document.createElement('tr'),name=document.createElement('td'),state=document.createElement('td');name.textContent=key.replaceAll('_',' ');state.textContent=metric.status.replaceAll('_',' ');state.title=metric.reason;tr.append(name,state);$('metrics').append(tr);}
+$('counts').textContent=`People per sampled frame: ${JSON.stringify(session.players.person_count_histogram)}. Unique temporary tracker IDs: ${session.players.diagnostics.unique_track_ids_observed}. Counts are diagnostics, not accuracy scores.`;
+$('detector').href=pathURL(session.artifacts.detector_sheet);
+for(const text of session.limitations){const li=document.createElement('li');li.textContent=text;$('limitations').append(li);}
+$('details').textContent=JSON.stringify({review:session.players.review,preview:session.preview,metrics:session.metrics},null,2);update();
+</script>
+</html>

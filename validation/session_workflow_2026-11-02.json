@@ -1,0 +1,830 @@
+{
+  "date": "2026-11-02",
+  "scope": "Milestone 1 session workflow, experimental image-region filtering and .NET file adapter; not complete academy validation",
+  "runs": [
+    {
+      "run": "academy-session-001",
+      "configuration": {
+        "camera": "academy-court-01",
+        "sample_fps": 15.0,
+        "expected_players": 4,
+        "threads": 4,
+        "max_seconds": null,
+        "roi": "0.34,0.42,0.99,0.80",
+        "detect_roi": "0.12,0.38,1.00,0.90",
+        "processed_overlay": true
+      },
+      "source_sha256": "2c08a15287f336a5a9711f7199b15bb03c8347a0bb5e1dfa3c1d79b61b793232",
+      "job_sha256": "8e8ad6fbc93d728ed9fe5783617e63e5e39e75483ad269c5d919727473db4606",
+      "result_sha256": "9b8389774200e4a2a15fa6feb2bc3ca38251a73ef1dae070339884b0a5821a63",
+      "player_rows_sha256": "2b811dc5164070cc1f24536742e4a0d58551967faebaf243f993051282dd83e7",
+      "person_count_histogram": {
+        "5": 13,
+        "4": 63,
+        "3": 192,
+        "2": 62,
+        "1": 3
+      },
+      "unique_temporary_track_ids": 12,
+      "stage_counts": {
+        "all_class_detections": 4058,
+        "secondary_all_class_detections": 0,
+        "raw_person_detections": 1869,
+        "court_filtered_person_detections": 1024,
+        "deduplicated_person_detections": 1020,
+        "view_accepted_person_detections": 1020,
+        "tracker_output_boxes": 1020,
+        "boxes_with_track_id": 987
+      },
+      "sampling_frames": 333,
+      "preview": {
+        "schema_version": "1.0.0",
+        "frames": 665,
+        "decoded_preview_frames": 665,
+        "fps": 30.0,
+        "source_size_px": [
+          720,
+          1280
+        ],
+        "preview_size_px": [
+          720,
+          1344
+        ],
+        "source_rectangle_xywh_px": [
+          0,
+          64,
+          720,
+          1280
+        ],
+        "source_frame_index_offset": 0,
+        "frames_with_sampled_player_observation": 554,
+        "player_observation_display": "preceding sample held for less than one sampling interval; no interpolation",
+        "timebase": "frame_index / probed average FPS; constant-frame-rate input required for exact alignment",
+        "audio": "omitted_from_preview; source unchanged",
+        "review_samples": [
+          {
+            "frame_index": 0,
+            "source_seconds": 0.0,
+            "image": "review-000000.jpg"
+          },
+          {
+            "frame_index": 83,
+            "source_seconds": 2.7666666666666666,
+            "image": "review-000083.jpg"
+          },
+          {
+            "frame_index": 166,
+            "source_seconds": 5.533333333333333,
+            "image": "review-000166.jpg"
+          },
+          {
+            "frame_index": 249,
+            "source_seconds": 8.3,
+            "image": "review-000249.jpg"
+          },
+          {
+            "frame_index": 332,
+            "source_seconds": 11.066666666666666,
+            "image": "review-000332.jpg"
+          },
+          {
+            "frame_index": 415,
+            "source_seconds": 13.833333333333334,
+            "image": "review-000415.jpg"
+          },
+          {
+            "frame_index": 498,
+            "source_seconds": 16.6,
+            "image": "review-000498.jpg"
+          },
+          {
+            "frame_index": 581,
+            "source_seconds": 19.366666666666667,
+            "image": "review-000581.jpg"
+          }
+        ]
+      },
+      "stage_seconds": {
+        "inspect": 2.122,
+        "players": 76.581,
+        "review": null,
+        "shuttle": null,
+        "render": 6.153,
+        "export": null
+      },
+      "source_bindings": {
+        "source": {
+          "path": "C:\\Users\\kamal\\Downloads\\SaveInta.com_AQPC6Ly6eh-lIW26J_bgtQCIIk14zYO416N9kXOrQXG7gIH0znTKp0e0PaOJ9apJE_rpv9lps3YrGZTbdnxa4UuaflWamSIlZG1aW5o.mp4",
+          "sha256": "2c08a15287f336a5a9711f7199b15bb03c8347a0bb5e1dfa3c1d79b61b793232",
+          "video": {
+            "filename": "SaveInta.com_AQPC6Ly6eh-lIW26J_bgtQCIIk14zYO416N9kXOrQXG7gIH0znTKp0e0PaOJ9apJE_rpv9lps3YrGZTbdnxa4UuaflWamSIlZG1aW5o.mp4",
+            "duration_seconds": 22.195,
+            "width_px": 720,
+            "height_px": 1280,
+            "frame_rate_fps": 30.0,
+            "video_codec": "h264",
+            "audio_present": true,
+            "file_size_bytes": 3120941
+          }
+        },
+        "configuration": {
+          "camera": "academy-court-01",
+          "sample_fps": 15.0,
+          "expected_players": 4,
+          "threads": 4,
+          "max_seconds": null,
+          "roi": "0.34,0.42,0.99,0.80",
+          "detect_roi": "0.12,0.38,1.00,0.90",
+          "processed_overlay": true
+        },
+        "models": {
+          "person": {
+            "path": "C:\\Users\\kamal\\.roboflow\\models\\rf-detr-nano.pth",
+            "sha256": "d8d6b9ee57d4d0ed2b1f305163624712a0532cb7bce0c747317984fc5457440d"
+          },
+          "shuttle": {
+            "path": "C:\\Projects\\BadmintonAI\\out\\models\\TrackNetV3_TrackNet_best.pt",
+            "sha256": "df867641a02712b021f04548ff4b1208ddfdb47f629ab2094ceb978667e83b1a"
+          }
+        },
+        "code": {
+          "badminton_proto.py": "eade8ce08d8cd16a2db57a6c75ff69591a32c672a5b68857311d4168244edf30",
+          "download_tracknet.py": "69fc12fb91d9e8f3afbc16a08567602ed4c50fcc3e71dccdc4c598a93360d0d7",
+          "player_tracking.py": "90b78ee2b99303874eed906b99235194d20ab8af884c55bea1e6a3b3e75019f9",
+          "session_results.py": "34b1b50277e6b00a6bd15a2f623afc5ad1112922bdf3082b830d56f59807286d",
+          "session_runner.py": "90dd2913a708588ce0c305e2b7cefde3ea98a1d035ca277044b5be2636b5a361",
+          "shuttle_annotation.py": "2ec56f8af30d3c103946375075f6c9e97bf6ef77367dc23d7c22cc83311a7001",
+          "shuttle_benchmark.py": "23bbc869282fdce7a5fc1683fa2f23aed9f9a089bbf86226142e429dbba45ce7",
+          "shuttle_candidates.py": "4637d41d2c81e48d63eadb38f0dfac2aa66ec0d8214770c04f34374a5de7b991",
+          "shuttle_linking.py": "e4150ef1a7ac88ef27f17d30416cd34c1ffa8424eb060ff0890b6b38f5b39f58",
+          "shuttle_tracknet.py": "856c84862d010dce7100a2f29ba6e52d4ea6c910635572f8cadab992973fc282",
+          "tracking_export.py": "c144cb86eb16ba04d38d05941052141e66d8dc0403b6784a945804f7596146f4",
+          "tracking_review.py": "c1e603f29b66379268b93cbdaa9e53efdada33b6e2e2d291d114ab2005353b6a",
+          "session_results.html": "bddaf88782c0b3df0166b3ba0f041f8992b3c566476f307a7e5499a9b2860e48",
+          "third_party\\tracknetv3\\tracknet.py": "28f70942b31c8544fa1c91dbc9809d4e5488cb277f74f11dc6f5e343155dad25"
+        },
+        "packages": {
+          "rfdetr": "1.11.2",
+          "trackers": "2.6.1",
+          "torch": "2.15.0",
+          "numpy": "2.4.6",
+          "Pillow": "13.0.0",
+          "opencv-python": "5.0.0.93"
+        }
+      },
+      "review": {
+        "source_binding": {
+          "summary_sha256": "5a9f4d62d09ca7b7785cf7c607b7b13c2083ca0e1e9fe9d384ba5079d1840501",
+          "tracks_sha256": "2b811dc5164070cc1f24536742e4a0d58551967faebaf243f993051282dd83e7"
+        },
+        "approval_scope": "tracking_in_image_pixels",
+        "decisions": {
+          "pending": 1
+        },
+        "all_scenes_decided": false,
+        "review_provenance": {
+          "accepted_by_reviewer_kind": {}
+        },
+        "approved_intervals": [],
+        "coaching_metrics": {
+          "status": "not_available"
+        }
+      }
+    },
+    {
+      "run": "academy-session-002",
+      "configuration": {
+        "camera": "academy-court-01",
+        "sample_fps": 15.0,
+        "expected_players": 4,
+        "threads": 4,
+        "max_seconds": null,
+        "roi": null,
+        "detect_roi": "0.00,0.38,1.00,1.00",
+        "processed_overlay": true,
+        "court_polygon": "0,0.61;0.42,0.53;1,0.53;1,1;0,1",
+        "secondary_detect_roi": "0.38,0.45,1.00,0.64"
+      },
+      "source_sha256": "2c08a15287f336a5a9711f7199b15bb03c8347a0bb5e1dfa3c1d79b61b793232",
+      "job_sha256": "c94aff1e18ec51110768a9f6e57dae9c1b6e336622ee9ffa3b04751867c2e13c",
+      "result_sha256": "8b2fd89f0c19ca8b3faba41b09273b1aee3513994814181192791670be2e9287",
+      "player_rows_sha256": "1fb7c6b531b107160e979a528489b0410b49b20f521e3c712af68ccc48cfd84b",
+      "person_count_histogram": {
+        "5": 123,
+        "6": 20,
+        "7": 4,
+        "4": 158,
+        "3": 28
+      },
+      "unique_temporary_track_ids": 18,
+      "stage_counts": {
+        "all_class_detections": 6621,
+        "secondary_all_class_detections": 2171,
+        "raw_person_detections": 3205,
+        "court_filtered_person_detections": 2499,
+        "deduplicated_person_detections": 1479,
+        "view_accepted_person_detections": 1479,
+        "tracker_output_boxes": 1479,
+        "boxes_with_track_id": 1415
+      },
+      "sampling_frames": 333,
+      "preview": {
+        "schema_version": "1.0.0",
+        "frames": 665,
+        "decoded_preview_frames": 665,
+        "fps": 30.0,
+        "source_size_px": [
+          720,
+          1280
+        ],
+        "preview_size_px": [
+          720,
+          1344
+        ],
+        "source_rectangle_xywh_px": [
+          0,
+          64,
+          720,
+          1280
+        ],
+        "source_frame_index_offset": 0,
+        "frames_with_sampled_player_observation": 665,
+        "player_observation_display": "preceding sample held for less than one sampling interval; no interpolation",
+        "timebase": "frame_index / probed average FPS; constant-frame-rate input required for exact alignment",
+        "audio": "omitted_from_preview; source unchanged",
+        "review_samples": [
+          {
+            "frame_index": 0,
+            "source_seconds": 0.0,
+            "image": "review-000000.jpg"
+          },
+          {
+            "frame_index": 83,
+            "source_seconds": 2.7666666666666666,
+            "image": "review-000083.jpg"
+          },
+          {
+            "frame_index": 166,
+            "source_seconds": 5.533333333333333,
+            "image": "review-000166.jpg"
+          },
+          {
+            "frame_index": 249,
+            "source_seconds": 8.3,
+            "image": "review-000249.jpg"
+          },
+          {
+            "frame_index": 332,
+            "source_seconds": 11.066666666666666,
+            "image": "review-000332.jpg"
+          },
+          {
+            "frame_index": 415,
+            "source_seconds": 13.833333333333334,
+            "image": "review-000415.jpg"
+          },
+          {
+            "frame_index": 498,
+            "source_seconds": 16.6,
+            "image": "review-000498.jpg"
+          },
+          {
+            "frame_index": 581,
+            "source_seconds": 19.366666666666667,
+            "image": "review-000581.jpg"
+          },
+          {
+            "frame_index": 664,
+            "source_seconds": 22.133333333333333,
+            "image": "review-000664.jpg"
+          }
+        ]
+      },
+      "stage_seconds": {
+        "inspect": 2.109,
+        "players": 135.654,
+        "review": null,
+        "shuttle": null,
+        "render": 7.097,
+        "export": null
+      },
+      "source_bindings": {
+        "source": {
+          "path": "C:\\Users\\kamal\\Downloads\\SaveInta.com_AQPC6Ly6eh-lIW26J_bgtQCIIk14zYO416N9kXOrQXG7gIH0znTKp0e0PaOJ9apJE_rpv9lps3YrGZTbdnxa4UuaflWamSIlZG1aW5o.mp4",
+          "sha256": "2c08a15287f336a5a9711f7199b15bb03c8347a0bb5e1dfa3c1d79b61b793232",
+          "video": {
+            "filename": "SaveInta.com_AQPC6Ly6eh-lIW26J_bgtQCIIk14zYO416N9kXOrQXG7gIH0znTKp0e0PaOJ9apJE_rpv9lps3YrGZTbdnxa4UuaflWamSIlZG1aW5o.mp4",
+            "duration_seconds": 22.195,
+            "width_px": 720,
+            "height_px": 1280,
+            "frame_rate_fps": 30.0,
+            "video_codec": "h264",
+            "audio_present": true,
+            "file_size_bytes": 3120941
+          }
+        },
+        "configuration": {
+          "camera": "academy-court-01",
+          "sample_fps": 15.0,
+          "expected_players": 4,
+          "threads": 4,
+          "max_seconds": null,
+          "roi": null,
+          "detect_roi": "0.00,0.38,1.00,1.00",
+          "processed_overlay": true,
+          "court_polygon": "0,0.61;0.42,0.53;1,0.53;1,1;0,1",
+          "secondary_detect_roi": "0.38,0.45,1.00,0.64"
+        },
+        "models": {
+          "person": {
+            "path": "C:\\Users\\kamal\\.roboflow\\models\\rf-detr-nano.pth",
+            "sha256": "d8d6b9ee57d4d0ed2b1f305163624712a0532cb7bce0c747317984fc5457440d"
+          },
+          "shuttle": {
+            "path": "C:\\Projects\\BadmintonAI\\out\\models\\TrackNetV3_TrackNet_best.pt",
+            "sha256": "df867641a02712b021f04548ff4b1208ddfdb47f629ab2094ceb978667e83b1a"
+          }
+        },
+        "code": {
+          "badminton_proto.py": "eade8ce08d8cd16a2db57a6c75ff69591a32c672a5b68857311d4168244edf30",
+          "download_tracknet.py": "69fc12fb91d9e8f3afbc16a08567602ed4c50fcc3e71dccdc4c598a93360d0d7",
+          "player_regions.py": "8171230b11bb14eae61f4b6bba1a3e8a0190bddc382bf4f91189d5b03460b6bd",
+          "player_tracking.py": "a45abd32c9a295ffa443846a538c412db7bc0dbf171ae511d411aefc7ce4fd38",
+          "session_results.py": "c9387469fedd72d2dfd3a33e410a71172edd28a9c3383ee3ce0daebd41850fc8",
+          "session_runner.py": "2d8539b615cb57663cdbbb26f99ec5c301fdac77ff6747030b9e29a0ebeb4166",
+          "shuttle_annotation.py": "2ec56f8af30d3c103946375075f6c9e97bf6ef77367dc23d7c22cc83311a7001",
+          "shuttle_benchmark.py": "23bbc869282fdce7a5fc1683fa2f23aed9f9a089bbf86226142e429dbba45ce7",
+          "shuttle_candidates.py": "4637d41d2c81e48d63eadb38f0dfac2aa66ec0d8214770c04f34374a5de7b991",
+          "shuttle_linking.py": "e4150ef1a7ac88ef27f17d30416cd34c1ffa8424eb060ff0890b6b38f5b39f58",
+          "shuttle_tracknet.py": "856c84862d010dce7100a2f29ba6e52d4ea6c910635572f8cadab992973fc282",
+          "tracking_export.py": "c144cb86eb16ba04d38d05941052141e66d8dc0403b6784a945804f7596146f4",
+          "tracking_review.py": "c1e603f29b66379268b93cbdaa9e53efdada33b6e2e2d291d114ab2005353b6a",
+          "session_results.html": "bddaf88782c0b3df0166b3ba0f041f8992b3c566476f307a7e5499a9b2860e48",
+          "third_party\\tracknetv3\\tracknet.py": "28f70942b31c8544fa1c91dbc9809d4e5488cb277f74f11dc6f5e343155dad25"
+        },
+        "packages": {
+          "rfdetr": "1.11.2",
+          "trackers": "2.6.1",
+          "torch": "2.15.0",
+          "numpy": "2.4.6",
+          "Pillow": "13.0.0",
+          "opencv-python": "5.0.0.93"
+        }
+      },
+      "review": {
+        "source_binding": {
+          "summary_sha256": "04a06bb5d71d4f24d9e9c93a71b8b0ee95f3a5e619284a882053c73a128135cf",
+          "tracks_sha256": "1fb7c6b531b107160e979a528489b0410b49b20f521e3c712af68ccc48cfd84b"
+        },
+        "approval_scope": "tracking_in_image_pixels",
+        "decisions": {
+          "pending": 1
+        },
+        "all_scenes_decided": false,
+        "review_provenance": {
+          "accepted_by_reviewer_kind": {}
+        },
+        "approved_intervals": [],
+        "coaching_metrics": {
+          "status": "not_available"
+        }
+      }
+    },
+    {
+      "run": "academy-session-003",
+      "configuration": {
+        "camera": "academy-court-01",
+        "sample_fps": 15.0,
+        "expected_players": 4,
+        "threads": 4,
+        "max_seconds": null,
+        "roi": null,
+        "detect_roi": "0.00,0.38,1.00,1.00",
+        "processed_overlay": true,
+        "court_polygon": "0,0.64;0.55,0.535;1,0.535;1,1;0,1",
+        "secondary_detect_roi": "0.38,0.45,1.00,0.64"
+      },
+      "source_sha256": "2c08a15287f336a5a9711f7199b15bb03c8347a0bb5e1dfa3c1d79b61b793232",
+      "job_sha256": "ad89e6866e4939d589131f994a9fa2dac059f7e8432b630a211dbfdf01b94627",
+      "result_sha256": "ff4cf5b052a2ab9555559b801fc8d64fbe10a2c29d5dd2d482667ad1accacb0f",
+      "player_rows_sha256": "f627010dcc37ba5eac7b75793d6080680afd62f809a51e0040b1affeeb19d6c7",
+      "person_count_histogram": {
+        "4": 266,
+        "5": 14,
+        "3": 51,
+        "2": 2
+      },
+      "unique_temporary_track_ids": 12,
+      "stage_counts": {
+        "all_class_detections": 6621,
+        "secondary_all_class_detections": 2171,
+        "raw_person_detections": 3205,
+        "court_filtered_person_detections": 2308,
+        "deduplicated_person_detections": 1291,
+        "view_accepted_person_detections": 1291,
+        "tracker_output_boxes": 1291,
+        "boxes_with_track_id": 1259
+      },
+      "sampling_frames": 333,
+      "preview": {
+        "schema_version": "1.0.0",
+        "frames": 665,
+        "decoded_preview_frames": 665,
+        "fps": 30.0,
+        "source_size_px": [
+          720,
+          1280
+        ],
+        "preview_size_px": [
+          720,
+          1344
+        ],
+        "source_rectangle_xywh_px": [
+          0,
+          64,
+          720,
+          1280
+        ],
+        "source_frame_index_offset": 0,
+        "frames_with_sampled_player_observation": 665,
+        "player_observation_display": "preceding sample held for less than one sampling interval; no interpolation",
+        "timebase": "frame_index / probed average FPS; constant-frame-rate input required for exact alignment",
+        "audio": "omitted_from_preview; source unchanged",
+        "review_samples": [
+          {
+            "frame_index": 0,
+            "source_seconds": 0.0,
+            "image": "review-000000.jpg"
+          },
+          {
+            "frame_index": 83,
+            "source_seconds": 2.7666666666666666,
+            "image": "review-000083.jpg"
+          },
+          {
+            "frame_index": 166,
+            "source_seconds": 5.533333333333333,
+            "image": "review-000166.jpg"
+          },
+          {
+            "frame_index": 249,
+            "source_seconds": 8.3,
+            "image": "review-000249.jpg"
+          },
+          {
+            "frame_index": 332,
+            "source_seconds": 11.066666666666666,
+            "image": "review-000332.jpg"
+          },
+          {
+            "frame_index": 415,
+            "source_seconds": 13.833333333333334,
+            "image": "review-000415.jpg"
+          },
+          {
+            "frame_index": 498,
+            "source_seconds": 16.6,
+            "image": "review-000498.jpg"
+          },
+          {
+            "frame_index": 581,
+            "source_seconds": 19.366666666666667,
+            "image": "review-000581.jpg"
+          },
+          {
+            "frame_index": 664,
+            "source_seconds": 22.133333333333333,
+            "image": "review-000664.jpg"
+          }
+        ]
+      },
+      "stage_seconds": {
+        "inspect": 2.113,
+        "players": 136.212,
+        "review": null,
+        "shuttle": null,
+        "render": 6.444,
+        "export": null
+      },
+      "source_bindings": {
+        "source": {
+          "path": "C:\\Users\\kamal\\Downloads\\SaveInta.com_AQPC6Ly6eh-lIW26J_bgtQCIIk14zYO416N9kXOrQXG7gIH0znTKp0e0PaOJ9apJE_rpv9lps3YrGZTbdnxa4UuaflWamSIlZG1aW5o.mp4",
+          "sha256": "2c08a15287f336a5a9711f7199b15bb03c8347a0bb5e1dfa3c1d79b61b793232",
+          "video": {
+            "filename": "SaveInta.com_AQPC6Ly6eh-lIW26J_bgtQCIIk14zYO416N9kXOrQXG7gIH0znTKp0e0PaOJ9apJE_rpv9lps3YrGZTbdnxa4UuaflWamSIlZG1aW5o.mp4",
+            "duration_seconds": 22.195,
+            "width_px": 720,
+            "height_px": 1280,
+            "frame_rate_fps": 30.0,
+            "video_codec": "h264",
+            "audio_present": true,
+            "file_size_bytes": 3120941
+          }
+        },
+        "configuration": {
+          "camera": "academy-court-01",
+          "sample_fps": 15.0,
+          "expected_players": 4,
+          "threads": 4,
+          "max_seconds": null,
+          "roi": null,
+          "detect_roi": "0.00,0.38,1.00,1.00",
+          "processed_overlay": true,
+          "court_polygon": "0,0.64;0.55,0.535;1,0.535;1,1;0,1",
+          "secondary_detect_roi": "0.38,0.45,1.00,0.64"
+        },
+        "models": {
+          "person": {
+            "path": "C:\\Users\\kamal\\.roboflow\\models\\rf-detr-nano.pth",
+            "sha256": "d8d6b9ee57d4d0ed2b1f305163624712a0532cb7bce0c747317984fc5457440d"
+          },
+          "shuttle": {
+            "path": "C:\\Projects\\BadmintonAI\\out\\models\\TrackNetV3_TrackNet_best.pt",
+            "sha256": "df867641a02712b021f04548ff4b1208ddfdb47f629ab2094ceb978667e83b1a"
+          }
+        },
+        "code": {
+          "badminton_proto.py": "eade8ce08d8cd16a2db57a6c75ff69591a32c672a5b68857311d4168244edf30",
+          "download_tracknet.py": "69fc12fb91d9e8f3afbc16a08567602ed4c50fcc3e71dccdc4c598a93360d0d7",
+          "player_regions.py": "8171230b11bb14eae61f4b6bba1a3e8a0190bddc382bf4f91189d5b03460b6bd",
+          "player_tracking.py": "a45abd32c9a295ffa443846a538c412db7bc0dbf171ae511d411aefc7ce4fd38",
+          "session_results.py": "c9387469fedd72d2dfd3a33e410a71172edd28a9c3383ee3ce0daebd41850fc8",
+          "session_runner.py": "2d8539b615cb57663cdbbb26f99ec5c301fdac77ff6747030b9e29a0ebeb4166",
+          "shuttle_annotation.py": "2ec56f8af30d3c103946375075f6c9e97bf6ef77367dc23d7c22cc83311a7001",
+          "shuttle_benchmark.py": "23bbc869282fdce7a5fc1683fa2f23aed9f9a089bbf86226142e429dbba45ce7",
+          "shuttle_candidates.py": "4637d41d2c81e48d63eadb38f0dfac2aa66ec0d8214770c04f34374a5de7b991",
+          "shuttle_linking.py": "e4150ef1a7ac88ef27f17d30416cd34c1ffa8424eb060ff0890b6b38f5b39f58",
+          "shuttle_tracknet.py": "856c84862d010dce7100a2f29ba6e52d4ea6c910635572f8cadab992973fc282",
+          "tracking_export.py": "c144cb86eb16ba04d38d05941052141e66d8dc0403b6784a945804f7596146f4",
+          "tracking_review.py": "c1e603f29b66379268b93cbdaa9e53efdada33b6e2e2d291d114ab2005353b6a",
+          "session_results.html": "bddaf88782c0b3df0166b3ba0f041f8992b3c566476f307a7e5499a9b2860e48",
+          "third_party\\tracknetv3\\tracknet.py": "28f70942b31c8544fa1c91dbc9809d4e5488cb277f74f11dc6f5e343155dad25"
+        },
+        "packages": {
+          "rfdetr": "1.11.2",
+          "trackers": "2.6.1",
+          "torch": "2.15.0",
+          "numpy": "2.4.6",
+          "Pillow": "13.0.0",
+          "opencv-python": "5.0.0.93"
+        }
+      },
+      "review": {
+        "source_binding": {
+          "summary_sha256": "feb4fd419f58d30434cac6187a540d1030cde1fb4103b96843e2cde3fe729059",
+          "tracks_sha256": "f627010dcc37ba5eac7b75793d6080680afd62f809a51e0040b1affeeb19d6c7"
+        },
+        "approval_scope": "tracking_in_image_pixels",
+        "decisions": {
+          "pending": 1
+        },
+        "all_scenes_decided": false,
+        "review_provenance": {
+          "accepted_by_reviewer_kind": {}
+        },
+        "approved_intervals": [],
+        "coaching_metrics": {
+          "status": "not_available"
+        }
+      }
+    },
+    {
+      "run": "academy-session-004",
+      "configuration": {
+        "camera": "academy-court-01",
+        "sample_fps": 15.0,
+        "expected_players": 4,
+        "threads": 4,
+        "max_seconds": null,
+        "roi": null,
+        "detect_roi": "0.00,0.38,1.00,1.00",
+        "processed_overlay": true,
+        "court_polygon": "0,0.64;0.55,0.535;1,0.535;1,1;0,1",
+        "secondary_detect_roi": "0.38,0.45,1.00,0.64"
+      },
+      "source_sha256": "2c08a15287f336a5a9711f7199b15bb03c8347a0bb5e1dfa3c1d79b61b793232",
+      "job_sha256": "ce954fc5b62e941dabd26501568c00ac05e10b932597d6dfe2f79e926c8d8204",
+      "result_sha256": "d95eccf13c40d125c6b000b940d4f039583deb12598d2fda47abfa8907f1c4d7",
+      "player_rows_sha256": "f627010dcc37ba5eac7b75793d6080680afd62f809a51e0040b1affeeb19d6c7",
+      "person_count_histogram": {
+        "4": 266,
+        "5": 14,
+        "3": 51,
+        "2": 2
+      },
+      "unique_temporary_track_ids": 12,
+      "stage_counts": {
+        "all_class_detections": 6621,
+        "secondary_all_class_detections": 2171,
+        "raw_person_detections": 3205,
+        "court_filtered_person_detections": 2308,
+        "deduplicated_person_detections": 1291,
+        "view_accepted_person_detections": 1291,
+        "tracker_output_boxes": 1291,
+        "boxes_with_track_id": 1259
+      },
+      "sampling_frames": 333,
+      "preview": {
+        "schema_version": "1.0.0",
+        "frames": 665,
+        "decoded_preview_frames": 665,
+        "fps": 30.0,
+        "source_size_px": [
+          720,
+          1280
+        ],
+        "preview_size_px": [
+          720,
+          1344
+        ],
+        "source_rectangle_xywh_px": [
+          0,
+          64,
+          720,
+          1280
+        ],
+        "source_frame_index_offset": 0,
+        "frames_with_sampled_player_observation": 665,
+        "player_observation_display": "preceding sample held for less than one sampling interval; no interpolation",
+        "timebase": "frame_index / probed average FPS; constant-frame-rate input required for exact alignment",
+        "audio": "omitted_from_preview; source unchanged",
+        "review_samples": [
+          {
+            "frame_index": 0,
+            "source_seconds": 0.0,
+            "image": "review-000000.jpg"
+          },
+          {
+            "frame_index": 83,
+            "source_seconds": 2.7666666666666666,
+            "image": "review-000083.jpg"
+          },
+          {
+            "frame_index": 166,
+            "source_seconds": 5.533333333333333,
+            "image": "review-000166.jpg"
+          },
+          {
+            "frame_index": 249,
+            "source_seconds": 8.3,
+            "image": "review-000249.jpg"
+          },
+          {
+            "frame_index": 332,
+            "source_seconds": 11.066666666666666,
+            "image": "review-000332.jpg"
+          },
+          {
+            "frame_index": 415,
+            "source_seconds": 13.833333333333334,
+            "image": "review-000415.jpg"
+          },
+          {
+            "frame_index": 498,
+            "source_seconds": 16.6,
+            "image": "review-000498.jpg"
+          },
+          {
+            "frame_index": 581,
+            "source_seconds": 19.366666666666667,
+            "image": "review-000581.jpg"
+          },
+          {
+            "frame_index": 664,
+            "source_seconds": 22.133333333333333,
+            "image": "review-000664.jpg"
+          }
+        ]
+      },
+      "stage_seconds": {
+        "inspect": 2.119,
+        "players": 148.851,
+        "review": null,
+        "shuttle": null,
+        "render": 6.584,
+        "export": null
+      },
+      "source_bindings": {
+        "source": {
+          "path": "C:\\Users\\kamal\\Downloads\\SaveInta.com_AQPC6Ly6eh-lIW26J_bgtQCIIk14zYO416N9kXOrQXG7gIH0znTKp0e0PaOJ9apJE_rpv9lps3YrGZTbdnxa4UuaflWamSIlZG1aW5o.mp4",
+          "sha256": "2c08a15287f336a5a9711f7199b15bb03c8347a0bb5e1dfa3c1d79b61b793232",
+          "video": {
+            "filename": "SaveInta.com_AQPC6Ly6eh-lIW26J_bgtQCIIk14zYO416N9kXOrQXG7gIH0znTKp0e0PaOJ9apJE_rpv9lps3YrGZTbdnxa4UuaflWamSIlZG1aW5o.mp4",
+            "duration_seconds": 22.195,
+            "width_px": 720,
+            "height_px": 1280,
+            "frame_rate_fps": 30.0,
+            "video_codec": "h264",
+            "audio_present": true,
+            "file_size_bytes": 3120941
+          }
+        },
+        "configuration": {
+          "camera": "academy-court-01",
+          "sample_fps": 15.0,
+          "expected_players": 4,
+          "threads": 4,
+          "max_seconds": null,
+          "roi": null,
+          "detect_roi": "0.00,0.38,1.00,1.00",
+          "processed_overlay": true,
+          "court_polygon": "0,0.64;0.55,0.535;1,0.535;1,1;0,1",
+          "secondary_detect_roi": "0.38,0.45,1.00,0.64"
+        },
+        "models": {
+          "person": {
+            "path": "C:\\Users\\kamal\\.roboflow\\models\\rf-detr-nano.pth",
+            "sha256": "d8d6b9ee57d4d0ed2b1f305163624712a0532cb7bce0c747317984fc5457440d"
+          },
+          "shuttle": {
+            "path": "C:\\Projects\\BadmintonAI\\out\\models\\TrackNetV3_TrackNet_best.pt",
+            "sha256": "df867641a02712b021f04548ff4b1208ddfdb47f629ab2094ceb978667e83b1a"
+          }
+        },
+        "code": {
+          "badminton_proto.py": "eade8ce08d8cd16a2db57a6c75ff69591a32c672a5b68857311d4168244edf30",
+          "download_tracknet.py": "69fc12fb91d9e8f3afbc16a08567602ed4c50fcc3e71dccdc4c598a93360d0d7",
+          "player_regions.py": "8171230b11bb14eae61f4b6bba1a3e8a0190bddc382bf4f91189d5b03460b6bd",
+          "player_tracking.py": "49bdd62e3f8e0341891a79a4cb9c813693123fca8eb895765d74ab033604ba86",
+          "session_results.py": "c9387469fedd72d2dfd3a33e410a71172edd28a9c3383ee3ce0daebd41850fc8",
+          "session_runner.py": "d98f98bd91817eaa2994e66af51682e47fb0bb40e6182ef77e9048ddff7eb375",
+          "shuttle_annotation.py": "2ec56f8af30d3c103946375075f6c9e97bf6ef77367dc23d7c22cc83311a7001",
+          "shuttle_benchmark.py": "23bbc869282fdce7a5fc1683fa2f23aed9f9a089bbf86226142e429dbba45ce7",
+          "shuttle_candidates.py": "4637d41d2c81e48d63eadb38f0dfac2aa66ec0d8214770c04f34374a5de7b991",
+          "shuttle_linking.py": "e4150ef1a7ac88ef27f17d30416cd34c1ffa8424eb060ff0890b6b38f5b39f58",
+          "shuttle_tracknet.py": "856c84862d010dce7100a2f29ba6e52d4ea6c910635572f8cadab992973fc282",
+          "tracking_export.py": "c144cb86eb16ba04d38d05941052141e66d8dc0403b6784a945804f7596146f4",
+          "tracking_review.py": "c1e603f29b66379268b93cbdaa9e53efdada33b6e2e2d291d114ab2005353b6a",
+          "session_results.html": "bddaf88782c0b3df0166b3ba0f041f8992b3c566476f307a7e5499a9b2860e48",
+          "third_party\\tracknetv3\\tracknet.py": "28f70942b31c8544fa1c91dbc9809d4e5488cb277f74f11dc6f5e343155dad25"
+        },
+        "packages": {
+          "rfdetr": "1.11.2",
+          "trackers": "2.6.1",
+          "torch": "2.15.0",
+          "numpy": "2.4.6",
+          "Pillow": "13.0.0",
+          "opencv-python": "5.0.0.93"
+        }
+      },
+      "review": {
+        "source_binding": {
+          "summary_sha256": "a9ef99cf61620688a090b66207237a3fb592ea90ed8bbef13861840c4d24d351",
+          "tracks_sha256": "f627010dcc37ba5eac7b75793d6080680afd62f809a51e0040b1affeeb19d6c7"
+        },
+        "approval_scope": "tracking_in_image_pixels",
+        "decisions": {
+          "pending": 1
+        },
+        "all_scenes_decided": false,
+        "review_provenance": {
+          "accepted_by_reviewer_kind": {}
+        },
+        "approved_intervals": [],
+        "coaching_metrics": {
+          "status": "not_available"
+        }
+      }
+    }
+  ],
+  "comparison": {
+    "initial_rectangle_four_detection_frames": 63,
+    "tighter_polygon_four_detection_frames": 266,
+    "denominator_sampled_frames": 333,
+    "accuracy_claim": false,
+    "remaining_failures": [
+      "Missed/overlapping people",
+      "Spurious or duplicate observations",
+      "Temporary track fragmentation, 12 observed IDs for 4 real players; no athlete assignment"
+    ],
+    "same_configuration_repeat_rows_byte_identical": true
+  },
+  "verification": {
+    "python_tests_passed": 112,
+    "javascript_behavior_tests_passed": 7,
+    "dotnet_contract_self_checks": "passed on .NET SDK 8.0.417",
+    "dotnet_actual_result_import": "academy-session-004 needs_review, 665 frames, all physical/coaching metrics unavailable",
+    "all_finished_stage_artifact_hashes_checked": true,
+    "all_result_artifact_paths_exist": true,
+    "all_result_export_hashes_match": true,
+    "source_hash_rechecked": true,
+    "final_resume": "inspect, players and render all reused without new inference; 1.57 seconds shell time",
+    "native_preview_alignment_regression_test": "30 FPS source / 15 FPS tracker with millisecond-rounded observation timestamps; all 6 synthetic source frames retain corresponding sample display",
+    "actual_browser_layout_interaction_tested": false,
+    "ui_tests_use_DOM_doubles": true,
+    "automated_visual_inspection": [
+      "Nine-frame tracked sheets for runs 001, 002 and 003",
+      "Detector-only sheets for 001 and 004; polygon overlay visible in 004",
+      "Full-resolution native preview frame 332 from 003"
+    ],
+    "full_motion_visual_acceptance": false
+  },
+  "limitations": [
+    "All runs repeat the same processed clip; pre-existing graphics are not ground truth",
+    "Diagnostic counts are not measured precision/recall or identity accuracy",
+    "No player intervals accepted on this clip, hence no new shuttle inference on it",
+    "No camera calibration, physical movement, contacts, shot types, speed or coaching approved",
+    "RACKETEK host not modified; adapter is a read-only integration fixture",
+    "Full plan remains unfinished; see completion plan checkpoint"
+  ]
+}

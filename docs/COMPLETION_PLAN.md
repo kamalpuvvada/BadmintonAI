@@ -129,3 +129,24 @@ The sample labels speed as an approximate horizontal estimate. A single uncalibr
 Planning allowances, not delivery promises: milestone 1 about 1-2 engineering days; milestone 2 about 2-4; milestone 3 about 2-4; milestone 4 about 3-6; milestone 5 about 1-3. Roughly 9-19 engineering days for the functional workflow, excluding data collection, human adjudication, model training, physical-speed research and changes in the unavailable RACKETEK backend. Re-estimate after the first full-clip runtime and failure report. Pilot validation is evidence-limited and has no defensible fixed date yet.
 
 Functional completion means the user can run a whole video locally, inspect and correct four-player/shuttle results, see capability-appropriate reports, and hand structured output to a .NET consumer. Validated release means the frozen academy-session gates also pass. The immediate next implementation is milestone 1, followed by doubles/portrait accuracy fixes on the supplied video; no further expansion of old broadcast annotations is on the critical path.
+
+## Implementation checkpoint: 2 November 2026
+
+Milestone 1 now has a working session runner, resumable stage artifacts, cancellation,
+native-frame experimental preview, frame-stepping results page and versioned JSON.
+The actual 665-frame clip has been processed end to end. Player review remains
+pending, so shuttle inference is correctly withheld on this recording. UI behavior
+is covered by DOM tests; actual browser layout/interaction acceptance remains open.
+
+Initial milestone 2 work adds convex image-region filtering and exposes the existing
+second detector crop in the runner. The tighter experimental region retains four
+person detections in 266/333 sampled frames versus 63/333 in the initial rectangle
+run. These are diagnostics, not precision/recall or proof of identity continuity.
+Overlaps, missed detections and fragmented IDs still require work. No tracker IDs
+have been assigned to real athletes.
+
+The .NET file consumer and contract checks are implemented as a small integration
+fixture ahead of milestone 5; the actual RACKETEK backend remains untouched. Court
+setup UI, identity corrections, calibrated movement, event/shot analysis and the
+pilot gates remain unfinished. Speed and coaching measurements remain unavailable.
+See `validation/session_workflow_2026-11-02.json` for the completed-run evidence.

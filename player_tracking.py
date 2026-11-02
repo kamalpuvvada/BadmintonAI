@@ -20,6 +20,7 @@ from typing import Any
 
 import numpy as np
 from PIL import Image, ImageDraw
+from player_regions import parse_polygon, polygon_mask, validate_polygon
 
 from badminton_proto import (
     VERSION, _font, _run, build_contact_sheet,
@@ -140,6 +141,7 @@ def select_person_detections(
     roi: tuple[float, float, float, float] | None,
     homography: np.ndarray | None,
     person_class_id: int = 1,
+    court_polygon: tuple | None = None,
 ) -> Any:
     """Keep model-labeled people, optionally restricted to the court footprint."""
     persons = detections[person_detection_mask(detections, person_class_id)]
@@ -147,6 +149,8 @@ def select_person_detections(
         return persons
     feet = foot_points(persons.xyxy)
     keep = np.ones(len(persons), dtype=bool)
+    if court_polygon is not None:
+        keep &= polygon_mask(feet / np.asarray(image_size), court_polygon)
     if roi is not None:
         width, height = image_size
         x1, y1, x2, y2 = roi
@@ -298,6 +302,7 @@ def annotate_detector_frame(
     filtered_persons: Any,
     roi: tuple[float, float, float, float] | None,
     detect_roi: tuple[float, float, float, float] | None,
+    court_polygon: tuple | None = None,
 ) -> Image.Image:
     """Before ByteTrack: grey = raw people, orange = final tracker input."""
     output = image.copy()
@@ -313,6 +318,8 @@ def annotate_detector_frame(
             (left * image.width, top * image.height, right * image.width, bottom * image.height),
             outline=color, width=2,
         )
+    if court_polygon is not None:
+        draw.polygon([(x * image.width, y * image.height) for x, y in court_polygon], outline="#ffe062", width=3)
     caption = f"DETECTOR: {len(raw_persons)} PERSON / {len(filtered_persons)} TRACK INPUT"
     draw.rectangle((0, image.height - 26, image.width, image.height), fill="#15232a")
     draw.text((5, image.height - 22), caption, fill="#ffa33a", font=_font(12))
@@ -371,7 +378,10 @@ def track_players(
     secondary_detect_roi: tuple[float, float, float, float] | None = None,
     secondary_confidence: float = 0.35,
     court_cut_threshold: float = 0.0,
+    court_polygon: tuple | None = None,
 ) -> Path:
+    if court_polygon is not None:
+        court_polygon = validate_polygon(court_polygon)
     if model_name not in ("nano", "small"):
         raise ValueError("Model must be nano or small")
     if not 0 < confidence < 1:
@@ -507,7 +517,7 @@ def track_players(
                     raise ValueError("Detector returned no class IDs; person labels are required")
                 class_id_histogram.update(int(class_id) for class_id in detections.class_id)
                 raw_persons = detections[person_detection_mask(detections, person_class_id)]
-                filtered = select_person_detections(detections, image.size, roi, active_calibration, person_class_id)
+                filtered = select_person_detections(detections, image.size, roi, active_calibration, person_class_id, court_polygon)
                 deduplicated = suppress_duplicate_people(filtered, person_nms_iou)
                 accepted = deduplicated if view_match else deduplicated[np.zeros(len(deduplicated), dtype=bool)]
                 tracked = tracker.update(accepted, timestamp=clip_timestamp)
@@ -557,7 +567,7 @@ def track_players(
                     target = review_dir / f"frame_{len(review_frames)+1:02d}.jpg"
                     shutil.copyfile(annotated / f"frame_{i+1:06d}.jpg", target)
                     review_frames.append({"timestamp_seconds": timestamp, "image": str(target.relative_to(output))})
-                    detector_frame = annotate_detector_frame(image, raw_persons, accepted, roi, detect_roi)
+                    detector_frame = annotate_detector_frame(image, raw_persons, accepted, roi, detect_roi, court_polygon)
                     detector_file = detector_review_dir / f"frame_{len(detector_review_frames)+1:02d}.jpg"
                     detector_frame.save(detector_file, quality=92)
                     detector_review_frames.append({
@@ -622,6 +632,8 @@ def track_players(
             "timestamps": "source video seconds: start_seconds + frame_index / fps; approximate original video time",
         },
         "region": {
+            "normalized_inclusion_polygon": court_polygon,
+            "polygon_scope": "image-space box-bottom inclusion only; not calibrated court geometry",
             "normalized_roi": list(roi) if roi else None,
             "normalized_detector_crop": list(detect_roi) if detect_roi else None,
             "normalized_secondary_detector_crop": list(secondary_detect_roi) if secondary_detect_roi else None,
@@ -694,6 +706,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--track-activation", type=float, default=0.7)
     parser.add_argument("--person-class-id", type=int, default=1, help="Fallback if model omits class_name; pretrained COCO person ID is 1")
     parser.add_argument("--calibration", type=Path, default=None)
+    parser.add_argument("--court-polygon", help="Convex normalized x,y vertices separated by semicolons; image-space filter, not calibration")
     args = parser.parse_args(argv)
     try:
         summary = track_players(
@@ -711,6 +724,7 @@ def main(argv: list[str] | None = None) -> int:
             track_activation=args.track_activation,
             person_class_id=args.person_class_id,
             calibration_path=args.calibration,
+            court_polygon=parse_polygon(args.court_polygon),
         )
     except (ValueError, OSError, RuntimeError, KeyError, TypeError, json.JSONDecodeError) as exc:
         print(f"Error: {exc}", file=sys.stderr)

@@ -2,6 +2,66 @@
 
 Current delivery priorities: [completion plan based on the supplied doubles video](docs/COMPLETION_PLAN.md) (2 November 2026).
 
+## Run a complete offline review job
+
+The first integrated workflow now inspects a recording, tracks players, prepares
+scene review, renders a native-frame preview and writes one results page and
+`result.json`. Shuttle inference runs only on currently accepted player intervals.
+Pending review does not prevent creating the player preview. This is a development
+workflow; calibration, contact/shot detection and coaching remain separate pending
+milestones in the completion plan.
+
+```powershell
+.\.venv\Scripts\python.exe session_runner.py run --video "path\to\session.mp4" --out "out\academy-session-new" --expected-players 4 --sample-fps 15
+```
+
+RF-DETR Nano must already be installed with a local `rf-detr-nano.pth` checkpoint
+in its normal cache (`~/.roboflow/models`), or pass `--person-weights` with that
+file. The runner binds its SHA-256 and disables Hugging Face online downloads.
+The optional reviewed shuttle stage uses the existing local TrackNet checkpoint;
+pass `--shuttle-weights` if stored elsewhere. Initial setup/download is separate.
+Use `--processed-overlay` for recordings containing pre-existing analysis graphics.
+Use `--roi`, `--detect-roi`, and `--max-seconds` for explicit diagnostic experiments;
+no court region is silently selected for a new recording.
+`--court-polygon "x,y;x,y;x,y;..."` optionally filters person box bottoms against
+an explicit convex normalized image region, supporting the tapered court in an
+oblique view. It is not a calibration or a guarantee of ground contact. An
+optional `--secondary-detect-roi` uses the existing second crop with person NMS,
+useful for inspecting small far-side players. These parameters are video-specific
+and require review; the four-player expectation never manufactures missing boxes.
+
+Open `out/academy-session-new/index.html` for the preview, frame stepping, scene
+review link, availability of measurements and exports. Keep the complete folder
+together. If the browser cannot load local video, serve that folder with
+`python -m http.server 8879 --bind 127.0.0.1 --directory out/academy-session-new`
+and open `http://127.0.0.1:8879`. The results page uses local assets only.
+
+```powershell
+.\.venv\Scripts\python.exe session_runner.py status --out "out\academy-session-new"
+.\.venv\Scripts\python.exe session_runner.py cancel --out "out\academy-session-new"
+# Repeat the original run options and add --resume after review or interruption:
+.\.venv\Scripts\python.exe session_runner.py run --video "path\to\session.mp4" --out "out\academy-session-new" --expected-players 4 --sample-fps 15 --resume
+```
+
+`job.json` separates job status from stage status. Job states are `running`,
+`needs_review`, `completed`, `failed`, and `cancelled`; stages can also be `pending`
+or `not_available`. A completed job can contain excluded scenes and unavailable
+measurements. No decision is attributed to a human automatically. Exact source,
+configuration, model, package, code and artifact bindings control cache reuse.
+Changed inputs or damaged artifacts create a new stage attempt and preserve the
+old attempt. A changed review invalidates downstream shuttle/preview eligibility.
+Reports are snapshots: resume after changing review; a saved HTML page does not
+monitor later decisions. During a refresh or after a failed refresh the previous
+public report is marked stale. Native source frames are preserved inside the
+preview with a separate 64-pixel header; audio is omitted. Sampled player boxes
+are held for less than one sampling interval and explicitly labelled with sample
+age. This is not interpolation or a claim of native-frame detection. Exact preview
+alignment currently assumes a constant-frame-rate source.
+
+The [minimal .NET file adapter](integration/dotnet/README.md) reads versioned
+session results, checks the completed manifest/result binding and preserves
+review status. It is not a deployed RACKETEK integration.
+
 This is a growing **offline-first, fixed-camera badminton coaching platform**. Step 1 establishes repeatable video ingestion and court calibration. Step 2 adds a separately installed person detection and ID-tracking preview. We deliberately do **not** invent shuttle speeds, shot types, or coaching metrics before validation.
 
 ## Why start here?
