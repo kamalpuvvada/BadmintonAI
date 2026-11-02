@@ -1,0 +1,41 @@
+{
+  "date": "2026-11-02",
+  "baseline_commit": "2dede22",
+  "scope": "Windows launcher and read-only loopback preview access; desktop/browser visual acceptance remains pending",
+  "launcher": "Start-BadmintonAI.cmd",
+  "entrypoint": "academy_app.py",
+  "features": [
+    "Choose recording and singles/doubles",
+    "Asynchronous preflight and worker stage progress",
+    "Safe cancellation and saved-job resume",
+    "Open local session results",
+    "Prepare player identity editor",
+    "Apply and verify downloaded identity corrections"
+  ],
+  "source_preset": {
+    "exact_video_sha256": "2c08a15287f336a5a9711f7199b15bb03c8347a0bb5e1dfa3c1d79b61b793232",
+    "profile": "Supplied portrait demo; rejected for any other source hash"
+  },
+  "verification": {
+    "python_tests_passed": 123,
+    "javascript_behavior_tests_passed": 10,
+    "tkinter_import_version": "8.6",
+    "actual_reference_video_command_preflight": "passed; command constructed, no new inference initiated",
+    "real_worker_resume_after_launcher_addition": "inspect, players and render cached artifacts reused; needs_review preserved",
+    "range_tests": "single, open-ended and suffix ranges; bounds; rejected malformed/multipart/unsatisfiable ranges; exact partial payload and response headers",
+    "file_server_tests": "loopback binding, path containment, hidden-file denial, no directory listing; handler doubles, no actual HTTP browser test",
+    "visible_desktop_opened_or_tested": false,
+    "browser_opened_or_playback_tested": false
+  },
+  "implementation_sha256": {
+    "academy_app.py": "1277ae7f1a093694171ab425b9552fdfe1f8bb311ecc0f1f001a4c0030fb86ae",
+    "Start-BadmintonAI.cmd": "a3111914078e364370bdbbc181343b7c0d511b948861feee741bd06fb8bbfa0f",
+    "test_academy_app.py": "e2fa21d90920b2a378c098136a9e7514879a108795d037c4eae3491fcb27d9bb"
+  },
+  "limitations": [
+    "Launcher is not a validated replacement for coach/player scene review",
+    "Models and FFmpeg must be installed beforehand",
+    "Native layout, live browser seeking and complete user journey remain unverified",
+    "Court setup, physical movement, contact/shot analysis, automatic identity recovery and pilot validation are unfinished"
+  ]
+}

@@ -4,6 +4,16 @@ Current delivery priorities: [completion plan based on the supplied doubles vide
 
 ## Run a complete offline review job
 
+On Windows, double-click [Start-BadmintonAI.cmd](Start-BadmintonAI.cmd) to open the
+desktop launcher. Choose a recording, select singles/doubles, and start analysis.
+The launcher shows stage progress, requests safe cancellation, resumes saved
+jobs, opens results through a read-only loopback server, and prepares/applies
+identity corrections. Use the portrait-demo profile only for the supplied clip;
+its exact source hash is checked. Standard mode applies no hidden court filter.
+Models and the local Python environment must already be installed. The launcher's
+core commands and local file-serving behavior are tested; visible desktop layout
+and actual browser interaction still need acceptance on the laptop.
+
 The first integrated workflow now inspects a recording, tracks players, prepares
 scene review, renders a native-frame preview and writes one results page and
 `result.json`. Shuttle inference runs only on currently accepted player intervals.

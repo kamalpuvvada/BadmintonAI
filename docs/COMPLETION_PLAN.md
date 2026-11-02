@@ -160,3 +160,13 @@ identity recovery and actual accepted identity labels remain unresolved. The
 identity editor uses the copied native preview and has DOM behavior tests; real
 browser visual acceptance is still pending. See
 `validation/player_identity_workflow_2026-11-02.json` for this follow-up evidence.
+
+The initial Windows desktop launcher now covers video choice, singles/doubles
+selection, exact-source demo profile, asynchronous job progress, safe cancellation,
+saved-job resume, local result viewing and identity correction prepare/apply.
+Its read-only loopback server supports single byte ranges for MP4 seeking and
+rejects paths outside the selected output folder and hidden files. Core command,
+resume and media-serving behaviors are unit-tested. Tk is installed, but the
+visible desktop and browser playback have not been exercised in this session.
+This addresses initial product access; court setup, automatic identity recovery,
+calibrated movement, shot analysis and pilot validation remain open.
