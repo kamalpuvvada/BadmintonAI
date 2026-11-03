@@ -203,6 +203,7 @@ def shuttle_stage(video, config, output, weights):
         for start in range(0,len(paths),256):
             block_peaks={}
             block=infer_groups(paths[start:start+256],contexts[start:start+256],predictor,
+                               stride=config.get('shuttle_window_stride'),
                                heatmap_threshold=config['shuttle_heatmap_threshold'],frame_peaks=block_peaks)
             detections.update({start+i:v for i,v in block.items()});peaks.update({start+i:v for i,v in block_peaks.items()})
             print(f'Shuttle model {min(start+256,len(paths))}/{len(paths)} sampled frames',flush=True)
@@ -226,7 +227,9 @@ def shuttle_stage(video, config, output, weights):
     write_json(output/'shuttle_summary.json',{'schema_version':'0.1.0','status':'experimental_independent_inference_not_review_approval',
                'source_sha256':sha256_file(video),'model':predictor.metadata,'fps':fps,'native_stride':stride,
                'configuration':{'crop_xyxy_px':crop,'model_size_px':[512,288],'heatmap_threshold':config['shuttle_heatmap_threshold'],
-                                'linker':'confidence_motion_in_model_pixels','block_frames':256,'inpainting':False,'interpolation':False},
+                                'linker':'confidence_motion_in_model_pixels','block_frames':256,
+                                'window_stride':config.get('shuttle_window_stride',predictor.sequence_length),
+                                'inpainting':False,'interpolation':False},
                'status_counts':dict(Counter(r['status'] for r in records)),'elapsed_seconds':time.perf_counter()-timer,
                'player_review_modified':False,'verified_positions':0})
     print('Shuttle stage complete',flush=True)

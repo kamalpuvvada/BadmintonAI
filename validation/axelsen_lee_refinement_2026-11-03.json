@@ -1,0 +1,210 @@
+{
+  "date": "2026-11-03",
+  "status": "experimental_refinement_not_full_rally_accuracy",
+  "source_sha256": "7c9ab079c59488a8ab7f69b1015a608e00fc8ee37ff6753e76523608e51a40b2",
+  "refinement": {
+    "source_sha256": "7c9ab079c59488a8ab7f69b1015a608e00fc8ee37ff6753e76523608e51a40b2",
+    "baseline_directory": "out\\axelsen-lee-analysis-004",
+    "trial_directory": "out\\axelsen-lee-analysis-007",
+    "baseline_rows_sha256": "4c2f95a93f40e99bbfdfe1253d1c6c0675bfc1294c195d98448c8b7fff974080",
+    "trial_rows_sha256": "3fd15f8d2ebb8d7398bc48a5db3c65a8b5f3e827f2330d8efd886fc91af677ab",
+    "baseline_observations": 614,
+    "refined_observations": 606,
+    "recoveries": [
+      {
+        "start_frame": 179,
+        "end_frame": 181,
+        "samples": 3,
+        "status": "observed_candidates_only"
+      },
+      {
+        "start_frame": 183,
+        "end_frame": 183,
+        "samples": 1,
+        "status": "observed_candidates_only"
+      },
+      {
+        "start_frame": 368,
+        "end_frame": 368,
+        "samples": 1,
+        "status": "observed_candidates_only"
+      },
+      {
+        "start_frame": 707,
+        "end_frame": 707,
+        "samples": 1,
+        "status": "observed_candidates_only"
+      },
+      {
+        "start_frame": 742,
+        "end_frame": 743,
+        "samples": 2,
+        "status": "observed_candidates_only"
+      },
+      {
+        "start_frame": 848,
+        "end_frame": 851,
+        "samples": 4,
+        "status": "observed_candidates_only"
+      },
+      {
+        "start_frame": 1044,
+        "end_frame": 1047,
+        "samples": 4,
+        "status": "observed_candidates_only"
+      }
+    ],
+    "withheld_baseline_frames": [
+      273,
+      309,
+      310,
+      314,
+      315,
+      317,
+      345,
+      349,
+      465,
+      566,
+      568,
+      572,
+      574,
+      575,
+      673,
+      758,
+      761,
+      766,
+      767,
+      768,
+      769,
+      794,
+      987,
+      995
+    ],
+    "withheld_baseline_samples": 24,
+    "interpolated_positions": 0,
+    "verified_positions": 0,
+    "player_review_modified": false,
+    "method": "short two-sided candidate paths from an explicit lower-cutoff model trial; baseline observations preserved"
+  },
+  "binding": {
+    "code_sha256": "9d58f76c0b17e4bf84f24a63a221ba820885c87702c0ccda16cc484fe66e9c03",
+    "artifacts_sha256": {
+      "refinement.json": "d78192eadc17bf3905b6cd1a30c0d19ab2beeac1c7bf4f156dcd84c28017a166",
+      "court_frames.jsonl": "637c51def246427d0637859fa6bc2eede8e33bc311355490ad3db3ac5253d15c",
+      "shuttle_filtered_frames.jsonl": "b689ff00d9f37ef711afeb97308fbb2aa72035d726805bd0d553aa27481cc49d",
+      "events.json": "edf45cb835428148884b2e1dea44df1e42a1ce76417a1f80e1f26c3f6bfa6fcd",
+      "render_summary.json": "c984d85325b1e1f77385a5417eaa12f7e4370b5558128f1f23a3943098c90a0e",
+      "Axelsen-Lee-All-Overlays.mp4": "73c99a37d1b56c27c0d2ae8028fb6d4b9c7fa2f1c52f1f7bf26fa0f6424aa23e",
+      "index.html": "64041428e78b51139945dbe6e8f3d23e24b6f93a2c8dadf054ce01563d89e4d0",
+      "broadcast_viewer.js": "b0486c83025ed5b7d31f83603f6e9c10bb87566ee8a484e17623171953967fee"
+    }
+  },
+  "render": {
+    "frames": 2256,
+    "fps": 60.0,
+    "source_sha256": "7c9ab079c59488a8ab7f69b1015a608e00fc8ee37ff6753e76523608e51a40b2",
+    "output_sha256": "73c99a37d1b56c27c0d2ae8028fb6d4b9c7fa2f1c52f1f7bf26fa0f6424aa23e",
+    "source_size_px": [
+      1080,
+      1920
+    ],
+    "overlays": "experimental_court_movement_shuttle_ambiguous_shot_hints",
+    "audio": "original audio re-encoded AAC",
+    "native_view_boundaries": [
+      1216,
+      1269,
+      2131
+    ],
+    "verified_coaching": false,
+    "player_review_modified": false
+  },
+  "media_probe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 1080,
+        "height": 1920,
+        "avg_frame_rate": "60/1",
+        "duration": "37.600000",
+        "nb_frames": "2256"
+      },
+      {
+        "codec_name": "aac",
+        "codec_type": "audio",
+        "avg_frame_rate": "0/0",
+        "duration": "37.600000",
+        "nb_frames": "1621"
+      }
+    ]
+  },
+  "tests": {
+    "python_passed": 176,
+    "new_js_tests_passed": 5
+  },
+  "shot_hypotheses": {
+    "Lift?": 5,
+    "Unknown shot": 8
+  },
+  "candidate_audit": {
+    "reviewer_kind": "automated",
+    "held_out": false,
+    "initial_41_recovery_trial": "rejected after source inspection identified scoreboard and ad marks",
+    "selected_16": "source patches inspected; shuttle-like streaks visible; not independent precision/recall",
+    "source_native_indices": [
+      358,
+      360,
+      362,
+      366,
+      736,
+      1414,
+      1484,
+      1486,
+      1696,
+      1698,
+      1700,
+      1702,
+      2088,
+      2090,
+      2092,
+      2094
+    ]
+  },
+  "browser_checks": {
+    "real_iab": true,
+    "large_movement_modal": true,
+    "large_heatmap_modal": true,
+    "player_filter": true,
+    "shot_list_seeks_video_and_maps": true,
+    "seek_time_checked_seconds": 2.9,
+    "screenshots": [
+      "large-movement-browser.jpg",
+      "large-heatmap-browser.jpg"
+    ]
+  },
+  "player_review_unchanged": true,
+  "interpolated_positions": 0,
+  "remaining": [
+    "Long and ambiguous shuttle gaps remain; aggregate accuracy is not established.",
+    "5 Lift? hypotheses and 8 unknown contacts; no validated classifier or per-class accuracy.",
+    "Point winner, errors, distance/speed and coaching remain unverified."
+  ],
+  "trial_comparison": [
+    {
+      "directory": "out/axelsen-lee-analysis-005",
+      "cutoff": 0.35,
+      "window_stride": 8,
+      "recovered_samples_after_strict_gates": 6
+    },
+    {
+      "directory": "out/axelsen-lee-analysis-007",
+      "cutoff": 0.35,
+      "window_stride": 4,
+      "recovered_samples_after_strict_gates": 16,
+      "selected": true,
+      "selection_scope": "development source-patch inspection; not a held-out accuracy claim"
+    }
+  ]
+}

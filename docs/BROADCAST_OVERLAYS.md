@@ -98,3 +98,49 @@ body-core exclusion and modified cache rejection. The real-video record in
 `validation/axelsen_lee_overlay_2026-11-03.json` separately records decoded frames,
 stage hashes, observed coverage, sparse source checks and remaining gaps. Passing
 software tests does not establish sporting accuracy.
+
+## Shuttle refinement and enlarged maps (3 November)
+
+The updated result is `out/axelsen-lee-analysis-008/index.html`. Open it directly,
+or double-click `Start-BroadcastReview.cmd` for a seekable read-only local video
+server. **Enlarge movement** and **Enlarge heatmap** open large synchronized maps.
+The player selector filters both maps. Clicking a contact time seeks the video;
+seeking backwards recomputes occupancy rather than keeping future positions.
+
+`broadcast_refinement.py` adds a bounded development comparison. The model trials
+use cutoff 0.35 with the original eight-frame stride or overlapping four-frame
+stride. Existing observations are reused; an endpoint guide only selects actual
+candidate positions on short gaps (at most six sampled frames). No synthetic
+coordinate is emitted. Ambiguous paths, missing candidates, edits and unbracketed
+gaps stay missing. Camera-stabilized motion rejects static ads. The initial loose
+41-sample recovery trial was rejected after a source-patch audit found false
+scoreboard/ad recoveries; that result is not the delivered video.
+
+The selected run recovers 16 source-observed samples, and withholds 24 prior
+detections inside the visible scoreboard. Net proposal count therefore falls from
+614 to 606; more detections is not the acceptance goal. Source patches for all 16
+recoveries were inspected automatically; they are not held-out precision/recall
+labels. Long gaps, including the longest flight fragment, remain unresolved.
+Possible slow apexes are retained unless background texture is also visible at
+the corresponding camera-compensated location before and after the whole run.
+
+Shot hypotheses now require a hitter-proximity margin and at least five outgoing
+observations. Low rising cues can be labelled `Lift?`; overhead, descent and lateral
+rules otherwise require their own evidence. The generic `Drive / other?` fallback
+has been removed. The delivered clip contains five `Lift?` hypotheses and eight
+unknown contacts. There is no measured classification-accuracy improvement or
+trained shot model claim.
+
+Reproduce the selected model trial and refinement, using fresh output directories:
+
+```powershell
+.\.venv\Scripts\python.exe broadcast_analysis.py court --job out\axelsen-lee-session-001 --config configs\axelsen_lee_broadcast_overlap_trial.json --out out\axelsen-lee-analysis-007
+.\.venv\Scripts\python.exe broadcast_analysis.py shuttle --job out\axelsen-lee-session-001 --config configs\axelsen_lee_broadcast_overlap_trial.json --out out\axelsen-lee-analysis-007
+.\.venv\Scripts\python.exe broadcast_refinement.py --baseline out\axelsen-lee-analysis-004 --trial out\axelsen-lee-analysis-007 --job out\axelsen-lee-session-001 --out out\axelsen-lee-analysis-008
+```
+
+Tests: 176 Python tests and five new JavaScript tests pass. Real browser checks
+verified the enlarged movement/heatmap dialogs, player filtering and video/map
+seeking at 2.90 seconds. The final video decodes 2,256 frames and retains audio.
+See `validation/axelsen_lee_refinement_2026-11-03.json` for exact hashes, counts,
+the rejected experiment and the unresolved validation work.

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BadmintonAI · Video and movement review</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui;background:#10151c;color:#eef4fa}body{margin:0;padding:24px}h1{font-size:28px;margin:0 0 8px}p{color:#b9c9d9;line-height:1.5}button,select{font:inherit;padding:12px 18px;border:1px solid #52677b;border-radius:9px;background:#233344;color:white;cursor:pointer}button:focus-visible,select:focus-visible{outline:3px solid #62e8e8;outline-offset:3px}.toolbar{display:flex;gap:12px;flex-wrap:wrap;margin:22px 0}.layout{display:grid;grid-template-columns:minmax(260px,360px) 1fr;gap:24px}video{width:100%;max-height:80vh;background:black}.maps{display:grid;grid-template-columns:1fr 1fr;gap:16px}.card{background:#19242f;border:1px solid #34495b;border-radius:14px;padding:18px}h2{font-size:20px;margin:0 0 10px}canvas{width:100%;max-height:76vh;object-fit:contain;display:block}.legend{font-size:14px;color:#b9c9d9}.cyan{color:#66e4ef}.orange{color:#ffae73}#status{min-height:30px}dialog{width:min(90vw,920px);max-height:94vh;background:#14202b;color:white;border:1px solid #687e92;border-radius:14px;padding:20px}dialog::backdrop{background:#000b}.dialogbar{display:flex;justify-content:space-between;align-items:center;gap:16px}dialog canvas{height:76vh;max-height:76vh}a{color:#78e4f3}details{margin-top:22px}table{border-collapse:collapse;width:100%}td,th{text-align:left;padding:12px;border-bottom:1px solid #34495b}@media(max-width:850px){body{padding:14px}.layout{grid-template-columns:1fr}video{max-height:65vh}.maps{grid-template-columns:1fr 1fr}button{padding:10px}}
+</style>
+<h1>Video, movement and shuttle review</h1>
+<p>Experimental tracking and shot hypotheses. Enlarging a map does not change the measurements. Missing shuttle observations remain gaps.</p>
+<div class="toolbar">
+<button id="large-movement" type="button">Enlarge movement</button>
+<button id="large-heatmap" type="button">Enlarge heatmap</button>
+<label>Show player <select id="player"><option value="both">Both players</option><option value="0">Near · T0</option><option value="1">Far · T1</option></select></label>
+<a href="Axelsen-Lee-All-Overlays.mp4" download>Save annotated MP4</a>
+</div>
+<p id="status" role="status" aria-live="polite"></p>
+<div class="layout">
+<div><video id="video" controls preload="metadata" src="Axelsen-Lee-All-Overlays.mp4"></video><p id="shot"></p></div>
+<section class="maps" aria-label="Synchronized movement maps">
+<div class="card"><h2>Movement trails</h2><canvas id="movement" width="600" height="1100" aria-label="Court positions and recent movement trails"></canvas><p class="legend"><span class="cyan">Near T0</span> · <span class="orange">Far T1</span><br>Recent observed box-bottom positions, not ground-contact measurements.</p></div>
+<div class="card"><h2>Occupancy heatmap</h2><canvas id="heatmap" width="600" height="1100" aria-label="Time-weighted court occupancy"></canvas><p class="legend">Brighter areas contain more observed time in this uninterrupted court-view segment. Resets at view changes.</p></div>
+</section></div>
+<details><summary>Contact and shot hypotheses</summary><p>Click a time to inspect the footage. Question marks indicate uncertainty; the list is not a complete shot inventory.</p><table><thead><tr><th>Time</th><th>Shot hypothesis</th><th>Evidence</th></tr></thead><tbody id="events"></tbody></table></details>
+<dialog id="map-dialog" aria-labelledby="dialog-title"><div class="dialogbar"><h2 id="dialog-title">Movement</h2><button id="close-map" type="button">Close large map</button></div><canvas id="large-map" width="960" height="1440" aria-label="Enlarged synchronized court map"></canvas><p id="large-status"></p></dialog>
+<script id="broadcast-data" type="application/json">/*BROADCAST_DATA*/</script>
+<script src="broadcast_viewer.js"></script></html>
