@@ -1,0 +1,366 @@
+{
+  "schema_version": "0.1.0",
+  "source": {
+    "path": "C:\\Users\\kamal\\Downloads\\Incredible Rally Between Axelsen and Lee Zii Jia #badminton_1080p60.mp4",
+    "sha256": "7c9ab079c59488a8ab7f69b1015a608e00fc8ee37ff6753e76523608e51a40b2",
+    "video": {
+      "filename": "Incredible Rally Between Axelsen and Lee Zii Jia #badminton_1080p60.mp4",
+      "duration_seconds": 37.686,
+      "width_px": 1080,
+      "height_px": 1920,
+      "frame_rate_fps": 60.0,
+      "video_codec": "h264",
+      "audio_present": true,
+      "file_size_bytes": 15227945
+    }
+  },
+  "inference_code_commit": "3b9c9c62cf271cc1e0acec114820696694201d82",
+  "reviewer_kind": "automated",
+  "ground_truth_verified": false,
+  "configuration": {
+    "camera": "broadcast-portrait-01",
+    "sample_fps": 15.0,
+    "expected_players": 2,
+    "threads": 4,
+    "max_seconds": null,
+    "roi": "0,0.51,1,0.86",
+    "detect_roi": "0,0.40,1,0.86",
+    "processed_overlay": false,
+    "court_polygon": null,
+    "secondary_detect_roi": null
+  },
+  "model": {
+    "path": "C:\\Users\\kamal\\.roboflow\\models\\rf-detr-nano.pth",
+    "sha256": "d8d6b9ee57d4d0ed2b1f305163624712a0532cb7bce0c747317984fc5457440d"
+  },
+  "player_stage_seconds": 163.121,
+  "stage_counts": {
+    "all_class_detections": 2750,
+    "secondary_all_class_detections": 0,
+    "raw_person_detections": 2087,
+    "court_filtered_person_detections": 1195,
+    "deduplicated_person_detections": 1193,
+    "view_accepted_person_detections": 1193,
+    "tracker_output_boxes": 1193,
+    "boxes_with_track_id": 1159
+  },
+  "person_count_histogram": {
+    "2": 519,
+    "1": 18,
+    "3": 2,
+    "5": 7,
+    "6": 12,
+    "4": 6
+  },
+  "unique_temporary_ids": 12,
+  "scene_review": {
+    "method": "mean absolute RGB change on 64x36 full-frame thumbnails",
+    "cut_threshold": 0.15,
+    "matching_view_cut_threshold": 0.0,
+    "enabled": true,
+    "candidate_cuts": [],
+    "scenes_observed": 1,
+    "status": "requires_manual_review",
+    "track_ids": "unique within this run across scene resets; not athlete identities"
+  },
+  "anchor_seed": {
+    "schema_version": "0.1.0",
+    "reviewer_kind": "automated",
+    "reviewer": "Codex source-frame inspection",
+    "scope": "Sparse visible torso containment diagnostic, not ground truth or continuity verification",
+    "selected_before_model_predictions_inspected": true,
+    "cases": [
+      {
+        "native_frame_index": 0,
+        "source_seconds": 0.0,
+        "source_image_sha256": "2c47d1f31a71cae56dad9e0dd961868f12b230a29f8e965af512fa9963c01179",
+        "anchors": [
+          {
+            "appearance_tag": "near_white",
+            "torso_point_px": [
+              625,
+              1143
+            ]
+          },
+          {
+            "appearance_tag": "far_dark_red",
+            "torso_point_px": [
+              767,
+              940
+            ]
+          }
+        ]
+      },
+      {
+        "native_frame_index": 480,
+        "source_seconds": 8.0,
+        "source_image_sha256": "09da8c9e9231dc53354dfc582ec8104c3f221dd27b81c39668a9d2f47ce6b687",
+        "anchors": [
+          {
+            "appearance_tag": "near_white",
+            "torso_point_px": [
+              562,
+              1213
+            ]
+          },
+          {
+            "appearance_tag": "far_dark_red",
+            "torso_point_px": [
+              603,
+              1010
+            ]
+          }
+        ]
+      },
+      {
+        "native_frame_index": 960,
+        "source_seconds": 16.0,
+        "source_image_sha256": "e1d353266ac544d164079803fadcdb43f76d6caed6d310043507a56e4e516d3d",
+        "anchors": [
+          {
+            "appearance_tag": "near_white",
+            "torso_point_px": [
+              358,
+              1145
+            ]
+          },
+          {
+            "appearance_tag": "far_dark_red",
+            "torso_point_px": [
+              528,
+              1043
+            ]
+          }
+        ]
+      },
+      {
+        "native_frame_index": 1440,
+        "source_seconds": 24.0,
+        "source_image_sha256": "9ba0ea1cf6fe192fe6d31e27053d47cd04e4dc743e2dcdd8151da6e411748247",
+        "anchors": [
+          {
+            "appearance_tag": "near_white",
+            "torso_point_px": [
+              640,
+              1250
+            ]
+          },
+          {
+            "appearance_tag": "far_dark_red",
+            "torso_point_px": [
+              365,
+              952
+            ]
+          }
+        ]
+      },
+      {
+        "native_frame_index": 1920,
+        "source_seconds": 32.0,
+        "source_image_sha256": "e0fff86417ebd76ad7684b04578f078b809371b29074fd553f81d4e01de9f580",
+        "anchors": [
+          {
+            "appearance_tag": "near_white",
+            "torso_point_px": [
+              535,
+              1180
+            ]
+          },
+          {
+            "appearance_tag": "far_dark_red",
+            "torso_point_px": [
+              420,
+              930
+            ]
+          }
+        ]
+      },
+      {
+        "native_frame_index": 2100,
+        "source_seconds": 35.0,
+        "source_image_sha256": "134eef86a75231b5e2b5536b38b1989685ee0a4dccf54cc64cf4501a6c33b6a3",
+        "anchors": [
+          {
+            "appearance_tag": "near_white",
+            "torso_point_px": [
+              587,
+              1197
+            ]
+          },
+          {
+            "appearance_tag": "far_dark_red",
+            "torso_point_px": [
+              547,
+              1013
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "anchor_method": "Six sparse source-only frames selected before reading model predictions; 12 visible torso points. One-to-one box containment. Preceding nominal 15 FPS sample; FFmpeg sampling alignment approximate. Not precision/recall, IDF1 or full continuity verification.",
+  "anchors": [
+    {
+      "source_seconds": 0.0,
+      "appearance_tag": "near_white",
+      "candidate_indices": [
+        0
+      ],
+      "covered": true,
+      "proposed_temporary_id": null
+    },
+    {
+      "source_seconds": 0.0,
+      "appearance_tag": "far_dark_red",
+      "candidate_indices": [
+        1
+      ],
+      "covered": true,
+      "proposed_temporary_id": null
+    },
+    {
+      "source_seconds": 8.0,
+      "appearance_tag": "near_white",
+      "candidate_indices": [
+        0
+      ],
+      "covered": true,
+      "proposed_temporary_id": 0
+    },
+    {
+      "source_seconds": 8.0,
+      "appearance_tag": "far_dark_red",
+      "candidate_indices": [
+        1
+      ],
+      "covered": true,
+      "proposed_temporary_id": 1
+    },
+    {
+      "source_seconds": 16.0,
+      "appearance_tag": "near_white",
+      "candidate_indices": [
+        0
+      ],
+      "covered": true,
+      "proposed_temporary_id": 0
+    },
+    {
+      "source_seconds": 16.0,
+      "appearance_tag": "far_dark_red",
+      "candidate_indices": [
+        1
+      ],
+      "covered": true,
+      "proposed_temporary_id": 1
+    },
+    {
+      "source_seconds": 24.0,
+      "appearance_tag": "near_white",
+      "candidate_indices": [
+        0
+      ],
+      "covered": true,
+      "proposed_temporary_id": 0
+    },
+    {
+      "source_seconds": 24.0,
+      "appearance_tag": "far_dark_red",
+      "candidate_indices": [
+        1
+      ],
+      "covered": true,
+      "proposed_temporary_id": 1
+    },
+    {
+      "source_seconds": 32.0,
+      "appearance_tag": "near_white",
+      "candidate_indices": [
+        0
+      ],
+      "covered": true,
+      "proposed_temporary_id": 0
+    },
+    {
+      "source_seconds": 32.0,
+      "appearance_tag": "far_dark_red",
+      "candidate_indices": [
+        1
+      ],
+      "covered": true,
+      "proposed_temporary_id": 1
+    },
+    {
+      "source_seconds": 35.0,
+      "appearance_tag": "near_white",
+      "candidate_indices": [
+        0
+      ],
+      "covered": true,
+      "proposed_temporary_id": 0
+    },
+    {
+      "source_seconds": 35.0,
+      "appearance_tag": "far_dark_red",
+      "candidate_indices": [
+        1
+      ],
+      "covered": true,
+      "proposed_temporary_id": 1
+    }
+  ],
+  "artifacts_sha256": {
+    "job.json": "860bc0612aa2a0f1abb4e2bbefc9065ad2d569d5f4964cc2f73a3f28ed0bdee4",
+    "result.json": "1a49d89ddb3b25ec0b8e046e0d68b8a8553a8196935b0dd1af05f4c3699c7c4b",
+    "players-001/player_tracks.jsonl": "dc82bc13004c118f4131b8ca155e65eebb2b5ab41728f2cba28331296516b0f0",
+    "players-001/tracking_summary.json": "41c8bbed209acec6ea436d92f798a4c4586b8608fdaae1f8b2dd8b47b5c1ce9d",
+    "render-001/preview.mp4": "5eff17a7378ef7ad4cb2bdf67d337dcdd6e0ea3bc2497705e2419839ce1ae2a6"
+  },
+  "court_view_before_35_5s": {
+    "sampled_frames": 533,
+    "person_count_histogram": {
+      "2": 516,
+      "1": 16,
+      "3": 1
+    },
+    "observed_temporary_ids": [
+      0,
+      1
+    ]
+  },
+  "closeup_from_35_6s": {
+    "sampled_frames": 30,
+    "person_count_histogram": {
+      "1": 1,
+      "5": 7,
+      "6": 12,
+      "4": 6,
+      "3": 1,
+      "2": 3
+    },
+    "observed_temporary_ids": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ]
+  },
+  "covered_anchors": 12,
+  "visible_anchors": 12,
+  "decoded_native_preview_frames": 2256,
+  "decision": "Tracking remains experimental. Source changes to a close-up around 35.52 seconds; no automatic scene or athlete review is granted. No shuttle, shot, point, error or coaching measurements approved.",
+  "limitations": [
+    "Court crop and inclusion ROI selected for this clip, not a general accuracy benchmark.",
+    "Source is a portrait broadcast edit with panning and a closing close-up; not calibrated fixed academy footage.",
+    "Existing scoreboard and names are source graphics, not verified athlete-to-track assignments.",
+    "Sparse anchors cannot establish full detection recall or ID continuity."
+  ]
+}
