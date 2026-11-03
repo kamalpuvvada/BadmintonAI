@@ -1,0 +1,61 @@
+{
+  "schema_version": "0.1.0",
+  "source_sha256": "7c9ab079c59488a8ab7f69b1015a608e00fc8ee37ff6753e76523608e51a40b2",
+  "reviewer_kind": "automated",
+  "reviewer": "Codex visual source-frame inspection",
+  "scope": "Six consecutive 30 FPS samples of a visible high-flight fragment; approximate source-only streak centers, not full-rally ground truth",
+  "held_out": false,
+  "model_summary_seen": true,
+  "these_prediction_coordinates_seen_before_labels": false,
+  "native_pixel_tolerance": 12,
+  "cases": [
+    {
+      "native_frame_index": 10,
+      "status": "visible_approximate",
+      "position_px": [
+        527,
+        737
+      ]
+    },
+    {
+      "native_frame_index": 12,
+      "status": "visible_approximate",
+      "position_px": [
+        525,
+        702
+      ]
+    },
+    {
+      "native_frame_index": 14,
+      "status": "visible_approximate",
+      "position_px": [
+        522,
+        674
+      ]
+    },
+    {
+      "native_frame_index": 16,
+      "status": "visible_approximate",
+      "position_px": [
+        519,
+        648
+      ]
+    },
+    {
+      "native_frame_index": 18,
+      "status": "visible_approximate",
+      "position_px": [
+        519,
+        648
+      ]
+    },
+    {
+      "native_frame_index": 20,
+      "status": "visible_approximate",
+      "position_px": [
+        516,
+        629
+      ]
+    }
+  ]
+}

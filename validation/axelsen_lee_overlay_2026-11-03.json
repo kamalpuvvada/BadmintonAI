@@ -1,0 +1,549 @@
+{
+  "schema_version": "0.1.0",
+  "date": "2026-11-03",
+  "status": "experimental_functional_overlay_not_validated_match_analysis",
+  "source_sha256": "7c9ab079c59488a8ab7f69b1015a608e00fc8ee37ff6753e76523608e51a40b2",
+  "code_sha256": "2d7aff38381034c0ebd5e65eb66b03cb391bfe4fd7a24e4e8c08aabe038ff623",
+  "tests": {
+    "python_passed": 170
+  },
+  "stages": {
+    "court": {
+      "inputs": {
+        "source_sha256": "7c9ab079c59488a8ab7f69b1015a608e00fc8ee37ff6753e76523608e51a40b2",
+        "players_sha256": "dc82bc13004c118f4131b8ca155e65eebb2b5ab41728f2cba28331296516b0f0",
+        "configuration_sha256": "81867d086803b9328385a9eafb886ce9edeff0925c82af56ef72d33c455fed4d",
+        "status": "experimental_no_session_approval",
+        "player_review_modified": false
+      },
+      "code_sha256": "2d7aff38381034c0ebd5e65eb66b03cb391bfe4fd7a24e4e8c08aabe038ff623",
+      "elapsed_seconds": 35.90099980001105,
+      "artifacts_sha256": {
+        "court_summary.json": "0df30f2e48d4178cac6a6e4fc0cbff298e441d3bd82ec1ec06f108261a348e9a",
+        "court_frames.jsonl": "637c51def246427d0637859fa6bc2eede8e33bc311355490ad3db3ac5253d15c"
+      }
+    },
+    "shuttle": {
+      "inputs": {
+        "source_sha256": "7c9ab079c59488a8ab7f69b1015a608e00fc8ee37ff6753e76523608e51a40b2",
+        "players_sha256": "dc82bc13004c118f4131b8ca155e65eebb2b5ab41728f2cba28331296516b0f0",
+        "configuration_sha256": "81867d086803b9328385a9eafb886ce9edeff0925c82af56ef72d33c455fed4d",
+        "status": "experimental_no_session_approval",
+        "player_review_modified": false
+      },
+      "code_sha256": "2d7aff38381034c0ebd5e65eb66b03cb391bfe4fd7a24e4e8c08aabe038ff623",
+      "elapsed_seconds": 0.011333599977660924,
+      "artifacts_sha256": {
+        "shuttle_summary.json": "ea3b65c909dee4e7276a7accb16a476b61deadc20e59c07adcef1bc2d216d3e7",
+        "shuttle_frames.jsonl": "59ce44df3c1097aed13a95527df692df22667d7068cea8a7992ab2bc0f9056dd"
+      }
+    },
+    "relink": {
+      "inputs": {
+        "source_sha256": "7c9ab079c59488a8ab7f69b1015a608e00fc8ee37ff6753e76523608e51a40b2",
+        "players_sha256": "dc82bc13004c118f4131b8ca155e65eebb2b5ab41728f2cba28331296516b0f0",
+        "configuration_sha256": "81867d086803b9328385a9eafb886ce9edeff0925c82af56ef72d33c455fed4d",
+        "status": "experimental_no_session_approval",
+        "player_review_modified": false
+      },
+      "code_sha256": "2d7aff38381034c0ebd5e65eb66b03cb391bfe4fd7a24e4e8c08aabe038ff623",
+      "elapsed_seconds": 0.1133844000287354,
+      "artifacts_sha256": {
+        "shuttle_filtered_frames.jsonl": "4c2f95a93f40e99bbfdfe1253d1c6c0675bfc1294c195d98448c8b7fff974080",
+        "shuttle_filtered_summary.json": "beed54a36decd3dd92fd80bbf6f248fbd8a4c5e672c64e88ac2bc339e8472c86"
+      }
+    },
+    "events": {
+      "inputs": {
+        "source_sha256": "7c9ab079c59488a8ab7f69b1015a608e00fc8ee37ff6753e76523608e51a40b2",
+        "players_sha256": "dc82bc13004c118f4131b8ca155e65eebb2b5ab41728f2cba28331296516b0f0",
+        "configuration_sha256": "81867d086803b9328385a9eafb886ce9edeff0925c82af56ef72d33c455fed4d",
+        "status": "experimental_no_session_approval",
+        "player_review_modified": false
+      },
+      "code_sha256": "2d7aff38381034c0ebd5e65eb66b03cb391bfe4fd7a24e4e8c08aabe038ff623",
+      "elapsed_seconds": 0.033115899947006255,
+      "artifacts_sha256": {
+        "events.json": "df53de29edf2931e3d24c2387fb9fa16c9b91b4a41eed17e889b7232449b226f"
+      }
+    },
+    "render": {
+      "inputs": {
+        "source_sha256": "7c9ab079c59488a8ab7f69b1015a608e00fc8ee37ff6753e76523608e51a40b2",
+        "players_sha256": "dc82bc13004c118f4131b8ca155e65eebb2b5ab41728f2cba28331296516b0f0",
+        "configuration_sha256": "81867d086803b9328385a9eafb886ce9edeff0925c82af56ef72d33c455fed4d",
+        "status": "experimental_no_session_approval",
+        "player_review_modified": false
+      },
+      "code_sha256": "2d7aff38381034c0ebd5e65eb66b03cb391bfe4fd7a24e4e8c08aabe038ff623",
+      "elapsed_seconds": 54.3272130000405,
+      "artifacts_sha256": {
+        "render_summary.json": "80979e9cbd82053532f4e7aad6d3d6b113756e345a76d46899a786e58f5c5771",
+        "Axelsen-Lee-All-Overlays.mp4": "c54ff782434823005afa463c77f31625955c7bc5fa9517e432f93f0dfa0d7856"
+      }
+    }
+  },
+  "court": {
+    "schema_version": "0.1.0",
+    "status": "experimental_not_review_approval",
+    "source_sha256": "7c9ab079c59488a8ab7f69b1015a608e00fc8ee37ff6753e76523608e51a40b2",
+    "configuration": {
+      "source_sha256": "7c9ab079c59488a8ab7f69b1015a608e00fc8ee37ff6753e76523608e51a40b2",
+      "setup_provenance": "Codex source-frame intersection inspection; experimental, not human-approved calibration",
+      "reference_native_frame": 0,
+      "analysis_fps": 15,
+      "active_picture_roi": [
+        0,
+        0.4,
+        1,
+        0.86
+      ],
+      "cut_threshold": 0.12,
+      "line_residual_max_px": 8,
+      "additional_setups": [
+        {
+          "native_frame_index": 1272,
+          "court_pixel_points": [
+            [
+              419,
+              1027
+            ],
+            [
+              853,
+              1029
+            ],
+            [
+              418,
+              1548
+            ],
+            [
+              990,
+              1552
+            ],
+            [
+              419,
+              1163
+            ],
+            [
+              419,
+              1311
+            ]
+          ],
+          "court_normalized_points": [
+            [
+              0.5,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              0.5,
+              1
+            ],
+            [
+              0.9245901639344262,
+              1
+            ],
+            [
+              0.5,
+              0.3522388059701492
+            ],
+            [
+              0.5,
+              0.6477611940298508
+            ]
+          ]
+        }
+      ],
+      "court_pixel_points": [
+        [
+          381,
+          1027
+        ],
+        [
+          817,
+          1028
+        ],
+        [
+          141,
+          1553
+        ],
+        [
+          818,
+          1550
+        ],
+        [
+          817,
+          1163
+        ],
+        [
+          818,
+          1313
+        ]
+      ],
+      "court_normalized_points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.5,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0.5,
+          1
+        ],
+        [
+          0.5,
+          0.3522388059701492
+        ],
+        [
+          0.5,
+          0.6477611940298508
+        ]
+      ],
+      "holdout_pixel_points": [
+        [
+          369,
+          1047
+        ],
+        [
+          817,
+          1048
+        ],
+        [
+          254,
+          1312
+        ],
+        [
+          247,
+          1550
+        ],
+        [
+          157,
+          1503
+        ],
+        [
+          817,
+          1503
+        ]
+      ],
+      "holdout_normalized_points": [
+        [
+          0,
+          0.0567164179104478
+        ],
+        [
+          0.5,
+          0.0567164179104478
+        ],
+        [
+          0,
+          0.6477611940298508
+        ],
+        [
+          0.0754098360655738,
+          1
+        ],
+        [
+          0,
+          0.9432835820895522
+        ],
+        [
+          0.5,
+          0.9432835820895522
+        ]
+      ],
+      "shuttle_crop_xyxy_px": [
+        0,
+        420,
+        1080,
+        1630
+      ],
+      "shuttle_heatmap_threshold": 0.5
+    },
+    "native_frames": 2256,
+    "fps": 60.0,
+    "sampling_stride": 4,
+    "status_counts": {
+      "experimental_court": 519,
+      "excluded_view_change": 45
+    },
+    "cut_times_seconds": [
+      20.266666666666666,
+      21.2,
+      35.53333333333333
+    ],
+    "holdout_residual_normalized": [
+      0.0032415728434577237,
+      0.0016698620691066998,
+      0.0026731728048566155,
+      0.003579210351699865,
+      0.008581726055957169,
+      0.004193064722913755
+    ],
+    "limitations": [
+      "Box-bottom proxies include airborne and occluded feet; no physical distance totals.",
+      "Mapping and flow are experimental; residual is a line-consistency diagnostic, not calibrated accuracy.",
+      "A cut revokes the mapping until a new explicit setup. No athlete identities or reviews granted."
+    ]
+  },
+  "shuttle": {
+    "schema_version": "0.1.0",
+    "status": "experimental_independent_inference_not_review_approval",
+    "source_sha256": "7c9ab079c59488a8ab7f69b1015a608e00fc8ee37ff6753e76523608e51a40b2",
+    "model": {
+      "name": "TrackNetV3 tracking module",
+      "checkpoint_sha256": "df867641a02712b021f04548ff4b1208ddfdb47f629ab2094ceb978667e83b1a",
+      "sequence_length": 8,
+      "background_mode": "concat",
+      "upstream_commit": "6eda442ada1740573f200f836d93edc9a541ee86",
+      "torch_version": "2.15.0+cpu",
+      "device": "cpu",
+      "inpainting": false
+    },
+    "fps": 30.0,
+    "native_stride": 2,
+    "configuration": {
+      "crop_xyxy_px": [
+        0,
+        420,
+        1080,
+        1630
+      ],
+      "model_size_px": [
+        512,
+        288
+      ],
+      "heatmap_threshold": 0.5,
+      "linker": "confidence_motion_in_model_pixels",
+      "block_frames": 256,
+      "inpainting": false,
+      "interpolation": false
+    },
+    "status_counts": {
+      "proposal": 622,
+      "unobserved": 416,
+      "excluded_view_change": 90
+    },
+    "elapsed_seconds": 146.14992779999739,
+    "player_review_modified": false,
+    "verified_positions": 0
+  },
+  "filtered_shuttle": {
+    "status": "experimental_body_core_exclusion",
+    "source_rows_sha256": "59ce44df3c1097aed13a95527df692df22667d7068cea8a7992ab2bc0f9056dd",
+    "source_sha256": "7c9ab079c59488a8ab7f69b1015a608e00fc8ee37ff6753e76523608e51a40b2",
+    "status_counts": {
+      "proposal": 614,
+      "unobserved": 424,
+      "excluded_view_change": 90
+    },
+    "suppressed_observed_candidates": 18,
+    "body_core_fractions_xyxy": [
+      0.2,
+      0.25,
+      0.8,
+      0.9
+    ],
+    "limitation": "Possible shuttle observations against bodies are withheld, not labelled absent. No verified positions or contact labels."
+  },
+  "render": {
+    "frames": 2256,
+    "fps": 60.0,
+    "source_sha256": "7c9ab079c59488a8ab7f69b1015a608e00fc8ee37ff6753e76523608e51a40b2",
+    "output_sha256": "c54ff782434823005afa463c77f31625955c7bc5fa9517e432f93f0dfa0d7856",
+    "source_size_px": [
+      1080,
+      1920
+    ],
+    "overlays": "experimental_court_movement_shuttle_ambiguous_shot_hints",
+    "audio": "original audio re-encoded AAC",
+    "native_view_boundaries": [
+      1216,
+      1269,
+      2131
+    ],
+    "verified_coaching": false,
+    "player_review_modified": false
+  },
+  "media_probe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 1080,
+        "height": 1920,
+        "avg_frame_rate": "60/1",
+        "duration": "37.600000",
+        "nb_frames": "2256"
+      },
+      {
+        "codec_name": "aac",
+        "codec_type": "audio",
+        "avg_frame_rate": "0/0",
+        "duration": "37.600000",
+        "nb_frames": "1621"
+      }
+    ]
+  },
+  "sparse_source_checks": {
+    "raw_linking": {
+      "matched": 4,
+      "visible_samples": 6,
+      "cases": [
+        {
+          "native_frame_index": 10,
+          "status": "visible_approximate",
+          "position_px": [
+            527,
+            737
+          ],
+          "error_px": null,
+          "within_tolerance": false
+        },
+        {
+          "native_frame_index": 12,
+          "status": "visible_approximate",
+          "position_px": [
+            525,
+            702
+          ],
+          "error_px": null,
+          "within_tolerance": false
+        },
+        {
+          "native_frame_index": 14,
+          "status": "visible_approximate",
+          "position_px": [
+            522,
+            674
+          ],
+          "error_px": 6.196740911276591,
+          "within_tolerance": true
+        },
+        {
+          "native_frame_index": 16,
+          "status": "visible_approximate",
+          "position_px": [
+            519,
+            648
+          ],
+          "error_px": 1.1288994917617776,
+          "within_tolerance": true
+        },
+        {
+          "native_frame_index": 18,
+          "status": "visible_approximate",
+          "position_px": [
+            519,
+            648
+          ],
+          "error_px": 1.1288994917617776,
+          "within_tolerance": true
+        },
+        {
+          "native_frame_index": 20,
+          "status": "visible_approximate",
+          "position_px": [
+            516,
+            629
+          ],
+          "error_px": 5.3947350251437385,
+          "within_tolerance": true
+        }
+      ]
+    },
+    "body_core_linking": {
+      "matched": 6,
+      "visible_samples": 6,
+      "cases": [
+        {
+          "native_frame_index": 10,
+          "status": "visible_approximate",
+          "position_px": [
+            527,
+            737
+          ],
+          "error_px": 8.669486736322318,
+          "within_tolerance": true
+        },
+        {
+          "native_frame_index": 12,
+          "status": "visible_approximate",
+          "position_px": [
+            525,
+            702
+          ],
+          "error_px": 8.94740535992507,
+          "within_tolerance": true
+        },
+        {
+          "native_frame_index": 14,
+          "status": "visible_approximate",
+          "position_px": [
+            522,
+            674
+          ],
+          "error_px": 6.196740911276591,
+          "within_tolerance": true
+        },
+        {
+          "native_frame_index": 16,
+          "status": "visible_approximate",
+          "position_px": [
+            519,
+            648
+          ],
+          "error_px": 1.1288994917617776,
+          "within_tolerance": true
+        },
+        {
+          "native_frame_index": 18,
+          "status": "visible_approximate",
+          "position_px": [
+            519,
+            648
+          ],
+          "error_px": 1.1288994917617776,
+          "within_tolerance": true
+        },
+        {
+          "native_frame_index": 20,
+          "status": "visible_approximate",
+          "position_px": [
+            516,
+            629
+          ],
+          "error_px": 5.3947350251437385,
+          "within_tolerance": true
+        }
+      ]
+    }
+  },
+  "shot_hint_distribution": {
+    "Lift / clear?": 4,
+    "Unknown shot": 6,
+    "Drive / other?": 3
+  },
+  "contact_hypotheses": 13,
+  "verified_shots": 0,
+  "original_player_review_unchanged": true,
+  "remaining": [
+    "Continuous full-rally player/shuttle labels and independent precision/recall remain unavailable.",
+    "Six source-point checks are approximate, non-held-out automated annotations; not release accuracy.",
+    "Box-bottom positions include jumps and jitter; no calibrated physical distance or speed.",
+    "Shot names are ambiguous heuristic hints, not trained or verified shot classifications.",
+    "No verified winner, error attribution or coaching score."
+  ],
+  "local_video": "out\\axelsen-lee-analysis-004\\Axelsen-Lee-All-Overlays.mp4"
+}

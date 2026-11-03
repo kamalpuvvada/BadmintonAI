@@ -1,0 +1,20 @@
+{
+  "source_sha256": "7c9ab079c59488a8ab7f69b1015a608e00fc8ee37ff6753e76523608e51a40b2",
+  "setup_provenance": "Codex source-frame intersection inspection; experimental, not human-approved calibration",
+  "reference_native_frame": 0,
+  "analysis_fps": 15,
+  "active_picture_roi": [0, 0.4, 1, 0.86],
+  "cut_threshold": 0.12,
+  "line_residual_max_px": 8,
+  "additional_setups": [{
+    "native_frame_index": 1272,
+    "court_pixel_points": [[419,1027],[853,1029],[418,1548],[990,1552],[419,1163],[419,1311]],
+    "court_normalized_points": [[0.5,0],[1,0],[0.5,1],[0.9245901639344262,1],[0.5,0.3522388059701492],[0.5,0.6477611940298508]]
+  }],
+  "court_pixel_points": [[381,1027],[817,1028],[141,1553],[818,1550],[817,1163],[818,1313]],
+  "court_normalized_points": [[0,0],[0.5,0],[0,1],[0.5,1],[0.5,0.3522388059701492],[0.5,0.6477611940298508]],
+  "holdout_pixel_points": [[369,1047],[817,1048],[254,1312],[247,1550],[157,1503],[817,1503]],
+  "holdout_normalized_points": [[0,0.0567164179104478],[0.5,0.0567164179104478],[0,0.6477611940298508],[0.0754098360655738,1],[0,0.9432835820895522],[0.5,0.9432835820895522]],
+  "shuttle_crop_xyxy_px": [0,420,1080,1630],
+  "shuttle_heatmap_threshold": 0.5
+}
