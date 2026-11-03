@@ -1,0 +1,253 @@
+{
+  "schema_version": "0.1.0",
+  "created_utc": "2026-11-03T01:13:12.384565+00:00",
+  "source_video_sha256": "2c08a15287f336a5a9711f7199b15bb03c8347a0bb5e1dfa3c1d79b61b793232",
+  "image_size_px": [
+    720,
+    1280
+  ],
+  "reviewer": "Codex automated source-frame inspection",
+  "reviewer_kind": "automated",
+  "scope": "Sparse internal torso anchors for diagnostic box coverage and candidate ID inspection; not box ground truth, actor verification or precision/recall",
+  "source_labels_used_as_ground_truth": false,
+  "appearance_tags_are_roster_identities": false,
+  "frozen_before_reading_players005_predictions": true,
+  "prior_baseline_previews_seen": true,
+  "held_out_or_blind": false,
+  "cases": [
+    {
+      "native_frame_index": 0,
+      "source_seconds": 0.0,
+      "source_image_sha256": "8de0c59d6fcd6eb02139d26a1feb0bae36c5d3f2b9c784194993e8141fb93f1a",
+      "anchors": [
+        {
+          "appearance_tag": "near_dark",
+          "torso_point_px": [
+            319,
+            700
+          ],
+          "visibility": "visible"
+        },
+        {
+          "appearance_tag": "near_light",
+          "torso_point_px": [
+            445,
+            700
+          ],
+          "visibility": "visible"
+        },
+        {
+          "appearance_tag": "far_dark",
+          "torso_point_px": [
+            512,
+            665
+          ],
+          "visibility": "visible"
+        },
+        {
+          "appearance_tag": "far_gray",
+          "torso_point_px": [
+            563,
+            666
+          ],
+          "visibility": "visible"
+        }
+      ]
+    },
+    {
+      "native_frame_index": 60,
+      "source_seconds": 2.0,
+      "source_image_sha256": "5308f1f1b248a18ffd2d1df8a060326260ebb17e83234db53f4f789ff3be378a",
+      "anchors": [
+        {
+          "appearance_tag": "near_dark",
+          "torso_point_px": [
+            291,
+            723
+          ],
+          "visibility": "visible"
+        },
+        {
+          "appearance_tag": "near_light",
+          "torso_point_px": [
+            425,
+            704
+          ],
+          "visibility": "visible"
+        },
+        {
+          "appearance_tag": "far_dark",
+          "torso_point_px": [
+            536,
+            667
+          ],
+          "visibility": "visible"
+        },
+        {
+          "appearance_tag": "far_gray",
+          "torso_point_px": [
+            627,
+            665
+          ],
+          "visibility": "visible"
+        }
+      ]
+    },
+    {
+      "native_frame_index": 121,
+      "source_seconds": 4.033333333333333,
+      "source_image_sha256": "df6ebf3164f8a2ec271381bc22a420131c31206e3e0c5fc5464d2fa206c469f8",
+      "anchors": [
+        {
+          "appearance_tag": "near_dark",
+          "torso_point_px": [
+            219,
+            722
+          ],
+          "visibility": "visible"
+        },
+        {
+          "appearance_tag": "near_light",
+          "torso_point_px": [
+            382,
+            721
+          ],
+          "visibility": "visible"
+        },
+        {
+          "appearance_tag": "far_dark",
+          "torso_point_px": [
+            492,
+            661
+          ],
+          "visibility": "visible"
+        },
+        {
+          "appearance_tag": "far_gray",
+          "torso_point_px": [
+            607,
+            657
+          ],
+          "visibility": "visible"
+        }
+      ]
+    },
+    {
+      "native_frame_index": 423,
+      "source_seconds": 14.1,
+      "source_image_sha256": "91900e7316f5235b61f84505cf18fe417a6ae5b61d9ed4b42a5cf6f0cd202732",
+      "anchors": [
+        {
+          "appearance_tag": "near_dark",
+          "torso_point_px": [
+            364,
+            722
+          ],
+          "visibility": "visible"
+        },
+        {
+          "appearance_tag": "near_light",
+          "torso_point_px": [
+            173,
+            720
+          ],
+          "visibility": "visible"
+        },
+        {
+          "appearance_tag": "far_dark",
+          "torso_point_px": [
+            535,
+            641
+          ],
+          "visibility": "visible"
+        },
+        {
+          "appearance_tag": "far_gray",
+          "torso_point_px": [
+            618,
+            666
+          ],
+          "visibility": "visible"
+        }
+      ]
+    },
+    {
+      "native_frame_index": 483,
+      "source_seconds": 16.1,
+      "source_image_sha256": "91f8da7601398b6c7d678e290c2a901dd43f6c36405405f746d44a0cdfe59b55",
+      "anchors": [
+        {
+          "appearance_tag": "near_dark",
+          "torso_point_px": [
+            423,
+            715
+          ],
+          "visibility": "visible"
+        },
+        {
+          "appearance_tag": "near_light",
+          "torso_point_px": [
+            138,
+            718
+          ],
+          "visibility": "visible"
+        },
+        {
+          "appearance_tag": "far_dark",
+          "torso_point_px": [
+            573,
+            650
+          ],
+          "visibility": "visible"
+        },
+        {
+          "appearance_tag": "far_gray",
+          "torso_point_px": [
+            609,
+            670
+          ],
+          "visibility": "visible"
+        }
+      ]
+    },
+    {
+      "native_frame_index": 664,
+      "source_seconds": 22.133333333333333,
+      "source_image_sha256": "cade439bc12455cf6c08e2fe5b9be8578e5f289aaae0c0edaccfebcdbea300c9",
+      "anchors": [
+        {
+          "appearance_tag": "near_dark",
+          "torso_point_px": [
+            531,
+            722
+          ],
+          "visibility": "visible"
+        },
+        {
+          "appearance_tag": "near_light",
+          "torso_point_px": [
+            205,
+            721
+          ],
+          "visibility": "visible"
+        },
+        {
+          "appearance_tag": "far_dark",
+          "torso_point_px": [
+            558,
+            650
+          ],
+          "visibility": "partial_occlusion"
+        },
+        {
+          "appearance_tag": "far_gray",
+          "torso_point_px": [
+            615,
+            645
+          ],
+          "visibility": "visible"
+        }
+      ]
+    }
+  ]
+}
