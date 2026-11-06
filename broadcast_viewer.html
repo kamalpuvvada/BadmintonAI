@@ -13,8 +13,13 @@
 <a href="Axelsen-Lee-All-Overlays.mp4" download>Save annotated MP4</a>
 </div>
 <p id="status" role="status" aria-live="polite"></p>
+<section class="card" aria-labelledby="shot-moments-title">
+<h2 id="shot-moments-title">Shot names in this clip</h2>
+<p id="shot-moments-help">Choose a shot to pause the video at that moment. A question mark marks a tentative label.</p>
+<div class="toolbar" id="shot-moments"></div>
+</section>
 <div class="layout">
-<div><video id="video" controls preload="metadata" src="Axelsen-Lee-All-Overlays.mp4"></video><p id="shot"></p></div>
+<div><p id="shot" aria-live="polite"></p><video id="video" controls preload="metadata" src="Axelsen-Lee-All-Overlays.mp4"></video></div>
 <section class="maps" aria-label="Synchronized movement maps">
 <div class="card"><h2>Movement trails</h2><canvas id="movement" width="600" height="1100" aria-label="Court positions and recent movement trails"></canvas><p class="legend"><span class="cyan">Near T0</span> · <span class="orange">Far T1</span><br>Recent observed box-bottom positions, not ground-contact measurements.</p></div>
 <div class="card"><h2>Occupancy heatmap</h2><canvas id="heatmap" width="600" height="1100" aria-label="Time-weighted court occupancy"></canvas><p class="legend">Brighter areas contain more observed time in this uninterrupted court-view segment. Resets at view changes.</p></div>

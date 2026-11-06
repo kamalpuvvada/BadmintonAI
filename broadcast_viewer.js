@@ -78,6 +78,20 @@
   let animating=false;
   function animate(){refresh();if(!video.paused&&!video.ended)requestAnimationFrame(animate);else animating=false;}
   video.addEventListener('play',()=>{if(!animating){animating=true;requestAnimationFrame(animate);}});
+  function jumpToShot(event){
+    video.pause();
+    video.currentTime=event.timestamp_seconds;
+    refresh(true);
+  }
+  const namedShots=data.events.filter(event=>event.shot_hint && event.shot_hint!=='Unknown shot');
+  if(!namedShots.length)el('shot-moments-help').textContent='This clip has no named shot hypotheses.';
+  for(const event of namedShots){
+    const button=document.createElement('button');
+    button.type='button';
+    button.textContent=`${event.shot_hint} · ${event.timestamp_seconds.toFixed(2)}s`;
+    button.addEventListener('click',()=>jumpToShot(event));
+    el('shot-moments').appendChild(button);
+  }
   for(const event of data.events){
     const tr=document.createElement('tr'),td=document.createElement('td'),button=document.createElement('button');
     button.textContent=event.timestamp_seconds.toFixed(2)+'s';button.addEventListener('click',()=>{video.currentTime=event.timestamp_seconds;refresh(true);});
