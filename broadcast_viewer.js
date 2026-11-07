@@ -22,7 +22,7 @@
     const between=!!current&&boundaries.some(edge=>edge>current.native_frame_index&&edge<=Math.floor(time*60+1e-7));
     return {current,trails,heat,paused:!current || current.status!=='experimental_court'||between};
   }
-  function shotAt(events,time,scene){return events.filter(e=>e.scene_id===scene&&time>=e.timestamp_seconds&&time-e.timestamp_seconds<1.1).at(-1)||null;}
+  function shotAt(events,time,scene){return events.filter(e=>e.scene_id===scene&&time+1e-5>=e.timestamp_seconds&&time-e.timestamp_seconds<(e.display_seconds??1.1)).at(-1)||null;}
   const api={stateAt,shotAt};
   if(typeof module!=='undefined'&&module.exports)module.exports=api;
   root.BroadcastMaps=api;

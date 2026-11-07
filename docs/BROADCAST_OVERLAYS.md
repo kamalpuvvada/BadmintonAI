@@ -144,3 +144,38 @@ verified the enlarged movement/heatmap dialogs, player filtering and video/map
 seeking at 2.90 seconds. The final video decodes 2,256 frames and retains audio.
 See `validation/axelsen_lee_refinement_2026-11-03.json` for exact hashes, counts,
 the rejected experiment and the unresolved validation work.
+
+## Independent pose and shot predictions (7 November)
+
+`shot_recognition.py` extracts per-player arm landmarks using the standard
+MediaPipe Pose SDK and the existing detector boxes. It combines body-normalized
+arm motion, overhead preparation/follow-through, wrist-to-shuttle proximity and
+observed flight. Torso checks reject another player inside an expanded crop.
+Motion coherence and a hitter margin constrain ambiguous association. This is an
+independently implemented rule-based classifier. Its inputs come from our cached
+tracking and pose inference.
+
+The current 60 FPS portrait prototype uses 15 FPS court/pose observations and
+30 FPS shuttle observations. Prepare a separate pose runtime with MediaPipe
+0.10.13 and NumPy below 2, then pass its package directory with `--pose-runtime`.
+An isolated package directory avoids changing the tracking environment's NumPy.
+
+```powershell
+.\.venv\Scripts\python.exe shot_recognition.py --source out\axelsen-lee-analysis-008 --video $clip --out out\axelsen-lee-analysis-new-shots --pose-runtime out\pose-runtime
+```
+
+Stages `pose`, `recognize` and `render` allow reusing cached landmarks. A normal
+run performs all three. The review launcher now selects analysis-009 when its
+page exists and otherwise opens analysis-008. Enlarged maps remain available.
+
+The actual analysis-009 export has four predictions each for Lift, Drive, Smash
+and Net shot, plus five unknown cues. Named predictions have a prominent video
+card, a 1.5-second display interval and clickable review controls. The UI tolerates
+microsecond rounding when a browser seeks to fractional frame times.
+
+These counts describe the generated hypotheses. Software regressions and source
+inspection cover the implementation, while classification accuracy and complete
+contact coverage still require coach-labelled evaluation. Tests cover stroke
+geometry, missing evidence, pose visibility, wrong-player crops, scene boundaries
+and fractional-time video seeking. Validation is recorded in
+`validation/shot_recognition_2026-11-07.json`.

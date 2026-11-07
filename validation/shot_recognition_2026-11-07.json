@@ -1,0 +1,114 @@
+{
+  "date": "2026-11-07",
+  "status": "experimental_independent_pose_and_flight_shot_predictions",
+  "binding": {
+    "source_sha256": "7c9ab079c59488a8ab7f69b1015a608e00fc8ee37ff6753e76523608e51a40b2",
+    "source_analysis": "out\\axelsen-lee-analysis-008",
+    "code_sha256": "9e4397bcf36d53adf9a6e7202e331cf32cc44cf3fe3afee53c1ad0a41cb7cb3b",
+    "artifacts_sha256": {
+      "pose_frames.jsonl": "33ba5461f37c99ded103a1d56a91fddd5afbf93439999d28e4d5746ae4db203d",
+      "pose_summary.json": "3f513cdb42e0d7d1aa7c572e13e1db693184fa81db8d32f5f7b11ed2b40fd649",
+      "swing_features.json": "88107cdaea79a20dc8c365becdea4f64b5bb139dff740eee531ed06b65d7e62e",
+      "events.json": "82c6a34e7fb322961e6f3f9463bdc5961f20a8c92aa75e12b2cccd4756647f06",
+      "court_frames.jsonl": "637c51def246427d0637859fa6bc2eede8e33bc311355490ad3db3ac5253d15c",
+      "shuttle_filtered_frames.jsonl": "b689ff00d9f37ef711afeb97308fbb2aa72035d726805bd0d553aa27481cc49d",
+      "render_summary.json": "7c252035ee3cf7564b6182bb194f363016f136d107046df02f96b2f7d01ff815",
+      "Axelsen-Lee-All-Overlays.mp4": "b58a99ddd76487386dbf0536e5adaa2ae78e5cc7618a7f7b38f742366463d7ef",
+      "index.html": "d3512547a6a51f91b938ca2b206bf906fd2bfda649e99f8e8861ba1a5a1ebdb6",
+      "broadcast_viewer.js": "b5a559b1a0dae4ab4124103b3164a6777c813e17f07605fbdaebc432d3bcbb28"
+    },
+    "status": "experimental_predictions_require_coach_evaluation",
+    "verified_shots": 0,
+    "pose_model_sha256": "e9a5c5cb17f736fafd4c2ec1da3b3d331d6edbe8a0d32395855aeb2cdfd64b9f"
+  },
+  "pose": {
+    "source_sha256": "7c9ab079c59488a8ab7f69b1015a608e00fc8ee37ff6753e76523608e51a40b2",
+    "court_rows_sha256": "637c51def246427d0637859fa6bc2eede8e33bc311355490ad3db3ac5253d15c",
+    "package": "mediapipe",
+    "version": "0.10.13",
+    "pose_complexity": 1,
+    "static_image_mode": true,
+    "source_crops": "RF-DETR body box with arm/head margin, resized to height 480",
+    "players_observed": 970,
+    "elapsed_seconds": 72.25064159999602,
+    "status": "experimental_pose_observations"
+  },
+  "render": {
+    "frames": 2256,
+    "fps": 60.0,
+    "source_sha256": "7c9ab079c59488a8ab7f69b1015a608e00fc8ee37ff6753e76523608e51a40b2",
+    "output_sha256": "b58a99ddd76487386dbf0536e5adaa2ae78e5cc7618a7f7b38f742366463d7ef",
+    "source_size_px": [
+      1080,
+      1920
+    ],
+    "overlays": "experimental_court_movement_shuttle_ambiguous_shot_hints",
+    "audio": "original audio re-encoded AAC",
+    "native_view_boundaries": [
+      1216,
+      1269,
+      2131
+    ],
+    "verified_coaching": false,
+    "player_review_modified": false
+  },
+  "media": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 1080,
+        "height": 1920,
+        "avg_frame_rate": "60/1",
+        "duration": "37.600000",
+        "nb_frames": "2256"
+      },
+      {
+        "codec_name": "aac",
+        "codec_type": "audio",
+        "avg_frame_rate": "0/0",
+        "duration": "37.600000",
+        "nb_frames": "1621"
+      }
+    ]
+  },
+  "shot_distribution": {
+    "Lift": 4,
+    "Smash": 4,
+    "Net shot": 4,
+    "Unknown": 5,
+    "Drive": 4
+  },
+  "named_predictions": 16,
+  "unknown_cues": 5,
+  "verified_shots": 0,
+  "tests": {
+    "python_passed": 182,
+    "viewer_js_passed": 7
+  },
+  "browser_checks": {
+    "smash_seek": 5.933333,
+    "drive_seek": 13.2,
+    "net_shot_seek": 7.233333,
+    "large_movement_dialog": true,
+    "fractional_time_display_fixed": true,
+    "screenshots": [
+      "smash-review-browser.jpg",
+      "drive-review-browser.jpg"
+    ]
+  },
+  "source_review_unchanged": true,
+  "independent_implementation": {
+    "dependencies": "MediaPipe Pose SDK plus our detector, court and shuttle outputs",
+    "reference_code_imported": false,
+    "reference_predictions_used_as_training_labels": false
+  },
+  "remaining": [
+    "Coach-labelled shot and hitter accuracy are unavailable.",
+    "Rules can confuse preparation/follow-through with contact.",
+    "No Clear predictions on this run; complete shot coverage remains unresolved.",
+    "Shuttle gaps, point winner, errors and coaching remain unverified."
+  ]
+}

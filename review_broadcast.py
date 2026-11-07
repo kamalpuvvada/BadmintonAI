@@ -9,7 +9,9 @@ from academy_app import LocalResults
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--directory',type=Path,default=Path(__file__).parent/'out/axelsen-lee-analysis-008')
+    latest = Path(__file__).parent/'out/axelsen-lee-analysis-009'
+    previous = Path(__file__).parent/'out/axelsen-lee-analysis-008'
+    parser.add_argument('--directory',type=Path,default=latest if (latest/'index.html').is_file() else previous)
     parser.add_argument('--no-browser',action='store_true')
     args=parser.parse_args()
     if not (args.directory/'index.html').is_file():parser.error('Review page not found in this folder')

@@ -24,3 +24,13 @@ test('native view boundary pauses before the next sampled court row',()=>{
  const rows=[{...row(0),native_frame_index:2128,timestamp_seconds:2128/60}];
  assert.equal(stateAt(rows,2131/60,'both',[2131]).paused,true);
 });
+test('pose shot predictions use their declared display duration',()=>{
+ const event={timestamp_seconds:2,scene_id:0,shot_hint:'Smash?',display_seconds:1.5};
+ assert.equal(shotAt([event],3.3,0),event);
+ assert.equal(shotAt([event],3.6,0),null);
+});
+test('fractional-frame seeks tolerate browser microsecond rounding',()=>{
+ const event={timestamp_seconds:356/60,scene_id:0,shot_hint:'Smash?',display_seconds:1.5};
+ assert.equal(shotAt([event],5.933333,0),event);
+ assert.equal(shotAt([event],5.9,0),null);
+});

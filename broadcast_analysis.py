@@ -446,11 +446,16 @@ def render_stage(video, config, output):
                 cv2.rectangle(frame,(16,16),(1064,218),(23,27,33),-1)
                 text(frame,'BadmintonAI | Court, movement and shuttle',32,58,1.,thickness=2)
                 text(frame,f'{timestamp:05.2f}s | EXPERIMENTAL - not verified measurements',32,102,.78,(120,225,250))
-                active=[e for e in events if e['scene_id']==c['scene_id'] and 0<=timestamp-e['timestamp_seconds']<1.1] if valid else []
+                active=[e for e in events if e['scene_id']==c['scene_id'] and 0<=timestamp-e['timestamp_seconds']<e.get('display_seconds',1.1)] if valid else []
                 latest=active[-1] if active else None
                 label=latest['shot_hint'] if latest else ('Waiting for reliable contact cue' if valid else 'View change - overlays withheld')
                 text(frame,'SHOT HINT: '+label,32,151,.87,(70,230,255),2)
-                text(frame,'Paired shot names are uncertain hypotheses; T IDs are temporary',32,193,.68)
+                text(frame,'Experimental shot predictions | T IDs are temporary',32,193,.68)
+                if latest and latest.get('shot_name'):
+                    cv2.rectangle(frame,(24,490),(1056,612),(23,27,33),-1)
+                    text(frame,'SHOT PREDICTION - '+latest['shot_name'].upper(),44,543,1.25,(70,230,255),2)
+                    evidence='Pose + shuttle evidence' if latest.get('evidence_source')=='pose_and_observed_shuttle' else 'Shuttle trajectory evidence'
+                    text(frame,evidence+' | Coach review pending',44,588,.72)
                 cv2.rectangle(frame,(16,1640),(1064,1904),(23,27,33),-1)
                 text(frame,'COURT MAP',34,1669,.65);text(frame,'MOVEMENT',229,1669,.65)
                 if valid:
